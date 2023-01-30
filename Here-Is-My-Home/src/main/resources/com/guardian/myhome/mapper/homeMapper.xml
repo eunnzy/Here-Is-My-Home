@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+ <mapper namespace="com.guardian.myhome.mapper.HomeMapper">
+ 	
+ 	<!-- 매물 등록  -->
+ 	<insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
+ 		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, home_area, trading_type, deposit, monthly, rent_periods,
+ 						room_count, admin_cost, parking, pet, elevator, balcony, move_date, floor, home_title, home_detail) 
+ 		values((select nvl(max(home_num), 0) + 1 from Home_tb), #{homeType}, #{addr1}, #{addr2}, #{addr3}, #{homeArea}, #{tradingType},
+ 				#{deposit}, #{monthly}, #{rentPeriods}, #{roomCount}, #{adminCost}, #{parking}, #{pet}, #{elevator}, #{balcony}, #{moveDate},
+ 				#{floor}, #{homeTitle}, #{homeDetail})
+ 		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">
+ 			select Max(home_num) as homeNum From Home_tb
+ 		</selectKey>
+ 	</insert>
+ 	
+ 	
+ 	<insert id="insertOption" parameterType="com.guardian.myhome.vo.OptionVO">
+		insert into Home_Option_tb(option_num, home_num, option_name) 
+		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
+	</insert>
+ 	
+ <!-- 	<insert id="insertOption" parameterType="list">
+		<selectKey keyProperty="maxSeq" resultType="int" order="BEFORE">
+			select nvl(max(option_num), 0) from Home_Option_tb
+		</selectKey> 
+		insert into Home_Option_tb(option_num, home_num, option_name) values
+		<foreach collection="list" item="option" index="idx" separator="UNION ALL">
+			( (#{option.maxSeq} + #{idx}) , #{option.homeNum}, #{option.optionName})
+		</foreach>
+	</insert>
+ 	
+	<insert id="insertOptions" parameterType="java.util.List">
+	 	<selectKey keyProperty="optionSeq" resultType="int" order="BEFORE">
+			select nvl(max(option_num), 0) from Home_Option_tb
+		</selectKey>
+ 		insert into Home_Option_tb(option_num, home_num, option_name) 
+		<foreach collection="items" item="option" index="idx" separator="UNION ALL">
+	 		select #{optionSeq} + #{idx} , #{option.homeNum}, #{option.optionName} from dual
+	   </foreach>
+ 	</insert>  -->
+ 	
+ 	<!-- 매물 사진 등록  -->
+ 	<insert id="insertHomeImg">
+ 		insert into Home_Img_tb(img_num, home_num, img_name, home_img_path) 
+ 		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{imgName}, #{homeImgPath})
+ 	</insert>
+ 	
+ 	
+ 	<select id="findHomeImgPathByHome" resultType="com.guardian.myhome.vo.HomeImgVO">
+ 		select * from Home_Img_tb where home_num = #{homeNum}
+ 	</select>
+ 	
+ 	
+ 	<!-- 매물 사진 삭제 -->
+ 	<delete id="deleteHomeImg">
+ 		delete from Home_Img_tb where img_num = #{imgNum}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	
+ </mapper>
+ 
