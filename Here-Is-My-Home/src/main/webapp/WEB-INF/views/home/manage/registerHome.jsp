@@ -57,13 +57,38 @@
 		.img-select div label:hover{
 		  background: url("/img/photo.png") #CCE1FF no-repeat center;
 		}
+		.img-div img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+		}
+		.img-div {
+			position: relative;
+		}
+		.imgDelete{
+		    position: absolute;
+		    top: 0;
+		    right: 5%;
+		    background-color: #ef7d7d;
+		    color: wheat;
+		    font-weight: 900;
+		    width: 30px;
+		    height: 30px;
+		    border-radius: 50%;
+		    line-height: 26px;
+		    text-align: center;
+		    border: none;
+		    display: block;
+		    cursor: pointer;	
+		}
 	
 	/*  
 		photo 이미지 출처 : 
 		https://www.flaticon.com/free-icon/picture_2659360?term=photo&page=1&position=8&origin=tag&related_id=2659360 
 	*/		
-		
-		
     </style>
 </head>
 <body>
@@ -81,7 +106,7 @@
         	</ul>
        	</div>
        	<div class="form-div">
-       		<form id="homeForm" method="post" action="/home/manage/register">
+       		<form id="homeForm" method="post">
        			<table class="table mb-5">
                     <thead>
                         <tr>
@@ -410,6 +435,13 @@
 					        		<li> 최대 10장까지 올릴 수 있습니다.</li>
 					        	</ul>
 					       	</div>
+				       		<input type="file" name="homeImg" id="homeImg" multiple="multiple">
+					       	<div class="resultImg">
+						       	 <!-- <div class="img-div">
+						       		<div class="imgDelete">X</div>
+						       		<img src="/home/showHomeImg?homeImgName=homeImg/oneroom.jpg">
+						       	</div> -->
+					       	</div>
 					       	<!-- <div class="img-div">
 							    <div class="img-add">
 							        <div class="img-input-div0">
@@ -418,234 +450,65 @@
 							        </div>
 							    </div>
 							</div> -->
-							<div class="image">
+							<!-- <div class="image">
 							    <div class="img-select">
 							        <div class="img-div0">
 							            <label for="img-add0"></label>
 							            <input type="file" id="img-add0" name="homeImg" multiple="multiple">
 							        </div>
 							    </div>
-							</div>
+							</div>  -->
 		                </td>
              		</tr>
             		</tbody>
 				</table>
-       		</form>	
        		</div>
-       		        <!--     <div class="btn-div"> -->
-<!--        		<button class="cancelBtn">취소</button>
- -->       	
- 			<button id="addBtn" class="addBtn" >등록하기</button>
-			<!-- </div> -->
-       	
+       		<div class="text-center mx-auto">
+        		<button type="reset" class="btn btn-large mr-2">취소</button>
+ 				<button type="submit" id="addBtn" class="btn btn-large" >등록</button>
+			</div>
+    	</form>	
 	</div>
 
-    
-    <script>
-    	let homeForm = $("#homeForm")
-    	
-    	$("#addBtn").on("click",function(e){	// 등록하기 버튼 클릭시 submit() 전송
-    		e.preventDefault();
-    		homeForm.submit();
-    	});
-    		
-    	
-    	// 이미지 추가 버튼 클릭시 발생
-		$(document).on("change", "input[type=file]", function(e){
-    		
-			if(!fileInfoCheck(fileObj.name, fileObj.size)){	// 파일 확장자 및 크기 검사
-				return false;
-			}
-	    		
-    		let target = $(this)[0];
-    		let index = 0;
-    		
-			if(target != null){
-				
-				let img_div = $(this).parent();
-				let imgList = target.files;
-				
-				var reader = new FileReader();    // 파일 위치 읽기
-				reader.readAsDataURL(imgList [0]);
-				
-				//로드 한 후 이미지 요소 설정(스타일,url)
-				reader.onload = function  (e) {
-				    // 이미지 미리보기
-				    img_div.children('label').css('background','url('+ e.target.result +') center no-repeat').css('background-size','105px 105px');
-				};
-				
-				// 이미지 파일 첨부 버튼 추가 하기
-				// 새로운 div 생성
-				var div = document.createElement('div');
-				
-				index++;
-				// 새로운 div의 className 지정
-				div.className = 'img-div'+index+'';
-				div.innerHTML = '<label for ="img-add'+index+'"></label>\<input type="file" id="img-add'+index+'" name="homeImg">';
-				
-				// 추가
-				$('.img-select').append(div);
-				
-			}else{
-				alert("이미지 없음");
-			}
-    		
-    		
-	   		let formData = new FormData();
-			let fileInput = $("input[name=homeImg]");
-			let fileList = fileInput[0].files;
-			let fileObj = fileList[0];
-			
-			console.log("fileList : " + fileList);
-			console.log("fileObj: " + fileObj);
-			console.log("fileName : " + fileObj.name);
-			console.log("fileSize : " + fileObj.size);
-			console.log("fileType(MimeType) : " + fileObj.type);
-		
-   		   
-    		formData.append("homeImg", fileObj);	//한장의 사진파일 일 때
-    		
-    		for(let i = 0; i < fileList.length; i++){	// 여러장의 사진 파일을 전송할 때 
-    			formData.append("homeImg", fileList[i]);
-    		}
-    		
-    		$.ajax({
-    			url: '/home/manage/homeImgUpload',
-    	    	processData : false,
-    	    	contentType : false,
-    	    	data : formData,
-    	    	type : 'POST',
-    	    	dataType : 'json'
-    		});
-    	});
-    	
-    	let regex = new RegExp("(.*?)\.(jpg|png|gif|jpeg)$");	// 파일 확장자 -> jpg / pn / gif / jpeg만 가능
-    	let maxSize = 1048576;	
-    	
-    	function fileInfoCheck(fileName, fileSize){	// 파일 정보 체크 
+	<script src="/js/registerHome.js" ></script>
+	<!-- 우편 번호 검색 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	$("#searchPost").click(function() {
+		new daum.Postcode({
+		    oncomplete: function(data) {
+   			// 위치 검색 api
+            	 var addr = '';
+	                var extraAddr = ''; 
+	 
+	                if (data.userSelectedType === 'R') { 
+	                    addr = data.roadAddress;
+	                } else { 
+	                    addr = data.jibunAddress;
+	                }
+	 
+	                if(data.userSelectedType === 'R'){
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                	addr += extraAddr;
+	                } else {
+	                	addr += ' ';
+	                }
 
-    		if(fileSize >= maxSize){
-    			alert("파일 사이즈 초과");
-    			return false;
-    		}
-    			  
-    		if(!regex.test(fileName)){
-    			alert("해당 종류의 파일은 업로드할 수 없습니다.");
-    			return false;
-    		}
-    		
-    		return true;		
-    		
-    	}
-		
-    	
-    	/*
-    	$("#addBtn").on("click",function(e){
-    		e.preventDefault();
-    		
-    		
-    		/* let homeData= {
-    	    		"homeType" : $("input[name=homeType]").val(),
-    	    		"addr1" : $("input[name=addr1]").val(),
-    	    		"addr2" : $("input[name=addr2]").val(),
-    	    		"addr3" : $("input[name=addr3]").val(),
-    	    		"homeArea" : $("input[name=homeArea]").val(),
-    	    		"tradingType" : $("input[name=tradingType]").val(),
-    	    		"deposit" : $("input[name=deposit]").val(),
-    	    		"monthly" : $("input[name=monthly]").val(),
-    	    		"rentPeriods" : $("input[name=rentPeriods]").val(),
-    	    		"roomCount" : $("input[name=roomCount]").val(),
-    	    		"adminCost" : $("input[name=adminCost]").val(),
-    	    		"parking" : $("input[name=parking]").val(),
-    	    		"pet" : $("input[name=pet]").val(),
-    	    		"elevator" : $("input[name=elevator]").val(),
-    	    		"balcony" : $("input[name=balcony]").val(),
-    	    		"moveDate" : $("input[name=moveDate]").val(),
-    	    		"floor" : $("input[name=floor]").val(),
-    	    		"optionList" : $("input[name=optionList]").val(),
-    	    		"homeTitle" : $("input[name=homeTitle]").val(),
-    	    		"homeDetail" : $("input[name=homeDetail]").val()
-    	    	}
-    	    	
-    		
-   	    	$.ajax({
-    			type:'post',
-    			url: '/home/manage/register',
-    			data: "text",
-                dataType: "json",
-                contentType: "application/json",
-    			success:function(data, status, xhr){
-    				var mesg = (data==1)? "성공" : "실패";
-    				alert(mesg);
-    				$("input").each(function(idx,ele){
-    					$(ele).prop("readonly", true);
-    				});
-    				$("textarea").each(function(idx,ele){
-    					$(ele).prop("readonly", true);
-    				});
-    	 		},
-    	 		error: function(xhr, status, error){console.log(xhr.status, status)}
-    		});  
-    	
-    	});   */
-    	
-    	
-   	  $("#homeImg").change(function(){
-   	   if(this.files && this.files[0]) {
-   	    var reader = new FileReader;
-   	    reader.onload = function(data) {
-   	     $(".selectImg").attr("src", data.target.result).width(200);        
-   	    }
-   	    reader.readAsDataURL(this.files[0]);
-   	   }
-   	  });
-    
-    </script>
-    
-    
-    <!-- 우편 주소  -->
-   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <script>
-   		// 위치 검색 api
-	   $("#searchPost").click(function() {
-		   new daum.Postcode({
-	            oncomplete: function(data) {
-	            	 var addr = '';
-		                var extraAddr = ''; 
-		 
-		                if (data.userSelectedType === 'R') { 
-		                    addr = data.roadAddress;
-		                } else { 
-		                    addr = data.jibunAddress;
-		                }
-		 
-		                if(data.userSelectedType === 'R'){
-		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                        extraAddr += data.bname;
-		                    }
-		                    if(data.buildingName !== '' && data.apartment === 'Y'){
-		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                    }
-		                    if(extraAddr !== ''){
-		                        extraAddr = ' (' + extraAddr + ')';
-		                    }
-		                	addr += extraAddr;
-		                } else {
-		                	addr += ' ';
-		                }
-
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('addr1').value = data.zonecode;
-	                document.getElementById('addr2').value = addr;
-	                document.getElementById('addr3').focus();
-	            }
-	        }).open();	 
-		   
-	   });
-		   
-	
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('addr1').value = data.zonecode;
+                document.getElementById('addr2').value = addr;
+                document.getElementById('addr3').focus();
+            }
+        }).open();	 
+	});
    </script>
-	   
-    
 </body>
 </html>

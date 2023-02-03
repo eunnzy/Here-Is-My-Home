@@ -18,11 +18,21 @@
  		</selectKey>
  	</insert>
  	
- 	
  	<insert id="insertOption" parameterType="com.guardian.myhome.vo.OptionVO">
 		insert into Home_Option_tb(option_num, home_num, option_name) 
 		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
 	</insert>
+	
+	<!-- 매물 사진 등록  -->
+ 	<insert id="insertHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
+ 		insert into Home_Img_tb(img_num, home_num, home_img_name, home_img_path) 
+ 		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{homeImgName}, #{homeImgPath})
+ 	</insert>
+ 	
+	
+<!--  	<select id="deleteHomeImg">
+ 		delete from Home_Img_tb where home_img_name = #{homeImgName}
+ 	</select> -->
  	
  <!-- 	<insert id="insertOption" parameterType="list">
 		<selectKey keyProperty="maxSeq" resultType="int" order="BEFORE">
@@ -44,22 +54,15 @@
 	   </foreach>
  	</insert>  -->
  	
- 	<!-- 매물 사진 등록  -->
- 	<insert id="insertHomeImg">
- 		insert into Home_Img_tb(img_num, home_num, img_name, home_img_path) 
- 		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{imgName}, #{homeImgPath})
- 	</insert>
+ <!-- 	<delete id="deleteHome">
+ 		delete from Home_Img_tb where home_img_name = #{homeImgName}
+ 	</delete> -->
  	
  	
- 	<select id="findHomeImgPathByHome" resultType="com.guardian.myhome.vo.HomeImgVO">
+ 	<select id="findHomeImgByHomeNum" resultType="com.guardian.myhome.vo.HomeImgVO">
  		select * from Home_Img_tb where home_num = #{homeNum}
  	</select>
  	
- 	
- 	<!-- 매물 사진 삭제 -->
- 	<delete id="deleteHomeImg">
- 		delete from Home_Img_tb where img_num = #{imgNum}
- 	</delete>
  	
  	
  	

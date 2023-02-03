@@ -16,7 +16,7 @@ import lombok.Setter;
 public class HomeImgVO {
 	private int imgNum; 		// 번호	
 	private int homeNum;		// 매물 번호
-	private String imgName;		// 사진 이름
+	private String homeImgName;		// 사진 이름
 	private String homeImgPath;	// 사진 경로
 	
 }

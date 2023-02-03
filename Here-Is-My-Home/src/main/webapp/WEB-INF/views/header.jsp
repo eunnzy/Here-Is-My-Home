@@ -26,7 +26,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Free</a>
+              <a class="dropdown-item" href="/community/freeBoard">Free</a>
               <a class="dropdown-item" href="#">Meeting</a>
               <a class="dropdown-item" href="#">Lost</a>
             </div>
