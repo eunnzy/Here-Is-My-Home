@@ -1,9 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
-mybatis-config.xml
-log4j.xml
-
 lecture
 target
 pom.properties
@@ -86,8 +83,6 @@ local.properties
 # Compiled class file
 *.class
 
-# Log file
-*.log
 
 # BlueJ files
 *.ctxt
