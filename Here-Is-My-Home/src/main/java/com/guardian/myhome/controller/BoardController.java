@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 */
 
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/community")
+public class BoardController {
 
-	@RequestMapping("/detail")
+	@RequestMapping("/freeBoard")
 	public String detailHome() {
-		return "home/detailHome";
+		return "community/freeBoard";
 	}
 	
 	

@@ -13,10 +13,8 @@ import com.guardian.myhome.vo.OptionVO;
 public interface HomeMapper {
 	public int insertHome(HomeVO home);	// 매물 등록
 	public int insertOption(OptionVO option);
-	
-	
 	public int insertHomeImg(HomeImgVO homeImg);	// 매물 사진 등록
-	public void deleteHomeImg(int imgNum);	// 매물 사진 삭제 (사진은 수정 개념 x)
-	public List<HomeImgVO> findHomeImgPathByHome(int homeNum);	// 매물에 대한 사진 경로
+//	public void deleteHomeImg(String homeImgName);	// 매물 사진 삭제 (사진은 수정 개념 x)
+	public List<HomeImgVO> findHomeImgByHomeNum(int homeNum);	// 매물 번호로 매물에 대한 이미지 파일 정보
 //	public void addHomeOption(HomeOptionVO homeOption)
 }

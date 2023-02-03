@@ -2,14 +2,18 @@ package com.guardian.myhome.vo;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /*
-	업로드 되는 이미지 파일이 2개 이상일 땐 List 타입으로 받기
- */
+	SQL을 처리하기 위한 매물 이미지 VO (이미지 번호, 게시글 번호 추가)
+*/
 
 @Data
-public class ImgUploadVO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class HomeImgUploadVO {
 	private int imgNum;		// 이미지 번호
 	private int homeNum;	// 매물 번호
 	private String homeImgName;	// 매물 사진 이름

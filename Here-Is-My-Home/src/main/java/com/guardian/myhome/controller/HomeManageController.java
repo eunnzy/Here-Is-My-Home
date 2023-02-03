@@ -1,7 +1,9 @@
 package com.guardian.myhome.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeVO;
-import com.guardian.myhome.vo.ImgUploadVO;
+import com.guardian.myhome.vo.HomeImgUploadVO;
 import com.guardian.myhome.vo.OptionVO;
+
+import net.coobird.thumbnailator.Thumbnailator;
 
 /*
  	집(매물) 관리 관련 컨트롤러 
@@ -90,32 +96,81 @@ public class HomeManageController {
 	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerHome(HomeVO homeVO, String[] optionList, 
-			HttpServletRequest request, HttpServletResponse response) {
+	public String registerHome(HomeVO homeVO, String[] optionList,	HttpServletRequest request, HttpServletResponse response) {
 		System.out.println(homeVO.toString());
 		
-		
-		homeService.insertHome(homeVO);	// 매물 정보 등록
-		int homeNum = homeVO.getHomeNum();
-		System.out.println(homeNum);
+		// homeService.insertHome(homeVO);	// 매물 정보 등록
+		// int homeNum = homeVO.getHomeNum();
+		// System.out.println(homeNum);
 		
 		// 옵션 DB 추가
-		for(String op : optionList) {
-			OptionVO option = new OptionVO();
-			option.setHomeNum(homeNum);
-			option.setOptionName(op);
-			homeService.insertOption(option);
-		}
+//		for(String op : optionList) {
+//			OptionVO option = new OptionVO();
+//			option.setHomeNum(homeNum);
+//			option.setOptionName(op);
+//			homeService.insertOption(option);
+//		}
+		
+		if (homeVO.getHomeImgList() != null) {
+			homeVO.getHomeImgList().forEach(
+					attach -> System.out.println("" + attach));
+        }
 		
 		
-//		homeService.insertOption(option);
+//		List<ImgUploadVO> imgList;
+//		
+//		// 파일 유형이 이미지 파일인지 확인
+//		for(MultipartFile multifile : homeImg) {
+//			File fileCheck = new File(multifile.getOriginalFilename());
+//			String type = null;
+//			
+//			try {
+//				type = Files.probeContentType(fileCheck.toPath());		
+//				System.out.println("Type : " + type);
+//			}catch(IOException e) {
+//				e.printStackTrace();
+//			}
+//			
+//			if(!type.startsWith("image")) {
+//				imgList = null;
+//			}
+//		}
+//		
+//		String uploadPath = "C:\\homeUpload";	// 파일 저장 경로
+//		List<HomeImgVO> homeImgList = new ArrayList<>();
+//		
+//		for(MultipartFile multifile : homeImg) {
+//
+//			HomeImgVO homeImgVO = new HomeImgVO();
+//			
+//			String imgName = multifile.getOriginalFilename();	// 파일 이름
+//			String uuid = UUID.randomUUID().toString();	// 사진 파일 이름이 중복 되면 덮어 쓰기 때문에 이를 방지 하기 위한 UUID(식별자)를 적용.
+//			imgName = uuid + "_" + imgName;	// ex) uuid_fileName.jpg/png
+//
+//			File save = new File(uploadPath, imgName);		
+//			System.out.println("파일 이름 : " + imgName);		
+//			System.out.println("파일 타입 : " + multifile.getContentType());
+//			System.out.println("파일 크기 : " + multifile.getSize());	
+//			
+//			try {
+//				multifile.transferTo(save); // transferTo() : 업로드 되는 파일(save) 파일 저장 
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//			homeImgVO.setHomeNum(homeNum);
+//			homeImgVO.setHomeImgName(imgName);
+//			homeImgVO.setHomeImgPath(uploadPath);
+//			
+//			homeImgList.add(homeImgVO);
+//		}
 		
 		return "home/manage/complete";
 	}
 	
 			
 	@RequestMapping(value = "/homeImgUpload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<ImgUploadVO>> uploadImage(@RequestParam MultipartFile[] homeImg, HttpServletRequest request, 
+	public ResponseEntity<List<HomeImgVO>> uploadImage(@RequestParam MultipartFile[] homeImg, HttpServletRequest request, 
 							HttpServletResponse response) {
 		
 		// 파일 유형이 이미지 파일인지 확인
@@ -125,48 +180,106 @@ public class HomeManageController {
 			
 			try {
 				type = Files.probeContentType(fileCheck.toPath());		
-				System.out.println("Type : " + type);
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
 			
 			if(!type.startsWith("image")) {
-				List<ImgUploadVO> list = null;
+				List<HomeImgVO> list = null;
 				return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
 			}
 
 		}
 		
 		String uploadPath = "C:\\homeUpload";	// 파일 저장 경로
+		String homeImgPath = "homeImg";
+		File uploadFolder = new File(uploadPath, homeImgPath);
 		
-		List<ImgUploadVO> homeImgList = new ArrayList<>();
+		if(!uploadFolder.exists())	// 위 경로가 존재하지 않으면
+			uploadFolder.mkdirs();
+		
+		List<HomeImgVO> homeImgList = new ArrayList<>();	// 매물 이미지 담는 ArrayList 객체
 		
 		for(MultipartFile multifile : homeImg) {
-
-			ImgUploadVO imgUploadVO = new ImgUploadVO();
+			
+			HomeImgVO homeImgVO = new HomeImgVO();	// 매물 이미지 정보 객체 생성
 			
 			String imgName = multifile.getOriginalFilename();	// 파일 이름
 			String uuid = UUID.randomUUID().toString();	// 사진 파일 이름이 중복 되면 덮어 쓰기 때문에 이를 방지 하기 위한 UUID(식별자)를 적용.
 			imgName = uuid + "_" + imgName;	// ex) uuid_fileName.jpg/png
 
-			imgUploadVO.setHomeImgName(imgName);
-			imgUploadVO.setHomeImgPath(uploadPath);
+			// 매물 객체 정보 저장	
+			homeImgVO.setHomeImgName(imgName);	
+			homeImgVO.setHomeImgPath(homeImgPath);	
 			
-			File save = new File(uploadPath, imgName);		
+			File save = new File(uploadFolder, imgName);		
 			System.out.println("파일 이름 : " + imgName);		
 			System.out.println("파일 타입 : " + multifile.getContentType());
-			System.out.println("파일 크기 : " + multifile.getSize());	
+			System.out.println("파일 크기 : " + multifile.getSize());
 			
 			try {
 				multifile.transferTo(save); // 파일 저장 
+
+				// 썸네일 이미지 저장 
+				FileOutputStream thumbnail = new FileOutputStream(new File(uploadFolder, "t_" + imgName));
+				Thumbnailator.createThumbnail(multifile.getInputStream(), thumbnail, 100, 100);
+				thumbnail.close();
+				
+				homeImgList.add(homeImgVO);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			
-			homeImgList.add(imgUploadVO);
-			ResponseEntity<List<ImgUploadVO>> result = new ResponseEntity<List<ImgUploadVO>>(homeImgList, HttpStatus.OK);
+			ResponseEntity<List<HomeImgVO>> result = new ResponseEntity<List<HomeImgVO>>(homeImgList, HttpStatus.OK);
 			return result;
 		}
 		return null;
+	}
+	
+	@RequestMapping(value = "/showHomeImg", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getHomeImg(String homeImgName) {
+		System.out.println(homeImgName);
+		File imgFile = new File("C:\\homeUpload", homeImgName);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-type", Files.probeContentType(imgFile.toPath()));
+		
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(imgFile), header, HttpStatus.OK);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	// 매물 사진 삭제
+	@RequestMapping(value = "/deleteHomeImg" , method = RequestMethod.POST)	// 매물 사진 삭제
+	public ResponseEntity<String> deleteHomeImg(String homeImgName) {
+		File file = null;
+		
+		System.out.println("deleteHome:" +homeImgName);
+		try {
+			// 썸네일 파일 삭제
+			file = new File("C:\\homeUpload\\"+ URLDecoder.decode(homeImgName, "UTF-8"));
+			file.delete();
+			
+			// 원본 파일 삭제
+			String originImgName = file.getAbsolutePath().replace("t_", "");	// 썸네일 파일 "t_" 붙은 것을 ""로
+			System.out.println(originImgName);
+			
+			file = new File(originImgName);
+			file.delete();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+		}
+		
+		return new ResponseEntity<String>("success", HttpStatus.OK);	// 성공했다고 리턴.
 	}
 }

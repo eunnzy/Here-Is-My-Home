@@ -1,6 +1,7 @@
 package com.guardian.myhome.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,6 +36,7 @@ public class HomeVO {
 	private String homeDetail;	// 상세 글
 	private int homeValid;		// 유효한 게시글 인지
 	private Date homeRegDate;	// 글 등록 날짜
-//	private List<HomeImgVO> homeImgPath;
+	private List<String> optionList;
+	private List<HomeImgVO> homeImgList;
 	
 }
