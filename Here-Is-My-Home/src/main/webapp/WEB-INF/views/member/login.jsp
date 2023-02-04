@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="UTF-8">
 <head>
-	<meta charset="UTF-8">
-	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
     <style>
       .input-form {
         max-width: 680px;
@@ -25,17 +26,39 @@
     <title>Document</title>
 </head>
 <body>
-  <header>
-		<jsp:include page="../header.jsp"></jsp:include>
-  </header>
+  <!-- 네브바 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="main.jsp"><img src="static/img/home2.png"></a>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto" >
+          <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">MyPage</a>
+            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="FreeBoard.jsp">Free</a>
+              <a class="dropdown-item" href="MeetingBoard.jsp">Meeting</a>
+              <a class="dropdown-item" href="LostBoard.jsp">Lost</a>
+            </div>
+          </li>
+        </ul>
+        <a href="login4.jsp"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button></a>
+      </div>
+    </div>
+  </nav>
+  <!-- 네브바 끝 -->
   
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h1 style="text-align:center;"  class="mb-3">   </h1>
         <h1 style="text-align:center;"  class="mb-3">로그인</h4>
-        <form class="validation-form" novalidate>
-
+        <form action="login.do" class="validation-form" novalidate>
+        
           <fieldset class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
@@ -49,15 +72,16 @@
 
           <div class="row">
             <div class="mb-3">
-              <label for="name">아이디</label>
-              <input type="text" class="form-control" id="name" placeholder="" value="" required>
+    
+              <label for="id">아이디</label>
+              <input type="text" class="form-control" id="imcha_id" name="imcha_id" required />
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
             </div>
           <div class="mb-3">
-            <label for="password">비밀번호</label>
-            <input type="password" class="form-control" id="password" placeholder="****" required>
+            <label for="login_password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="****" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
             </div>
@@ -72,13 +96,14 @@
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="/Front/일반회원가입.html">일반회원가입</a>
-            <a class="dropdown-item" href="/Front/중개인회원가입.html">중개인회원가입</a>
+            <a class="dropdown-item" href="/member/userJoin">일반회원가입</a>
+            <a class="dropdown-item" href="lessor_join.jsp">중개인회원가입</a>
           </div>
         </div>
       </div>
 
       <button type="button" class="btn btn-outline-warning" style="text-decoration: none;">카카오 로그인</button>
+</form>
 </form>
   </div>
 
@@ -110,7 +135,7 @@
   <!-- footer -->
   <div style="background-color: #dbe2f0; text-align: center;">
     <br><br>
-    <div>
+    <dib>
         <a href="#">이용약관</a>   
         <a href="#">개인정보처리방침</a>
         <a href="#">프로젝트소개</a><hr>
@@ -120,5 +145,6 @@
     <br><br><br><br>
   </div>
 
- </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
 </html>
