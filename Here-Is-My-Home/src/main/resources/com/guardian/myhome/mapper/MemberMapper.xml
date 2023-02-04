@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+ <mapper namespace="com.guardian.myhome.mapper.MemberMapper">
+ 
+ 	<insert id="memberJoin" parameterType="com.guardian.myhome.vo.MemberVO">
+	insert into Imcha_tb (imcha_id, imcha_pw, nickname, phone, user_roll, imcha_addr1, imcha_addr2, imcha_addr3)          
+	values(#{imchaId}, #{imchaPw}, #{nickname}, #{phone}, #{userRoll}, #{imchaAddr1}, #{imchaAddr2}, #{imchaAddr3})
+ 	</insert> 
+ 	
+ 	
+ 	<select id="idCheck" resultType="int">
+ 		select count(*) from Imcha_tb where imcha_Id = #{imchaId}
+ 	</select>
+ </mapper>
