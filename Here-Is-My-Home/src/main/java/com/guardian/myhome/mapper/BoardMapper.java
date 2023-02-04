@@ -9,11 +9,11 @@ public interface BoardMapper {
 	// 전국 목록 리스트
 	public List<BoardVO> getAllList();
 	
-	// 같은 동네 목록 리스트
-	public List<BoardVO> getList();
+//	// 같은 동네 목록 리스트
+//	public List<BoardVO> getList();
 	
 	// 카테고리별 목록 리스트
-	public List<BoardVO> getCategoryList();
+	public List<BoardVO> getCategoryList(String category);
 		
 	// INSERT처리만 되고 생성된 PK값을 알 필요가 없는 경우 
 	public void insert(BoardVO board);
@@ -31,9 +31,9 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 	
 	// 조회수 증가
-	public int viewsUp(BoardVO board);
+	public int viewsUp(Long bno);
 	
 	// 좋아요 증가
-	public int likesUp(BoardVO board);
+	public int likesUp(Long bno);
 
 }

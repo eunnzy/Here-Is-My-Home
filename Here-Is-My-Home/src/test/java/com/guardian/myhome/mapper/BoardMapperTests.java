@@ -19,11 +19,11 @@ public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
 	
-	// 같은 동네 목록 리스트
-	//@Test
-	public void testGetList() {
-		mapper.getList().forEach(board -> log.info(board));
-	}
+//	// 같은 동네 목록 리스트
+//	// @Test
+//	public void testGetList() {
+//		mapper.getList().forEach(board -> log.info(board));
+//	}
 	
 	// 전국 목록 리스트
 	//@Test
@@ -34,7 +34,7 @@ public class BoardMapperTests {
 	// 카테고리별 목록 리스트
 	//@Test
 	public void testGetCategoryList() {
-		mapper.getCategoryList().forEach(board -> log.info(board));
+		mapper.getCategoryList("동네질문").forEach(board -> log.info(board));
 	}
 	
 	// INSERT처리만 되고 생성된 PK값을 알 필요가 없는 경우
@@ -95,26 +95,17 @@ public class BoardMapperTests {
 		log.info("UPDATE COUNT : " + count);
 	}
 	
-//	public void viewsUp(Long bno);
-	
 	// 조회수 증가 
 	// @Test
 	public void testViewsUp() {
-		BoardVO vo = new BoardVO();
-		
-		vo.setBno(1L);
-		
-		int count = mapper.viewsUp(vo);
+		int count = mapper.viewsUp(1L);
 		log.info("VIEW COUNT : " + count);
 	}
 	
-	@Test
+	// 좋아요 증가 
+	//@Test
 	public void testLikesUp() {
-		BoardVO vo = new BoardVO();
-		
-		vo.setBno(1L);
-		
-		int count = mapper.likesUp(vo);
+		int count = mapper.likesUp(1L);
 		log.info("LIKE COUNT : " + count);
 	}
 
