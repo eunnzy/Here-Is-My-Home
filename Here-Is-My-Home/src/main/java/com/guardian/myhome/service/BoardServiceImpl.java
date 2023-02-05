@@ -37,11 +37,11 @@ public class BoardServiceImpl implements BoardService {
 	// 수정
 	@Override
 	public boolean modify(BoardVO board) {
-		log.info("modify........" + board);
+		log.info("remove........" + board);
 		return mapper.update(board) == 1;
 	}
-
-	// 삭제
+	
+	// 삭제 
 	@Override
 	public boolean remove(Long bno) {
 		log.info("remove........" + bno);

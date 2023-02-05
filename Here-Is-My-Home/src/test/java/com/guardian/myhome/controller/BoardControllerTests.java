@@ -56,32 +56,32 @@ public class BoardControllerTests {
 	// 등록  
 	// @Test
 	public void testRegister() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/register").param("title", "컨트롤러 새글 제목")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/insertBoard.do").param("title", "컨트롤러 새글 제목")
 				.param("content", "컨트롤러 새글 내용").param("category", "도와줘요").param("imchaid", "Songs"))
 				.andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 	}
 	
 	// 조회수가 올라가는 조회처리 
-	@Test
+	// @Test
 	public void testGet() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/community/get").param("bno", "10")).andReturn().getModelAndView().getModelMap());
 	}
 	
 	// 수정
-	// @Test
+	@Test
 	public void testModify() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/modify")
-				.param("bno", "4").param("title", "컨트롤러에서 수정한 제목").param("content", "컨트롤러에서 수정한 내용")
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/updateBoard.do")
+				.param("bno", "24").param("title", "컨트롤러에서 수정한 제목").param("content", "컨트롤러에서 수정한 내용")
 				.param("category", "Songss")).andReturn().getModelAndView().getViewName();
 			
 		log.info(resultPage);
 	}
 	
 	// 삭제 
-	//@Test
+	// @Test
 	public void testRemove() throws Exception {
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/remove").param("bno", "4"))
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/community/delete.do").param("bno", "13"))
 				.andReturn().getModelAndView().getViewName();
 		
 		log.info(resultPage);

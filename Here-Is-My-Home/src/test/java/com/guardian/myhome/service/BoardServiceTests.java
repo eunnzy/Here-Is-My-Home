@@ -48,16 +48,15 @@ public class BoardServiceTests {
 	}
 	
 	// 수정 
-	// @Test
+	@Test
 	public void testUpdate() {
-		BoardVO board = service.get(2L);
-		
+		BoardVO board = service.get(10L);
 		if(board == null) {
 			return;
 		}
 		
-		board.setTitle("비즈니스 계층에서 제목을 수정해볼께요 ");
-		log.info("MODIFY RESULR : " + service.modify(board));
+		board.setTitle("뭐야 ");
+		log.info("MODIFY : " + service.modify(board));
 	}
 	
 	// 삭제 

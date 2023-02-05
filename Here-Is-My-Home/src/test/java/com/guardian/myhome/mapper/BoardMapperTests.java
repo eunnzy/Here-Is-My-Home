@@ -91,8 +91,8 @@ public class BoardMapperTests {
 		vo.setContent("수정된 내용");
 		vo.setCategory("도와줘요");
 		
-		int count = mapper.update(vo);
-		log.info("UPDATE COUNT : " + count);
+		mapper.update(vo);
+		log.info(vo);
 	}
 	
 	// 조회수 증가 
