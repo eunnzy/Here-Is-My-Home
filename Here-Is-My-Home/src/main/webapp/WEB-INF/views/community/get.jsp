@@ -7,6 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <title>View</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+      $(function() {
+        var $mymodal = $("#mymodal");
+        $mymodal.hide();
+        $("#deleteBT").on("click",function(){
+          $mymodal.show();
+          $("#Y").on("click", function() {
+            self.location = "delete.do?bno=<c:out value="${board.bno}" />"
+          });
+          $("#N").on("click", function() {
+            return;
+          });
+      });
+      });
+</script>
 </head>
 <body>
 	<header>
@@ -58,11 +74,34 @@
             <button type="button" class="btn btn-secondary">수정</button>
           </a>
           
-          <a href="delete.do?bno=<c:out value="${board.bno}" />" style="text-decoration: none;">
-            <button type="button" class="btn btn-secondary">삭제</button>
-          </a>
+          <%-- <a href="delete.do?bno=<c:out value="${board.bno}" />" style="text-decoration: none;"> --%>
+            <button type="button" class="btn btn-secondary" id="deleteBT">삭제</button>
+          <!-- </a> -->
+          
+        <!-- 삭제 모달 -->
+        
+        <div class="modal" id="mymodal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Modal title</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true"></span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <p>작성하신 글을 삭제하시겠어요?</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="N">Yes</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="N">No</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
         </div>
-      </span>
+      </span> <!-- 하단 버튼 끝 -->
+      
       <div><br><br></div>
     </div>
 	

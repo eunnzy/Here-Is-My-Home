@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>modify</title>
+<title>Modify</title>
 </head>
 <body>
 	<header>
@@ -39,7 +39,7 @@
          </tr>
          <tr>
           <th scope="col" class="col col-lg-1">제목</th>
-           <td><input type="text" class="form-control" id="title" name="title" value="<c:out value="${updateboard.title}" />"></td>
+           <td><input type="text" class="form-control" id="title" name="title" value="<c:out value="${updateboard.title}" />" required></td>
           </tr>
           <!-- <tr>
            <th scope="col" class="col col-lg-1">첨부파일</th>
@@ -47,7 +47,7 @@
           </tr> -->
           <tr>
            <th scope="col" class="col col-lg-1">내용</th>
-           <td><textarea class="form-control" id="content" rows="10" name="content"><c:out value="${updateboard.content}" /></textarea></td>
+           <td><textarea class="form-control" id="content" rows="10" name="content" required><c:out value="${updateboard.content}" /></textarea></td>
           </tr>
          </table>
         </div>

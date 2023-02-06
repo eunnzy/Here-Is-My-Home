@@ -40,7 +40,7 @@
          </tr>
          <tr>
           <th scope="col" class="col col-lg-1">제목</th>
-           <td><input type="text" class="form-control" id="title" name="title"></td>
+           <td><input type="text" class="form-control" id="title" name="title" required></td>
           </tr>
           <tr>
            <th scope="col" class="col col-lg-1">첨부파일</th>
@@ -48,7 +48,7 @@
           </tr>
           <tr>
            <th scope="col" class="col col-lg-1">내용</th>
-           <td><textarea class="form-control" id="content" rows="10" name="content"></textarea></td>
+           <td><textarea class="form-control" id="content" rows="10" name="content" required></textarea></td>
           </tr>
          </table>
         </div>
