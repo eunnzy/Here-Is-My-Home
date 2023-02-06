@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
     <style>
       .input-form {
         max-width: 680px;
@@ -54,12 +58,13 @@
   <!-- 네브바 끝 -->
   
   <div class="container">
+  	<form id="login_form" method="post">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h1 style="text-align:center;"  class="mb-3">로그인</h4>
-        <form action="login.do" class="validation-form" novalidate>
+        <h1 style="text-align:center;"  class="mb-3">로그인</h1>
+        <form class="validation-form" novalidate>
         
-          <fieldset class="form-group">
+       <!--    <fieldset class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
               <label class="form-check-label" for="optionsRadios1">일반회원</label>
@@ -68,22 +73,26 @@
               <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
               <label class="form-check-label" for="optionsRadios2">중개인회원</label>
             </div>
-          </fieldset>
+          </fieldset> -->
 
           <div class="row">
             <div class="mb-3">
     
               <label for="id">아이디</label>
-              <input type="text" class="form-control" id="imcha_id" name="imcha_id" required />
+              <div class="id_input_box">
+              <input type="text" class="id-input" id="imchaId" name="imchaId" required />
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
+                </div>
               </div>
             </div>
           <div class="mb-3">
             <label for="login_password">비밀번호</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="****" required>
+            <div class="pw_input_box">
+            <input type="password" class="password-input" id="imchaPw" name="imchaPw" placeholder="****" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
+              </div>
             </div>
           </div>
           <p><a href="아이디찾기.html">아이디/비밀번호찾기</a></p>
@@ -104,11 +113,13 @@
 
       <button type="button" class="btn btn-outline-warning" style="text-decoration: none;">카카오 로그인</button>
 </form>
+</div>
+</div>
+
 </form>
   </div>
 
-</div>
-</div>
+
         <footer class="my-3 text-center text-small">
           <p>   &nbsp; </p>
               </footer>

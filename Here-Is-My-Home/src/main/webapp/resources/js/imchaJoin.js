@@ -1,14 +1,82 @@
-	$(document).ready(function(){
-		$(".join_button").click(function(){
-			$("#join_form").attr("action", "/member/join");
-			$("#join_form").submit();
-		});
+//	$(document).ready(function(){
+//		$(".join_button").click(function(){
+//			$("#join_form").attr("action", "/member/imchaJoin");
+//			$("#join_form").submit();
+//		});
+//	});
+//	
+ var code = "";
+ 
+ var idCheck = false;
+ var idckCheck = false;
+ var pwCheck = false;
+ var pwckCheck = false;
+ var nicknameCheck = false;
+ var phoneCheck = false;
+ var addressCheck = false;
+ 
+$(document).ready(function(){
+	$("btn btn-primary btn btn-block").click(function(){
+		
+		var imchaId = $('.form-id').val();
+		var imchaPw = $('.form-password').val();
+		var pwck    = $('.form-passwordCheck').val();
+		var nickname = $('.form-control').val();
+		var phone   = $('.form-control').val();
+		var imchaAddr3 = $('.form-control_3').val();
 	});
 	
+	if(imchaId == "") {
+		$('.final_id_ck').css('display', 'block');
+		idCheck = false;
+	} else {
+		$('.final_id_ck').css('display', 'none');
+		idCheck = true;
+	}
+	
+	if(pwck == "") {
+		$('.final_pwck_ck').css('display', 'block');
+		pwckCheck = false;
+	} else {
+		$('.final_pwck_ck').css('display', 'none');
+		pwckCheck = true;
+	}
+	
+	if(nickname == "") {
+		$('.final_name_ck').css('display','block');
+		nicknameCheck = false;
+	} else {
+		$('.final_name_ck').css('display','none');
+		nicknameCheck = true;
+	}
+	
+	if(phone == "") {
+		$('.final_phone_ck').css('display','block');
+		phoneCheck = false;
+	} else {
+		$('.final_phone_ck').css('display','none');
+		phoncheck = true;
+	}
+	
+	if(imchaAddr3 = "") {
+		$('.final_imchaAddr3_ck').css('display','block');
+		addressCheck = false; 
+	} else {
+		$('.final_imchaAddr3_ck').css('display','none');
+		addressCheck = true;
+	}
+	
+	if(idCheck&idckCheck&pwCheck&pwckCheck&nicknameCheck&phoneCheck&addressCheck){
+		$("#validation-form").attr("action", "/member/userJoin");
+		$("#validation-form").submit();
+	}
+	
+	
+});
 	// 아이디 중복검사
-	$('.form-control').on("propertychange change keyup paste input", function(){
+	$('.form-id').on("propertychange change keyup paste input", function(){
 		
-		var imchaId = $('.form-control').val();
+		var imchaId = $('.form-id').val();
 		var data  = {imchaId : imchaId}
 		
 		$.ajax({
@@ -66,12 +134,35 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $(".address_input_1").val(data.zonecode);
-                $(".address_input_2").val(addr);
+                $(".form-control_1").val(data.zonecode);
+                $(".form-control_2").val(addr);
                 // 커서를 상세주소 필드로 이동한다.
-                $(".address_input_3").attr("readonly",false);
-                $(".address_input_3").focus();
+                $(".form-control_3").attr("readonly",false);
+                $(".form-control_3").focus();
             } 
 	    }).open();    
 	 
 	}
+	
+	// 비밀번호 확인
+	$('.form-passwordCheck').on("propertychange change keyup paste input", function(){
+		
+		var imchaPw = $('.form-password').val();
+		var pwck    = $('.form-passwordCheck').val();
+		$('.final_pwck_ck').css('display','none');
+		
+		if (imchaPw == pwck) {
+			$('.pwck_input_re_1').css('display', 'block');
+			$('.pwck_input_re_2').css('display', 'none');
+			pwckcorCheck = true;
+		}else {
+			$('.pwck_input_re_1').css('display', 'none');
+			$('.pwck_input_re_2').css('display', 'block');
+			pwckcorCheck = false;
+		}
+	});
+	
+//	$(".btn btn-primary btn btn-block").click(function() {
+//		
+//		alert("로그인 버튼 작동");
+//	});
