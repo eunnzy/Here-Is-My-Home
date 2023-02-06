@@ -28,7 +28,7 @@ import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.HomeImgUploadVO;
-import com.guardian.myhome.vo.OptionVO;
+import com.guardian.myhome.vo.HomeOptionVO;
 
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -94,24 +94,19 @@ public class HomeManageController {
 		return 1;
 	}*/
 	
-	
+	// 매물 등록 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerHome(HomeVO homeVO, String[] optionList,	HttpServletRequest request, HttpServletResponse response) {
+	public String registerHome(HomeVO homeVO, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println(homeVO.toString());
 		
-		// homeService.insertHome(homeVO);	// 매물 정보 등록
-		// int homeNum = homeVO.getHomeNum();
-		// System.out.println(homeNum);
+		System.out.println("OptionVO -- ");
+		if(homeVO.getOptionList() != null) {
+			homeVO.getOptionList().forEach(
+					option -> System.out.println("" + option));
+		}
 		
-		// 옵션 DB 추가
-//		for(String op : optionList) {
-//			OptionVO option = new OptionVO();
-//			option.setHomeNum(homeNum);
-//			option.setOptionName(op);
-//			homeService.insertOption(option);
-//		}
-		
-		if (homeVO.getHomeImgList() != null) {
+		System.out.println("\nHomeImgVO--");
+ 		if (homeVO.getHomeImgList() != null) {
 			homeVO.getHomeImgList().forEach(
 					attach -> System.out.println("" + attach));
         }
@@ -165,6 +160,8 @@ public class HomeManageController {
 //			homeImgList.add(homeImgVO);
 //		}
 		
+ 		homeService.insertHome(homeVO);
+ 		
 		return "home/manage/complete";
 	}
 	
@@ -258,7 +255,7 @@ public class HomeManageController {
 	
 	
 	// 매물 사진 삭제
-	@RequestMapping(value = "/deleteHomeImg" , method = RequestMethod.POST)	// 매물 사진 삭제
+	@RequestMapping(value = "/removeHomeImg" , method = RequestMethod.POST)	// 매물 사진 삭제
 	public ResponseEntity<String> deleteHomeImg(String homeImgName) {
 		File file = null;
 		

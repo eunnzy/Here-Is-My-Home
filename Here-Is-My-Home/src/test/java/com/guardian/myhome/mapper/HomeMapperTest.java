@@ -1,6 +1,9 @@
 package com.guardian.myhome.mapper;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +24,8 @@ import com.guardian.myhome.vo.HomeVO;
 public class HomeMapperTest {
 	@Autowired
 	private HomeMapper homeMapper;
+	@Autowired
 	
-	@Test
 	public void addHome() throws Exception {
 		HomeVO homeVO = new HomeVO();
 		
@@ -40,12 +43,23 @@ public class HomeMapperTest {
 		homeVO.setParking(1);
 		homeVO.setPet("가능");
 		homeVO.setElevator("가능");
+		homeVO.setBalcony("가능");
 		homeVO.setMoveDate(new Date());
 		homeVO.setFloor(3);
 		homeVO.setHomeTitle("첫번째 테스트");
 		homeVO.setHomeDetail("첫번째 테스트 상세글");
 		
-		homeMapper.insertHome(homeVO);
+		int result = homeMapper.insertHome(homeVO);
+		System.out.println(result );
+	}
+
+	@Test
+	public void selectHome() throws Exception {
+		List<HomeVO> list = homeMapper.selectAllHomeList();
+		
+		
+		
+		System.out.println(list);
 	}
 	
 }

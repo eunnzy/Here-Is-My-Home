@@ -27,6 +27,12 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value="/search" , method = RequestMethod.GET)
+	public String searchHome() {
+		
+		return "home/searchHome";
+	}
+	
 	
 
 }

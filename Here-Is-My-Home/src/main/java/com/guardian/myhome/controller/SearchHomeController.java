@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/home")
+//@RequestMapping("/home")
 public class SearchHomeController {
 	
-	@RequestMapping("/search")
+//	@RequestMapping("/search")
 	public String searchHome() {
 		return "home/searchHome";
 	}

@@ -161,7 +161,7 @@ $("#addBtn").on("click",function(e){	// 등록하기 버튼 클릭시 submit() �
 		console.log(targetImg);
 		
 		$.ajax({
-			url: "/home/manage/deleteHomeImg",
+			url: "/home/manage/removeHomeImg",
 			data: {homeImgName : targetImg},
 			dataType: "text",
 			type: "POST",

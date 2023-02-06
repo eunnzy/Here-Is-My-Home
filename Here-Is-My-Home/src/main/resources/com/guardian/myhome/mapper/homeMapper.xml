@@ -13,58 +13,22 @@
  		values((select nvl(max(home_num), 0) + 1 from Home_tb), #{homeType}, #{addr1}, #{addr2}, #{addr3}, #{homeArea}, #{tradingType},
  				#{deposit}, #{monthly}, #{rentPeriods}, #{roomCount}, #{adminCost}, #{parking}, #{pet}, #{elevator}, #{balcony}, #{moveDate},
  				#{floor}, #{homeTitle}, #{homeDetail})
- 		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">
+ 		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">	 <!-- 삽입 후 매물 번호 반환 -->
  			select Max(home_num) as homeNum From Home_tb
  		</selectKey>
  	</insert>
  	
- 	<insert id="insertOption" parameterType="com.guardian.myhome.vo.OptionVO">
-		insert into Home_Option_tb(option_num, home_num, option_name) 
-		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
-	</insert>
+	<select id="selectAllHomeList" resultType="com.guardian.myhome.vo.HomeVO">
+		select home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, home_area AS homeArea, trading_type AS tradingType, 
+			   deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, parking, pet, 
+			   elevator, balcony, move_date AS moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail
+ 		from home_tb
+	</select>
 	
-	<!-- 매물 사진 등록  -->
- 	<insert id="insertHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
- 		insert into Home_Img_tb(img_num, home_num, home_img_name, home_img_path) 
- 		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{homeImgName}, #{homeImgPath})
- 	</insert>
- 	
-	
-<!--  	<select id="deleteHomeImg">
- 		delete from Home_Img_tb where home_img_name = #{homeImgName}
- 	</select> -->
- 	
- <!-- 	<insert id="insertOption" parameterType="list">
-		<selectKey keyProperty="maxSeq" resultType="int" order="BEFORE">
-			select nvl(max(option_num), 0) from Home_Option_tb
-		</selectKey> 
-		insert into Home_Option_tb(option_num, home_num, option_name) values
-		<foreach collection="list" item="option" index="idx" separator="UNION ALL">
-			( (#{option.maxSeq} + #{idx}) , #{option.homeNum}, #{option.optionName})
-		</foreach>
-	</insert>
- 	
-	<insert id="insertOptions" parameterType="java.util.List">
-	 	<selectKey keyProperty="optionSeq" resultType="int" order="BEFORE">
-			select nvl(max(option_num), 0) from Home_Option_tb
-		</selectKey>
- 		insert into Home_Option_tb(option_num, home_num, option_name) 
-		<foreach collection="items" item="option" index="idx" separator="UNION ALL">
-	 		select #{optionSeq} + #{idx} , #{option.homeNum}, #{option.optionName} from dual
-	   </foreach>
- 	</insert>  -->
- 	
- <!-- 	<delete id="deleteHome">
- 		delete from Home_Img_tb where home_img_name = #{homeImgName}
- 	</delete> -->
- 	
- 	
- 	<select id="findHomeImgByHomeNum" resultType="com.guardian.myhome.vo.HomeImgVO">
- 		select * from Home_Img_tb where home_num = #{homeNum}
- 	</select>
- 	
- 	
- 	
+ 	<!-- 등록된 매물 삭제 -->
+ 	<delete id="deleteHome">
+		delete from Home_tb where home_num = #{homeNum}
+	</delete>
  	
  	
  </mapper>
