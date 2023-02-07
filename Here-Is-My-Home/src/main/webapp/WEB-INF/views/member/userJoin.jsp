@@ -69,36 +69,42 @@
             <div class="mb-3">
               <label for="id_name">아이디</label>
               <div class="id_input_box">
-              <input type="text" class="form-control" name="imchaId" id="imchaId" placeholder="영어와 숫자를 조합" value="" required>
+              <input type="text" class="form-id" name="imchaId" id="imchaId" placeholder="영어와 숫자를 조합" value="" required>
               <div class="invalid-feedback">아이디를 입력해주세요.
+               <span class="final_id_ck">아이디를 입력해주세요.</span>
+              </div>
               </div>
               <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
-			<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
-			
-              </div>
+			  <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+			 
             </div>
 
             <div class="mb-3">
               <label for="password">비밀번호</label>
-              <input type="password" class="form-control" name="imchaPw" id="imchaPw" placeholder="****" required>
+              <input type="password" class="form-password" name="imchaPw" id="imchaPw" placeholder="****" required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
-              <p></p>
-              
+              <span class="final_pw_ck">비밀번호를 입력해주세요.</span>
+             </div>
             <div class="mb-3">
               <label for="pwck">비밀번호 확인</label>
-              <input type="password" class="form-control" name="pwck" id="pwck" placeholder="****" required>
+              <input type="password" class="form-passwordCheck" name="pwck" id="pwck" placeholder="****" required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
-              </div>
-
+                 <span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
+               </div>
+               <span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
+                <span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
+               </div>
+               
             <div class=" mb-3">
               <label for="nickname">닉네임</label>
               <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="" required>
               <div class="invalid-feedback">
                 닉네임을 입력해주세요.
               </div>
+              <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
             </div>
 
 
@@ -108,6 +114,7 @@
             <div class="invalid-feedback">
               전화번호를 입력해주세요.
             </div>
+            <span class="final_phone_ck">휴대폰 번호를 입력해주세요.</span>
           </div>
 
           <div class=" mb-3">
@@ -120,7 +127,7 @@
             <div class="mb-3">
               <p> </p>
               <label for="address">주소</label>
-              <input type="text" class="form-control" name="imchaAddr1" id="imchaAddr1" placeholder="" >
+              <input type="text" class="form-control_1" name="imchaAddr1" id="imchaAddr1" placeholder="" readonly="readonly" >
               <div class="invalid-feedback"> 
               </div>
               <div class="address_button" onclick="execution_daum_address()">
@@ -128,15 +135,16 @@
 				</div>
 				
 			<div class="mb-3">
-              <input type="text" class="form-control" name="imchaAddr2" id="imchaAddr2" placeholder="">
+              <input type="text" class="form-control_2" name="imchaAddr2" id="imchaAddr2" placeholder=""  readonly="readonly">
               <div class="invalid-feedback"> 
               </div>
               <br>
               
               <div class="mb-3">
-              <input type="text" class="form-control" name="imchaAddr3" id="imchaAddr3" placeholder="" >
+              <input type="text" class="form-control_3" name="imchaAddr3" id="imchaAddr3" placeholder="" readonly="readonly" >
               <div class="invalid-feedback"> 
               </div>
+              <span class="final_adress_ck">상세주소를 입력해주세요.</span>
             </div>
 
 
