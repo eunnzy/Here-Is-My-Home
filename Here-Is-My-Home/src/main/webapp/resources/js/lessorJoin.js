@@ -18,15 +18,15 @@
 $(document).ready(function(){
 	$("btn btn-primary btn btn-block").click(function(){
 		
-		var imchaId = $('.form-id').val();
-		var imchaPw = $('.form-password').val();
+		var lessorId = $('.form-id').val();
+		var lessorPw = $('.form-password').val();
 		var pwck    = $('.form-passwordCheck').val();
-		var nickname = $('.form-control').val();
+		var lessorNickName = $('.form-control').val();
 		var phone   = $('.form-control').val();
 		var imchaAddr3 = $('.form-control_3').val();
 	});
 	
-	if(imchaId == "") {
+	if(lessorId == "") {
 		$('.final_id_ck').css('display', 'block');
 		idCheck = false;
 	} else {
@@ -42,7 +42,7 @@ $(document).ready(function(){
 		pwckCheck = true;
 	}
 	
-	if(nickname == "") {
+	if(lessorNickName == "") {
 		$('.final_name_ck').css('display','block');
 		nicknameCheck = false;
 	} else {
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		phoncheck = true;
 	}
 	
-	if(imchaAddr3 = "") {
+	if(lessorAddr3 = "") {
 		$('.final_imchaAddr3_ck').css('display','block');
 		addressCheck = false; 
 	} else {
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	}
 	
 	if(idCheck&idckCheck&pwCheck&pwckCheck&nicknameCheck&phoneCheck&addressCheck){
-		$("#validation-form").attr("action", "/member/userJoin");
+		$("#validation-form").attr("action", "/member/lessorJoin");
 		$("#validation-form").submit();
 	}
 	
@@ -76,12 +76,13 @@ $(document).ready(function(){
 	// 아이디 중복검사
 	$('.form-id').on("propertychange change keyup paste input", function(){
 		
-		var imchaId = $('.form-id').val();
-		var data  = {imchaId : imchaId}
+//		console.log("keyup 테스트");
+		var lessorId = $('.form-id').val();
+		var data  = {lessorId : lessorId}
 		
 		$.ajax({
 			type : "post",
-			url : "/member/memberIdChk",
+			url : "/member/lessorIdChk",
 			data : data,
 			success : function(result) {
 				if(result != 'fail') {
@@ -94,6 +95,29 @@ $(document).ready(function(){
 			}
 		}); 
 	});
+	
+	// 닉네임 중복검사
+//	$('.form-nickname').on("propertychange change keyup paste input", function(){
+//		
+////		console.log("keyup 테스트");
+//		var lessorNickName = $('.form-nickname').val();
+//		var data  = {lessorNickName : lessorNickName}
+//		
+//		$.ajax({
+//			type : "post",
+//			url : "/member/lessorNickChk",
+//			data : data,
+//			success : function(result2) {
+//				if(result2 != 'fail') {
+//					$('.id_input_re_1').css("display","inline-block");
+//					$('.id_input_re_2').css("display","none");
+//				} else {
+//					$('.id_input_re_2').css("display","inline-block");
+//					$('.id_input_re_1').css("display","none");
+//				}
+//			}
+//		}); 
+//	});
 	 
 	// 주소연동
 	function execution_daum_address(){
@@ -147,11 +171,11 @@ $(document).ready(function(){
 	// 비밀번호 확인
 	$('.form-passwordCheck').on("propertychange change keyup paste input", function(){
 		
-		var imchaPw = $('.form-password').val();
+		var lessorPw = $('.form-password').val();
 		var pwck    = $('.form-passwordCheck').val();
 		$('.final_pwck_ck').css('display','none');
 		
-		if (imchaPw == pwck) {
+		if (lessorPw == pwck) {
 			$('.pwck_input_re_1').css('display', 'block');
 			$('.pwck_input_re_2').css('display', 'none');
 			pwckcorCheck = true;

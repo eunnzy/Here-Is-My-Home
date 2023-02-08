@@ -23,8 +23,8 @@
  	</select> -->
  	
  	<!-- 로그인 -->
- 	<select id="lessorLogin"  parameterType="com.guardian.myhome.vo.LessorVO">
- 			select lessor_id AS lessorId, lessor_nickname AS lessorNicknamefrom lessor_tb where lessor_id = #{lessorId} and lessor_pw = #{lessorPw}
+ 	<select id="lessorLogin" resultType="com.guardian.myhome.vo.LessorVO">
+ 			select lessor_id,lessor_nickname from lessor_tb where lessor_id = #{lessorId} and lessor_pw = #{lessorPw}
  	</select>
  	
  </mapper>
