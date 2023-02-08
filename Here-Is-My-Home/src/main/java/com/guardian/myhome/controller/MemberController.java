@@ -20,7 +20,6 @@ import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.service.MemberService;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.MemberVO;
-import com.guardian.myhome.vo.OptionVO;
 
 /*
 	회원 관련 기능

@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.guardian.myhome.vo.OptionVO;
+import com.guardian.myhome.vo.HomeOptionVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -17,7 +17,7 @@ import com.guardian.myhome.vo.OptionVO;
 })
 public class HomeOptionTest {
 	@Autowired
-	private HomeMapper homeMapper;
+	private HomeOptionMapper homeOptionMapper;
 	
 	@Test
 	public void addOption() throws Exception {
@@ -26,10 +26,10 @@ public class HomeOptionTest {
 		
 //		List<OptionVO> option = new ArrayList<>();
 		for(String op: optionList) {
-			OptionVO option = new OptionVO();
+			HomeOptionVO option = new HomeOptionVO();
 			option.setHomeNum(homeNum);
 			option.setOptionName(op);
-			homeMapper.insertOption(option);
+			homeOptionMapper.insertOption(option);
 		}
 		
 //		System.out.println(option);

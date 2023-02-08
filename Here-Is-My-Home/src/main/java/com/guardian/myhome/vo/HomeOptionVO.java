@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data	
 @NoArgsConstructor
 @AllArgsConstructor
-public class OptionVO {
+public class HomeOptionVO {
 	private int optionNum;
 	private int homeNum;
 	private String optionName;

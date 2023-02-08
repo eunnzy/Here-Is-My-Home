@@ -1,31 +1,36 @@
 package com.guardian.myhome.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.file.Files;
+import java.util.List;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.vo.HomePreviewVO;
+import com.guardian.myhome.vo.HomeVO;
 
 /*
 	매물 관련 - 상세보기, 검색 등.
 */
 
-@Controller
-@RequestMapping("/home")
+// @Controller
+// @RequestMapping("/home")
 public class HomeController {
-
-	@RequestMapping("/detail")
+	@Autowired
+	private HomeService homeService;
+	
+	// @RequestMapping("/detail")
 	public String detailHome() {
 		return "home/detailHome";
 	}
 	
+	
+	// @RequestMapping(value="/search" , method = RequestMethod.GET)
+	public String searchHome() {
+		return "home/searchHome";
+	}
 	
 	
 

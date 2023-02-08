@@ -18,8 +18,10 @@ public class HomeVO {
 	private String addr1;		// 우편번호
 	private String addr2;		// 도로명	
 	private String addr3;		// 상세 주소
+	private double latitude;	// 위도
+	private double longitude;	// 경도
 	private int homeArea;	// 집 면적
-	private String tradingType; // 거래 종류 - 월세, 전세 등
+	private String rentType; // 거래 종류 - 월세, 전세 등
 	private int deposit; 	// 보증금
 	private int monthly;		// 월세
 	private int rentPeriods;	// 임대 기간

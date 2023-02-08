@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+ <mapper namespace="com.guardian.myhome.mapper.HomeOptionMapper">
+ 	
+ 	<insert id="insertOption" parameterType="com.guardian.myhome.vo.HomeOptionVO">
+		insert into Home_Option_tb(option_num, home_num, option_name) 
+		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
+	</insert>
+	
+ 	<select id="findOptionByHomeNum" parameterType="int">
+ 		select option_name AS optionName from Home_Option_tb where home_num = #{homeNum}
+ 	</select>
+ <!-- 	<insert id="insertOption" parameterType="list">
+		<selectKey keyProperty="maxSeq" resultType="int" order="BEFORE">
+			select nvl(max(option_num), 0) from Home_Option_tb
+		</selectKey> 
+		insert into Home_Option_tb(option_num, home_num, option_name) values
+		<foreach collection="list" item="option" index="idx" separator="UNION ALL">
+			( (#{option.maxSeq} + #{idx}) , #{option.homeNum}, #{option.optionName})
+		</foreach>
+	</insert>
+ 	
+	<insert id="insertOptions" parameterType="java.util.List">
+	 	<selectKey keyProperty="optionSeq" resultType="int" order="BEFORE">
+			select nvl(max(option_num), 0) from Home_Option_tb
+		</selectKey>
+ 		insert into Home_Option_tb(option_num, home_num, option_name) 
+		<foreach collection="items" item="option" index="idx" separator="UNION ALL">
+	 		select #{optionSeq} + #{idx} , #{option.homeNum}, #{option.optionName} from dual
+	   </foreach>
+ 	</insert>  -->
+ 	
+ 	
+ 	
+ </mapper>
+ 
