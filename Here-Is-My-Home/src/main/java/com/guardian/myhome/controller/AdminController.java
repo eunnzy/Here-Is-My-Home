@@ -102,7 +102,7 @@ public class AdminController {
 		
 		session.invalidate();
 		
-		return "redirect:/index";
+		return "redirect:/admin/main";
 	}
 	
 }
