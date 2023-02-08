@@ -81,7 +81,7 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addAttribute("type", cri.getType());
-		return "redirect: /community/list";
+		return "redirect: /community/list" + cri.getListLink();
 	}
 		
 	// 삭제 
@@ -93,7 +93,7 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addAttribute("type", cri.getType());
-		return "redirect: /community/list";
+		return "redirect: /community/list" + cri.getListLink();
 	}
 	
 }
