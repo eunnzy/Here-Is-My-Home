@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
@@ -26,6 +26,15 @@ $(document).ready(function() {
 		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
 		actionForm.attr("action", "/community/get");
 		actionForm.submit();
+	});
+	
+	history.replaceState({}, null, null);
+	
+	var searchForm = $("#searchForm");
+	$("#searchForm button").on("click", function(e) {
+		searchForm.find("input[name='pageNum']").val(1);
+		e.preventDefault();
+		searchForm.submit();
 	});
 });
 </script>
@@ -62,8 +71,11 @@ $(document).ready(function() {
                 <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}" />> Content </option>
                 <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}" />> Title or Content </option>
               </select>
+              
               <input class="form-control me-sm-2" type="search" placeholder="Search" name="keyword"
                value='<c:out value="${pageMaker.cri.keyword}" />' required>
+               <input type="hidden" name="pageNum" value="<c:out value="${pageMaker.cri.pageNum }" />" >
+               <input type="hidden" name="amount" value="<c:out value="${pageMaker.cri.amount }" />" >
               <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form><br>
 
@@ -137,6 +149,8 @@ $(document).ready(function() {
     <form id = "actionForm" action="/community/list" method="get" >
     	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" >
     	<input type="hidden" name="amount" value="${pageMaker.cri.amount }" >
+    	<input type="hidden" name="keyword" value="<c:out value="${pageMaker.cri.keyword}" />" >
+    	<input type="hidden" name="type" value="<c:out value="${pageMaker.cri.type}" />" >
     </form>
 	
 	<footer>

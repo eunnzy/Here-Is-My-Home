@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -28,7 +28,7 @@ $(document).ready(function() {
      <div class="col-lg-12"><br><br>
        <h1 id="tables">수정하기</h1>
        
-     <form action="updateBoard.do" method="post" enctype="multipart/form-data">
+     <form action="updateBoard.do?bno=<c:out value="${board.bno}" />" method="post" enctype="multipart/form-data">
   	   	
 	   <div class="bs-component">
         <table class="table table-hover">
@@ -64,22 +64,10 @@ $(document).ready(function() {
         
 
 	     <!-- 하단 버튼 -->
-	     <button type="button" class="btn btn-info" id="backBT">취소하고 목록으로</button>
+	     <button type="button" class="btn btn-info" onclick="location.href='/community/list'">취소하고 목록으로</button>
 	     <button type="reset" class="btn btn-info">수정취소</button>
 	     <span class="float-end"><button type="submit" class="btn btn-info">수정</button></span>
-	     
-	     <input type="hidden" name="bno" value="<c:out value="${board.bno}" /> ">
-	     <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" >
-	     <input type="hidden" name="amount" value="${pageMaker.cri.amount }" >
      </form>
-     
-     	<form id = "actionForm" action="/community/list" method="get" >
-	    	<input type="hidden" name="bno" value="<c:out value="${board.bno}" />" >
-	    	<input type="hidden" name="pageNum" value='<c:out value="${CRI.pageNum }"></c:out>' >
-	    	<input type="hidden" name="amount" value="<c:out value="${CRI.amount }"></c:out>" >
-	    	<input type="hidden" name="keyword" value="<c:out value="${CRI.keyword}" />" >
-	    	<input type="hidden" name="type" value="<c:out value="${CRI.type}" />" >
-	    </form>
       </div>
      </div>
 	</div>

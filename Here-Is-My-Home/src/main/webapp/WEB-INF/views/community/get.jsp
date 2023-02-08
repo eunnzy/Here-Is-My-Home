@@ -2,27 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
 <title>View</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	var actionForm = $("#actionForm");
-	$("#listBT").on("click", function(e) {
-		e.preventDefault();
-		actionForm.submit();
-	});
-	
-/* 	$("#deleteBT").on("click", function(e) {
-		e.preventDefault();
-		actionForm.attr("action", "delete.do");
-		actionForm.submit();
-	}); */
-});
-</script>
 </head>
 <body>
 	<header>
@@ -67,21 +52,42 @@ $(document).ready(function() {
     <div><br></div>
 
 	  <!-- 하단 버튼 -->
-	  <!-- 페이지이동 Form -->
-	  
-      <span><button type="button" class="btn btn-info" id="listBT">뒤로</button></span>
+      <span><button type="button" class="btn btn-info" id="BackBT" onclick="location.href='/community/list'">뒤로</button></span>
       
       <span class="float-end"><div class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary" id="modifyBT" onclick="location.href='/community/modify?bno=<c:out value="${board.bno}" />'">수정</button>
 	  <button type="button" class="btn btn-secondary" id="deleteBT" onclick="location.href='delete.do?bno=<c:out value="${board.bno}" />'">삭제</button>
 	  </div></span>
-		
-		<form id = "actionForm" action="/community/list" method="get">
-	    	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"></c:out>' >
-	    	<input type="hidden" name="amount" value="<c:out value="${cri.amount }"></c:out>" >
-	    	<input type="hidden" name="keyword" value="<c:out value="${cri.keyword}" />" >
-	    	<input type="hidden" name="type" value="<c:out value="${cri.type}" />" >
+	  
+	    <!-- 페이지이동 Form -->
+	    <form id = "actionForm" action="/community/list" method="get" >
+	   		<input type="hidden" id="bno" name="bno" value="<c:out value="${board.bno}" />" >
+	    	<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }" />" >
+	    	<input type="hidden" name="amount" value="<c:out value="${cri.amount }" />"  >
+	    	<input type="hidden" name="keyword" value="<c:out value="${cri.keyword }" />"  >
+	    	<input type="hidden" name="type" value="<c:out value="${cri.type }" />"  >
 	    </form>
+<!-- 	    <script type="text/javascript">
+		$(function(){
+			var actionForm = $("#actionForm");
+			$("#BackBT").on("click", function(e) {
+				e.preventDefault();
+				self.location="/community/list";
+				actionForm.submit();
+			});
+			
+			$("#deleteBT").on("click", function(e) {
+				e.preventDefault();
+				
+				actionForm.submit();
+			});
+			$("#modifyBT").on("click", function(e) {
+				e.preventDefault();
+				actionForm.attr("action", "/community/modify");
+				actionForm.submit();
+			});
+		});
+		</script> -->
 	    
       <div><br><br></div>
     </div>
