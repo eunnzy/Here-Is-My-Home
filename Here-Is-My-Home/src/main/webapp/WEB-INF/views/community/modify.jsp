@@ -7,6 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Modify</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var actionForm = $("actionForm");
+	$("#backBT").on("click", function(e) {
+		e.preventDefault();
+		actionForm.submit();
+	});
+});
+</script>
 </head>
 <body>
 	<header>
@@ -18,7 +28,7 @@
      <div class="col-lg-12"><br><br>
        <h1 id="tables">수정하기</h1>
        
-     <form action="updateBoard.do?bno=<c:out value="${updateboard.bno}" />" method="post" enctype="multipart/form-data">
+     <form action="updateBoard.do" method="post" enctype="multipart/form-data">
   	   	
 	   <div class="bs-component">
         <table class="table table-hover">
@@ -26,7 +36,7 @@
           <th scope="col" class="col col-lg-1">카테고리</th>
           <td>
            <select class="form-select" id="condition" name="category">
-            <option value="<c:out value="${updateboard.category}" />"><c:out value="${updateboard.category}" /></option>
+            <option value="<c:out value="${board.category}" />"><c:out value="${board.category}" /></option>
             <option value="동네소식">동네소식</option>
             <option value="동네질문">동네질문</option>
             <option value="동네맛집">동네맛집</option>
@@ -39,7 +49,7 @@
          </tr>
          <tr>
           <th scope="col" class="col col-lg-1">제목</th>
-           <td><input type="text" class="form-control" id="title" name="title" value="<c:out value="${updateboard.title}" />" required></td>
+           <td><input type="text" class="form-control" id="title" name="title" value="<c:out value="${board.title}" />" required></td>
           </tr>
           <!-- <tr>
            <th scope="col" class="col col-lg-1">첨부파일</th>
@@ -47,22 +57,32 @@
           </tr> -->
           <tr>
            <th scope="col" class="col col-lg-1">내용</th>
-           <td><textarea class="form-control" id="content" rows="10" name="content" required><c:out value="${updateboard.content}" /></textarea></td>
+           <td><textarea class="form-control" id="content" rows="10" name="content" required><c:out value="${board.content}" /></textarea></td>
           </tr>
          </table>
         </div>
         
 
 	     <!-- 하단 버튼 -->
-	     <a href="/community/list"><button type="button" class="btn btn-info">취소하고 목록으로</button></a>
-	     <span class="float-end">
-	     	<button type="submit" class="btn btn-info">수정</button>
-	     </span>
+	     <button type="button" class="btn btn-info" id="backBT">취소하고 목록으로</button>
+	     <button type="reset" class="btn btn-info">수정취소</button>
+	     <span class="float-end"><button type="submit" class="btn btn-info">수정</button></span>
+	     
+	     <input type="hidden" name="bno" value="<c:out value="${board.bno}" /> ">
+	     <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" >
+	     <input type="hidden" name="amount" value="${pageMaker.cri.amount }" >
      </form>
+     
+     	<form id = "actionForm" action="/community/list" method="get" >
+	    	<input type="hidden" name="bno" value="<c:out value="${board.bno}" />" >
+	    	<input type="hidden" name="pageNum" value='<c:out value="${CRI.pageNum }"></c:out>' >
+	    	<input type="hidden" name="amount" value="<c:out value="${CRI.amount }"></c:out>" >
+	    	<input type="hidden" name="keyword" value="<c:out value="${CRI.keyword}" />" >
+	    	<input type="hidden" name="type" value="<c:out value="${CRI.type}" />" >
+	    </form>
       </div>
      </div>
 	</div>
-
 	
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>

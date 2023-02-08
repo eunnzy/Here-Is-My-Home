@@ -1,5 +1,7 @@
 package com.guardian.myhome.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.guardian.myhome.vo.BoardVO;
+import com.guardian.myhome.vo.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,41 +22,23 @@ public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
 	
-//	// 같은 동네 목록 리스트
-//	// @Test
-//	public void testGetList() {
-//		mapper.getList().forEach(board -> log.info(board));
-//	}
-	
 	// 전국 목록 리스트
-	//@Test
-	public void testGetAllList() {
-		mapper.getAllList().forEach(board -> log.info(board));
+	// @Test
+	public void testGetList() {
+		Criteria cri = new Criteria();
+		mapper.getListWithPaging(cri).forEach(board -> log.info(board));
 	}
 	
-	// 카테고리별 목록 리스트
-	//@Test
-	public void testGetCategoryList() {
-		mapper.getCategoryList("동네질문").forEach(board -> log.info(board));
-	}
-	
-	// INSERT처리만 되고 생성된 PK값을 알 필요가 없는 경우
-	//@Test
-	public void testInsert() {
-		BoardVO board = new BoardVO();
-		board.setTitle("새로 추가하는 제목");
-		board.setContent("새로 작성하는 내용");
-		board.setCategory("도와줘요");
-		board.setImchaid("cha_user1");
-			
-		mapper.insert(board);
-			
-		// Lombok이 만들어주는 toString()를 이용해 bno멤버변수의 값을 알아보기 위함 -> bno값은 null로 확인됨 
-		log.info(board);
+	// 페이징 테스트 
+	// @Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		list.forEach(board -> log.info(board));
 	}
 	
 	// INSERT처리도 되고 생성된 PK값을 알아야 하는 경우
-	//@Test
+	// @Test
 	public void testInsertSelectKey() {
 		BoardVO board = new BoardVO();
 		board.setTitle("새로 추가하는 제목 SelectKey");
@@ -68,7 +53,7 @@ public class BoardMapperTests {
 		}
 	
 	// 조회
-	//@Test
+	// @Test
 	public void testRead() {
 		BoardVO board = mapper.read(10L);
 			

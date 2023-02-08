@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.guardian.myhome.mapper.BoardMapper;
 import com.guardian.myhome.vo.BoardVO;
+import com.guardian.myhome.vo.Criteria;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,20 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
+	
+	// 전국 목록
+	@Override
+	public List<BoardVO> getList(Criteria cri) {
+		log.info("get List With Paging......" + cri);
+		return mapper.getListWithPaging(cri);
+	}
+	
+	// 게시물 전체 갯수
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
+	}
 
 	// 등록 
 	@Override
@@ -48,26 +63,6 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno) == 1;
 	}
 
-//	// 같은 동네 목록
-//	@Override
-//	public List<BoardVO> getList() {
-//		log.info("getList........");
-//		return mapper.getList();
-//	}
-
-	// 전국 목록
-	@Override
-	public List<BoardVO> getAllList() {
-		log.info("getList........");
-		return mapper.getAllList();
-	}
-
-	// 카테고리별 목록 
-	@Override
-	public List<BoardVO> getCategoryList(String category) {
-		log.info("getList........");
-		return mapper.getCategoryList(category);
-	}
 	
 	// 조회수 
 	@Override
@@ -82,5 +77,4 @@ public class BoardServiceImpl implements BoardService {
 		log.info("likesUp........" + bno);
 		return mapper.likesUp(bno) == 1;
 	}
-
 }

@@ -7,6 +7,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Community List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#regBT").on("click", function() {
+		self.location = "/community/register";
+	});
+	
+	var actionForm = $("#actionForm");
+	$(".page-item a").on("click", function(e) {
+		e.preventDefault();
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	});
+	
+	$(".move").on("click", function(e) {
+		e.preventDefault();
+		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+		actionForm.attr("action", "/community/get");
+		actionForm.submit();
+	});
+});
+</script>
 </head>
 <body>
 	<header>
@@ -33,12 +55,15 @@
             </span><br><br>
             
             <!-- 검색창 -->
-            <form class="d-flex">
-              <select class="form-select" id="condition" style="width: 10%;">
-                <option>제목</option>
-                <option>내용</option>
+            <form class="d-flex" id="searchForm" action="/community/list" method="get">
+              <select class="form-select" id="condition" style="width: 25%;" name="type" required>
+              	<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}" />> Search List </option>
+                <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}" />> Title </option>
+                <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}" />> Content </option>
+                <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}" />> Title or Content </option>
               </select>
-              <input class="form-control me-sm-2" type="search" placeholder="Search">
+              <input class="form-control me-sm-2" type="search" placeholder="Search" name="keyword"
+               value='<c:out value="${pageMaker.cri.keyword}" />' required>
               <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form><br>
 
@@ -66,7 +91,7 @@
                   <c:forEach items="${list}" var="board">
                   <tr class="table-light">
                     <td><c:out value="${board.category}" /></td>
-                    <td><a href="/community/get?bno=<c:out value="${board.bno}" />" style="text-decoration:none;"><c:out value="${board.title}" /></a></td>
+                    <td><a class="move" href="<c:out value="${board.bno}" />" style="text-decoration:none;"><c:out value="${board.title}" /></a></td>
                     <td><c:out value="${board.imchaid}" /></td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
                     <td><c:out value="${board.views}" /></td>
@@ -81,38 +106,38 @@
         <!-- 페이징 -->
         <div>
           <ul class="pagination pagination-sm">
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">&raquo;</a>
-            </li>
+          
+          	<c:if test="${pageMaker.prev}">
+          	  <li class="page-item">
+                <a class="page-link" href="${pageMaker.startPage -1}">&laquo;</a>
+              </li>
+          	</c:if>
+          	
+          	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+          		<li class="page-item ${pageMaker.cri.pageNum == num ? "active" : ""} " >
+          		<a class="page-link" href="${num}">${num}</a>
+          		</li>
+          	</c:forEach>
+          	
+          	<c:if test="${pageMaker.next}">
+          	  <li class="page-item">
+                <a class="page-link" href="${pageMaker.endPage +1 }">&raquo;</a>
+              </li>
+          	</c:if>
           </ul>
         </div>
 
         <!-- 하단 버튼 -->
         <span><button type="button" class="btn btn-info">내가 쓴 글</button></span>
-        <span class="float-end">
-          <a href="/community/register" style="text-decoration: none;"><button type="button" class="btn btn-info">글쓰기</button></a>
-        </span>
-        </span>
+        <span class="float-end"><button type="button" class="btn btn-info" id="regBT">글쓰기</button></span>
         <div><br><br></div>
     </div>
+    
+    <!-- 페이지이동 Form -->
+    <form id = "actionForm" action="/community/list" method="get" >
+    	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" >
+    	<input type="hidden" name="amount" value="${pageMaker.cri.amount }" >
+    </form>
 	
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>
