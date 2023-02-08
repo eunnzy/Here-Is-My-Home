@@ -4,7 +4,7 @@
 <html lang="UTF-8">
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 <script
@@ -80,7 +80,7 @@
     
               <label for="id">아이디</label>
               <div class="id_input_box">
-              <input type="text" class="id-input" id="imchaId" name="imchaId" required />
+              <input type="text" class="id-input" id="lessorId" name="lessorId" required />
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
                 </div>
@@ -89,7 +89,7 @@
           <div class="mb-3">
             <label for="login_password">비밀번호</label>
             <div class="pw_input_box">
-            <input type="password" class="password-input" id="imchaPw" name="imchaPw" placeholder="****" required>
+            <input type="password" class="password-input" id="lessorPw" name="lessorPw" placeholder="****" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
               </div>
@@ -124,7 +124,7 @@
           <p>   &nbsp; </p>
               </footer>
             </div>
-       <!--      <script>
+           <!--  <script>
               window.addEventListener('load', () => {
                 const forms = document.getElementsByClassName('validation-form');
           

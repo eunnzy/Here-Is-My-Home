@@ -18,9 +18,11 @@
  	</select>
  	
  	<!-- 로그인 -->
- 	<select id="memberLogin" parameterType="com.guardian.myhome.vo.MemberVO">
- 		select count(*) from Imcha_tb where imcha_Id = #{imchaId} and imcha_pw = #{imchaPw}
- 	</select>
+ 	<select id="memberLogin" resultType="com.guardian.myhome.vo.MemberVO">
+       select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
+             imcha_addr1 AS imchaAddr1, imcha_addr2 AS imchaAddr2, imcha_addr3 AS imchaAddr3
+       from Imcha_tb where imcha_Id = #{imchaId} and imcha_pw = #{imchaPw}
+    </select>
  	
  	
  </mapper>
