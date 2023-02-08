@@ -12,17 +12,24 @@
  		insert into Home_Img_tb(img_num, home_num, home_img_name, home_img_path) 
  		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{homeImgName}, #{homeImgPath})
  	</insert>
-	
- 	
+
  	<select id="allHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
  		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
  		from Home_Img_tb
  	</select>
  	
+	<select id="previewHomeImg" resultType="com.guardian.myhome.vo.HomeImgVO"> <!-- 미리보기 사진 -->
+			select  home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
+			from Home_Img_tb
+			where home_num = #{homeNum}
+	</select>
+	
+ 	
  	<select id="findHomeImgByHomeNum" resultType="com.guardian.myhome.vo.HomeImgVO">
  		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath  
  		from Home_Img_tb where home_num = #{homeNum}
  	</select>
+ 	
  	
  	
  	

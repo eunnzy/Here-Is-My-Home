@@ -240,9 +240,6 @@
 					</div>
 				</div>
 		</div>
-		
-		
-		
 	</div>
 	
 	<script>
@@ -267,16 +264,19 @@
 							
 		});
 	</script>
-	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
+		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	 	mapOption = { 
 		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨 
 		    }; 
 		
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		let zoomControl = new kakao.maps.ZoomControl(); // 지도 줌 컨트롤러
+		map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
+		
 		
 		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 		if (navigator.geolocation) {
@@ -296,6 +296,11 @@
 		    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667)
 		    displayMarker(locPosition);
 		}
+		
+		// 매물 위치 마커
+		var markerImg = "/icon/houseMarker.png";
+		var markerSize = new kakao.maps.Size(36, 41);
+		var imgOption = {offset: new kakao.maps.Point(27, 41)};
 		
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 		function displayMarker(locPosition) {

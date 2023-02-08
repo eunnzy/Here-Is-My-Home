@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomeVO;
-import com.guardian.myhome.vo.HomeOptionVO;
 
 /*
 	회원 관련 컨트롤러

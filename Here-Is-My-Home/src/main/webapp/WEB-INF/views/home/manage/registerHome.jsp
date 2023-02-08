@@ -171,6 +171,8 @@
 								   		<input type="text" class="form-control" name="addr3" id="addr3">  
 							    	</div>
 							    </div>
+							    <input type="hidden" name="latitude" id="latitude">
+							    <input type="hidden" name="longitude" id="longitude">
                             </td>
                         </tr>
                   		</tbody>
@@ -202,8 +204,8 @@
                        <tr>
                            <td> 거래 종류  </td>
                            <td>
-                               <input type="radio" class="form-check-input" name="tradingType" value="월세"> <label> 월세 </label> 
-                               <input type="radio" class="form-check-input" name="tradingType" value="전세"> <label> 전세 </label> 
+                               <input type="radio" class="form-check-input" name="rentType" value="월세"> <label> 월세 </label> 
+                               <input type="radio" class="form-check-input" name="rentType" value="전세"> <label> 전세 </label> 
                            </td>
                        </tr>
                        <tr>
@@ -442,22 +444,6 @@
 						       		<img src="/home/showHomeImg?homeImgName=homeImg/oneroom.jpg">
 						       	</div> -->
 					       	</div>
-					       	<!-- <div class="img-div">
-							    <div class="img-add">
-							        <div class="img-input-div0">
-							            <label for ="img_plus_0"></label>
-							            <input type="file" name="homeImg" id="homeImg" multiple="multiple">
-							        </div>
-							    </div>
-							</div> -->
-							<!-- <div class="image">
-							    <div class="img-select">
-							        <div class="img-div0">
-							            <label for="img-add0"></label>
-							            <input type="file" id="img-add0" name="homeImg" multiple="multiple">
-							        </div>
-							    </div>
-							</div>  -->
 		                </td>
              		</tr>
             		</tbody>
@@ -470,10 +456,14 @@
     	</form>	
 	</div>
 
-	<script src="/js/registerHome.js" ></script>
+	<script src="/js/registerHome2.js" ></script>
+	
 	<!-- 우편 번호 검색 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script>
+	var geocoder = new kakao.maps.services.Geocoder();
+	
 	$("#searchPost").click(function() {
 		new daum.Postcode({
 		    oncomplete: function(data) {
@@ -503,12 +493,29 @@
 	                }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('addr1').value = data.zonecode;
+                $("#addr1").val(data.zonecode);
+                $("#addr2").val(addr);
+                $("#addr3").focus();
+                
+                
+                geocoder.addressSearch(addr, changeToLoc);
+            /*     document.getElementById('addr1').value = data.zonecode;
                 document.getElementById('addr2').value = addr;
-                document.getElementById('addr3').focus();
+                document.getElementById('addr3').focus(); */
+                
+                
             }
         }).open();	 
 	});
+	
+	var changeToLoc = function(data, status) {
+		if(status  === kakao.maps.services.Status.OK) {
+			$("#latitude").val(data[0].y);
+			$("#longitude").val(data[0].x);
+			console.log($("#latitude").val());
+			console.log($("#longitude").val());
+		}	
+	};
    </script>
 </body>
 </html>

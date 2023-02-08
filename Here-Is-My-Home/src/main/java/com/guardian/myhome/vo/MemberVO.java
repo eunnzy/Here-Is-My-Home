@@ -7,14 +7,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class MemberVO {
 
 	private String imchaId;
+	
 	private String imchaPw;
+	
 	private String nickname;
+	
 	private String phone;
+	
 	private String userRoll;
+	
 	private String imchaAddr1;
+	
 	private String imchaAddr2;
+	
 	private String imchaAddr3;
+	
 	private int valid;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enrollDate;
 
