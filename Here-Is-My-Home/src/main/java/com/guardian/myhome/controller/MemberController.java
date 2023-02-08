@@ -34,11 +34,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	// 회원가입
+	// 유저회원가입
 	@RequestMapping(value = "/userJoin", method = RequestMethod.GET)
-	public void loginGET() {
+	public void joinGET() {
 		
 	}
+	
 	
 	@RequestMapping(value = "/userJoin", method = RequestMethod.POST)
 	public String joinPOST(MemberVO member) throws Exception{
@@ -67,6 +68,7 @@ public class MemberController {
 		return "/member/login";
 	}
 	
+	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
 		
@@ -87,6 +89,19 @@ public class MemberController {
 			
 			return "redirect:/index";
 		}
+	}
+	
+
+	
+	// 로그아웃
+	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
+	public String logoutGET(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		return "redirect:/index";
 	}
 	
 }
