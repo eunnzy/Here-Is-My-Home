@@ -67,7 +67,7 @@
  	display : none;
  }
  
-  .form-id {display:block;width:100%;padding:1rem 1.5rem;
+  .form-id, .form-nickname{display:block;width:100%;padding:1rem 1.5rem;
 font-size:1rem;font-weight:400;line-height:1.5;color:#7b8ab8;
 background-color:#f0f5fa;background-clip:padding-box;border:0 solid 
 #bed1e6;-webkit-appearance:none;-moz-appearance:none;appearance:none;
@@ -133,3 +133,12 @@ background-color:#f0f5fa;background-clip:padding-box;border:0 solid
 #bed1e6;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:.375rem;
 box-shadow:inset 2px 2px 8px rgba(55,94,148,.3),inset -3px -2px 5px 
 rgba(255,255,255,.8);transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+
+.form-nickname{display:block;width:100%;padding:1rem 1.5rem;
+font-size:1rem;font-weight:400;line-height:1.5;color:#7b8ab8;
+background-color:#f0f5fa;background-clip:padding-box;border:0 solid 
+#bed1e6;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:.375rem;
+box-shadow:inset 2px 2px 8px rgba(55,94,148,.3),inset -3px -2px 5px 
+rgba(255,255,255,.8);transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+
+.address_button { cursor}

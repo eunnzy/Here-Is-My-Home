@@ -61,7 +61,7 @@
   	<form id="login_form" method="post">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h1 style="text-align:center;"  class="mb-3">로그인</h1>
+        <h1 style="text-align:center;"  class="mb-3">중개인 로그인</h1>
         <form class="validation-form" novalidate>
         
           <!-- <fieldset class="form-group">
@@ -80,7 +80,7 @@
     
               <label for="id">아이디</label>
               <div class="id_input_box">
-              <input type="text" class="id-input" id="imchaId" name="imchaId" required />
+              <input type="text" class="id-input" id="lessorId" name="lessorId" required />
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
                 </div>
@@ -89,7 +89,7 @@
           <div class="mb-3">
             <label for="login_password">비밀번호</label>
             <div class="pw_input_box">
-            <input type="password" class="password-input" id="imchaPw" name="imchaPw" placeholder="****" required>
+            <input type="password" class="password-input" id="lessorPw" name="lessorPw" placeholder="****" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
               </div>
@@ -124,7 +124,7 @@
           <p>   &nbsp; </p>
               </footer>
             </div>
-       <!--      <script>
+           <!--  <script>
               window.addEventListener('load', () => {
                 const forms = document.getElementsByClassName('validation-form');
           

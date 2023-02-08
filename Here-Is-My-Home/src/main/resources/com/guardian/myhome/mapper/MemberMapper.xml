@@ -19,7 +19,7 @@
  	
  	<!-- 로그인 -->
  	<select id="memberLogin" resultType="com.guardian.myhome.vo.MemberVO">
- 		select imcha_id,nickname from Imcha_tb where imcha_Id = #{imchaId} and imcha_pw = #{imchaPw}
+ 		select imcha_id,nickname from Imcha_tb where imcha_id = #{imchaId} and imcha_pw = #{imchaPw}
  	</select>
  	
  	
