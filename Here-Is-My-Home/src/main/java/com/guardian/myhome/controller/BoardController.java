@@ -40,7 +40,6 @@ public class BoardController {
 		return "/community/list";
 	}
 	
-	// 회원정보 함께 넘기기 
 	// 등록 페이지 불러오는 매핑
 	@GetMapping("/register")
 	public String register() {
