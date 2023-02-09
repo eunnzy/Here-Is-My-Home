@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.guardian.myhome.vo.BoardVO;
+import com.guardian.myhome.vo.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -65,23 +66,11 @@ public class BoardServiceTests {
 		log.info("REMOVE RESULT : " + service.remove(5L));
 	}
 	
-	
-//	// 같은 동네 
-//	// @Test
-//	public void testGetList() {
-//		service.getList().forEach(board -> log.info(board));
-//	}
-			
-	// 카테고리별 목록 
-	@Test
-	public void testGetCategoryList() {
-		service.getCategoryList("동네질문").forEach(board -> log.info(board));
-	}
-		
 	// 전국 목록 
 	// @Test
 	public void testGetAllList() {
-		service.getAllList().forEach(board -> log.info(board));
+		Criteria cri = new Criteria();
+		service.getList(cri).forEach(board -> log.info(board));
 	}
 	
 	// 조회수 

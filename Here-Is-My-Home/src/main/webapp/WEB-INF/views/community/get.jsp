@@ -2,27 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
 <title>View</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
-      $(function() {
-        var $mymodal = $("#mymodal");
-        $mymodal.hide();
-        $("#deleteBT").on("click",function(){
-          $mymodal.show();
-          $("#Y").on("click", function() {
-            self.location = "delete.do?bno=<c:out value="${board.bno}" />"
-          });
-          $("#N").on("click", function() {
-            return;
-          });
-      });
-      });
-</script>
 </head>
 <body>
 	<header>
@@ -67,41 +52,43 @@
     <div><br></div>
 
 	  <!-- 하단 버튼 -->
-      <span><a href="/community/list"><button type="button" class="btn btn-info" >목록</button></a></span>
-      <span class="float-end">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <a href="/community/modify?bno=<c:out value="${board.bno}" />" style="text-decoration: none;">
-            <button type="button" class="btn btn-secondary">수정</button>
-          </a>
-          
-          <%-- <a href="delete.do?bno=<c:out value="${board.bno}" />" style="text-decoration: none;"> --%>
-            <button type="button" class="btn btn-secondary" id="deleteBT">삭제</button>
-          <!-- </a> -->
-          
-        <!-- 삭제 모달 -->
-        
-        <div class="modal" id="mymodal">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title">Modal title</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true"></span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <p>작성하신 글을 삭제하시겠어요?</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" id="N">Yes</button>
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="N">No</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-        </div>
-      </span> <!-- 하단 버튼 끝 -->
+      <span><button type="button" class="btn btn-info" id="BackBT" onclick="location.href='/community/list'">뒤로</button></span>
       
+      <span class="float-end"><div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary" id="modifyBT" onclick="location.href='/community/modify?bno=<c:out value="${board.bno}" />'">수정</button>
+	  <button type="button" class="btn btn-secondary" id="deleteBT" onclick="location.href='delete.do?bno=<c:out value="${board.bno}" />'">삭제</button>
+	  </div></span>
+	  
+	    <!-- 페이지이동 Form -->
+	    <form id = "actionForm" action="/community/list" method="get" >
+	   		<input type="hidden" id="bno" name="bno" value="<c:out value="${board.bno}" />" >
+	    	<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }" />" >
+	    	<input type="hidden" name="amount" value="<c:out value="${cri.amount }" />"  >
+	    	<input type="hidden" name="keyword" value="<c:out value="${cri.keyword }" />"  >
+	    	<input type="hidden" name="type" value="<c:out value="${cri.type }" />"  >
+	    </form>
+<!-- 	    <script type="text/javascript">
+		$(function(){
+			var actionForm = $("#actionForm");
+			$("#BackBT").on("click", function(e) {
+				e.preventDefault();
+				self.location="/community/list";
+				actionForm.submit();
+			});
+			
+			$("#deleteBT").on("click", function(e) {
+				e.preventDefault();
+				
+				actionForm.submit();
+			});
+			$("#modifyBT").on("click", function(e) {
+				e.preventDefault();
+				actionForm.attr("action", "/community/modify");
+				actionForm.submit();
+			});
+		});
+		</script> -->
+	    
       <div><br><br></div>
     </div>
 	

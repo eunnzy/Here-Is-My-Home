@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
+
 @Data
 public class BoardVO {
 	private Long bno;			//글번호
@@ -16,4 +17,6 @@ public class BoardVO {
 	private int views;			//조회수
 	private int likes;			//좋아요
 
+	
+	
 }
