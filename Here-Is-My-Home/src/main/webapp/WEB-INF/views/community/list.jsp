@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -28,7 +28,6 @@ $(document).ready(function() {
 		actionForm.submit();
 	});
 	
-	history.replaceState({}, null, null);
 	
 	var searchForm = $("#searchForm");
 	$("#searchForm button").on("click", function(e) {

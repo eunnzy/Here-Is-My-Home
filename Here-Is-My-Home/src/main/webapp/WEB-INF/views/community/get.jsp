@@ -2,12 +2,67 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>View</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" > </script>
+<script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var bnoValue = '<c:out value="${board.bno}" />';
+	var replyUL = $(".chat");
+		
+		// 댓글 목록 불러오기 
+		showList(1);
+		function showList(page) { 
+			replyService.getList({ bno:bnoValue, page: page||1 }, 
+					function(list) { var str="";  if(list == null || list.length == 0) { replyUL.html(""); return; }
+					for (var i = 0, len = list.length || 0; i < len; i++) {
+						str += "<div class='replydiv'> <h6 class='card-subtitle mb-2 text-muted' data-rno='" + list[i].rno + "'>";
+						str += "<span>" + list[i].replyer + "</span>";
+						str += "<span class='float-end'>" + replyService.displayTime(list[i].updateDate) + "</span></h6>";
+						str += "<p class='card-text'>" + list[i].reply + "</p>"; 
+						str += "<div class='btn-group float-end' role='group' aria-label='Basic example'>";
+						str += "<button type='button' class='btn btn-primary btn-sm float-end moBT'>수정</button>"; 
+						str += "<button type='button' class='btn btn-primary btn-sm float-end delBT' data-no='" + list[i].rno + "'>삭제</button>"; 
+						str += "</div><br><br></div>";
+					}
+					replyUL.html(str);
+					});
+		}
+		
+		// 나중에 회원아이디로 값 변경 
+		// 댓글 입력 
+		var replyer = '<c:out value="${board.bno}" />' + "user";
+		var regBt = $("#replyregBT");
+		regBt.on("click", function(e) {
+			if($("#reply").val() == null || $("#reply").val() == "") {
+				alert("댓글 내용을 입력해주세요.");
+			} else {
+				var reply = {reply:$("#reply").val(), replyer:bnoValue, bno:bnoValue};
+				replyService.add(reply, function(result) { 
+					showList(1); 
+					$("#reply").val('');
+				});
+		}
+	
+		// 댓글 삭제 
+		$(".delBT").on("click", function(e) {
+			var no = $(this).data("no");
+			replyService.remove(no, function(result) { 
+				alert("댓글이 삭제되었습니다.");
+				showList(1); });
+		});
+		
+		
+		
+		
+	});
+		
+});		
+</script>
 </head>
 <body>
 	<header>
@@ -33,61 +88,33 @@
 
     <!-- 댓글 -->
     <div class="card card-body" style="background-color: white;">
-        <h6 class="card-subtitle mb-2 text-muted">
-          <span>작성자</span>
-          <span class="float-end">작성일</span>
-        </h6>
-        <p class="card-text">내용</p>
-        <h6 class="card-subtitle mb-2 text-muted">
-          <span>작성자</span>
-          <span class="float-end">작성일</span>
-        </h6>
-        <p class="card-text" style="color: black;">내용</p>
-
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" style="80%">
-          <button class="btn btn-primary" type="button" id="button-addon2">등록</button>
+    	<div class = "chat"></div>
+    	
+        <!-- 댓글 작성 창 -->
+		<div><br></div>
+        <div class="input-group mb-3 replyreg">
+          <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" style="80%" name="reply" id="reply" required>
+          <button class="btn btn-primary" type="button" id="replyregBT">등록</button>
         </div>
     </div>
     <div><br></div>
 
 	  <!-- 하단 버튼 -->
+	  
       <span><button type="button" class="btn btn-info" id="BackBT" onclick="location.href='/community/list'">뒤로</button></span>
-      
       <span class="float-end"><div class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary" id="modifyBT" onclick="location.href='/community/modify?bno=<c:out value="${board.bno}" />'">수정</button>
-	  <button type="button" class="btn btn-secondary" id="deleteBT" onclick="location.href='delete.do?bno=<c:out value="${board.bno}" />'">삭제</button>
+	  <button type="button" class="btn btn-secondary" onclick="location.href='/community/delete.do?bno=<c:out value="${board.bno}" />'">삭제</button>
 	  </div></span>
-	  
-	    <!-- 페이지이동 Form -->
+
+<%-- 	    <!-- 페이지이동 Form -->
 	    <form id = "actionForm" action="/community/list" method="get" >
 	   		<input type="hidden" id="bno" name="bno" value="<c:out value="${board.bno}" />" >
 	    	<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }" />" >
 	    	<input type="hidden" name="amount" value="<c:out value="${cri.amount }" />"  >
 	    	<input type="hidden" name="keyword" value="<c:out value="${cri.keyword }" />"  >
 	    	<input type="hidden" name="type" value="<c:out value="${cri.type }" />"  >
-	    </form>
-<!-- 	    <script type="text/javascript">
-		$(function(){
-			var actionForm = $("#actionForm");
-			$("#BackBT").on("click", function(e) {
-				e.preventDefault();
-				self.location="/community/list";
-				actionForm.submit();
-			});
-			
-			$("#deleteBT").on("click", function(e) {
-				e.preventDefault();
-				
-				actionForm.submit();
-			});
-			$("#modifyBT").on("click", function(e) {
-				e.preventDefault();
-				actionForm.attr("action", "/community/modify");
-				actionForm.submit();
-			});
-		});
-		</script> -->
+	    </form> --%>
 	    
       <div><br><br></div>
     </div>
