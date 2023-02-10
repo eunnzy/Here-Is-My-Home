@@ -34,17 +34,13 @@
          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
          <button type="button" class="btn btn-primary">Login</button>
         <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <button id="navbarDropdownMenuLink" type="button" class="btn btn-primary dropdown-toggle dropdown-menu-end" data-bs-toggle="dropdown" aria-expanded="false"></button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="/member/login">일반회원 로그인</a>
             <a class="dropdown-item" href="/member/lessorLogin">중개인 로그인</a>
           </div>
         </div>
         </div>
-          </c:if>
- 
-          <c:if test = "${member != null }">
-          <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/logout.do">Log-out</a></div>
           </c:if>
           </div>
      </div>

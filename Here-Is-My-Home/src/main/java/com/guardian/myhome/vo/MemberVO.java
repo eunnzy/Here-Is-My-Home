@@ -19,11 +19,10 @@ public class MemberVO {
 	
 	private String userRoll;
 	
-	private String imchaAddr1;
+	private String sido1;
 	
-	private String imchaAddr2;
+	private String gugun1;
 	
-	private String imchaAddr3;
 	
 	private int valid;
 	
@@ -70,28 +69,22 @@ public class MemberVO {
 		this.userRoll = userRoll;
 	}
 
-	public String getImchaAddr1() {
-		return imchaAddr1;
+	
+
+	public String getSido1() {
+		return sido1;
 	}
 
-	public void setImchaAddr1(String imchaAddr1) {
-		this.imchaAddr1 = imchaAddr1;
+	public void setSido1(String sido1) {
+		this.sido1 = sido1;
 	}
 
-	public String getImchaAddr2() {
-		return imchaAddr2;
+	public String getGugun1() {
+		return gugun1;
 	}
 
-	public void setImchaAddr2(String imchaAddr2) {
-		this.imchaAddr2 = imchaAddr2;
-	}
-
-	public String getImchaAddr3() {
-		return imchaAddr3;
-	}
-
-	public void setImchaAddr3(String imchaAddr3) {
-		this.imchaAddr3 = imchaAddr3;
+	public void setGugun1(String gugun1) {
+		this.gugun1 = gugun1;
 	}
 
 	public int getValid() {
@@ -113,9 +106,11 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [imchaId=" + imchaId + ", imchaPw=" + imchaPw + ", nickname=" + nickname + ", phone=" + phone
-				+ ", userRoll=" + userRoll + ", imchaAddr1=" + imchaAddr1 + ", imchaAddr2=" + imchaAddr2
-				+ ", imchaAddr3=" + imchaAddr3 + ", valid=" + valid + ", enrollDate=" + enrollDate + "]";
+				+ ", userRoll=" + userRoll + ", sido1=" + sido1 + ", gugun1=" + gugun1 + ", valid=" + valid
+				+ ", enrollDate=" + enrollDate + "]";
 	}
+
+	
 	
 	
 	
