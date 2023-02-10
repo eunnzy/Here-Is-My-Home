@@ -31,11 +31,28 @@
  	</select>
 	
 	
+	<select id="selectHomeDetail" resultType="com.guardian.myhome.vo.HomeVO">
+		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
+			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
+			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail
+		from Home_tb
+	</select>
+	
 	<select id="previewList" resultType="com.guardian.myhome.vo.HomePreviewVO">
 			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
 					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
 					home_title AS homeTitle, home_valid AS homeValid
 			from Home_tb
+	</select>
+	
+	
+	<select id="homeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
+			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
+					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
+					home_title AS homeTitle, home_valid AS homeValid
+			from Home_tb
+			where (latitude Between #{swLat} and #{neLat}) and
+      			  (longitude Between #{swLng} and #{neLng}) 
 	</select>
 	
 

@@ -1,7 +1,9 @@
 package com.guardian.myhome.mapper;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +57,7 @@ public class HomeMapperTest {
 		System.out.println(result );
 	}
 
-	@Test
+	
 	public void previewHome() throws Exception {
 		List<HomePreviewVO> homeList = homeMapper.previewList();		
 		System.out.println("전: " + homeList + "\n");
@@ -69,6 +71,19 @@ public class HomeMapperTest {
 		
 		System.out.println(homeList);
 		System.out.println();
+	}
+	
+	@Test
+	public void previewHomeBounds() throws Exception {
+		Map<String, Object> mapBounds = new HashMap<>();
+		mapBounds.put("swLng", 127.06148367243757);
+		mapBounds.put("neLng", 127.0736617874016);
+		mapBounds.put("swLat", 37.592605575396554);
+		mapBounds.put("neLat", 37.59862623535382);
+		
+		List<HomePreviewVO> homeList = homeMapper.homeInBoundsList(mapBounds);
+		System.out.println(homeList);
+		
 	}
 	
 	
