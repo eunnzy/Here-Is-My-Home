@@ -80,7 +80,7 @@
     
               <label for="id">아이디</label>
               <div class="id_input_box">
-              <input type="text" class="id-input" id="lessorId" name="lessorId" required />
+              <input type="text" class="id-input" id="imchaId" name="imchaId" required />
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
                 </div>
@@ -89,7 +89,7 @@
           <div class="mb-3">
             <label for="login_password">비밀번호</label>
             <div class="pw_input_box">
-            <input type="password" class="password-input" id="lessorPw" name="lessorPw" placeholder="****" required>
+            <input type="password" class="password-input" id="imchaPw" name="imchaPw" placeholder="****" required>
             <div class="invalid-feedback">
               비밀번호를 입력해주세요.
               </div>
