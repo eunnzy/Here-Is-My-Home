@@ -1,6 +1,7 @@
 package com.guardian.myhome.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,23 +52,36 @@ public class HomeServiceImpl implements HomeService{
 		
 	}
 	
+	public List<HomeVO> selectAllHomeList() {
+		// List<HomeVO> homeList = homeMapper.selectAllHomeList();
+		return  homeMapper.selectAllHomeList();
+	}
+	
+
+	@Override
+	public HomeVO selectHomeDetail(int homeNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public List<HomePreviewVO> previewHomeList() {
 		List<HomePreviewVO> previewHomeList = null;
 		
 		previewHomeList = homeMapper.previewList();
 		
-		for(int i=0; i<previewHomeList.size(); i++) {
-			int homeNum = previewHomeList.get(i).getHomeNum();
-			previewHomeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
+		if(previewHomeList != null) {
+			for(int i=0; i<previewHomeList.size(); i++) {
+				int homeNum = previewHomeList.get(i).getHomeNum();
+				previewHomeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
+			}
+			
+			return previewHomeList;
 		}
 		
 		return previewHomeList;
 	}
+
 	
-	public List<HomeVO> selectAllHomeList() {
-		// List<HomeVO> homeList = homeMapper.selectAllHomeList();
-		return  homeMapper.selectAllHomeList();
-	}
 	
 	@Override
 	public List<HomeImgVO> findHomeImgPathByHome(int homeNum) {
@@ -75,6 +89,23 @@ public class HomeServiceImpl implements HomeService{
 		return null;
 	}
 
+	// 현재 위치를 기준으로 지도 경계에 존재하는 매물 리스트
+	@Override 
+	public List<HomePreviewVO> homeInBoundsList(Map<String, Object> mapBounds) {
+		List<HomePreviewVO> homeInBoundsList = null;
+		
+		homeInBoundsList = homeMapper.homeInBoundsList(mapBounds);
+		
+		if(homeInBoundsList != null) {
+			for(int i=0; i<homeInBoundsList.size(); i++) {
+				int homeNum = homeInBoundsList.get(i).getHomeNum();
+				homeInBoundsList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
+			}
+			return homeInBoundsList;
+		}
+		
+		return homeInBoundsList;
+	}
 
 
 

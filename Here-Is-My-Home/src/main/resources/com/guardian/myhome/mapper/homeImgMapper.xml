@@ -19,7 +19,7 @@
  	</select>
  	
 	<select id="previewHomeImg" resultType="com.guardian.myhome.vo.HomeImgVO"> <!-- 미리보기 사진 -->
-			select  home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
+			select  img_num AS imgNum, home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
 			from Home_Img_tb
 			where home_num = #{homeNum}
 	</select>
