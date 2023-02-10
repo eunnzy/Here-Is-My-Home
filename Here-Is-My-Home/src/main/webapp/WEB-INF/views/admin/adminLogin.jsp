@@ -21,7 +21,7 @@
 		<div class="row h-100">
 			<div class="col col-sm-12 col-md-12 col-lg-8 m-0 p-0 w-100 h-100 accounts_col">
 			<div class="accounts_image w-100 h-100">
-				<img src="/img/house.png"
+				<img src="/img/adminhome.png"
 					alt="accounts_imge" class="img-fluid w-100 h-100" />
 <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
 </div>
@@ -40,7 +40,7 @@
            <div class="form-group">
                 <label for="login_password">Password</label>
                 <i class="fa fa-eye-slash" id="eye_icon_login"></i>
-                <input type="password" name="adminPw" class="form-control" id="adminPw onfocus="labelUp(this)" onblur="labelDown(this)" required />
+                <input type="password" name="adminPw" class="form-control" id="adminPw" onfocus="labelUp(this)" onblur="labelDown(this)" required />
               </div>
 			<div class="form-group mb-0">
 				<button type="submit" class="btn btn-primary register_btn w-100">LOGIN</button>

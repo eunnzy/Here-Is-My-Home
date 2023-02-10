@@ -21,24 +21,23 @@ public class MemberMapperTest {
 
 	@Autowired
 	private MemberMapper membermapper;
-//	
-//	@Test
-//	public void memberJoin() throws Exception{
-//		MemberVO member = new MemberVO();
-//		
-//		member.setImchaId("test");
-//		member.setImchaPw("test");
-//		member.setNickname("test");
-//		member.setPhone("010-1111-1111");
-//		member.setUserRoll("test");
-//		member.setImchaAddr1("test");
-//		member.setImchaAddr2("test");
-//		member.setImchaAddr3("test");
-//		
-//		membermapper.memberJoin(member);
-//	}
 	
 	@Test
+	public void memberJoin() throws Exception{
+		MemberVO member = new MemberVO();
+		
+		member.setImchaId("test");
+		member.setImchaPw("test");
+		member.setNickname("test");
+		member.setPhone("010-1111-1111");
+		member.setUserRoll("test");
+		member.setSido1("서울시");
+		member.setGugun1("강남구");
+		
+		membermapper.memberJoin(member);
+	}
+	
+	// @Test
 	public void memberLogin() throws Exception {
 		MemberVO member = new MemberVO();
 		

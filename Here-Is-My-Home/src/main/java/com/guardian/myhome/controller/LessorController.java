@@ -88,4 +88,15 @@ public class LessorController {
 		}
 
 	}
+	
+//	// 로그아웃
+//	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
+//	public String logoutGET(HttpServletRequest request) throws Exception {
+//		
+//		HttpSession session = request.getSession();
+//		
+//		session.invalidate();
+//		
+//		return "redirect:/index";
+//	}
 }
