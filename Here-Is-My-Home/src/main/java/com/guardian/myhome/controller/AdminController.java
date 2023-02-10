@@ -41,13 +41,19 @@ public class AdminController {
 		
 	}
 	
+		@RequestMapping("/main")
+		public String home() {
+			
+			return "/admin/main";
+		}
+	
 	
 	@RequestMapping(value = "/adminJoin", method = RequestMethod.POST)
 	public String joinPOST(AdminVO admin) throws Exception{
 		
 		adminservice.adminJoin(admin);
 		
-		return "redirect:/admin/index";
+		return "redirect:/admin/main";
 	}
 	
 	// 아이디 중복체크
