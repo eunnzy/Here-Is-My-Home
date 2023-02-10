@@ -88,10 +88,9 @@ public class BoardController {
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
 		log.info("remove..." + bno);
 		service.remove(bno);
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		rttr.addAttribute("type", cri.getType());
+		if(service.remove(bno)) {
+			rttr.addFlashAttribute("result", "success");
+		}
 		return "redirect: /community/list" + cri.getListLink();
 	}
 	
