@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,13 +23,13 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/community/*")
+@RequestMapping("/community/")
 @AllArgsConstructor
 public class BoardController {
 
 	private BoardService service;
 	
-	// 같은 동네 목록 페이지 list정보와 함께 전달 -> 지금 일반회원 vo가 없어서 메소드가 전국으로 등록되어 있음(닉네임 파트도 회원ID로 처리)
+	// 목록 리스트 (전국)
 	@GetMapping("/list")
 	public String list(Model model, Criteria cri) {
 		log.info("list: " + cri);
@@ -48,7 +49,7 @@ public class BoardController {
 	
 	// 조회수가 올라가는 조회처리 
 	@GetMapping("/get")
-	public String get(@RequestParam("bno") Long bno, Model model, Criteria cri) {
+	public String get(@RequestParam("bno") Long bno, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("/get");
 		service.viewsUp(bno);
 		model.addAttribute("board", service.get(bno));
@@ -57,7 +58,7 @@ public class BoardController {
 	
 	// 수정테이블 불러오기
 	@GetMapping("/modify")
-	public String modify(Long bno, Model model, Criteria cri) {
+	public String modify(Long bno, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("board", service.get(bno));
 		return "/community/modify";
 	}
@@ -73,25 +74,29 @@ public class BoardController {
 	
 	// 수정
 	@PostMapping("updateBoard.do")
-	public String modify(BoardVO vo, RedirectAttributes rttr, Criteria cri) {
+	public String modify(BoardVO vo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		log.info("modify : " + vo);
 		service.modify(vo);
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addAttribute("type", cri.getType());
-		return "redirect: /community/list" + cri.getListLink();
+		return "redirect: /community/list";
 	}
 		
 	// 삭제 
 	@RequestMapping("delete.do")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, Criteria cri) {
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		log.info("remove..." + bno);
 		service.remove(bno);
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect: /community/list" + cri.getListLink();
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("type", cri.getType());
+		return "redirect: /community/list";
 	}
 	
 }

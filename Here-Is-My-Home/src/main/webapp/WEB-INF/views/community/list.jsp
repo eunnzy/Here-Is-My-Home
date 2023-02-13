@@ -2,41 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Community List</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#regBT").on("click", function() {
-		self.location = "/community/register";
-	});
-	
-	var actionForm = $("#actionForm");
-	$(".page-item a").on("click", function(e) {
-		e.preventDefault();
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-		actionForm.submit();
-	});
-	
-	$(".move").on("click", function(e) {
-		e.preventDefault();
-		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
-		actionForm.attr("action", "/community/get");
-		actionForm.submit();
-	});
-	
-	
-	var searchForm = $("#searchForm");
-	$("#searchForm button").on("click", function(e) {
-		searchForm.find("input[name='pageNum']").val(1);
-		e.preventDefault();
-		searchForm.submit();
-	});
-});
-</script>
+<script type="text/javascript" src="/js/board_listBT.js"></script>
 </head>
 <body>
 	<header>
@@ -68,7 +40,10 @@ $(document).ready(function() {
               	<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}" />> Search List </option>
                 <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}" />> Title </option>
                 <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}" />> Content </option>
+                <option value="N" <c:out value="${pageMaker.cri.type eq 'N'?'selected':''}" />> Nickname </option>
                 <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}" />> Title or Content </option>
+                <option value="TN" <c:out value="${pageMaker.cri.type eq 'TN'?'selected':''}" />> Title or Nickname </option>
+                <option value="TCN" <c:out value="${pageMaker.cri.type eq 'TCN'?'selected':''}" />> Title or Content or Nickname </option>
               </select>
               
               <input class="form-control me-sm-2" type="search" placeholder="Search" name="keyword"
@@ -103,7 +78,7 @@ $(document).ready(function() {
                   <tr class="table-light">
                     <td><c:out value="${board.category}" /></td>
                     <td><a class="move" href="<c:out value="${board.bno}" />" style="text-decoration:none;"><c:out value="${board.title}" /></a></td>
-                    <td><c:out value="${board.imchaid}" /></td>
+                    <td><c:out value="${board.nickname}" /></td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
                     <td><c:out value="${board.views}" /></td>
                     <td><c:out value="${board.likes}" /></td>

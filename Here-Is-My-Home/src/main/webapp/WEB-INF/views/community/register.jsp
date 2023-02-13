@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Write</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
        
      <form action="insertBoard.do" method="post" enctype="multipart/form-data">
   	   <!-- '${board.imchaid}' 컨트롤러에서 조정 후 회원 아이디 입력하기 -->
-       <input type='hidden' name='imchaid' value='Songs'>
+       <input type='hidden' name='imchaid' value='songs'>
        	
 	   <div class="bs-component">
         <table class="table table-hover">
@@ -53,7 +53,6 @@
          </table>
         </div>
         
-
 	     <!-- 하단 버튼 -->
 	     <a href="/community/list"><button type="button" class="btn btn-info">취소</button></a>
 	     <span class="float-end">

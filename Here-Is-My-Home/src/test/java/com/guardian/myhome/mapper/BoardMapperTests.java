@@ -30,7 +30,7 @@ public class BoardMapperTests {
 	}
 	
 	// 페이징 테스트 
-	@Test
+	 @Test
 	public void testPaging() {
 		Criteria cri = new Criteria();
 		List<BoardVO> list = mapper.getListWithPaging(cri);
