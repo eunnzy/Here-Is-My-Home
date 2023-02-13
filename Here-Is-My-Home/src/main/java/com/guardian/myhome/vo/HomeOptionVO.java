@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HomeOptionVO {
-	private int optionNum;
 	private int homeNum;
 	private String optionName;
 }

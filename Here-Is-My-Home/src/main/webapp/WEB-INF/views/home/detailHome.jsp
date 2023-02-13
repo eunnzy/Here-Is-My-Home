@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,13 @@
 		.homeImg-div {
 			border: 1px solid gray;
 		}
+		#reportBtn, #likeBtn, #qnaBtn {
+			cursor: pointer;
+		}
+		.side-content {
+			position: sticky;
+			top: 5px;
+		}
 	</style>
 </head>
 <body>
@@ -31,16 +39,18 @@
 			<div class="row">
 				<div class="col-sm-8 homeImg-div">
 					<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+						<!-- <div class="carousel-indicators">
+						    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+						    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+						    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						  </div>	 -->
+												
 						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="/img/b.png" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/img/oneroom.jpg" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="..." class="d-block w-100" alt="...">
-							</div>
+							<c:forEach items="${home.homeImgList}" var="imgFile">
+								<div class="carousel-item active">
+									<img src="/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}" class="d-block w-100" height="450" alt="...">
+								</div>
+							</c:forEach>
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -53,54 +63,145 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div class="card bg-light">
-						<div class="card-body">
-					    	<h4 class="card-title">월세 / 전세  보증금 / 월세 작성</h4>
-					    	<h6 class="card-subtitle mb-2 text-muted">주소 </h6>
-					    
-					    	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					    
-						   	<div class="col mb-3">
-							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
-						    	<img src="/icon/siren.png" name="sirenBtn" id="sirenBtn" onclick="siren()"> <label for="sirenBtn">허위 매물 신고</label> 
-						   	</div>
-
-						    <div class="col mb-3">
-							   	<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
-						    	<img src="/icon/heart.png" name="likeBtn" id="likeBtn" onclick="homeLike()"> <label for="likeBtn">찜하기</label> 
-						    </div>
-
-							<div class="col mb-3">
-							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>  -->
-						    	<img src="/icon/question.png" name="qnaBtn" id="qnaBtn" onclick="qna()"> <label for="qnaBtn">문의 남기기</label> 
+					<div class="side-content">
+						<div class="card bg-light">
+							<div class="card-body">
+						    	<h4 class="card-title">
+						    		<c:choose>
+						    			<c:when test="${home.rentType == '월세'}">
+						    				<span class="badge bg-success">${home.rentType}</span>
+											${home.deposit} / ${home.monthly}		
+										</c:when>	   
+										<c:otherwise>
+											<span class="badge bg-info">${home.rentType}</span>
+											${home.deposit}
+										</c:otherwise> 
+						    		</c:choose>
+						    	</h4>
+						    	<h6 class="card-subtitle mb-2 text-muted">${home.addr2 } ${home.addr3 } </h6>
+						    	
+						    	<div class="user-info mb-2">
+							    	<p>
+							    		---- User 정보 ------
+							    	</p>
+							    	<p class="card-text"> 이름 : 
+							    	
+							    	br</p>
+							    	<p class="card-text"> 주소:  </p>
+							    	---- User 정보 ------
+						    	</div>
+							   	<div class="col mb-3">
+								    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
+							    	<img src="/icon/siren.png" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" name="reportBtn" id="reportBtn" onclick="report()"> <label for="sirenBtn">허위 매물 신고</label> 
+							   	</div>
+							    <div class="col mb-3">
+								   	<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
+							    	<img src="/icon/heart.png" name="likeBtn" id="likeBtn" onclick="homeLike()"> <label for="likeBtn">찜하기</label> 
+							    </div>
+								<div class="col mb-3">
+								    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>  -->
+							    	<img src="/icon/question.png" name="qnaBtn" id="qnaBtn" onclick="qna()"> <label for="qnaBtn">문의 남기기</label> 
+								</div>
 							</div>
 						</div>
-					</div>
+					</div> 
 				</div>
 			</div>
-			<div class="col-sm-8">
-			adfjkasdfkasdjfk
-			dfajksflkasdj
-			djaklfsjdfa
-			<br>
-			<br>
-			<br>
-			klasjdfasdlkfjaskldfjads
-			fjadsklfjas;dlk
-			<br>
-			<br>
-			<br>
-			<h1>Hello</h1>
-			<h1>Hello</h1>
-			<h1>Hello</h1>
-			<h1>Hello</h1>
-			<h1>Hello</h1>
-			
+			<div class="col-sm-8 mt-4">
+				<div class="basic-info">
+					<table class="table">
+						<thead>
+							<tr>
+		                  		<th colspan="2"> <h3> <b>기본 정보</b> </h3> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td width="30%"> ${home.rentType} </td>
+								<td> 
+									<c:choose>
+										<c:when test="${home.rentType == '월세'}">
+											${home.deposit} / ${home.monthly}		
+										</c:when>	 
+										<c:otherwise>
+											${home.deposit}원
+										</c:otherwise> 
+									</c:choose>
+								</td>
+							</tr>
+							<tr>
+								<td> 관리비 </td>
+								<td> ${home.adminCost}원 </td>
+							</tr>
+							<tr>
+								<td> 주차 </td>
+								<c:if test="${home.parking > 0 }">
+									<td> ${home.parking}대 가능 </td>
+								</c:if>
+							</tr>
+							<tr>
+								<td> 입주 가능일 </td>
+								<td> <fmt:formatDate  value="${home.moveDate}" pattern="yyyy-MM-dd" /> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- 상세 정보  -->
+				<div class="detail-info mt-3">
+					<table class="table">
+						<thead>
+							<tr>
+		                  		<th colspan="2"> <h3> <b>상세 정보</b> </h3> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td td width="30%"> 방 종류 </td>
+								<td> ${home.homeType } </td>
+							</tr>
+							<tr>
+								<td> 집 면적 </td>
+								<td> ${home.homeArea } 평 </td>
+							</tr>
+							<tr>
+								<td> 엘리베이터 </td>
+								<td> ${home.elevator } </td>
+							</tr>
+							<tr>
+								<td> 발코니 / 베란다 </td>
+								<td> ${home.balcony } </td>
+							</tr>
+							<tr>
+								<td> 반려 동물 </td>
+								<td> ${home.pet } </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<!--  -->
+				<div class="detail">
+					<table class="table">
+						<thead>
+							<tr>
+		                  		<th colspan="2"> <h3> <b>상세 설명</b> </h3> </th>
+							</tr>
+						</thead>
+						<tbody>
+								<td>
+									<div class="content-wrap">
+										<div class="home-title">${home.homeTitle }</div>
+										<div class="home-detail">${home.homeDetail }</div>
+									</div>
+								</td>
+						</tbody>
+					</table>
+				</div>
+				
+				
+			</div>
 		</div>
-		</div>
-		
-		
-		
 	</div>
 </body>
 </html>

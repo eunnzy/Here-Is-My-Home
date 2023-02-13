@@ -124,6 +124,7 @@ html, body{
 .home-list {
 	width:100%;
 	height: 100%;
+	cursor: pointer;
 }
 .home-card {
 	padding: 15px 15px;
@@ -149,7 +150,7 @@ img {
 	padding-left: 20px;
 }
 .homeType-content, .option-content, .trading-content, .addInfo-content{
-	margin: 10px;
+	margin: 5px;
 	padding: 20px 15px;
 	display: none;
 	position: absolute;

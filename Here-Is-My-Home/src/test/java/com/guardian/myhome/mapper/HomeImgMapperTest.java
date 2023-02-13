@@ -1,5 +1,6 @@
 package com.guardian.myhome.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -19,15 +20,30 @@ import com.guardian.myhome.vo.HomeImgVO;
 })
 public class HomeImgMapperTest {
 	@Autowired
-	private HomeImgMapper homeImgMapper;
+	private HomeMapper homeMapper;
+	@Autowired
 	
+	
+	
+	public void homeImg() throws Exception {
+		
+		List<HomeImgVO> list = new ArrayList<>();
+		for(int i=0; i<3; i++) {
+			HomeImgVO homeImg = new HomeImgVO();
+			homeImg.setHomeImgName(i+"이름");
+			homeImg.setHomeImgPath(i+"path");
+			homeImg.setHomeNum(0);
+			list.add(homeImg);
+		}
+			
+		homeMapper.insertHomeImgList(list);
+//		HomeImgVO homeImg = homeImgMapper.previewHomeImg(1);
+//		System.out.println(homeImg);
+	}
 	
 	@Test
-	public void homeImg() throws Exception {
-		HomeImgVO homeImg = homeImgMapper.previewHomeImg(1);
-		System.out.println(homeImg);
+	public void homePreview() throws Exception {
+		int homeNum = 2;
+		System.out.println(homeMapper.selectHomeImgDetail(homeNum));
 	}
-
-	
-	
 }

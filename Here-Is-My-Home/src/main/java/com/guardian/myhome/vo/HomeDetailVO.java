@@ -8,10 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data	// getter, setter, toString, hashcode 등을 자동으로 생성
+@Data
 @NoArgsConstructor
-//@AllArgsConstructor
-public class HomeVO {
+public class HomeDetailVO {
 	private int homeNum;		// 매물 번호	
 //	private String lessorId;	// 중개인 아이디 (작성자)
 	private String homeType;	// 집 종류
@@ -22,8 +21,11 @@ public class HomeVO {
 	private double longitude;	// 경도
 	private int homeArea;	// 집 면적
 	private String rentType; // 거래 종류 - 월세, 전세 등
+	private int deposit; 	// 보증금
+	private int monthly;		// 월세
 	private int rentPeriods;	// 임대 기간
 	private int roomCount;		// 방 개수
+	private int adminCost;	// 관리비
 	private int parking;		// 주차 몇대?
 	private String pet;			// 반려동물
 	private String elevator;	// 엘리베이터
@@ -35,5 +37,7 @@ public class HomeVO {
 	private String homeDetail;	// 상세 글
 	private int homeValid;		// 유효한 게시글 인지
 	private Date homeRegDate;	// 글 등록 날짜
+	private List<String> optionList;
+	private List<HomeImgVO> homeImgList;
 	
 }

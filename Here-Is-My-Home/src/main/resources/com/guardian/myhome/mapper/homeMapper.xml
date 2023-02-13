@@ -4,39 +4,52 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  
- <mapper namespace="com.guardian.myhome.mapper.HomeMapper">
+ <mapper namespace="HomeMapper">
  	
  	<!-- 매물 등록  -->
- 	<insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
- 		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, latitude, longitude, home_area, rent_type, deposit, monthly, rent_periods,
- 						room_count, admin_cost, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail) 
+ 	 <insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
+ 		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, latitude, longitude, home_area, rent_type, rent_periods,
+ 						room_count, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail) 
  		values((select nvl(max(home_num), 0) + 1 from Home_tb), #{homeType}, #{addr1}, #{addr2}, #{addr3}, #{latitude}, #{longitude}, #{homeArea},
- 				 #{rentType}, #{deposit}, #{monthly}, #{rentPeriods}, #{roomCount}, #{adminCost}, #{parking}, #{pet}, #{elevator}, #{balcony}, 
+ 				 #{rentType}, #{rentPeriods}, #{roomCount},  #{parking}, #{pet}, #{elevator}, #{balcony}, 
  				 #{moveDate}, #{floor}, #{homeTitle}, #{homeDetail})
  		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">	 <!-- 삽입 후 매물 번호 반환 -->
  			select Max(home_num) as homeNum From Home_tb
  		</selectKey>
  	</insert>
  	
- 	<select id="selectAllHomeList" resultType="com.guardian.myhome.vo.HomeVO">
- 		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
-			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
-			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail, 
-			   home_img_name AS homeImgName, home_img_path as homeImgPath 
- 		from (select *
- 			  from Home_Img_tb join home_tb using(home_num)
- 			  order by home_img_name
- 			  ) 
- 		where rownum &gt; 2 <!-- rownum = -->
- 	</select>
-	
-	
-	<select id="selectHomeDetail" resultType="com.guardian.myhome.vo.HomeVO">
-		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
-			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
-			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail
-		from Home_tb
-	</select>
+ 	<insert id="insertHomeImgList" parameterType="java.util.List">
+ 		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+ 		into Home_Img_tb(home_num, home_img_name, home_img_path) 
+ 		values
+ 			(#{item.homeNum}, #{item.homeImgName}, #{item.homeImgPath})
+ 		</foreach>
+ 	</insert>
+ 	
+ 	<insert id="insertHomeOptionList" parameterType="java.util.List">
+ 		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+ 		into Home_Option_tb(home_num, option_name)  
+ 		values
+ 			(#{item.homeNum}, #{item.optionName})
+ 		</foreach>
+ 	</insert>
+ 	
+ 	<insert id="insertHomePrice" parameterType="com.guardian.myhome.vo.HomePriceVO">
+ 		insert into Home_Price_tb(home_num, deposit, monthly, admin_cost)  
+ 		values (#{homeNum}, #{deposit}, #{monthly}, #{adminCost})
+ 	</insert>
+ 	
+ 	<!-- <insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
+ 		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, latitude, longitude, home_area, rent_type, deposit, monthly, rent_periods,
+ 						room_count, admin_cost, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail) 
+ 		values((select nvl(max(home_num), 0) + 1 from Home_tb), #{homeType}, #{addr1}, #{addr2}, #{addr3}, #{latitude}, #{longitude}, #{homeArea},
+ 				 #{rentType}, #{deposit}, #{monthly}, #{rentPeriods}, #{roomCount}, #{adminCost}, #{parking}, #{pet}, #{elevator}, #{balcony}, 
+ 				 #{moveDate}, #{floor}, #{homeTitle}, #{homeDetail})
+ 		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">	 삽입 후 매물 번호 반환
+ 			select Max(home_num) as homeNum From Home_tb
+ 		</selectKey>
+ 	</insert> -->
+ 	
 	
 	<select id="previewList" resultType="com.guardian.myhome.vo.HomePreviewVO">
 			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
@@ -46,14 +59,34 @@
 	</select>
 	
 	
-	<select id="homeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
+	<select id="selectHomeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
 			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
 					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
 					home_title AS homeTitle, home_valid AS homeValid
-			from Home_tb
+			from  Home_tb join Home_Price_tb using(home_num) 
 			where (latitude Between #{swLat} and #{neLat}) and
       			  (longitude Between #{swLng} and #{neLng}) 
 	</select>
+	
+	
+ 	
+ 	<select id="selectHomeDetail" resultType="com.guardian.myhome.vo.HomeDetailVO">
+		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
+			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
+			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail
+		from Home_tb join Home_Price_tb using(home_num) 
+		where home_num = #{homeNum}
+	</select>
+	
+	 <select id="selectHomeOptionDetail" resultType="String">
+ 		select option_name AS optionName from Home_Option_tb where home_num = #{homeNum}
+ 	</select>
+	
+	 	
+ 	<select id="selectHomeImgDetail" resultType="com.guardian.myhome.vo.HomeImgVO">
+ 		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath  
+ 		from Home_Img_tb where home_num = #{homeNum}
+ 	</select>
 	
 
 	<!-- <select id="previewList" resultType="com.guardian.myhome.vo.HomePreviewVO">
@@ -71,6 +104,36 @@
  	<delete id="deleteHome">
 		delete from Home_tb where home_num = #{homeNum}
 	</delete>
+	
+	
+	<!--  옵션관련  -->
+	<insert id="insertOption" parameterType="com.guardian.myhome.vo.HomeOptionVO">
+		insert into Home_Option_tb(option_num, home_num, option_name) 
+		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
+	</insert>
+	
+
+	
+	
+	
+	<!-- 매물 사진 등록  -->
+ 	<insert id="insertHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
+ 		insert into Home_Img_tb(img_num, home_num, home_img_name, home_img_path) 
+ 		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{homeImgName}, #{homeImgPath})
+ 	</insert>
+
+ 	<!-- <select id="allHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
+ 		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
+ 		from Home_Img_tb
+ 	</select> -->
+ 	
+	<select id="selectPreviewHomeImg" resultType="com.guardian.myhome.vo.HomeImgVO"> <!-- 미리보기 사진 -->
+			select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
+			from (select * from Home_Img_tb where home_num = #{homeNum})
+			where <![CDATA[ rownum <2 ]]>
+	</select>
+	
+
  	
  	
  </mapper>

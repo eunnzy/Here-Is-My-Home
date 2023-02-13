@@ -1,10 +1,11 @@
+
 let homeForm = $("#homeForm");
 let homeImgList = [];    
 
 
 let regex = new RegExp("(.*?)\.(jpg|png|gif|jpeg)$");	// 파일 확장자 -> jpg / pn / gif / jpeg만 가능
 let maxSize = 1048576;	
-function imgExtentionCheck(fileName, fileSize){	// 파일 확장자 체크 
+function imgExtentionCheck(fileName, fileSize){	// 파일 확장자 및 크기 체크 
 
 	if(fileSize >= maxSize){
 		alert("파일 사이즈 초과");
@@ -235,4 +236,3 @@ $("#addBtn").on("click",function(e){	// 등록하기 버튼 클릭시 submit() �
 	
 });
 		
-	
