@@ -15,7 +15,7 @@
 	 <header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
-	
+
 	<div class="wrapper">
 	<div class="map-container">
 		<div id="map"></div>	<!-- 지도 -->
@@ -24,6 +24,7 @@
 				<div class="input-filter-wrap">		
 					<div class="seach-input-wrapper">	
 						<div class="search-input">
+							<i class="bi bi-arrow-repeat"></i>
 							<input type="text" id="searchInput" placeholder="지역, 학교, 지하철역으로 검색"> 
 							<button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 		       			</div>
@@ -31,10 +32,10 @@
 	       			<div class="filter-wrapper">
 		       			<div class="filter">
 		       				<label>검색 조건</label>
-		       				<button type="button" class="homeTypeFilter">매물 종류</button>
-		       				<button type="button" class="tradingFilter">거래 유형</button>
-		       				<button type="button" class="optionFilter" >옵션</button>
-		       				<button type="button" class="addInfoFilter">추가 필터</button>
+		       				<button type="button" class="homeTypeBtn" id="homeTypeBtn">매물 종류</button>
+		       				<button type="button" class="tradingBtn" id="tradingBtn">거래 유형</button>
+		       				<button type="button" class="optionBtn" id="optionBtn" >옵션</button>
+		       				<button type="button" class="addInfoBtn" id="addInfoBtn">추가 필터</button>
 		       			</div>
 		       		</div>
        		   </div> 
@@ -170,8 +171,6 @@
                         </div>
        				</div>
 				</div>
-       			
-       			
 				<!-- 메믈 리스트 -->
 				<div class="home-wrap">
                     <div class="home-list">
@@ -213,31 +212,49 @@
 	    </ul>	 -->
 	
 	<script>
-		$("button").click(function() {
-			let className = $(this).attr("class");
-			console.log(className);
-			
-			switch(className) {
-			case "homeTypeFilter":
-				$(".homeType-content").toggle();
-				break;
-			case "tradingFilter":
-				$(".trading-content").toggle();
-				break;
-			case "optionFilter":
-				$(".option-content").toggle();
-				break;
-			case "addInfoFilter":
-				$(".addInfo-content").toggle();
-				break;
+	$(document).ready(function () {
+		$("#homeTypeBtn").click(function() {
+			if($(".homeType-content").css("display") == "none")	{
+				$(".homeType-content").css("display", "inline-block");
+			}else {
+				$(".homeType-content").css("display", "none");
 			}
-							
 		});
+		
+		
+		$("#tradingBtn").click(function() {
+			if($(".trading-content").css("display") == "none")	{
+				$(".trading-content").css("display", "inline-block");
+			}else {
+				$(".trading-content").css("display", "none");
+			}
+		});
+		
+		
+		$("#optionBtn").click(function() {
+			if($(".option-content").css("display") == "none")	{
+				$(".option-content").css("display", "inline-block");
+			}else {
+				$(".option-content").css("display", "none");
+			}
+		});
+		
+		$("#addInfoBtn").click(function() {
+			if($(".addInfo-content").css("display") == "none")	{
+				$(".addInfo-content").css("display", "inline-block");
+			}else {
+				$(".addInfo-content").css("display", "none");
+			}
+		});
+		
+	});	
+		
 	</script>
 	
-	<script src="/js/searchMap.js" ></script>
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
+	<script src="/js/searchHome.js" ></script>
 
 </script>
 </body>

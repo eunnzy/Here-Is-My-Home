@@ -1,5 +1,8 @@
 package com.guardian.myhome.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.guardian.myhome.vo.HomeOptionVO;
+import com.guardian.myhome.vo.HomePriceVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -17,24 +21,43 @@ import com.guardian.myhome.vo.HomeOptionVO;
 })
 public class HomeOptionTest {
 	@Autowired
-	private HomeOptionMapper homeOptionMapper;
+	private HomeMapper homeOptionMapper;
+	
+	
+	public void price() throws Exception {
+		HomePriceVO priceVO = new HomePriceVO();
+		
+		priceVO.setAdminCost(100);
+		priceVO.setDeposit(100);
+		priceVO.setHomeNum(1);
+		priceVO.setMonthly(100);
+		
+		homeOptionMapper.insertHomePrice(priceVO);
+	}
+	
+//	@Test
+//	public void addOption() throws Exception {
+//		int homeNum = 1;
+//		String[] optionList = {"냉장고", "TV", "세탁기"};
+//		
+//		List<HomeOptionVO> list = new ArrayList<>();
+//		for(String op: optionList) {
+//			HomeOptionVO option = new HomeOptionVO();
+//			option.setHomeNum(homeNum);
+//			option.setOptionName(op);
+//			list.add(option);
+//		}
+//		homeOptionMapper.insertHomeOptionList(list);
+//		
+////		System.out.println(option);
+//
+//		
+//			
+	
+//	}
 	
 	@Test
-	public void addOption() throws Exception {
-		int homeNum = 1;
-		String[] optionList = {"냉장고", "TV", "세탁기"};
-		
-//		List<OptionVO> option = new ArrayList<>();
-		for(String op: optionList) {
-			HomeOptionVO option = new HomeOptionVO();
-			option.setHomeNum(homeNum);
-			option.setOptionName(op);
-			homeOptionMapper.insertOption(option);
-		}
-		
-//		System.out.println(option);
-
-		
-			
+	public void selectOption() throws Exception {
+		System.out.println(homeOptionMapper.selectHomeOptionDetail(1));
 	}
 }

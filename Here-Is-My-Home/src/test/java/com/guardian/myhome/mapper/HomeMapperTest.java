@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeVO;
 
@@ -39,11 +40,11 @@ public class HomeMapperTest {
 		homeVO.setLongitude(127.032848249971);
 		homeVO.setHomeArea(32);
 		homeVO.setRentType("월세");
-		homeVO.setDeposit(500);
-		homeVO.setMonthly(50);
+//		homeVO.setDeposit(500);
+//		homeVO.setMonthly(50);
 		homeVO.setRentPeriods(1);
 		homeVO.setRoomCount(2);
-		homeVO.setAdminCost(0);
+//		homeVO.setAdminCost(0);
 		homeVO.setParking(1);
 		homeVO.setPet("가능");
 		homeVO.setElevator("가능");
@@ -57,6 +58,7 @@ public class HomeMapperTest {
 		System.out.println(result );
 	}
 
+	
 	
 	public void previewHome() throws Exception {
 		List<HomePreviewVO> homeList = homeMapper.previewList();		
@@ -73,7 +75,7 @@ public class HomeMapperTest {
 		System.out.println();
 	}
 	
-	@Test
+	
 	public void previewHomeBounds() throws Exception {
 		Map<String, Object> mapBounds = new HashMap<>();
 		mapBounds.put("swLng", 127.06148367243757);
@@ -81,10 +83,17 @@ public class HomeMapperTest {
 		mapBounds.put("swLat", 37.592605575396554);
 		mapBounds.put("neLat", 37.59862623535382);
 		
-		List<HomePreviewVO> homeList = homeMapper.homeInBoundsList(mapBounds);
+		List<HomePreviewVO> homeList = homeMapper.selectHomeInBoundsList(mapBounds);
 		System.out.println(homeList);
 		
 	}
+	
+	@Test
+	public void detailHome() throws Exception {
+		HomeDetailVO homeDetailVO = homeMapper.selectHomeDetail(2);
+		System.out.println(homeDetailVO);
+	}
+	
 	
 	
 }

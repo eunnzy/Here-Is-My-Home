@@ -12,6 +12,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link href="/css/registerHome.css"  type="text/css" rel="stylesheet" >
 	<style>
 		.home-container {
@@ -33,58 +34,35 @@
 		table {
 			border: 1px solid #8c8c8c;
 		}
-		
 		thead {
 			border-bottom: 1px solid #8c8c8c;
 		}
-		.img-select div{
-		  display: inline-block;
-		  border: 1px solid #ddd;
-		  width: 250px;
-		  height: 250px;
-		  z-index: 1;
-		}
-		.img-select div input[type=file]{
-		  display: none;
-		}
-		.img-select div label{
-		  display: inline-block;
-		  width: 250px;
-		  height: 250px;
-		  background: url("/img/photo.png") no-repeat center;
-		  z-index: 0;
-		}
-		.img-select div label:hover{
-		  background: url("/img/photo.png") #CCE1FF no-repeat center;
-		}
 		.img-div img{
-		max-width: 100%;
-	    height: auto;
-	    display: block;
-	    padding: 5px;
-	    margin-top: 10px;
-	    margin: auto;	
+			width:100%;
+		    height: auto;
+		    display: flex;
+		    margin-top: 15px;
 		}
 		.img-div {
+			display:flex;
+			margin-top: 25px;
 			position: relative;
 		}
 		.imgDelete{
 		    position: absolute;
-		    top: 0;
-		    right: 5%;
-		    background-color: #ef7d7d;
-		    color: wheat;
+		    top: 10px;
+		    padding:3px;
+		    right: 0px;
+		    background-color: #7E7E7E;
+		    color: white;
 		    font-weight: 900;
 		    width: 30px;
 		    height: 30px;
-		    border-radius: 50%;
 		    line-height: 26px;
 		    text-align: center;
-		    border: none;
-		    display: block;
+		    display: inline-block;
 		    cursor: pointer;	
 		}
-	
 	/*  
 		photo 이미지 출처 : 
 		https://www.flaticon.com/free-icon/picture_2659360?term=photo&page=1&position=8&origin=tag&related_id=2659360 
@@ -437,8 +415,8 @@
 					        		<li> 최대 10장까지 올릴 수 있습니다.</li>
 					        	</ul>
 					       	</div>
-				       		<input type="file" name="homeImg" id="homeImg" multiple="multiple">
-					       	<div class="resultImg">
+				       		<input type="file" class="form-control" name="homeImg" id="homeImg" multiple="multiple">
+					       	<div class="row resultImg">
 						       	 <!-- <div class="img-div">
 						       		<div class="imgDelete">X</div>
 						       		<img src="/home/showHomeImg?homeImgName=homeImg/oneroom.jpg">
@@ -456,7 +434,7 @@
     	</form>	
 	</div>
 
-	<script src="/js/registerHome2.js" ></script>
+	<script src="/js/registerHome.js" ></script>
 	
 	<!-- 우편 번호 검색 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

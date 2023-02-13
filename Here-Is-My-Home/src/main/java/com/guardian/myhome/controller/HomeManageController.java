@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomeImgVO;
-import com.guardian.myhome.vo.HomeOptionVO;
+import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeVO;
 
 import net.coobird.thumbnailator.Thumbnailator;
@@ -54,13 +54,16 @@ public class HomeManageController {
 	public String registerForm() {
 		return "home/manage/registerHome";
 	}
-	
-	// 집(매물) 등록
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public int registerHome(@RequestBody HashMap<String, Object> homeData) {
 		HomeVO homeVO = new HomeVO();
-		System.out.println(homeData);
+		HomePriceVO homePriceVO = new HomePriceVO();
+		List<String> homeOptionList = new ArrayList<>();
+		List<HomeImgVO> homeImgList = new ArrayList<>();
+
+		Map<String, Object> insertMap = new HashMap<>();
 		
 		for(String key: homeData.keySet()) { 	// view에서 가져온 키 값들을 돌면서 체크
 			if(!(homeData.get(key).equals(""))) {	// 공백이 아닌 것( 데이터를 갖고 있는 것)
@@ -90,10 +93,10 @@ public class HomeManageController {
 						homeVO.setRentType((String)homeData.get(key)); 
 						break;
 					case "deposit": 
-						homeVO.setDeposit(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						homePriceVO.setDeposit(Integer.parseInt(String.valueOf(homeData.get(key)))); 
 						break;
 					case "monthly": 
-						homeVO.setMonthly(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						homePriceVO.setMonthly(Integer.parseInt(String.valueOf(homeData.get(key)))); 
 						break;
 					case "rentPeriods": 
 						homeVO.setRentPeriods(Integer.parseInt((String) homeData.get(key))); 
@@ -102,7 +105,7 @@ public class HomeManageController {
 						homeVO.setRoomCount(Integer.parseInt((String) homeData.get(key))); 
 						break;
 					case "adminCost": 
-						homeVO.setAdminCost(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						homePriceVO.setAdminCost(Integer.parseInt(String.valueOf(homeData.get(key)))); 
 						break;
 					case "parking": 
 						homeVO.setParking(Integer.parseInt((String) homeData.get(key))); 
@@ -138,10 +141,9 @@ public class HomeManageController {
 						homeVO.setHomeDetail((String)homeData.get(key)); 
 						break;
 					case "optionList":
-						homeVO.setOptionList((List<String>)homeData.get(key));
+						homeOptionList = (List<String>)homeData.get(key);
 						break;
 					case "homeImgList":
-						List<HomeImgVO> homeImgList = new ArrayList<>();
 						for(String img : (List<String>)homeData.get(key)) {
 							HomeImgVO homeImgVO = new HomeImgVO();
 							String[] imgStr = img.split(" ");
@@ -151,48 +153,139 @@ public class HomeManageController {
 							homeImgVO.setHomeImgName(imgStr[1]);
 							homeImgList.add(homeImgVO);
 						}
-						System.out.println(homeImgList);
-						homeVO.setHomeImgList(homeImgList);
 						break;
 				}
 			}
 			
 		}
+		System.out.println("----- HomeManageController ----");
+		System.out.println("homeVO: " + homeVO);
+		System.out.println("homePriceVO: " + homePriceVO);
+		System.out.println("homeImgList: " + homeImgList);
+		System.out.println("homeOptionList: " + homeOptionList);
 		
-		int result = homeService.insertHome(homeVO);	// 매물 정보 삽입.
+		insertMap.put("homeVO", homeVO);
+		insertMap.put("homePriceVO", homePriceVO);
+		insertMap.put("homeImgList", homeImgList);
+		insertMap.put("homeOptionList", homeOptionList);
+		
+		int result = homeService.insertHome(insertMap);	// 매물 정보 삽입.
 		
 		return result;
 	}
 	
-	// 매물 등록 
+	
+	
+	
+//	// 집(매물) 등록
 //	@RequestMapping(value = "/register", method = RequestMethod.POST)
-//	public String registerHome(HomeVO homeVO, HttpServletRequest request, HttpServletResponse response) {
-//		System.out.println(homeVO.toString());
+//	@ResponseBody
+//	public int registerHome(@RequestBody HashMap<String, Object> homeData) {
+//		HomeVO homeVO = new HomeVO();
+//		System.out.println(homeData);
 //		
-//		System.out.println("OptionVO -- ");
-//		if(homeVO.getOptionList() != null) {
-//			homeVO.getOptionList().forEach(
-//					option -> System.out.println("" + option));
-//		}
-//		
-//		System.out.println("\nHomeImgVO--");
-// 		if (homeVO.getHomeImgList() != null) {
-//			homeVO.getHomeImgList().forEach(
-//					attach -> System.out.println("" + attach));
-//        }
-		
-		
-//			homeImgVO.setHomeNum(homeNum);
-//			homeImgVO.setHomeImgName(imgName);
-//			homeImgVO.setHomeImgPath(uploadPath);
+//		for(String key: homeData.keySet()) { 	// view에서 가져온 키 값들을 돌면서 체크
+//			if(!(homeData.get(key).equals(""))) {	// 공백이 아닌 것( 데이터를 갖고 있는 것)
+//				switch(key) {
+//					case "homeType": 
+//						homeVO.setHomeType((String)homeData.get(key)); 
+//						break;
+//					case "addr1" : 
+//						homeVO.setAddr1((String)homeData.get(key)); 
+//						break;
+//					case "addr2" : 
+//						homeVO.setAddr2((String)homeData.get(key)); 
+//						break;
+//					case "addr3" : 
+//						homeVO.setAddr3((String)homeData.get(key)); 
+//						break;
+//					case "latitude":
+//						homeVO.setLatitude(Double.parseDouble((String)homeData.get(key)));
+//						break;
+//					case "longitude":
+//						homeVO.setLongitude(Double.parseDouble((String)homeData.get(key)));
+//						break;
+//					case "homeArea" : 
+//						homeVO.setHomeArea(Integer.parseInt((String) homeData.get(key))); 
+//						break;
+//					case "rentType" : 
+//						homeVO.setRentType((String)homeData.get(key)); 
+//						break;
+//					case "deposit": 
+//						homeVO.setDeposit(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+//						break;
+//					case "monthly": 
+//						homeVO.setMonthly(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+//						break;
+//					case "rentPeriods": 
+//						homeVO.setRentPeriods(Integer.parseInt((String) homeData.get(key))); 
+//						break;
+//					case "roomCount" : 
+//						homeVO.setRoomCount(Integer.parseInt((String) homeData.get(key))); 
+//						break;
+//					case "adminCost": 
+//						homeVO.setAdminCost(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+//						break;
+//					case "parking": 
+//						homeVO.setParking(Integer.parseInt((String) homeData.get(key))); 
+//						break;
+//					case "pet": 
+//						homeVO.setPet((String)homeData.get(key)); 
+//						break;
+//					case "elevator":
+//						homeVO.setElevator((String)homeData.get(key)); 
+//						break;
+//					case "balcony": 
+//						homeVO.setBalcony((String)homeData.get(key)); 
+//						break;
+//					case "moveDate": 
+//						try {
+//							String dateStr = (String)homeData.get(key);
+//							SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//							Date date;
+//							date = format.parse(dateStr);
+//							System.out.println(date);
+//							homeVO.setMoveDate(date);
+//						} catch (ParseException e) {
+//							e.printStackTrace();
+//						}
+//						break;
+//					case "floor": 
+//						homeVO.setFloor(Integer.parseInt((String) homeData.get(key))); 
+//						break;
+//					case "homeTitle": 
+//						homeVO.setHomeTitle((String)homeData.get(key));
+//						break;
+//					case "homeDetail": 
+//						homeVO.setHomeDetail((String)homeData.get(key)); 
+//						break;
+//					case "optionList":
+//						homeVO.setOptionList((List<String>)homeData.get(key));
+//						break;
+//					case "homeImgList":
+//						List<HomeImgVO> homeImgList = new ArrayList<>();
+//						for(String img : (List<String>)homeData.get(key)) {
+//							HomeImgVO homeImgVO = new HomeImgVO();
+//							String[] imgStr = img.split(" ");
+//							System.out.println(imgStr);
+//							
+//							homeImgVO.setHomeImgPath(imgStr[0]);
+//							homeImgVO.setHomeImgName(imgStr[1]);
+//							homeImgList.add(homeImgVO);
+//						}
+//						System.out.println(homeImgList);
+//						homeVO.setHomeImgList(homeImgList);
+//						break;
+//				}
+//			}
 //			
-//			homeImgList.add(homeImgVO);
 //		}
-		
-// 		homeService.insertHome(homeVO);
-// 		
-//		return "home/manage/complete";
+//		
+//		int result = homeService.insertHome(homeVO);	// 매물 정보 삽입.
+//		
+//		return result;
 //	}
+	
 	
 			
 	@RequestMapping(value = "/homeImgUpload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -248,7 +341,7 @@ public class HomeManageController {
 
 				// 썸네일 이미지 저장 
 				FileOutputStream thumbnail = new FileOutputStream(new File(uploadFolder, "t_" + imgName));
-				Thumbnailator.createThumbnail(multifile.getInputStream(), thumbnail, 100, 100);
+				Thumbnailator.createThumbnail(multifile.getInputStream(), thumbnail, 200, 200);
 				thumbnail.close();
 				
 				homeImgList.add(homeImgVO);
