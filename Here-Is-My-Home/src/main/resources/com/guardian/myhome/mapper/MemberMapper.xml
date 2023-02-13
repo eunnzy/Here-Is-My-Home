@@ -8,8 +8,8 @@
  
  	<!-- 회원가입 -->
  	<insert id="memberJoin" parameterType="com.guardian.myhome.vo.MemberVO">
-	insert into Imcha_tb (imcha_id, imcha_pw, nickname, phone, user_roll, imcha_addr1, imcha_addr2, imcha_addr3)          
-	values(#{imchaId}, #{imchaPw}, #{nickname}, #{phone}, #{userRoll}, #{imchaAddr1}, #{imchaAddr2}, #{imchaAddr3})
+	insert into Imcha_tb (imcha_id, imcha_pw, nickname, phone, user_roll, sido1, gugun1)          
+	values(#{imchaId}, #{imchaPw}, #{nickname}, #{phone}, #{userRoll}, #{sido1}, #{gugun1})
  	</insert> 
  	
  	<!-- 아이디 중복체크 -->
@@ -20,7 +20,7 @@
  	<!-- 로그인 -->
  	<select id="memberLogin" resultType="com.guardian.myhome.vo.MemberVO">
        select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
-             imcha_addr1 AS imchaAddr1, imcha_addr2 AS imchaAddr2, imcha_addr3 AS imchaAddr3
+             sido1, gugun1
        from Imcha_tb where imcha_Id = #{imchaId} and imcha_pw = #{imchaPw}
     </select>
  	

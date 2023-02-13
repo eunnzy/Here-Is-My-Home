@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" > </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript" src="/js/board_getBT.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var bnoValue = '<c:out value="${board.bno}" />';
@@ -24,9 +25,8 @@ $(document).ready(function() {
 						str += "<span>" + list[i].replyer + "</span>";
 						str += "<span class='float-end'>" + replyService.displayTime(list[i].updateDate) + "</span></h6>";
 						str += "<p class='card-text'>" + list[i].reply + "</p>"; 
-						str += "<div class='btn-group float-end' role='group' aria-label='Basic example'>";
-						str += "<button type='button' class='btn btn-primary btn-sm float-end moBT'>수정</button>"; 
-						str += "<button type='button' class='btn btn-primary btn-sm float-end delBT' data-no='" + list[i].rno + "'>삭제</button>"; 
+						str += "<div class='float-end'>";
+						str += "<button type='button' class='btn btn-primary btn-sm float-end delBT' id='" + list[i].rno + "'>삭제</button>"; 
 						str += "</div><br><br></div>";
 					}
 					replyUL.html(str);
@@ -35,7 +35,7 @@ $(document).ready(function() {
 		
 		// 나중에 회원아이디로 값 변경 
 		// 댓글 입력 
-		var replyer = '<c:out value="${board.bno}" />' + "user";
+		var replyer = '<c:out value="${board.bno}" />';
 		var regBt = $("#replyregBT");
 		regBt.on("click", function(e) {
 			if($("#reply").val() == null || $("#reply").val() == "") {
@@ -47,20 +47,15 @@ $(document).ready(function() {
 					$("#reply").val('');
 				});
 		}
-	
-		// 댓글 삭제 
+		});
+		
+		// 댓글 삭제 안됨 
 		$(".delBT").on("click", function(e) {
 			var no = $(this).data("no");
 			replyService.remove(no, function(result) { 
 				alert("댓글이 삭제되었습니다.");
 				showList(1); });
-		});
-		
-		
-		
-		
-	});
-		
+		}); 
 });		
 </script>
 </head>
@@ -100,21 +95,20 @@ $(document).ready(function() {
     <div><br></div>
 
 	  <!-- 하단 버튼 -->
-	  
-      <span><button type="button" class="btn btn-info" id="BackBT" onclick="location.href='/community/list'">뒤로</button></span>
+      <span><button type="button" class="btn btn-info" id="BackBT">뒤로</button></span>
       <span class="float-end"><div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary" id="modifyBT" onclick="location.href='/community/modify?bno=<c:out value="${board.bno}" />'">수정</button>
-	  <button type="button" class="btn btn-secondary" onclick="location.href='/community/delete.do?bno=<c:out value="${board.bno}" />'">삭제</button>
+      <button type="button" class="btn btn-secondary" id="modifyBT">수정</button>
+	  <button type="button" class="btn btn-secondary" id="deleteBT">삭제</button>
 	  </div></span>
 
-<%-- 	    <!-- 페이지이동 Form -->
-	    <form id = "actionForm" action="/community/list" method="get" >
+ 	    <!-- 페이지이동 Form -->
+	    <form id = "operForm" action="/community/modify" method="get" >
 	   		<input type="hidden" id="bno" name="bno" value="<c:out value="${board.bno}" />" >
-	    	<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }" />" >
+ 	    	<input type="hidden" name="pageNum" value="<c:out value="${cri.pageNum }" />" >
 	    	<input type="hidden" name="amount" value="<c:out value="${cri.amount }" />"  >
 	    	<input type="hidden" name="keyword" value="<c:out value="${cri.keyword }" />"  >
-	    	<input type="hidden" name="type" value="<c:out value="${cri.type }" />"  >
-	    </form> --%>
+	    	<input type="hidden" name="type" value="<c:out value="${cri.type }" />"  > 
+	    </form> 
 	    
       <div><br><br></div>
     </div>

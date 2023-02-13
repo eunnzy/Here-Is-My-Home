@@ -14,6 +14,10 @@
 						<when test="type == 'C'.toString()" >
 							content like '%'||#{keyword}||'%'
 						</when>
+						<when test="type == 'N'.toString()" >
+							nickname like '%'||#{keyword}||'%'
+						</when>
+						
 					</choose>
 				</trim>
 			</foreach>
@@ -23,8 +27,8 @@
 	<!-- 전국 목록 리스트 resultMap="boardMap" -->
 	<select id="getListWithPaging" resultType="com.guardian.myhome.vo.BoardVO">
 		<![CDATA[
-		SELECT A.* FROM 
-		(SELECT /*+ INDEX_DESC (B pk_board) */ rownum rn, B.* FROM Board B, Imcha_tb I WHERE 
+		SELECT A.* 
+		FROM (SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE
 		]]>
 		
 		<include refid="criteria"></include>
@@ -37,7 +41,8 @@
 	
 	<!-- 전체 갯수 -->
 	<select id="getTotalCount" resultType="int">
-		SELECT COUNT(*) FROM Board WHERE 
+		SELECT COUNT(*) FROM 
+		(SELECT B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID) A WHERE 
 		<include refid="criteria"></include>
 		BNO > 0
 	</select>
@@ -50,7 +55,7 @@
 	
 	<!-- 조회 -->
 	<select id="read" resultType="com.guardian.myhome.vo.BoardVO">
-		SELECT B.*, I.nickname, I.addr FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID AND bno = #{bno}
+		SELECT B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID AND bno = #{bno}
 	</select>
 	
 	<!-- 삭제 -->
