@@ -1,6 +1,7 @@
 package com.guardian.myhome.service;
 
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.MemberVO;
 
 public interface LessorService {
 
@@ -15,4 +16,10 @@ public interface LessorService {
 	
 	// 로그인
 	public LessorVO lessorLogin(LessorVO lessor) throws Exception;
+	
+	// 회원정보 저장
+	public LessorVO getLessor(LessorVO lessor) throws Exception;
+	
+	// 회원정보 수정
+	public void updateLessor(LessorVO lessor) throws Exception;
 }

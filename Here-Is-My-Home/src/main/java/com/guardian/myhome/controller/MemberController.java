@@ -1,24 +1,17 @@
 package com.guardian.myhome.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.mapper.MemberMapper;
 import com.guardian.myhome.service.MemberService;
-import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.MemberVO;
 
 /*
@@ -85,7 +78,7 @@ public class MemberController {
 			return "redirect:/member/login";
 		} else {
 			session.setAttribute("member", vo);
-			
+			System.out.println(vo.getImchaId());
 			return "redirect:/index";
 		}
 	}
@@ -102,6 +95,7 @@ public class MemberController {
 		
 		return "redirect:/index";
 	}
+	
 	
 }
 

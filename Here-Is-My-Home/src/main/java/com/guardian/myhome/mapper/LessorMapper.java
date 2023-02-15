@@ -1,6 +1,7 @@
 package com.guardian.myhome.mapper;
 
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.MemberVO;
 
 public interface LessorMapper {
 
@@ -15,4 +16,10 @@ public interface LessorMapper {
 	
 	// 로그인 
 	public LessorVO lessorLogin(LessorVO lessor);
+	
+	// 중개인 정보저장
+	public LessorVO getLessor(LessorVO lessor);
+	
+	// 중개인 정보 수정
+	public void updateLessor(LessorVO lessor);
 }
