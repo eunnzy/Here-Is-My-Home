@@ -108,14 +108,18 @@
                 <span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
                </div>
                
-            <div class=" mb-3">
+            <div class="mb-3">
               <label for="nickname">닉네임</label>
-              <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                닉네임을 입력해주세요.
+              <div class="id_input_box">
+              <input type="text" class="form-nickname" name="nickname" id="nickname" placeholder="" value="" required>
+              <div class="invalid-feedback">닉네임을 입력해주세요.
+               <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
               </div>
-              <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
+              </div>
+              <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
+			  <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
             </div>
+   
 
 
           <div class="mb-3">

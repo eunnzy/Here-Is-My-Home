@@ -29,7 +29,7 @@
 
          
          </ul>
-          <c:if test = "${member == null }">
+          <c:if test = "${member == null && lessor == null}">
          <!-- <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/login">Login</a></div> -->
          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
          <button type="button" class="btn btn-primary">Login</button>
@@ -43,10 +43,9 @@
         </div>
           </c:if>
  
-          <c:if test = "${member != null }">
+          <c:if test = "${member != null || lessor != null}">
           <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/logout.do">Log-out</a></div>
           </c:if>
-          </div>
      </div>
 
   </nav>

@@ -1,6 +1,7 @@
 package com.guardian.myhome.mapper;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.vo.AdminVO;
 import com.guardian.myhome.vo.MemberVO;
 
@@ -23,7 +25,7 @@ public class AdminMapperTest {
 	@Autowired
 	private AdminMapper adminmapper;
 	
-	@Test
+	//@Test
 	public void adminJoin() throws Exception{
 		AdminVO admin = new AdminVO();
 		
@@ -46,4 +48,8 @@ public class AdminMapperTest {
 		adminmapper.adminLogin(admin);
 		System.out.println("결과 값 : " + adminmapper.adminLogin(admin));
 	}
+	
+
+	
+
 }

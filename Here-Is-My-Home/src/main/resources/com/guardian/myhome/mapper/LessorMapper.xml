@@ -28,5 +28,20 @@
              lessor_addr1 AS lessorAddr1, lessor_addr2 AS lessorAddr2, lessor_addr3 AS lessorAddr3
        from lessor_tb where lessor_Id = #{lessorId} and lessor_pw = #{lessorPw}
     </select>
+    
+    <!-- 아이디 찾기  -->
+    <select id="findLessorId" resultType="com.guardian.myhome.vo.LessorVO">
+    	select lessor_id AS lessorId from lessor_tb where lessor_nickname=#{lessorNickName} and phone = #{phone}
+    </select>
+ 	 
+ 	 <!-- 비밀번호 찾기 -->
+ 	 <select id="findLessorPw" resultType="com.guardian.myhome.vo.LessorVO">
+ 	 	select lessor_pw As lessorPw from lessor_tb where lessor_id = #{lessorId} and phone = #{phone}
+ 	 </select>
+ 	 
+ 	 <!-- 비밀번호 변경 -->
+ 	 <update id="updateLessorPw">
+ 	 	update lessor_tb set lessor_pw = #{lessorPw} where lessor_id = #{lessorId}
+ 	 </update>
  	
  </mapper>

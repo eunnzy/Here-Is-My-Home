@@ -34,13 +34,13 @@
 		</div>
 		<form id="login_form" method="post" class="form w-100 p-4">
             <div class="form-group">
-                <label for="email">ID</label>
-                <input type="text" name="adminId" class="form-control" id="amdinId" onfocus="labelUp(this)" onblur="labelDown(this)" required />
+                <label for="adminId"></label>
+                <input type="text" name="adminId" class="form-control" id="amdinId" placeholder="ID" onfocus="labelUp(this)" onblur="labelDown(this)" required />
               </div>
            <div class="form-group">
-                <label for="login_password">Password</label>
+                <label for="login_password"></label>
                 <i class="fa fa-eye-slash" id="eye_icon_login"></i>
-                <input type="password" name="adminPw" class="form-control" id="adminPw" onfocus="labelUp(this)" onblur="labelDown(this)" required />
+                <input type="password" name="adminPw" class="form-control" id="adminPw" placeholder="PASSWORD"onfocus="labelUp(this)" onblur="labelDown(this)" required />
               </div>
 			<div class="form-group mb-0">
 				<button type="submit" class="btn btn-primary register_btn w-100">LOGIN</button>

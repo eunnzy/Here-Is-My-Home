@@ -1,5 +1,6 @@
 package com.guardian.myhome.service;
 
+
 import com.guardian.myhome.vo.AdminVO;
 
 public interface AdminService {
