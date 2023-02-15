@@ -11,6 +11,14 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+  	$(function() {
+  		$("#find_id_btn").click(function(){
+  			location.href="../member/findId";
+  		})
+  	})
+  </script>
     <style>
       .input-form {
         max-width: 680px;
@@ -80,7 +88,9 @@
               </div>
             </div>
           </div>
-          <p><a href="아이디찾기.html">아이디/비밀번호찾기</a></p>
+
+          <p><a href="${pageContext.request.contextPath }/member/findId" id="findId">아이디 찾기</a></p>
+          <p><a href="${pageContext.request.contextPath }/member/findPw" id="findPw">비밀번호 찾기</a></p>
         </div>
       <div class="mb-4"></div>
       <div class="col-md-6 mb-3"  >    </div>  
@@ -141,6 +151,7 @@
     <br><br><br><br>
   </div>
 
+  <script type="text/javascript"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
