@@ -1,7 +1,5 @@
 package com.guardian.myhome.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,6 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberDAO dao;
-	
 	
 	// 회원가입
 	@Override
@@ -64,6 +61,18 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO updatePw(MemberVO member) throws Exception {
 		
 		return dao.updatePw(member);
+	}
+
+	@Override
+	public void updateMember(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MemberVO getMember(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -24,4 +24,10 @@ public interface LessorService {
 		
 	// 비밀번호 변경
 	public LessorVO updateLessorPw(LessorVO lessor) throws Exception;
+	
+	// 회원정보 저장
+	public LessorVO getLessor(LessorVO lessor) throws Exception;
+	
+	// 회원정보 수정
+	public void updateLessor(LessorVO lessor) throws Exception;
 }

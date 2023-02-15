@@ -29,19 +29,20 @@
        from lessor_tb where lessor_Id = #{lessorId} and lessor_pw = #{lessorPw}
     </select>
     
-    <!-- 아이디 찾기  -->
-    <select id="findLessorId" resultType="com.guardian.myhome.vo.LessorVO">
-    	select lessor_id AS lessorId from lessor_tb where lessor_nickname=#{lessorNickName} and phone = #{phone}
-    </select>
- 	 
- 	 <!-- 비밀번호 찾기 -->
- 	 <select id="findLessorPw" resultType="com.guardian.myhome.vo.LessorVO">
- 	 	select lessor_pw As lessorPw from lessor_tb where lessor_id = #{lessorId} and phone = #{phone}
- 	 </select>
- 	 
- 	 <!-- 비밀번호 변경 -->
- 	 <update id="updateLessorPw">
- 	 	update lessor_tb set lessor_pw = #{lessorPw} where lessor_id = #{lessorId}
- 	 </update>
+    
+    <select id="getLessor" resultType="com.guardian.myhome.vo.LessorVO">
+ 		select lessor_id AS lessorId, lessor_pw AS lessorPw, lessor_nickname AS lessorNickName, phone, user_roll AS userRoll, birthDate AS birthDate,
+             lessor_addr1 AS lessorAddr1, lessor_addr2 AS lessorAddr2, lessor_addr3 AS lessorAddr3, jgs_name AS jgsName, jgs_num AS jgsNum, name AS name
+       from lessor_tb where lessor_Id=#{lessorId}
+ 	</select>
+ 	
+ 	<!-- 회원 정보 수정 -->
+ 	<update id="updateLessor" >
+ 		update lessor_tb
+ 		set lessor_pw=#{lessorPw}, lessor_nickname=#{lessorNickName}, phone=#{phone}, user_roll=#{userRoll}, lessor_addr1=#{lessorAddr1}, 
+ 			lessor_addr2=#{lessorAddr2}, lessor_addr3=#{lessorAddr3}, jgs_name=#{jgsName}, jgs_num=#{jgsNum}, birthDate=#{birthDate}, name=#{name}
+ 		where lessor_id=#{lessorId}
+ 	</update>
+ 	
  	
  </mapper>

@@ -44,4 +44,16 @@
  	 	update imcha_tb set imcha_pw = #{imchaPw} where imcha_id = #{imchaId}
  	 </update>
  	
+ 	<!-- 회원 정보 수정 -->
+ 	<update id="updateMember">
+ 		update Imcha_tb
+ 		set imcha_pw=#{imchaPw}, nickname=#{nickname}, phone=#{phone}, user_roll=#{userRoll}, sido1=#{sido1}, gugun1=#{gugun1}
+ 		where imcha_Id=#{imchaId}
+ 	</update>
+ 	
+ 	<select id="getMember" resultType="com.guardian.myhome.vo.MemberVO">
+ 		select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
+             sido1, gugun1
+       from Imcha_tb where imcha_Id=#{imchaId}
+ 	</select>
  </mapper>

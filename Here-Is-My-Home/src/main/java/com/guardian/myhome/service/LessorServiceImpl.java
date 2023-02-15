@@ -62,5 +62,15 @@ public class LessorServiceImpl implements LessorService {
 			
 			return dao.updateLessorPw(lessor);
 		}
+	
+	@Override
+	public LessorVO getLessor(LessorVO lessor) throws Exception {
+		return lessormapper.getLessor(lessor);
+	}
+	
+	@Override
+	public void updateLessor(LessorVO lessor) throws Exception {
+		lessormapper.updateLessor(lessor);
+	}
 
 }

@@ -23,4 +23,12 @@ public interface MemberMapper {
 	
 	
 	
+	
+	// 정보 수정
+	public void updateMember(MemberVO member);
+	
+	// 정보 저장
+	public MemberVO getMember(MemberVO memeber);
+	
+	
 }
