@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,16 +21,20 @@
           <li class="nav-item">
              <a class="nav-link" href="../home/searchHome">search Home</a>
           </li>
-          <li class="nav-item">
-             <a class="nav-link" href="#">MyPage</a>
-          </li>
+          	<li class="nav-item">
+          	 	<c:if test="${member.userRoll == '일반회원' }"> 
+             		<a class="nav-link" href="../mypage/mypageImcha">MyPage</a>
+            	</c:if>
+            	<c:if test="${lessor.userRoll == '중개인' }"> 
+             		<a class="nav-link" href="../mypage/mypageLessor">MyPage</a>
+            	</c:if> 
+            </li>
           <li class="nav-item">
              <a class="nav-link" href="/community/list">Community</a>
           </li>
-
-         
          </ul>
-          <c:if test = "${member == null }">
+         
+          <c:if test = "${member == null && lessor == null}">
          <!-- <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/login">Login</a></div> -->
          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
          <button type="button" class="btn btn-primary">Login</button>
@@ -43,11 +48,11 @@
         </div>
           </c:if>
  
-          <c:if test = "${member != null }">
+          <c:if test = "${member != null || lessor != null}">
           <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/logout.do">Log-out</a></div>
           </c:if>
-          </div>
-     </div>
+	     </div>
+	    </div>
 
   </nav>
 </body>
