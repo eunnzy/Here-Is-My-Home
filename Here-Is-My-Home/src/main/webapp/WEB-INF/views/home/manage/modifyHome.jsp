@@ -75,7 +75,7 @@
 	</header>
 	
 	<div class="home-container col-md-9 mx-auto">
-		<h1 class="mt-3 mb-3"> 방 올리기 </h1>
+		<h1 class="mt-3 mb-3"> 방 정보 수정 </h1>
 		<div class="add-notice p-3 mx-auto mb-5" >
         	<ul>
         		<li>전/월세 매물만 등록할 수 있습니다.</li>
@@ -93,7 +93,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="width: 15%;"> 방 종류  </td>
+                            <td> 방 종류  </td>
                             <td class="radio-btn"> 
                             	<div class="form-check form-check-inline">
                                 	<input type="radio" class="form-check-input" name="homeType" value="원룸"> <label> 원룸 </label> 
@@ -126,7 +126,7 @@
                    	</thead>
                    	<tbody>
                         <tr>
-                            <td style="width: 15%;"> 주소  </td>
+                            <td> 주소  </td>
                             <td> 
                             	 <div class="row mb-3">
 								    <label for="addr1" class="col-sm-2">우편번호</label>
@@ -164,7 +164,7 @@
                    </thead>
                    <tbody>
                        <tr>
-                           <td style="width: 15%;"> 크기  </td>
+                           <td> 크기  </td>
                            <td> 
                            	<div class="row">
 								<div class="col-sm-auto">
@@ -216,7 +216,7 @@
 							   			<label>만원</label>
 							   		</div>
 							   		<div class="col-auto">
-							   			<label>*전세인 경우 0으로 작성</label>
+							   			<label>* 전세인 경우 0으로 작성</label>
 							   		</div>
 						    		</div>
 						   	 	</div>
@@ -259,7 +259,7 @@
                    </thead>
                    <tbody>
                        <tr>
-                           <td style="width: 15%;"> 관리비  </td>
+                           <td> 관리비  </td>
                            <td> 
                            		<div class="row mb-3">
 								    <div class="col-auto">
@@ -285,14 +285,14 @@
                            </td>
                        </tr>
                        <tr>
-                           <td> 반려동물  </td>
+                           <td> 반려동물 </td>
                            <td class="radio-btn">
                                <input class="form-check-input" type="radio" name="pet" value="가능"> <label> 가능 </label> 
                                <input class="form-check-input" type="radio" name="pet" value="불가능"> <label> 불가능 </label> 
                            </td>
                        </tr>
                        <tr>
-                           <td> 엘리베이터  </td>
+                           <td> 엘리베이터 </td>
                            <td class="radio-btn">
                                <input class="form-check-input" type="radio" name="elevator" value="가능"> <label> 가능 </label> 
                                <input class="form-check-input" type="radio" name="elevator" value="불가능"> <label> 불가능 </label> 
@@ -394,14 +394,14 @@
                    </thead>
                    <tbody >
                        <tr>
-                           <td style="width: 15%;"> 제목  </td>
+                           <td> 제목  </td>
                            <td> 
                                <input class="form-control" type="text" name="homeTitle" >           
                            </td>
                        </tr>
                        <tr>
                            <td> 상세 설명  </td>
-                           <td><textarea class="form-control"  name="homeDetail" style="height: 300px"></textarea>
+                           <td><textarea class="form-control"  name="homeDetail" rows="10"></textarea>
                            </td>
                        </tr>
                    </tbody>
@@ -447,7 +447,6 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script>
 	var geocoder = new kakao.maps.services.Geocoder();
-	
 	$("#searchPost").click(function() {
 		new daum.Postcode({
 		    oncomplete: function(data) {
@@ -505,8 +504,6 @@
 		let area = $(this).val();
 		let homeArea = $("#homeArea").val( Math.floor(area / 3.3) );
 	});
-	
-	
 	
    </script>
 </body>

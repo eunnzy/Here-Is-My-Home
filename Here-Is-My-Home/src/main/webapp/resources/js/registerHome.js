@@ -110,7 +110,14 @@ $(".resultImg").on("click", ".imgDelete", function(e){
 		}
 	});
 	
+	
+	
 });
+	
+function overlay() {
+	
+}	
+	
 	
 // 등록하기 버튼 클릭시 submit() 전송	
 $("#addBtn").on("click",function(e){	

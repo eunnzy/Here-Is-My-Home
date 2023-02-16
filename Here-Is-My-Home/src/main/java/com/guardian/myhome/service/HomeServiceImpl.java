@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.guardian.myhome.dao.HomeDAO;
-import com.guardian.myhome.mapper.HomeImgMapper;
-import com.guardian.myhome.mapper.HomeMapper;
-import com.guardian.myhome.mapper.HomeOptionMapper;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -70,6 +67,19 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	// 현재 위치를 기준으로 지도 경계에 존재하는 매물 리스트 반환하기 
+//	@Override 
+//	public List<HomePreviewVO> homeInBoundsList(Map<String, Object> mapBounds) {
+//		List<HomePreviewVO> homeInBoundsList = null;
+//		homeInBoundsList = homeDAO.selectHomeInBoundsList(mapBounds);
+//		
+//		for(int i=0; i<homeInBoundsList.size(); i++) {
+//			int homeNum = homeInBoundsList.get(i).getHomeNum();
+//			homeInBoundsList.get(i).setHomeImgVO(homeDAO.selectPreviewHomeImg(homeNum));
+//		}
+//		
+//		return homeInBoundsList;
+//	}
+	
 	@Override 
 	public List<HomePreviewVO> homeInBoundsList(Map<String, Object> mapBounds) {
 		List<HomePreviewVO> homeInBoundsList = null;
@@ -77,18 +87,20 @@ public class HomeServiceImpl implements HomeService{
 		
 		for(int i=0; i<homeInBoundsList.size(); i++) {
 			int homeNum = homeInBoundsList.get(i).getHomeNum();
-			homeInBoundsList.get(i).setHomeImgVO(homeDAO.selectPreviewHomeImg(homeNum));
+			homeInBoundsList.get(i).setHomeImg(homeDAO.selectPreviewHomeImg(homeNum));
+			homeInBoundsList.get(i).setOptionList(homeDAO.selectHomeOptionList(homeNum));
 		}
 		
 		return homeInBoundsList;
 	}
+	
 
 
 	@Override
 	public Map<String, Object> selectHomeDetail(int homeNum) {
 		HomeDetailVO homeDetailVO = homeDAO.selectHomeDetail(homeNum);
-		homeDetailVO.setOptionList(homeDAO.selectHomeOptionDetail(homeNum));
-		homeDetailVO.setHomeImgList(homeDAO.selectHomeImgDetail(homeNum));
+		homeDetailVO.setOptionList(homeDAO.selectHomeOptionList(homeNum));
+		homeDetailVO.setHomeImgList(homeDAO.selectHomeImgList(homeNum));
 		
 		Map<String, Object> home = new HashMap<>();
 		home.put("homeNum", homeDetailVO.getHomeNum());

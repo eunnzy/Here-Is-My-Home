@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HomeDetailVO {
 	private int homeNum;		// 매물 번호	
-//	private String lessorId;	// 중개인 아이디 (작성자)
+	private String lessorId;	// 중개인 아이디 (작성자)
 	private String homeType;	// 집 종류
 	private String addr1;		// 우편번호
 	private String addr2;		// 도로명	
@@ -29,7 +29,7 @@ public class HomeDetailVO {
 	private int parking;		// 주차 몇대?
 	private String pet;			// 반려동물
 	private String elevator;	// 엘리베이터
-	private String balcony;	// 엘리베이터
+	private String balcony;	// 발코니
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date moveDate;	// 입주가능일
 	private int floor;			// 층

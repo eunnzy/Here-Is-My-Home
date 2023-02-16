@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.guardian.myhome.mapper.HomeMapper;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -42,6 +41,12 @@ public class HomeDAOImpl implements HomeDAO{
 	}
 
 
+//	@Override
+//	public List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds) {
+//		return sqlSession.selectList("HomeMapper.selectHomeInBoundsList", mapBounds);
+//	}
+//	
+	
 	@Override
 	public List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds) {
 		return sqlSession.selectList("HomeMapper.selectHomeInBoundsList", mapBounds);
@@ -57,70 +62,20 @@ public class HomeDAOImpl implements HomeDAO{
 	}
 
 	@Override
-	public List<HomeImgVO> selectHomeImgDetail(int homeNum) {
-		return sqlSession.selectList("HomeMapper.selectHomeImgDetail", homeNum);
+	public List<HomeImgVO> selectHomeImgList(int homeNum) {
+		return sqlSession.selectList("HomeMapper.selectHomeImgList", homeNum);
 	}
 
 	@Override
-	public List<String> selectHomeOptionDetail(int homeNum) {
-		return sqlSession.selectList("HomeMapper.selectHomeOptionDetail", homeNum);
+	public List<String> selectHomeOptionList(int homeNum) {
+		return sqlSession.selectList("HomeMapper.selectHomeOptionList", homeNum);
 	}
 	
-//	@Autowired
-//	SqlSession sqlSession;
-//	
 //	@Override
-//	public int insertHome(HomeVO homeVO) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.insertHome(homeVO);
+//	public List<Integer> selectHomeNumByOptionCheck(List<String> homeOptionList) {
+//		// TODO Auto-generated method stub
+//		return null;
 //	}
-//
-//	@Override
-//	public int insertHomeImgList(List<HomeImgVO> homeImgList) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.insertHomeImgList(homeImgList);
-//	}
-//
-//	@Override
-//	public int insertHomePrice(HomePriceVO HomePriceVO) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.insertHomePrice(HomePriceVO);
-//	}
-//
-//	@Override
-//	public int insertHomeOptionList(List<HomeOptionVO> homeOptionList) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.insertHomeOptionList(homeOptionList);
-//	}
-//
-//
-//	@Override
-//	public List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class); 
-//		return homeMapper.selectHomeInBoundsList(mapBounds);
-//	}
-//	
-//	@Override
-//	public HomeImgVO selectPreviewHomeImg(int homeNum) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.selectPreviewHomeImg(homeNum);
-//	}
-//	
-//	public HomeDetailVO selectHomeDetail(int homeNum) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.selectHomeDetail(homeNum);
-//	}
-//
-//	@Override
-//	public List<HomeImgVO> selectHomeImgDetail(int homeNum) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.selectHomeImgDetail(homeNum);
-//	}
-//
-//	@Override
-//	public List<String> selectHomeOptionDetail(int homeNum) {
-//		HomeMapper homeMapper = sqlSession.getMapper(HomeMapper.class);
-//		return homeMapper.selectHomeOptionDetail(homeNum);
-//	}
+	
 
 }

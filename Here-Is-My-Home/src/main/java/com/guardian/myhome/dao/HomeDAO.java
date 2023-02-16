@@ -15,9 +15,11 @@ public interface HomeDAO {
 	int insertHomeImgList(List<HomeImgVO> homeImgList);
 	int insertHomePrice(HomePriceVO HomePriceVO);
 	int insertHomeOptionList(List<HomeOptionVO> homeOptionList);
-	List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds);	// 지도 경계 내 리스트
+//	List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds);	// 지도 경계 내 리스트
+	List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds);
 	HomeImgVO selectPreviewHomeImg(int homeNum);	// 매물 미리보기시 나올 사진
-	HomeDetailVO selectHomeDetail(int homeNum);	// 매물 정보 리스트
-	List<HomeImgVO> selectHomeImgDetail(int homeNum); // 해당 매물 사진들 반환
-	List<String> selectHomeOptionDetail(int homeNum); // 해당 매물 옵션 목록 반환
+	HomeDetailVO selectHomeDetail(int homeNum);	// 매물 정보 반환
+	List<HomeImgVO> selectHomeImgList(int homeNum); // 해당 매물 사진들 반환
+	List<String> selectHomeOptionList(int homeNum); // 해당 매물 옵션 목록 반환
+//	List<Integer> selectHomeNumByOptionCheck(List<String> homeOptionList);	// 체크한 옵션 리스트의 매물 번호 
 }

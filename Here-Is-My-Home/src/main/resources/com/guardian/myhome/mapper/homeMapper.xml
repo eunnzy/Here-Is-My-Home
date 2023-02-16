@@ -9,10 +9,10 @@
  	<!-- 매물 등록  -->
  	 <insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
  		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, latitude, longitude, home_area, rent_type, rent_periods,
- 						room_count, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail) 
+ 						room_count, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail, lessor_id) 
  		values((select nvl(max(home_num), 0) + 1 from Home_tb), #{homeType}, #{addr1}, #{addr2}, #{addr3}, #{latitude}, #{longitude}, #{homeArea},
  				 #{rentType}, #{rentPeriods}, #{roomCount},  #{parking}, #{pet}, #{elevator}, #{balcony}, 
- 				 #{moveDate}, #{floor}, #{homeTitle}, #{homeDetail})
+ 				 #{moveDate}, #{floor}, #{homeTitle}, #{homeDetail}, #{lessorId})
  		<selectKey keyProperty="homeNum" resultType="com.guardian.myhome.vo.HomeVO"  order="AFTER">	 <!-- 삽입 후 매물 번호 반환 -->
  			select Max(home_num) as homeNum From Home_tb
  		</selectKey>
@@ -54,51 +54,54 @@
 	<select id="previewList" resultType="com.guardian.myhome.vo.HomePreviewVO">
 			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
 					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
-					home_title AS homeTitle, home_valid AS homeValid
+					home_title AS homeTitle, home_valid AS homeValid, lessor_id AS lessorId
 			from Home_tb
 	</select>
 	
 	
-	<select id="selectHomeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
+	<!-- <select id="selectHomeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
 			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
 					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
 					home_title AS homeTitle, home_valid AS homeValid
 			from  Home_tb join Home_Price_tb using(home_num) 
 			where (latitude Between #{swLat} and #{neLat}) and
       			  (longitude Between #{swLng} and #{neLng}) 
-	</select>
+	</select> -->
 	
+	<select id="selectHomeInBoundsList" resultType="com.guardian.myhome.vo.HomePreviewVO" parameterType="hashmap">
+			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
+			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
+			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail, lessor_id AS lessorId
+			from Home_tb join Home_Price_tb using(home_num) 
+			where (latitude Between #{swLat} and #{neLat}) and (longitude Between #{swLng} and #{neLng}) 
+	</select>
 	
  	
  	<select id="selectHomeDetail" resultType="com.guardian.myhome.vo.HomeDetailVO">
 		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,  home_area AS homeArea, 
 			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
-			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail
+			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail, lessor_id AS lessorId
 		from Home_tb join Home_Price_tb using(home_num) 
 		where home_num = #{homeNum}
 	</select>
 	
-	 <select id="selectHomeOptionDetail" resultType="String">
+	 <select id="selectHomeOptionList" resultType="java.lang.String">
  		select option_name AS optionName from Home_Option_tb where home_num = #{homeNum}
  	</select>
 	
 	 	
- 	<select id="selectHomeImgDetail" resultType="com.guardian.myhome.vo.HomeImgVO">
+ 	<select id="selectHomeImgList" resultType="com.guardian.myhome.vo.HomeImgVO">
  		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath  
  		from Home_Img_tb where home_num = #{homeNum}
  	</select>
 	
-
-	<!-- <select id="previewList" resultType="com.guardian.myhome.vo.HomePreviewVO">
-			select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
-					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
-					home_title AS homeTitle, home_valid AS homeValid, home_img_name AS homeImgName, home_img_path as homeImgPath 
-			from (select *
-		 			from Home_Img_tb join home_tb using(home_num)
-		 			order by home_img_name
- 			)
- 			where rownum &gt; 2 
-	</select> -->
+	<select id="selectHomeNumByOptionCheck" resultType="java.lang.Integer" parameterType="java.util.List">
+ 			select  <![CDATA[distinct]]> home_num As homeNum from Home_option_tb 
+ 			where option_name in 
+ 			<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+			#{item}
+ 		</foreach>
+	</select>
 	
  	<!-- 등록된 매물 삭제 -->
  	<delete id="deleteHome">

@@ -68,7 +68,7 @@ public class HomeMapperTest {
 		for(int i=0; i<homeList.size(); i++)
 		{
 			int homeNum = homeList.get(i).getHomeNum();
-			homeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
+//			homeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
 		}
 		
 		System.out.println(homeList);

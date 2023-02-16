@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 //@AllArgsConstructor
 public class HomeVO {
 	private int homeNum;		// 매물 번호	
-//	private String lessorId;	// 중개인 아이디 (작성자)
+	private String lessorId;	// 중개인 아이디 (작성자)
 	private String homeType;	// 집 종류
 	private String addr1;		// 우편번호
 	private String addr2;		// 도로명	

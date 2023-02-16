@@ -35,6 +35,7 @@ import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -57,7 +58,9 @@ public class HomeManageController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public int registerHome(@RequestBody HashMap<String, Object> homeData) {
+	public int registerHome(@RequestBody HashMap<String, Object> homeData, HttpServletRequest request) {
+		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	// 글 등록 아이디
+		
 		HomeVO homeVO = new HomeVO();
 		HomePriceVO homePriceVO = new HomePriceVO();
 		List<String> homeOptionList = new ArrayList<>();
@@ -175,116 +178,126 @@ public class HomeManageController {
 	}
 	
 	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@ResponseBody
+	public int modifyHome(@RequestBody HashMap<String, Object> homeData, HttpServletRequest request) {
+//		String lessorId = request.getSession();	// 글 등록 아이디
+		HomeVO homeVO = new HomeVO();
+		HomePriceVO homePriceVO = new HomePriceVO();
+		List<String> homeOptionList = new ArrayList<>();
+		List<HomeImgVO> homeImgList = new ArrayList<>();
+
+		Map<String, Object> insertMap = new HashMap<>();
+		
+		for(String key: homeData.keySet()) { 	// view에서 가져온 키 값들을 돌면서 체크
+			if(!(homeData.get(key).equals(""))) {	// 공백이 아닌 것( 데이터를 갖고 있는 것)
+				switch(key) {
+					case "homeType": 
+						homeVO.setHomeType((String)homeData.get(key)); 
+						break;
+					case "addr1" : 
+						homeVO.setAddr1((String)homeData.get(key)); 
+						break;
+					case "addr2" : 
+						homeVO.setAddr2((String)homeData.get(key)); 
+						break;
+					case "addr3" : 
+						homeVO.setAddr3((String)homeData.get(key)); 
+						break;
+					case "latitude":
+						homeVO.setLatitude(Double.parseDouble((String)homeData.get(key)));
+						break;
+					case "longitude":
+						homeVO.setLongitude(Double.parseDouble((String)homeData.get(key)));
+						break;
+					case "homeArea" : 
+						homeVO.setHomeArea(Integer.parseInt((String) homeData.get(key))); 
+						break;
+					case "rentType" : 
+						homeVO.setRentType((String)homeData.get(key)); 
+						break;
+					case "deposit": 
+						homePriceVO.setDeposit(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						break;
+					case "monthly": 
+						homePriceVO.setMonthly(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						break;
+					case "rentPeriods": 
+						homeVO.setRentPeriods(Integer.parseInt((String) homeData.get(key))); 
+						break;
+					case "roomCount" : 
+						homeVO.setRoomCount(Integer.parseInt((String) homeData.get(key))); 
+						break;
+					case "adminCost": 
+						homePriceVO.setAdminCost(Integer.parseInt(String.valueOf(homeData.get(key)))); 
+						break;
+					case "parking": 
+						homeVO.setParking(Integer.parseInt((String) homeData.get(key))); 
+						break;
+					case "pet": 
+						homeVO.setPet((String)homeData.get(key)); 
+						break;
+					case "elevator":
+						homeVO.setElevator((String)homeData.get(key)); 
+						break;
+					case "balcony": 
+						homeVO.setBalcony((String)homeData.get(key)); 
+						break;
+					case "moveDate": 
+						try {
+							String dateStr = (String)homeData.get(key);
+							SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+							Date date;
+							date = format.parse(dateStr);
+							System.out.println(date);
+							homeVO.setMoveDate(date);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+						break;
+					case "floor": 
+						homeVO.setFloor(Integer.parseInt((String) homeData.get(key))); 
+						break;
+					case "homeTitle": 
+						homeVO.setHomeTitle((String)homeData.get(key));
+						break;
+					case "homeDetail": 
+						homeVO.setHomeDetail((String)homeData.get(key)); 
+						break;
+					case "optionList":
+						homeOptionList = (List<String>)homeData.get(key);
+						break;
+					case "homeImgList":
+						for(String img : (List<String>)homeData.get(key)) {
+							HomeImgVO homeImgVO = new HomeImgVO();
+							String[] imgStr = img.split(" ");
+							System.out.println(imgStr);
+							
+							homeImgVO.setHomeImgPath(imgStr[0]);
+							homeImgVO.setHomeImgName(imgStr[1]);
+							homeImgList.add(homeImgVO);
+						}
+						break;
+				}
+			}
+			
+		}
+		System.out.println("----- HomeManageController ----");
+		System.out.println("homeVO: " + homeVO);
+		System.out.println("homePriceVO: " + homePriceVO);
+		System.out.println("homeImgList: " + homeImgList);
+		System.out.println("homeOptionList: " + homeOptionList);
+		
+		insertMap.put("homeVO", homeVO);
+		insertMap.put("homePriceVO", homePriceVO);
+		insertMap.put("homeImgList", homeImgList);
+		insertMap.put("homeOptionList", homeOptionList);
+		
+		int result = homeService.insertHome(insertMap);	// 매물 정보 삽입.
+		
+		return result;
+	}
 	
-	
-//	// 집(매물) 등록
-//	@RequestMapping(value = "/register", method = RequestMethod.POST)
-//	@ResponseBody
-//	public int registerHome(@RequestBody HashMap<String, Object> homeData) {
-//		HomeVO homeVO = new HomeVO();
-//		System.out.println(homeData);
-//		
-//		for(String key: homeData.keySet()) { 	// view에서 가져온 키 값들을 돌면서 체크
-//			if(!(homeData.get(key).equals(""))) {	// 공백이 아닌 것( 데이터를 갖고 있는 것)
-//				switch(key) {
-//					case "homeType": 
-//						homeVO.setHomeType((String)homeData.get(key)); 
-//						break;
-//					case "addr1" : 
-//						homeVO.setAddr1((String)homeData.get(key)); 
-//						break;
-//					case "addr2" : 
-//						homeVO.setAddr2((String)homeData.get(key)); 
-//						break;
-//					case "addr3" : 
-//						homeVO.setAddr3((String)homeData.get(key)); 
-//						break;
-//					case "latitude":
-//						homeVO.setLatitude(Double.parseDouble((String)homeData.get(key)));
-//						break;
-//					case "longitude":
-//						homeVO.setLongitude(Double.parseDouble((String)homeData.get(key)));
-//						break;
-//					case "homeArea" : 
-//						homeVO.setHomeArea(Integer.parseInt((String) homeData.get(key))); 
-//						break;
-//					case "rentType" : 
-//						homeVO.setRentType((String)homeData.get(key)); 
-//						break;
-//					case "deposit": 
-//						homeVO.setDeposit(Integer.parseInt(String.valueOf(homeData.get(key)))); 
-//						break;
-//					case "monthly": 
-//						homeVO.setMonthly(Integer.parseInt(String.valueOf(homeData.get(key)))); 
-//						break;
-//					case "rentPeriods": 
-//						homeVO.setRentPeriods(Integer.parseInt((String) homeData.get(key))); 
-//						break;
-//					case "roomCount" : 
-//						homeVO.setRoomCount(Integer.parseInt((String) homeData.get(key))); 
-//						break;
-//					case "adminCost": 
-//						homeVO.setAdminCost(Integer.parseInt(String.valueOf(homeData.get(key)))); 
-//						break;
-//					case "parking": 
-//						homeVO.setParking(Integer.parseInt((String) homeData.get(key))); 
-//						break;
-//					case "pet": 
-//						homeVO.setPet((String)homeData.get(key)); 
-//						break;
-//					case "elevator":
-//						homeVO.setElevator((String)homeData.get(key)); 
-//						break;
-//					case "balcony": 
-//						homeVO.setBalcony((String)homeData.get(key)); 
-//						break;
-//					case "moveDate": 
-//						try {
-//							String dateStr = (String)homeData.get(key);
-//							SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//							Date date;
-//							date = format.parse(dateStr);
-//							System.out.println(date);
-//							homeVO.setMoveDate(date);
-//						} catch (ParseException e) {
-//							e.printStackTrace();
-//						}
-//						break;
-//					case "floor": 
-//						homeVO.setFloor(Integer.parseInt((String) homeData.get(key))); 
-//						break;
-//					case "homeTitle": 
-//						homeVO.setHomeTitle((String)homeData.get(key));
-//						break;
-//					case "homeDetail": 
-//						homeVO.setHomeDetail((String)homeData.get(key)); 
-//						break;
-//					case "optionList":
-//						homeVO.setOptionList((List<String>)homeData.get(key));
-//						break;
-//					case "homeImgList":
-//						List<HomeImgVO> homeImgList = new ArrayList<>();
-//						for(String img : (List<String>)homeData.get(key)) {
-//							HomeImgVO homeImgVO = new HomeImgVO();
-//							String[] imgStr = img.split(" ");
-//							System.out.println(imgStr);
-//							
-//							homeImgVO.setHomeImgPath(imgStr[0]);
-//							homeImgVO.setHomeImgName(imgStr[1]);
-//							homeImgList.add(homeImgVO);
-//						}
-//						System.out.println(homeImgList);
-//						homeVO.setHomeImgList(homeImgList);
-//						break;
-//				}
-//			}
-//			
-//		}
-//		
-//		int result = homeService.insertHome(homeVO);	// 매물 정보 삽입.
-//		
-//		return result;
-//	}
 	
 	
 			

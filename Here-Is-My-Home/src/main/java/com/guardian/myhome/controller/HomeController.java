@@ -40,6 +40,17 @@ public class HomeController {
 		return "home/detailHome";
 	}
 	
+//	@RequestMapping(value="/homeInBounds", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<HomePreviewVO> homeInBounds(@RequestParam Map<String, Object> mapBounds) {
+//		List<HomePreviewVO> homeInBoundsList = null;
+//		homeInBoundsList = homeService.homeInBoundsList(mapBounds);
+//		System.out.println(homeInBoundsList);
+//		
+//		return homeInBoundsList;
+//	}
+	
+	
 	@RequestMapping(value="/homeInBounds", method = RequestMethod.POST)
 	@ResponseBody
 	public List<HomePreviewVO> homeInBounds(@RequestParam Map<String, Object> mapBounds) {
@@ -50,6 +61,13 @@ public class HomeController {
 		return homeInBoundsList;
 	}
 	
+	
+	/*
+	 * @RequestMapping(value="/searchHome" , method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public List<HomePreviewVO> searchHome(@RequestParam Map<String,
+	 * Object> filter) { return "home/searchHome"; }
+	 */
 	
 	@RequestMapping(value="/searchHome" , method = RequestMethod.GET)
 	public String searchHome() {
