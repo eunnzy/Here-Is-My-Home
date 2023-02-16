@@ -67,6 +67,14 @@
 		crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- 네브바 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
+    </div>
+  </nav>
+  <!-- 네브바 끝 -->
+  
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -110,15 +118,14 @@
                
             <div class="mb-3">
               <label for="nickname">닉네임</label>
-              <div class="id_input_box">
-              <input type="text" class="form-nickname" name="nickname" id="nickname" placeholder="" value="" required>
-              <div class="invalid-feedback">닉네임을 입력해주세요.
-               <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
-              </div>
-              </div>
-              <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
-			  <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
-            </div>
+              <input type="text" class="form-nickname" name="nickname" id="nickname" placeholder="" required>
+              <div class="invalid-feedback">
+                닉네임을 입력해주세요.
+                 <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
+               </div>
+               <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
+                <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
+               </div>
    
 
 
@@ -137,11 +144,12 @@
             </div>
    
             
-
+		<div class=" mb-3">
 		    <label for="exampleSelect1" class="form-label mt-4">주소</label>
+		</div>
 		    <select class="form-select" id="exampleSelect1" name="sido1" id="sido1" style="width: 40%;"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    <select class="form-select" id="exampleSelect1" name="gugun1" id="gugun1" style="width: 40%;"></select>
-
+		
             
           <hr class="mb-4">
           <div class="custom-control custom-checkbox">
