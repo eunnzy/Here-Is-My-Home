@@ -67,26 +67,23 @@
 		crossorigin="anonymous"></script>
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp"></jsp:include>
+	</header>
+
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h1 style="text-align:center;"  class="mb-3">   </h1>
 
-  <form id="join_form" method="post">
-  <h1 style="text-align:center;"  class="mb-3">회원가입</h4>
-        <form class="validation-form" novalidate>
+  
+  <h1 style="text-align:center;"  class="mb-3">회원 정보 수정</h1>
+        <form id="getMember_form" method="post" class="validation-form" action="updateMember" novalidate>
           <div class="row">
-            <div class="mb-3">
+            <div class="mb-3" >
               <label for="id_name">아이디</label>
               <div class="id_input_box">
-              <input type="text" class="form-id" name="imchaId" id="imchaId" placeholder="영어와 숫자를 조합" value="" required>
-              <div class="invalid-feedback">아이디를 입력해주세요.
-               <span class="final_id_ck">아이디를 입력해주세요.</span>
-              </div>
-              </div>
-              <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
-			  <span class="id_input_re_2">아이디가 이미 존재합니다.</span>
-			 
+                 <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${member.imchaId}" required>
             </div>
 
             <div class="mb-3">
@@ -108,23 +105,19 @@
                 <span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
                </div>
                
-            <div class="mb-3">
+            <div class=" mb-3">
               <label for="nickname">닉네임</label>
-              <div class="id_input_box">
-              <input type="text" class="form-nickname" name="nickname" id="nickname" placeholder="" value="" required>
-              <div class="invalid-feedback">닉네임을 입력해주세요.
-               <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
+              <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="${member.nickname}" required>
+              <div class="invalid-feedback">
+                닉네임을 입력해주세요.
               </div>
-              </div>
-              <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
-			  <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
+              <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
             </div>
-   
 
 
           <div class="mb-3">
             <label for="phone">전화번호</label>
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" required>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" value="${member.phone}" required>
             <div class="invalid-feedback">
               전화번호를 입력해주세요.
             </div>
@@ -150,20 +143,19 @@
           </div>
 
           <div class="col-md-6 mb-4"></div>
-          <button class="btn btn-primary btn btn-block" type="submit">가입 완료</button> &nbsp;
-          <a href="/member/lessorJoin" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp;
-          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button>
-</form>
-</h1>
-</form>
+          <button class="btn btn-primary btn btn-block" type="submit"  >수정 완료</button> &nbsp;
+         </div>
+         </div>
+	</form>
       </div>
     </div>
   </div>  
   
+  <div>
     <footer class="my-3 text-center text-small">
       <p>  &nbsp; </p>
     </footer>
-        </div>
+  </div>
 
   	<footer>
        <jsp:include page="../footer.jsp"></jsp:include>

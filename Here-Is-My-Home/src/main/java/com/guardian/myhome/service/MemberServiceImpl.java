@@ -3,6 +3,7 @@ package com.guardian.myhome.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.guardian.myhome.dao.MemberDAO;
 import com.guardian.myhome.mapper.MemberMapper;
 import com.guardian.myhome.vo.MemberVO;
 
@@ -11,6 +12,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberMapper membermapper;
+	
+	@Autowired
+	MemberDAO dao;
 	
 	// 회원가입
 	@Override
@@ -24,6 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String imchaId) throws Exception {
 		return membermapper.idCheck(imchaId);
 	}
+	
+	// 닉네임 중복체크
+	@Override
+	public int nicknameCheck(String nickname) throws Exception {
+		return membermapper.nicknameCheck(nickname);
+	}
 
 	// 로그인
 	@Override
@@ -31,4 +41,39 @@ public class MemberServiceImpl implements MemberService {
 		
 		return membermapper.memberLogin(member);
 	}
+	
+	// 아이디찾기
+	@Override
+	public MemberVO findId(MemberVO member) throws Exception {
+		
+		return dao.findId(member);
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public MemberVO findPw(MemberVO member) throws Exception {
+		
+		return dao.findPw(member);
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public MemberVO updatePw(MemberVO member) throws Exception {
+		
+		return dao.updatePw(member);
+	}
+
+	@Override
+	public void updateMember(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MemberVO getMember(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

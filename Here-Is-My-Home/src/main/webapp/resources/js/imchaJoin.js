@@ -94,6 +94,28 @@ $(document).ready(function(){
 			}
 		}); 
 	});
+	
+	// 닉네임 중복검사
+	$('.form-nickname').on("propertychange change keyup paste input", function(){
+		
+		var nickname = $('.form-nickname').val();
+		var data  = {nickname : nickname}
+		
+		$.ajax({
+			type : "post",
+			url : "/member/nicknameChk",
+			data : data,
+			success : function(result) {
+				if(result != 'fail') {
+					$('.nickname_input_re_1').css("display","inline-block");
+					$('.nickname_input_re_2').css("display","none");
+				} else {
+					$('.nickname_input_re_2').css("display","inline-block");
+					$('.nickname_input_re_1').css("display","none");
+				}
+			}
+		}); 
+	});
 	 
 //	// 주소연동
 //	function execution_daum_address(){

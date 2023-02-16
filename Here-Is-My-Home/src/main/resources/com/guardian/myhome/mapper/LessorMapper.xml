@@ -28,5 +28,21 @@
              lessor_addr1 AS lessorAddr1, lessor_addr2 AS lessorAddr2, lessor_addr3 AS lessorAddr3
        from lessor_tb where lessor_Id = #{lessorId} and lessor_pw = #{lessorPw}
     </select>
+    
+    
+    <select id="getLessor" resultType="com.guardian.myhome.vo.LessorVO">
+ 		select lessor_id AS lessorId, lessor_pw AS lessorPw, lessor_nickname AS lessorNickName, phone, user_roll AS userRoll, birthDate AS birthDate,
+             lessor_addr1 AS lessorAddr1, lessor_addr2 AS lessorAddr2, lessor_addr3 AS lessorAddr3, jgs_name AS jgsName, jgs_num AS jgsNum, name AS name
+       from lessor_tb where lessor_Id=#{lessorId}
+ 	</select>
+ 	
+ 	<!-- 회원 정보 수정 -->
+ 	<update id="updateLessor" >
+ 		update lessor_tb
+ 		set lessor_pw=#{lessorPw}, lessor_nickname=#{lessorNickName}, phone=#{phone}, user_roll=#{userRoll}, lessor_addr1=#{lessorAddr1}, 
+ 			lessor_addr2=#{lessorAddr2}, lessor_addr3=#{lessorAddr3}, jgs_name=#{jgsName}, jgs_num=#{jgsNum}, birthDate=#{birthDate}, name=#{name}
+ 		where lessor_id=#{lessorId}
+ 	</update>
+ 	
  	
  </mapper>

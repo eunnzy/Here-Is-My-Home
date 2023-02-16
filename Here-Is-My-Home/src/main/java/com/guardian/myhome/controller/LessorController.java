@@ -5,13 +5,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.MemberVO;
 
 
 @Controller
@@ -99,4 +102,76 @@ public class LessorController {
 //		
 //		return "redirect:/index";
 //	}
+	
+	// 아이디 찾기
+		@RequestMapping(value="/findLessorId", method=RequestMethod.GET)
+		public String findLessorIdGET() throws Exception {
+			return "member/findLessorId";
+		}
+		
+		@RequestMapping(value="/findLessorId", method=RequestMethod.POST)
+		public String findLessorIdPOST(LessorVO lessor, Model model) throws Exception {
+			
+			LessorVO findLessorIdVo = lessorservice.findLessorId(lessor);
+			
+			if (findLessorIdVo == null) {
+				
+				model.addAttribute("check",1);
+				return "/member/msg";
+			}else {
+				model.addAttribute("check",0);
+				model.addAttribute("lessorId", findLessorIdVo.getLessorId());
+				return "/member/resultLessorId";
+			}
+		}
+		
+		// 아이디 결과
+		@RequestMapping(value="/resultLessorId", method=RequestMethod.GET)
+		public String resultLessorIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="lessornickName")String phone,String lessorNickName,LessorVO searchVO) throws Exception{
+			
+			searchVO.setLessorNickName(lessorNickName);
+			searchVO.setPhone(phone);
+			LessorVO findLessorId = lessorservice.findLessorId(searchVO);
+			
+			model.addAttribute("searchVO", findLessorId);
+			
+			return "/member/resultLessorId";
+		}
+		
+		// 비밀번호 찾기
+		@RequestMapping(value="/findLessorPw", method=RequestMethod.GET)
+		public String findLessorPwGET() throws Exception {
+			
+			return "member/findLessorPw";
+		}
+		
+		@RequestMapping(value="/findLessorPw", method=RequestMethod.POST)
+		public String findLessorPwPOST(LessorVO lessor, HttpSession session, RedirectAttributes rttr) throws Exception{
+			
+			LessorVO findLessorPwVo = lessorservice.findLessorPw(lessor);
+			
+			if(findLessorPwVo == null) {
+				rttr.addFlashAttribute("check", 1);
+				return "/member/msg";
+			}else {
+				findLessorPwVo.setLessorId(lessor.getLessorId());
+				rttr.addFlashAttribute("check",0);
+				rttr.addFlashAttribute("findLessorPwVo", findLessorPwVo);
+				return "redirect:/member/updateLessorPw";
+			}
+		}
+		
+		// 비밀번호 변경
+		@RequestMapping(value="/updateLessorPw", method=RequestMethod.GET)
+		public void updateLessorPwGET(@RequestParam(value="updateLessorPw", defaultValue="", required=false) String lessorId, LessorVO lessor) throws Exception{
+			
+		}
+		
+		@RequestMapping(value="/updateLessorPw", method=RequestMethod.POST)
+		public String updateLessorPwPOST(@RequestParam(value="updatelessorPw", defaultValue="", required=false) String lessorId, LessorVO lessor) throws Exception{
+			
+			lessorservice.updateLessorPw(lessor);
+			
+			return "redirect:/member/lessorLogin";
+		}
 }

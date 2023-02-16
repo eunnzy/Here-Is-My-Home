@@ -38,6 +38,15 @@
  	display : none;
  }
  
+ .nickname_input_re_1 {
+ 	color : green;
+ 	display : none;
+ 	}
+ .nickname_input_re_1 {
+ 	color : red;
+ 	display : none;
+ }
+ 
  .pwck_input_re_1 {
  	color : green;
  	display : none;
@@ -67,7 +76,7 @@
  	display : none;
  }
  
-  .form-id, .form-nickname{display:block;width:100%;padding:1rem 1.5rem;
+  .form-id{display:block;width:100%;padding:1rem 1.5rem;
 font-size:1rem;font-weight:400;line-height:1.5;color:#7b8ab8;
 background-color:#f0f5fa;background-clip:padding-box;border:0 solid 
 #bed1e6;-webkit-appearance:none;-moz-appearance:none;appearance:none;

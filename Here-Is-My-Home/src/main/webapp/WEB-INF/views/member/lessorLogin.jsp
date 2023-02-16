@@ -95,7 +95,8 @@
               </div>
             </div>
           </div>
-          <p><a href="아이디찾기.html">아이디/비밀번호찾기</a></p>
+          <p><a href="${pageContext.request.contextPath }/member/findLessorId" id="findLessorId">아이디 찾기</a></p>
+          <p><a href="${pageContext.request.contextPath }/member/findLessorPw" id="findLessorPw">비밀번호 찾기</a></p>
         </div>
       <div class="mb-4"></div>
       <div class="col-md-6 mb-3"  >    </div>  
