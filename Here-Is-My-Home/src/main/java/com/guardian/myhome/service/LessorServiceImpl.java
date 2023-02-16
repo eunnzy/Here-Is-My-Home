@@ -24,17 +24,18 @@ public class LessorServiceImpl implements LessorService {
 
 	}
 	
+	// 아이디 중복체크
 	@Override
 	public int idCheck(String lessorId) throws Exception {
 		
 		return lessormapper.idCheck(lessorId);
 	}
 	
-//	@Override
-//	public int nicknameCheck(String lessorNickName) throws Exception {
-//		
-//		return lessormapper.nicknameCheck(lessorNickName);
-//	}
+	// 닉네임 중복체크
+	@Override
+	public int lessorNickNameCheck(String lessorNickName) throws Exception {
+		return lessormapper.lessorNickNameCheck(lessorNickName);
+	}
 	
 	@Override
 	public LessorVO lessorLogin(LessorVO lessor) throws Exception {

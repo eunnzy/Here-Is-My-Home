@@ -97,27 +97,26 @@ $(document).ready(function(){
 	});
 	
 	// 닉네임 중복검사
-//	$('.form-nickname').on("propertychange change keyup paste input", function(){
-//		
-////		console.log("keyup 테스트");
-//		var lessorNickName = $('.form-nickname').val();
-//		var data  = {lessorNickName : lessorNickName}
-//		
-//		$.ajax({
-//			type : "post",
-//			url : "/member/lessorNickChk",
-//			data : data,
-//			success : function(result2) {
-//				if(result2 != 'fail') {
-//					$('.id_input_re_1').css("display","inline-block");
-//					$('.id_input_re_2').css("display","none");
-//				} else {
-//					$('.id_input_re_2').css("display","inline-block");
-//					$('.id_input_re_1').css("display","none");
-//				}
-//			}
-//		}); 
-//	});
+	$('.form-nickname').on("propertychange change keyup paste input", function(){
+			
+			var lessorNickName = $('.form-nickname').val();
+			var data  = {lessorNickName : lessorNickName}
+			
+			$.ajax({
+				type : "post",
+				url : "/member/lessorNickNameChk",
+				data : data,
+				success : function(result) {
+					if(result != 'fail') {
+						$('.nickname_input_re_1').css("display","inline-block");
+						$('.nickname_input_re_2').css("display","none");
+					} else {
+						$('.nickname_input_re_2').css("display","inline-block");
+						$('.nickname_input_re_1').css("display","none");
+					}
+				}
+			}); 
+		});
 	 
 	// 주소연동
 	function execution_daum_address(){

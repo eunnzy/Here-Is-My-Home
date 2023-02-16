@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.MemberVO;
 
 
 @Controller
@@ -39,6 +38,7 @@ public class LessorController {
 		return "redirect:/lessorJoin";
 	}
 	
+	// 아이디 중복체크
 	@RequestMapping(value = "/lessorIdChk", method = RequestMethod.POST)
 	@ResponseBody
 	public String lessorIdChkPOST(String lessorId) throws Exception {
@@ -49,6 +49,20 @@ public class LessorController {
 			return "fail";
 		} else {
 			return "success";
+		}
+	}
+	
+	// 닉네임 중복체크
+	@RequestMapping(value = "/lessorNickNameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String lessorNickNameChkPOST(String lessorNickName) throws Exception {
+				
+	int result = lessorservice.lessorNickNameCheck(lessorNickName);
+				
+	if (result != 0) {
+		return "fail";
+	} else {
+		return "success";
 		}
 	}
 	
