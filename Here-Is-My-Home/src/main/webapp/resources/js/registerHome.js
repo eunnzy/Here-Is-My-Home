@@ -186,7 +186,7 @@ $("#addBtn").on("click",function(e){
 			data: JSON.stringify(homeData),
             contentType: "application/json",
 			success:function(data, status, xhr){
-				var msg = (data==1)? "글 등록 성공했습니다." : "실패";
+				var msg = (data==1) ? "글 등록 성공했습니다." : "실패";
 				alert(msg);
 				homeForm.reset();
 	 		},

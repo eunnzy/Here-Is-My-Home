@@ -10,7 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/css/bootstrap.min.css?v=1" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<style>
@@ -43,11 +43,19 @@
 				<div class="col-sm-8 ">
 					<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
 						<div class="carousel-inner homeImg-div">
-							<c:forEach items="${home.homeImgList}" var="imgFile">
-								<div class="carousel-item active">
-									<img src="/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}" class="d-block w-100" height="450" alt="...">
-								</div>
-							</c:forEach>
+							<c:forEach items="${home.homeImgList}" var="imgFile" varStatus="status">
+								<c:choose> 
+									<c:when test="${status.first}">
+										<div class="carousel-item active">
+									</c:when>
+									<c:otherwise>
+										<div class="carousel-item">
+									</c:otherwise> 
+								</c:choose>
+										<img src="/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}" class="d-block w-100" height="450" alt="...">
+									</div>
+								
+							</c:forEach> 
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -75,17 +83,16 @@
 					    		</c:choose>
 					    	</h4>
 					    	<h6 class="card-subtitle mb-2 text-muted">${home.addr2 } ${home.addr3 } </h6>
-					    	
-					    	<div class="user-info mb-2">
-						    	<p>
-						    		---- User 정보 ------
-						    	</p>
-						    	<p class="card-text"> 이름 : 
-						    	
-						    	br</p>
-						    	<p class="card-text"> 주소:  </p>
-						    	---- User 정보 ------
-					    	</div>
+					    	<hr>
+					    	<div class="user-info mt-3">
+				    		<div class="text-center">
+					    		 ${home.jgsName} <br> 
+					    		중개사 등록번호:  ${home.jgsNum} <br>
+						    	 대표명 : ${home.jgsName }  <br>
+						    	전화번호: ${home.phone }  <br>
+						    	주소:  ${home.lessorAddr }</div>
+				    		</div>
+				    		<hr>
 						   	<div class="col mb-3">
 							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
 						    	<img src="/icon/siren.png" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" name="reportBtn" id="reportBtn" onclick="report()"> <label for="sirenBtn">허위 매물 신고</label> 
@@ -99,8 +106,8 @@
 						    	<img src="/icon/question.png" name="qnaBtn" id="qnaBtn" onclick="qna()"> <label for="qnaBtn">문의 남기기</label> 
 							</div>
 							
-							<div class="d-flex text-center mx-auto mt-3">
-								<button type="button" class="btn btn-primary"> 예약하기 </button>
+							<div class="d-grid gap-2 mx-auto mt-3">
+								<button type="button" class="btn btn-md btn-success"> 예약하기 </button>
 							</div>
 						</div>
 					</div>
@@ -146,7 +153,7 @@
 						</table>
 					</div>
 				
-				<!-- 상세 정보  -->
+					<!-- 상세 정보  -->
 					<div class="detail-info mt-3">
 						<table class="table">
 							<thead>
@@ -192,9 +199,50 @@
 							</tr>
 						</table>
 					</div>
+					
+				<div class="location mt-3 mb-2">
+					 <h3> <b>위치 정보</b> </h3>
+					<div id="map" style="width:100%; height: 350px"></div>
+				</div>
 				
 			</div>
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
+	<script>
+	$(document).ready(function() {
+		/* let homeImgDiv = $(".homeImg-div");
+		
+		let str = "";
+		str += "<div class='carousel-inner homeImg-div'> <c:forEach items='${home.homeImgList}' var='imgFile'> <div class='carousel-item active'>";
+		str	+= "<img src='/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}' class='d-block' height='450' alt='...'>";
+		str += "</div></c:forEach></div>";
+		
+		homeImgDiv.append(str); */
+		
+		// 위치 정보 표시
+		var latitude = ${home.latitude};
+		var logitude = ${home.longitude};
+		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = { 
+		    center: new kakao.maps.LatLng(latitude, logitude), // 지도의 중심좌표
+		    level: 3 // 지도의 확대 레벨 
+		};
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		var markerPosition  = new kakao.maps.LatLng(latitude, logitude); 	// 마커 위치
+			
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+	});
+	
+	</script>
 </body>
 </html>

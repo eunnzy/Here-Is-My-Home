@@ -216,7 +216,7 @@
 							   			<label>만원</label>
 							   		</div>
 							   		<div class="col-auto">
-							   			<label>*전세인 경우 0으로 작성</label>
+							   			<label>* 전세인 경우 0으로 작성</label>
 							   		</div>
 						    		</div>
 						   	 	</div>
@@ -434,8 +434,8 @@
 				</table>
        		</div>
        		<div class="text-center mx-auto">
-        		<button type="reset" class="btn btn-large mr-2">취소</button>
- 				<button type="submit" id="addBtn" class="btn btn-large" >등록</button>
+        		<button type="reset" class="btn btn-md mr-2">취소</button>
+ 				<button type="submit" id="addBtn" class="btn btn-md" >등록</button>
 			</div>
     	</form>	
 	</div>

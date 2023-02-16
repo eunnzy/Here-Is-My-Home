@@ -90,7 +90,7 @@ public class HomeMapperTest {
 	
 	@Test
 	public void detailHome() throws Exception {
-		HomeDetailVO homeDetailVO = homeMapper.selectHomeDetail(2);
+		HomeDetailVO homeDetailVO = homeMapper.selectHomeDetail(3);
 		System.out.println(homeDetailVO);
 	}
 	

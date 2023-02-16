@@ -338,7 +338,6 @@ function displayPlaces(places) {
  	var bounds = new kakao.maps.LatLngBounds(); 	// 지도 범위 재 설정
     var placePosition = new kakao.maps.LatLng(places[0].y, places[0].x);
     bounds.extend(placePosition);
-    
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정
   	map.setBounds(bounds);
   	map.setLevel(3);

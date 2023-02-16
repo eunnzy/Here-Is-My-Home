@@ -54,17 +54,18 @@
                              	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="빌라">
 					 			<label class="form-check-label" >빌라 </label>
                         </div>
-                        <div class="form-check form-check-inline mb-3">
+                        <div class="form-check form-check-inline">
                              	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="쉐어하우스">
 					 			<label class="form-check-label" >쉐어하우스 </label>
                         </div>
        				</div>
-       			
+       				
+       				<hr>
+       				
        				<div>
        					<h4>거래 유형</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
      				<div class="rent-Type mb-4">
      					<div class="form-check form-check-inline">
                            	<input type="checkbox" class="form-check-input" autocomplete="off" name="rentType" value="원룸">
@@ -81,12 +82,13 @@
 				        <label for="customRange3" class="form-label">월세</label>
 				        <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
 					</div>
-				
+					
+					<hr>
+					
        				<div>
        					<h4>옵션 선택</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
      				<div class="option-list mb-4">
      					<div class="form-check form-check-inline">
                         	<input type="checkbox" class="form-check-input" autocomplete="off" name="optionList" value="세탁기">
@@ -137,12 +139,13 @@
 						 	<label  class="form-check-label">비데</label>
                         </div>
        				</div>
-
+       				
+					<hr>
+					
        				<div>
        					<h4>추가 정보</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
      				<div class="addInfo-list mb-3">
      					<div class="form-check form-check-inline">
                            	<input type="checkbox" class="form-check-input" autocomplete="off" name="addInfoList" value="반려동물">

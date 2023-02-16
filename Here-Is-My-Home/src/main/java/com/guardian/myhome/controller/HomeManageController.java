@@ -60,8 +60,11 @@ public class HomeManageController {
 	@ResponseBody
 	public int registerHome(@RequestBody HashMap<String, Object> homeData, HttpServletRequest request) {
 		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	// 글 등록 아이디
+		if(lessorVO == null)
+			return 0;
 		
 		HomeVO homeVO = new HomeVO();
+		homeVO.setLessorId(lessorVO.getLessorId());
 		HomePriceVO homePriceVO = new HomePriceVO();
 		List<String> homeOptionList = new ArrayList<>();
 		List<HomeImgVO> homeImgList = new ArrayList<>();

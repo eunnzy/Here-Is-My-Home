@@ -124,8 +124,12 @@ public class HomeServiceImpl implements HomeService{
 		home.put("homeDetail", homeDetailVO.getHomeDetail());
 		home.put("optionList", homeDetailVO.getOptionList());
 		home.put("homeImgList", homeDetailVO.getHomeImgList());
-		
-		
+		home.put("jgsName", homeDetailVO.getJgsName());
+		home.put("jgsNum", homeDetailVO.getJgsNum());
+		home.put("phone", homeDetailVO.getPhone());
+		home.put("lessorName", homeDetailVO.getName());
+		home.put("lessorAddr", homeDetailVO.getLessorAddr1() + " " 
+				+ homeDetailVO.getLessorAddr2() + " " + homeDetailVO.getLessorAddr3());
 		home.put("deposit", convertMoneyUnit(homeDetailVO.getDeposit()));
 		home.put("monthly", convertMoneyUnit(homeDetailVO.getMonthly()));
 		home.put("adminCost", convertMoneyUnit(homeDetailVO.getAdminCost()));
