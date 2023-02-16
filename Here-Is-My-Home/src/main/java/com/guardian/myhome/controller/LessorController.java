@@ -86,7 +86,7 @@ public class LessorController {
 	
 	// 로그인
 	@RequestMapping(value = "/lessorLogin", method = RequestMethod.POST)
-	public String lessorloingPOST(HttpServletRequest request, LessorVO lessor, RedirectAttributes rttr) throws Exception{
+	public String lessorloginPOST(HttpServletRequest request, LessorVO lessor, RedirectAttributes rttr) throws Exception{
 		
 //		System.out.println("login 메서드 진입");
 //		System.out.println("전달된 데이터 : " + lessor);

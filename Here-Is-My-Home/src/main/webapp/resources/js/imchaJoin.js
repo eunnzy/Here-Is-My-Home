@@ -98,12 +98,12 @@ $(document).ready(function(){
 	// 닉네임 중복검사
 	$('.form-nickname').on("propertychange change keyup paste input", function(){
 			
-			var lessorNickName = $('.form-nickname').val();
-			var data  = {lessorNickName : lessorNickName}
+			var nickname = $('.form-nickname').val();
+			var data  = {nickname : nickname}
 			
 			$.ajax({
 				type : "post",
-				url : "/member/lessorNickNameChk",
+				url : "/member/nicknameChk",
 				data : data,
 				success : function(result) {
 					if(result != 'fail') {
