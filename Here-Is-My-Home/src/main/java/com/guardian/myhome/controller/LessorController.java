@@ -35,7 +35,7 @@ public class LessorController {
 		
 		lessorservice.lessorJoin(lessor);
 		
-		return "redirect:/lessorJoin";
+		return "redirect:/index";
 	}
 	
 	// 아이디 중복체크
