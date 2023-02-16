@@ -10,8 +10,8 @@ public interface LessorService {
 	// 아이디 중복 검사
 	public int idCheck(String lessorId) throws Exception;
 	
-	// 닉네임 중복 검사
-//	public int nicknameCheck(String lessorNickName) throws Exception;
+	// 닉네임 중복검사
+	public int lessorNickNameCheck(String lessorNickName) throws Exception;
 	
 	// 로그인
 	public LessorVO lessorLogin(LessorVO lessor) throws Exception;

@@ -33,26 +33,7 @@
   <!-- 네브바 -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="Main.html"><img src="/img/house.png"></a>
-      <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav me-auto" >
-          <li class="nav-item">
-              <a class="nav-link active" href="searchHome.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">MyPage</a>
-            </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="FreeBoard.jsp">Free</a>
-              <a class="dropdown-item" href="MeetingBoard.jsp">Meeting</a>
-              <a class="dropdown-item" href="LostBoard.jsp">Lost</a>
-            </div>
-          </li>
-        </ul>
-       <!--  <a href="login4.jsp"><button class="btn btn-secondary my-2 my-sm-0">Login</button></a> -->
-      </div>
+      <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
     </div>
   </nav>
   <!-- 네브바 끝 -->
@@ -97,20 +78,18 @@
                 <span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
                </div>
                
-            <div class=" mb-3">
-              <label for="nickname">닉네임</label>
-              <div class="nickname_input_box">
+            <div class="mb-3">
+              <label for="lessor_nickname">닉네임</label>
+              <div class="id_input_box">
               <input type="text" class="form-nickname" name="lessorNickName" id="lessorNickName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                닉네임을 입력해주세요.
+              <div class="invalid-feedback">닉네임을 입력해주세요.
+               <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
               </div>
-              <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
               </div>
-           <!--    <span class="id_input_re_1">사용 닉네임입니다.</span>
-			  <span class="id_input_re_2">닉네임이 이미 존재합니다.</span> -->
+              <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
+			  <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
             </div>
-
-
+       
           <div class="mb-3">
             <label for="phone">전화번호</label>
             <input type="text" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" required>
@@ -160,9 +139,6 @@
               <input type="text" class="form-control" name="userRoll" id="userRoll" placeholder="" value="중개인" readonly />
             </div>
             
-            
-   
-       
 
             <div class="mb-3">
               <p> </p>
@@ -231,5 +207,6 @@
  <script src="/js/lessorJoin.js" ></script>
  <script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+ 
 </body>
 </html>

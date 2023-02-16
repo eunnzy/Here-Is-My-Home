@@ -33,26 +33,7 @@
   <!-- 네브바 -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="main.jsp"><img src="/img/house.png"></a>
-      <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav me-auto" >
-          <li class="nav-item">
-              <a class="nav-link active" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">MyPage</a>
-            </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="FreeBoard.jsp">Free</a>
-              <a class="dropdown-item" href="MeetingBoard.jsp">Meeting</a>
-              <a class="dropdown-item" href="LostBoard.jsp">Lost</a>
-            </div>
-          </li>
-        </ul>
-        <!-- <a href="/index" class="btn btn-secondary my-2 my-sm-0" type="submit">Login</a> -->
-      </div>
+      <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
     </div>
   </nav>
   <!-- 네브바 끝 -->

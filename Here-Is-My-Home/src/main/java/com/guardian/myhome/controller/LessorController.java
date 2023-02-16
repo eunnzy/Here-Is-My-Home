@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.MemberVO;
 
 
 @Controller
@@ -36,9 +35,10 @@ public class LessorController {
 		
 		lessorservice.lessorJoin(lessor);
 		
-		return "redirect:/lessorJoin";
+		return "redirect:/index";
 	}
 	
+	// 아이디 중복체크
 	@RequestMapping(value = "/lessorIdChk", method = RequestMethod.POST)
 	@ResponseBody
 	public String lessorIdChkPOST(String lessorId) throws Exception {
@@ -49,6 +49,20 @@ public class LessorController {
 			return "fail";
 		} else {
 			return "success";
+		}
+	}
+	
+	// 닉네임 중복체크
+	@RequestMapping(value = "/lessorNickNameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String lessorNickNameChkPOST(String lessorNickName) throws Exception {
+				
+	int result = lessorservice.lessorNickNameCheck(lessorNickName);
+				
+	if (result != 0) {
+		return "fail";
+	} else {
+		return "success";
 		}
 	}
 	
@@ -72,7 +86,7 @@ public class LessorController {
 	
 	// 로그인
 	@RequestMapping(value = "/lessorLogin", method = RequestMethod.POST)
-	public String lessorloingPOST(HttpServletRequest request, LessorVO lessor, RedirectAttributes rttr) throws Exception{
+	public String lessorloginPOST(HttpServletRequest request, LessorVO lessor, RedirectAttributes rttr) throws Exception{
 		
 //		System.out.println("login 메서드 진입");
 //		System.out.println("전달된 데이터 : " + lessor);

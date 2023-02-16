@@ -190,11 +190,11 @@ carousel-inner::after{display:block;clear:both;content:""}.carousel-item{positio
  	display : none;
  }
  
- .nickname_input_re_1 {
+.nickname_input_re_1 {
  	color : green;
  	display : none;
  	}
- .nickname_input_re_1 {
+ .nickname_input_re_2 {
  	color : red;
  	display : none;
  }

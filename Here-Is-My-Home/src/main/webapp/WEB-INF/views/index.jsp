@@ -21,7 +21,7 @@
   
 	<div style="text-align: center;">
     	<br>
-    	<a href="로그인.html"><button type="button" class="btn btn-primary" style="display: inline-block; width: 150px;">시작하기</button></a>
+    	<a href="/member/login"><button type="button" class="btn btn-primary" style="display: inline-block; width: 150px;">시작하기</button></a>
     	<br><br><br>
   	</div>
 	</div>
