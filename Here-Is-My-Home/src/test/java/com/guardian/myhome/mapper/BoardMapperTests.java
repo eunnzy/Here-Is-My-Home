@@ -86,12 +86,6 @@ public class BoardMapperTests {
 		int count = mapper.viewsUp(1L);
 		log.info("VIEW COUNT : " + count);
 	}
-	
-	// 좋아요 증가 
-	//@Test
-	public void testLikesUp() {
-		int count = mapper.likesUp(1L);
-		log.info("LIKE COUNT : " + count);
-	}
+
 
 }

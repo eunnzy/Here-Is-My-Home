@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.guardian.myhome.mapper.BoardAttachMapper;
 import com.guardian.myhome.mapper.BoardMapper;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
@@ -15,13 +17,16 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
 	
-	// 전국 목록
+	@Setter(onMethod_ = @Autowired)
+	private BoardAttachMapper attachMapper;
+	
+	// 목록 리스트 
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
 		log.info("get List With Paging......" + cri);
@@ -36,10 +41,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 등록 
+	@Transactional
 	@Override
 	public void register(BoardVO board) {
 		log.info("register........" + board);
 		mapper.insertSelectKey(board);
+		
+		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		board.getAttachList().forEach(attach -> {
+			attach.setBno(board.getBno());
+			attachMapper.insert(attach);
+		});
 	}
 
 	// 조회
@@ -70,11 +85,21 @@ public class BoardServiceImpl implements BoardService {
 		log.info("viewsUp........" + bno);
 		return mapper.viewsUp(bno) == 1;
 	}
-
-	// 좋아요 
+	
+	
+	
+	// 내가 쓴 글 목록 리스트 
 	@Override
-	public boolean likesUp(Long bno) {
-		log.info("likesUp........" + bno);
-		return mapper.likesUp(bno) == 1;
+	public List<BoardVO> getMyboard(String imchaid) {
+		log.info("get getMyboard......" + imchaid);
+		return mapper.getMyboard(imchaid);
 	}
+	
+	// 내가 쓴 글 갯수
+//	@Override
+//	public int getMyboardCount(String imchaid) {
+//		log.info("getMyboardCount");
+//		return mapper.getMyboardCount(imchaid);
+//	}
+	
 }
