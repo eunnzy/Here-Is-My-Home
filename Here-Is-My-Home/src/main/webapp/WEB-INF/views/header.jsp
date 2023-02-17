@@ -42,7 +42,7 @@
         <div class="btn-group" role="group">
           <button id="navbarDropdownMenuLink" type="button" class="btn btn-primary dropdown-toggle dropdown-menu-end" data-bs-toggle="dropdown" aria-expanded="false"></button>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/member/login">일반회원 로그인</a>
+            <a class="dropdown-item" href="/member/imchaLogin">일반회원 로그인</a>
             <a class="dropdown-item" href="/member/lessorLogin">중개인 로그인</a>
           </div>
         </div>
