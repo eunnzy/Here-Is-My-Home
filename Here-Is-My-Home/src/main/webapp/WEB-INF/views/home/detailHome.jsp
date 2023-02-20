@@ -10,27 +10,11 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-	<link href="/css/bootstrap.min.css?v=1" rel="stylesheet"></link>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/css/detailHome.css" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<style>
-		body {
-			background-color: white;
-		}
-		.homeImg-div > .carousel-item > img{
-			border: 1px solid gray;
-			width: 100%;
-			min-width: 100%;
-      		min-height: 500px;
-		}
-		#reportBtn, #likeBtn, #qnaBtn {
-			cursor: pointer;
-		}
-		.side-content {
-			position: sticky;
-			top: 5px;
-		}
-	</style>
 </head>
 <body style="background-color:white;">
 	<header>
@@ -54,7 +38,6 @@
 								</c:choose>
 										<img src="/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}" class="d-block w-100" height="450" alt="...">
 									</div>
-								
 							</c:forEach> 
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
@@ -107,8 +90,9 @@
 							</div>
 							
 							<div class="d-grid gap-2 mx-auto mt-3">
-								<button type="button" class="btn btn-md btn-success"> 예약하기 </button>
+								<button type="button" class="btn btn-md btn-success" id="reservBtn"> 예약하기 </button>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -163,7 +147,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td td width="30%"> 방 종류 </td>
+									<td width="30%"> 방 종류 </td>
 									<td> ${home.homeType } </td>
 								</tr>
 								<tr>
@@ -207,42 +191,38 @@
 				
 			</div>
 		</div>
+		
+		<div class="reserv-modal">
+			<div class="reserv-wrap">
+				<div class="reserv-title">집 방문 예약</div>
+				<div class="reserv-close"><i class='bi bi-x-lg'></i></div>
+			<div class="reserv-content">
+				<table class="table">
+					<tr>
+						<td style="color: white;"> 이름 </td>
+						<td> <input type="text" class="form-control" name="reservName"></td>
+					</tr>
+					<tr>
+						<td style="color: white;"> 방문 날짜 </td>
+						<td> <input type="date" class="form-control" name="reservName"></td>
+					</tr>
+					<tr>
+						<td style="color: white;"> 방문 시간 </td>
+						<td> <input type="text" class="form-control" name="reservName"></td>
+					</tr>
+				</table>
+			</div>
+			</div>
+		</div>
 	</div>
 	
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
 	<script>
-	$(document).ready(function() {
-		/* let homeImgDiv = $(".homeImg-div");
-		
-		let str = "";
-		str += "<div class='carousel-inner homeImg-div'> <c:forEach items='${home.homeImgList}' var='imgFile'> <div class='carousel-item active'>";
-		str	+= "<img src='/home/getHomeImg?homeImgFile=${imgFile.homeImgPath}/${imgFile.homeImgName}' class='d-block' height='450' alt='...'>";
-		str += "</div></c:forEach></div>";
-		
-		homeImgDiv.append(str); */
-		
-		// 위치 정보 표시
-		var latitude = ${home.latitude};
-		var logitude = ${home.longitude};
-		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = { 
-		    center: new kakao.maps.LatLng(latitude, logitude), // 지도의 중심좌표
-		    level: 3 // 지도의 확대 레벨 
-		};
-		
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		
-		var markerPosition  = new kakao.maps.LatLng(latitude, logitude); 	// 마커 위치
-			
-		var marker = new kakao.maps.Marker({
-		    position: markerPosition
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-	});
-	
+		let latitude = ${home.latitude};
+		let logitude = ${home.longitude};
+	// 위치 정보 표시
 	</script>
+	<script src="/js/detailHome.js" ></script>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class HomeDetailVO {
 	private int homeValid;		// 유효한 게시글 인지
 	private Date homeRegDate;	// 글 등록 날짜
 	private String jgsName;
-	private int jgsNum;
+	private String jgsNum;
 	private String phone;
 	private String name;
 	private String lessorAddr1;

@@ -64,6 +64,5 @@ public class HomeOptionTest {
 		optionList.add("비데");
 		optionList.add("에어컨");
 		
-		System.out.println(homeOptionMapper.selectHomeNumByOptionCheck(optionList));
 	}
 }

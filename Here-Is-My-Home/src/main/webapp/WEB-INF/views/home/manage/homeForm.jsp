@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>매물 정보 수정</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<header>
-		<jsp:include page="../../header.jsp"></jsp:include>
-	</header>
+	
 </body>
 </html>

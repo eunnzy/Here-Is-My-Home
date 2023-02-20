@@ -23,7 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -181,16 +183,39 @@ public class HomeManageController {
 	}
 	
 	
+	// 매물 수정 페이지
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyHome(@RequestParam("homeNum")int homeNum, Model model, HttpServletRequest request) {
+		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	
+		Map<String, Object> home = homeService.selectHomeDetail(homeNum);	// 원래 정보 가져오기
+		System.out.println("detailHome: " + home);
+		home.put("deposit", (int)home.get("deposit")/10000);
+		home.put("monthly", (int)home.get("monthly")/10000);
+		home.put("adminCost", (int)home.get("adminCost")/10000);
+		model.addAttribute("home", home);
+		return "home/manage/modifyHome";
+	}
+	
+	
+	// 매물 수정 처리
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
-	public int modifyHome(@RequestBody HashMap<String, Object> homeData, HttpServletRequest request) {
-//		String lessorId = request.getSession();	// 글 등록 아이디
+	public int modifyHome(@RequestBody HashMap<String, Object> homeData) {
+		System.out.println("modifyHome Controller 실행");
+		System.out.println(homeData);
+		
+		int homeNum = (int) homeData.get("homeNum");
+		
+		System.out.println("homeNum = " + homeNum);
+		System.out.println("homeData = " + homeData);
 		HomeVO homeVO = new HomeVO();
+		homeVO.setHomeNum(homeNum);
+		
 		HomePriceVO homePriceVO = new HomePriceVO();
 		List<String> homeOptionList = new ArrayList<>();
 		List<HomeImgVO> homeImgList = new ArrayList<>();
 
-		Map<String, Object> insertMap = new HashMap<>();
+		Map<String, Object> modifyMap = new HashMap<>();
 		
 		for(String key: homeData.keySet()) { 	// view에서 가져온 키 값들을 돌면서 체크
 			if(!(homeData.get(key).equals(""))) {	// 공백이 아닌 것( 데이터를 갖고 있는 것)
@@ -291,19 +316,19 @@ public class HomeManageController {
 		System.out.println("homeImgList: " + homeImgList);
 		System.out.println("homeOptionList: " + homeOptionList);
 		
-		insertMap.put("homeVO", homeVO);
-		insertMap.put("homePriceVO", homePriceVO);
-		insertMap.put("homeImgList", homeImgList);
-		insertMap.put("homeOptionList", homeOptionList);
+		modifyMap.put("homeVO", homeVO);
+		modifyMap.put("homePriceVO", homePriceVO);
+		modifyMap.put("homeImgList", homeImgList);
+		modifyMap.put("homeOptionList", homeOptionList);
 		
-		int result = homeService.insertHome(insertMap);	// 매물 정보 삽입.
+		int result = homeService.modifyHomeInfo(modifyMap);// 매물 정보 수정
 		
 		return result;
 	}
 	
 	
 	
-			
+	// 매물 사진 로컬 저장소에 업로드 		
 	@RequestMapping(value = "/homeImgUpload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<HomeImgVO>> uploadImage(@RequestParam MultipartFile[] homeImg, HttpServletRequest request, 
 							HttpServletResponse response) {
@@ -372,6 +397,7 @@ public class HomeManageController {
 		return null;
 	}
 	
+	// 이미지 보여주기
 	@RequestMapping(value = "/showHomeImg", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getHomeImg(String homeImgName) {
 		System.out.println(homeImgName);

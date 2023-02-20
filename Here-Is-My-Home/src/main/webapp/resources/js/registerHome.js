@@ -41,9 +41,6 @@ function showImage(resultArr) {
 	});
 	uploadResult.append(str);
 	
-	// let obj = resultArr[0];
-	// console.log(imgPath);
-	// console.log(str);
 }
 
 	
@@ -120,7 +117,7 @@ function overlay() {
 	
 	
 // 등록하기 버튼 클릭시 submit() 전송	
-$("#addBtn").on("click",function(e){	
+$("#updateBtn").on("click",function(e){	
 	e.preventDefault();
 	
 	let optionList = [];	// 옵션 체크 한 것 배열로 넘기기.
@@ -188,7 +185,7 @@ $("#addBtn").on("click",function(e){
 			success:function(data, status, xhr){
 				var msg = (data==1) ? "글 등록 성공했습니다." : "실패";
 				alert(msg);
-				homeForm.reset();
+				homeForm[0].reset();
 	 		},
 	 		error: function(xhr, status, error){console.log(xhr.status, status)}
 		}); 

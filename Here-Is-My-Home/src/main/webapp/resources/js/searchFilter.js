@@ -2,6 +2,8 @@ let homeTypeCheck = [];
 let rentTypeCheck = [];
 let optionCheck = [];
 let addInfoCheck = [];
+let deposit = 0;
+let monthly = 0;
 let btnFlag = false;
 
 $(document).ready(function() {
@@ -21,6 +23,7 @@ $("#cancelBtn").click(function() {
 	});
 
 $("#filterApplyBtn").click(function() {
+
 		$("input[name=homeType]:checked").each(function() {
 			if(!homeTypeCheck.includes($(this).val())) 
 				homeTypeCheck.push($(this).val());
@@ -41,6 +44,25 @@ $("#filterApplyBtn").click(function() {
 				addInfoCheck.push($(this).val());
 		});
 		
+		
+		deposit = $("#deposit").val();
+		if(deposit == 1) {
+			deposit = 5000;
+		}else if(deposit == 2){
+			deposit = 10000;
+		}else {
+			deposit = 999999;
+		}
+		
+		monthly = $("#monthly").val();
+		if(monthly == 1) {
+			monthly = 50;
+		}else if(monthly == 2){
+			monthly = 100;
+		}else {
+			monthly = 999999;
+		}
+		
 		console.log(homeTypeCheck);
 		console.log(rentTypeCheck);
 		console.log(optionCheck);
@@ -48,6 +70,8 @@ $("#filterApplyBtn").click(function() {
 		
 		btnFlag=true;
 		console.log(homeData);
+		
+		
 			
 		for(let i=0; i<homeData.length; i++) {
 			console.log(homeData[i]);
@@ -61,7 +85,7 @@ $("#filterApplyBtn").click(function() {
 			    continue;
 			}
 			else 
-				showHomeList(homeData[i], i);
+				displayHomeList(homeData[i], i);
 		}
 		
 		$(".filter-content").css("display", "none");

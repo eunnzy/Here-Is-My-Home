@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  
- <mapper namespace="HomeMapper">
+ <mapper namespace="com.guardian.myhome.mapper.HomeMapper">
  	
  	<!-- 매물 등록  -->
  	 <insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
@@ -107,20 +107,12 @@
  		</foreach>
 	</select>
 	
- 	<!-- 등록된 매물 삭제 -->
- 	<delete id="deleteHome">
-		delete from Home_tb where home_num = #{homeNum}
-	</delete>
-	
 	
 	<!--  옵션관련  -->
 	<insert id="insertOption" parameterType="com.guardian.myhome.vo.HomeOptionVO">
 		insert into Home_Option_tb(option_num, home_num, option_name) 
 		values ((select nvl(max(option_num), 0) + 1 from Home_Option_tb),  #{homeNum}, #{optionName})
 	</insert>
-	
-
-	
 	
 	
 	<!-- 매물 사진 등록  -->
@@ -129,10 +121,6 @@
  		values((select nvl(max(img_num), 0) + 1 from Home_Img_tb), #{homeNum}, #{homeImgName}, #{homeImgPath})
  	</insert>
 
- 	<!-- <select id="allHomeImg" parameterType="com.guardian.myhome.vo.HomeImgVO">
- 		select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
- 		from Home_Img_tb
- 	</select> -->
  	
 	<select id="selectPreviewHomeImg" resultType="com.guardian.myhome.vo.HomeImgVO"> <!-- 미리보기 사진 -->
 			select home_num AS homeNum, home_img_name AS homeImgName, home_img_path AS homeImgPath 
@@ -141,7 +129,27 @@
 	</select>
 	
 
+ 	<delete id="deleteHomeImg">
+		delete from Home_Img_tb where home_num = #{homeNum}
+	</delete>
+	
+	<delete id="deleteHomeOption">
+		delete from Home_Option_tb where home_num = #{homeNum}
+	</delete>
  	
+ 	<update id="updateHome" parameterType="com.guardian.myhome.vo.HomeVO">
+ 		update Home_tb 
+ 		set home_type=#{homeType}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, 
+ 			latitude=#{latitude}, longitude = #{longitude}, home_area = #{homeArea}, rent_type=#{rentType},
+ 			rent_periods=#{rentPeriods}, room_count=#{roomCount}, parking=#{parking}, pet=#{pet}, elevator=#{elevator},
+ 			balcony=#{balcony}, moveDate=#{moveDate}, floor=#{floor}, home_title=#{homeTitle}, home_detail=#{homeDetail}
+ 		where home_num=#{homeNum}
+ 		
+ 	</update>
+ 	
+ 	<update id="updateHomePrice" parameterType="com.guardian.myhome.vo.HomePriceVO">
+ 		update Home_Price_tb set deposit = #{deposit}, monthly = #{monthly}, admin_cost = #{adminCost} where home_num = #{homeNum}
+ 	</update>
  	
  </mapper>
  

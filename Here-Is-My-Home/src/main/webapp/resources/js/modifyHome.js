@@ -1,3 +1,65 @@
+var geocoder = new kakao.maps.services.Geocoder();
+// 작성한 주소의 위도, 경도 값 계산
+var changeToLoc = function(data, status) {
+	if(status  === kakao.maps.services.Status.OK) {
+		$("#latitude").val(data[0].y);
+		$("#longitude").val(data[0].x);
+		console.log($("#latitude").val());
+		console.log($("#longitude").val());
+	}	
+};
+
+// 주소 검색
+$("#searchPost").click(function() {
+	new daum.Postcode({
+	    oncomplete: function(data) {
+		// 위치 검색 api
+        	 var addr = '';
+                var extraAddr = ''; 
+ 
+                if (data.userSelectedType === 'R') { 
+                    addr = data.roadAddress;
+                } else { 
+                    addr = data.jibunAddress;
+                }
+ 
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                	addr += extraAddr;
+                } else {
+                	addr += ' ';
+                }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            $("#addr1").val(data.zonecode);
+            $("#addr2").val(addr);
+            $("#addr3").focus();
+            
+            
+            geocoder.addressSearch(addr, changeToLoc);
+            
+        }
+    }).open();	 
+});
+
+
+// 전용 면적(m^2) -> '평' 으로 계산
+$("#area").on("propertychange keyup paste input", function() { 	
+	let area = $(this).val();
+	let homeArea = $("#homeArea").val( Math.floor(area / 3.3) );
+});
+
+
+
+
 let index = 0;
 let homeForm = $("#homeForm");
 let homeImgList = [];    
@@ -41,9 +103,6 @@ function showImage(resultArr) {
 	});
 	uploadResult.append(str);
 	
-	// let obj = resultArr[0];
-	// console.log(imgPath);
-	// console.log(str);
 }
 
 	
@@ -110,10 +169,14 @@ $(".resultImg").on("click", ".imgDelete", function(e){
 		}
 	});
 	
+	
+	
 });
 	
+	
+	
 // 등록하기 버튼 클릭시 submit() 전송	
-$("#addBtn").on("click",function(e){	
+$("#updateBtn").on("click",function(e){	
 	e.preventDefault();
 	
 	let optionList = [];	// 옵션 체크 한 것 배열로 넘기기.
@@ -147,6 +210,7 @@ $("#addBtn").on("click",function(e){
 	}
 		
 	let homeData= {
+				"homeNum" : homeNum,
 	    		"homeType" : $("input[name=homeType]").val(),
 	    		"addr1" : $("input[name=addr1]").val(),
 	    		"addr2" : $("input[name=addr2]").val(),
@@ -175,13 +239,13 @@ $("#addBtn").on("click",function(e){
 	console.log(homeData);
 	$.ajax({
 			type:'post',
-			url: '/home/manage/register',
+			url: '/home/manage/modify',
 			data: JSON.stringify(homeData),
             contentType: "application/json",
 			success:function(data, status, xhr){
-				var msg = (data==1)? "글 등록 성공했습니다." : "실패";
+				var msg = (data==1) ? "글 등록 성공했습니다." : "실패";
 				alert(msg);
-				homeForm.reset();
+				homeForm[0].reset();
 	 		},
 	 		error: function(xhr, status, error){console.log(xhr.status, status)}
 		}); 
