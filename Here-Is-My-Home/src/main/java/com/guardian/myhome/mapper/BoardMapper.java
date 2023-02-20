@@ -26,6 +26,12 @@ public interface BoardMapper {
 		
 	// 조회수 증가
 	public int viewsUp(Long bno);
+	
+	// 좋아요 증가
+	public int likesUp(Long bno);
+		
+	// 좋아요 감소
+	public int likesDown(Long bno);
 		
 	// 내가 쓴 글 목록 리스트 
 	public List<BoardVO> getMyboard(String imchaid);

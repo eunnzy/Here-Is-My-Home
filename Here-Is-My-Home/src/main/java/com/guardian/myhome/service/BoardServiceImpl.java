@@ -7,18 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.guardian.myhome.mapper.BoardAttachMapper;
+import com.guardian.myhome.mapper.BoardLikesMapper;
 import com.guardian.myhome.mapper.BoardMapper;
 import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-//@AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -26,6 +25,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardLikesMapper likesMapper;
 	
 	// 목록 리스트 
 	@Override
@@ -47,11 +49,9 @@ public class BoardServiceImpl implements BoardService {
 	public void register(BoardVO board) {
 		log.info("register........" + board);
 		mapper.insertSelectKey(board);
-		
 		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
-		
 		board.getAttachList().forEach(attach -> {
 			attach.setBno(board.getBno());
 			attachMapper.insert(attach);
@@ -72,19 +72,14 @@ public class BoardServiceImpl implements BoardService {
 		log.info("modify........" + board);
 		attachMapper.deleteAll(board.getBno());
 		boolean modifyResult = mapper.update(board) == 1;
-		
 		if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
 			board.getAttachList().forEach(attach -> {
 				attach.setBno(board.getBno());
 				attachMapper.insert(attach);
 			});
 		}
-		
 		return modifyResult;
 	}
-	
-	
-	
 	
 	// 삭제 
 	@Transactional
@@ -94,7 +89,6 @@ public class BoardServiceImpl implements BoardService {
 		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
-
 	
 	// 조회수 
 	@Override
@@ -102,8 +96,6 @@ public class BoardServiceImpl implements BoardService {
 		log.info("viewsUp........" + bno);
 		return mapper.viewsUp(bno) == 1;
 	}
-	
-	
 	
 	// 내가 쓴 글 목록 리스트 
 	@Override
@@ -124,5 +116,35 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardAttachVO> getAttachList(Long bno) {
 		log.info("get Attach list by bno" + bno);
 		return attachMapper.findByBno(bno);
+	}
+	
+	
+	
+	
+	
+	// 좋아요 On -> Up
+	@Override
+	public void likesOn(Long bno, String userid) {
+		log.info("likesOn........" + bno);
+		likesMapper.likesOn(bno, userid);
+		mapper.likesUp(bno);
+	}
+	
+	// 좋아요 Off -> Down
+	@Override
+	public void likesOff(Long bno, String userid) {
+		log.info("likesOff........" + bno);
+		likesMapper.likesOff(bno, userid);
+		mapper.likesDown(bno);
+	}
+	
+	// 좋아요 체크 여부
+	@Override
+	public boolean likeCheck(Long bno, String userid) {
+		if(likesMapper.likeCheck(bno, userid) == 0) {
+			return false;			// 좋아요 off = false
+		} else {
+			return true;			// 좋아요 on = true 
+		}
 	}
 }

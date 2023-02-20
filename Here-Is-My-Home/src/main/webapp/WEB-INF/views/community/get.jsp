@@ -43,7 +43,7 @@
 	      <div id="uploadimg"></div>
 	        <!-- hidden -->
 	      	<input type="hidden" name="bno" value="<c:out value="${board.bno}" />" >
-	      	<input type="hidden" name="likec" value="<c:out value="${board.likec}" />" >
+	      	
 	      <!-- 조회수, 좋아요 -->
 	      <div class="card-body"> 	
 	      <span><c:out value="${board.views}" /> 조회</span>

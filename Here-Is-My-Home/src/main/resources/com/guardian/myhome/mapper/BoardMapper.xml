@@ -73,6 +73,16 @@
 		UPDATE Board SET views = views+1 WHERE bno = #{bno}
 	</update>
 	
+	<!-- 좋아요 증가  -->
+	<update id="likesUp">
+		UPDATE Board SET likes = likes+1 WHERE bno = #{bno}
+	</update>
+	
+	<!-- 좋아요 감소  -->
+	<update id="likesDown">
+		UPDATE Board SET likes = likes-1 WHERE bno = #{bno}
+	</update>
+	
 	
 
 	<!-- SELECT A.* 

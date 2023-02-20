@@ -287,18 +287,6 @@ public class BoardController {
 		log.info("getAttachList" + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// 컨트롤러 내에서 사용하는 메소드 
 	// 파일 업로드 폴더 만들기 
@@ -342,8 +330,5 @@ public class BoardController {
 			}
 		});
 	}
-		
-		
-
 }
 

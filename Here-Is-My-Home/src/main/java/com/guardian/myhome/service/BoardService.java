@@ -38,5 +38,14 @@ public interface BoardService {
 	
 	// 파일 업로드 조회 
 	public List<BoardAttachVO> getAttachList(Long bno);
+	
+	// 좋아요 ON -> UP
+	public void likesOn(Long bno, String userid);
+	
+	// 좋아요 OFF -> DOWN
+	public void likesOff(Long bno, String userid);
+	
+	// 좋아요 체크 여부 
+	public boolean likeCheck(Long bno, String userid);
 
 }

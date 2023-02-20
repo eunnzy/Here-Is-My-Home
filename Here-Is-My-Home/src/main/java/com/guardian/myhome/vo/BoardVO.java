@@ -17,14 +17,11 @@ public class BoardVO {
 	private Date updateDate;	//수정시간
 	
 	private int views;			//조회수
-	
 	private int likes;			//좋아요
-	private int likec;			//좋아요(컨디션)
 	
 	private String nickname;	// 닉네임
 	private String sido1;		// 주소1
 	private String gugun1;		// 주소2 
 	
 	private List<BoardAttachVO> attachList;	// 파일업로드 
-	
 }
