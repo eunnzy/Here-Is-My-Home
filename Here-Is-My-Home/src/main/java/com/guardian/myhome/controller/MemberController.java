@@ -80,13 +80,13 @@ public class MemberController {
 			}
 		}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/imchaLogin", method = RequestMethod.GET)
 	public String registerForm() {
-		return "/member/login";
+		return "/member/imchaLogin";
 	}
 	
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/imchaLogin", method = RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
 		
 //		System.out.println("login 메서드 진입");
@@ -100,7 +100,7 @@ public class MemberController {
 		if(vo == null) {
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
-			return "redirect:/member/login";
+			return "redirect:/member/imchaLogin";
 		} else {
 			session.setAttribute("member", vo);
 			System.out.println(vo.getImchaId());
@@ -190,7 +190,7 @@ public class MemberController {
 		
 		memberservice.updatePw(member);
 		
-		return "redirect:/member/login";
+		return "redirect:/member/imchaLogin";
 	}
 	
 }
