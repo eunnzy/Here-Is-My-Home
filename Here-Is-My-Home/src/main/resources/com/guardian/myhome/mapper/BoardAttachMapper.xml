@@ -4,7 +4,7 @@
 
 	<insert id="insert">
 		INSERT INTO Board_attach (uuid, uploadPath, fileName, filetype, bno)
-		VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{filetype}, #{bno})
+		VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno})
 	</insert>
 	
 	<delete id="delete">
@@ -14,5 +14,9 @@
 	<select id="findByBno" resultType="com.guardian.myhome.vo.BoardAttachVO">
 		SELECT * FROM Board_attach WHERE bno = #{bno}
 	</select>
+	
+	<delete id="deleteAll">
+		DELETE Board_attach WHERE bno = #{bno}
+	</delete>
 	
 </mapper>

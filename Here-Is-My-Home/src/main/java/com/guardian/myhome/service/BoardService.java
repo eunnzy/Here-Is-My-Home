@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.List;
 
+import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -34,5 +35,8 @@ public interface BoardService {
 			
 	// 내가 쓴 글 갯수 
 //	public int getMyboardCount(String imchaid);
+	
+	// 파일 업로드 조회 
+	public List<BoardAttachVO> getAttachList(Long bno);
 
 }
