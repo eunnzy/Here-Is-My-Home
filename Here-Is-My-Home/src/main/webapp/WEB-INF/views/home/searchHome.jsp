@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -21,89 +20,88 @@
 		<div id="map"></div>	<!-- 지도 -->
 		<div class="search-div">
 			<div class="search-group-wrap">
-				<div class="input-filter-wrap">		
-					<div class="seach-input-wrapper">	
-						<div class="search-input">
-							<i class="bi bi-arrow-repeat"></i>
-							<input type="text" id="searchInput" placeholder="지역, 학교, 지하철역으로 검색"> 
-							<button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-		       			</div>
+				<div class="search-bar-wrap">		
+					<div class="search-bar">
+						<button type="button" class="filterBtn" id="filterBtn"><i class="fa-solid fa-sliders"></i></button>
+						<input type="text" id="searchInput" placeholder="지역, 학교, 지하철역으로 검색"> 
+						<button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 	       			</div>
-	       			<div class="filter-wrapper">
-		       			<div class="filter">
-		       				<label>검색 조건</label>
-		       				<button type="button" class="homeTypeBtn" id="homeTypeBtn">매물 종류</button>
-		       				<button type="button" class="tradingBtn" id="tradingBtn">거래 유형</button>
-		       				<button type="button" class="optionBtn" id="optionBtn" >옵션</button>
-		       				<button type="button" class="addInfoBtn" id="addInfoBtn">추가 필터</button>
-		       			</div>
-		       		</div>
        		   </div> 
-       			<div class="homeType-content">
+       		   
+       			<div class="filter-content">
        				<div>
        					<h4>매물 종류</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
-     				<div class="homeType">
+     				<div class="home-type mb-4">
      					<div class="form-check form-check-inline">
-                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="원룸">
+                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="원룸">
 							<label class="form-check-label">원룸</label>
 						</div>
                         <div class="form-check form-check-inline">
-                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="homeTypeCheck" value="투룸">
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="homeType" value="투룸">
  							<label class="form-check-label">투룸</label>
                         </div>
                         <div class="form-check form-check-inline">
-                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="쓰리룸이상">
+                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="쓰리룸이상">
 			 				<label class="form-check-label" >쓰리룸이상 </label>
                         </div>
                         <div class="form-check form-check-inline">
-                         	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="오피스텔">
+                         	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="오피스텔">
 	 						<label class="form-check-label" >오피스텔</label>
                         </div>
                         <div class="form-check form-check-inline">
-                             	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="빌라">
+                             	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="빌라">
 					 			<label class="form-check-label" >빌라 </label>
                         </div>
                         <div class="form-check form-check-inline">
-                             	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="쉐어하우스">
+                             	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeType" value="쉐어하우스">
 					 			<label class="form-check-label" >쉐어하우스 </label>
                         </div>
        				</div>
-       			</div>
-       			
-       			<div class="trading-content">
+       				
+       				<hr>
+       				
        				<div>
        					<h4>거래 유형</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
-     				<div class="homeType">
+     				<div class="rent-Type mb-4">
      					<div class="form-check form-check-inline">
-                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="원룸">
+                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="rentType" value="원룸">
 							<label class="form-check-label">월세</label>
 						</div>
                         <div class="form-check form-check-inline">
-                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="homeTypeCheck" value="투룸">
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="rentType" value="투룸">
  							<label class="form-check-label">전세</label>
                         </div>
        				</div>
-       				<div class="range-div">
-				        <label for="customRange1" class="form-label">보증금</label>
-				        <input type="range" class="form-range" id="customRange1">
-				        <label for="customRange3" class="form-label">월세</label>
-				        <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+       				<div class="range-div mt-3 mb-4">
+				        <label for="customRange1" class="form-label d-grid">보증금</label>
+				        <input type="range" id="deposit" min="0" max="3">
+				        <ul class="deposit-range-ul">
+				        	<li> 0 </li>
+				        	<li> 5000만</li>
+				        	<li> 1억 </li>
+				        	<li> 최대 </li>
+				        </ul>
+				        <label for="customRange3" class="form-label d-grid">월세</label>
+				        <input type="range"id="monthly" min="0" max="3">
+				        <ul class="monthly-range-ul">
+				        	<li> 0 </li>
+				        	<li> 50만</li>
+				        	<li> 100만 </li>
+				        	<li> 최대 </li>
+				        </ul>
 					</div>
-				</div>
-				
-				<div class="option-content">
+					
+					<hr>
+					
        				<div>
        					<h4>옵션 선택</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
-     				<div class="option-check">
+     				<div class="option-list mb-4">
      					<div class="form-check form-check-inline">
                         	<input type="checkbox" class="form-check-input" autocomplete="off" name="optionList" value="세탁기">
 						 	<label class="form-check-label">세탁기</label>
@@ -148,29 +146,43 @@
                            	<input type="checkbox" class="form-check-input"autocomplete="off" name="optionList" value="도어락">
 						 	<label class="form-check-label" >도어락 </label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline mb-3">
                           	<input type="checkbox" class="form-check-input"  autocomplete="off" name="optionList" value="비데">
 						 	<label  class="form-check-label">비데</label>
                         </div>
        				</div>
-				</div>
-				<div class="addInfo-content">
+       				
+					<hr>
+					
        				<div>
        					<h4>추가 정보</h4>
        					<p>중복 선택 가능</p>
        				</div>
-       				<hr>
-     				<div class="homeType">
+     				<div class="addInfo-list mb-3">
      					<div class="form-check form-check-inline">
-                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="homeTypeCheck" value="반려동물">
+                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="addInfoList" value="반려동물">
 							<label class="form-check-label">반려동물</label>
 						</div>
                         <div class="form-check form-check-inline">
-                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="homeTypeCheck" value="투룸">
- 							<label class="form-check-label">전세</label>
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="addInfoList" value="엘리베이터">
+ 							<label class="form-check-label">엘리베이터</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="addInfoList" value="주차">
+ 							<label class="form-check-label">주차 가능</label>
+                        </div>
+                        <div class="form-check form-check-inline mb-3">
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="addInfoList" value="발코니">
+ 							<label class="form-check-label">발코니/베란다</label>
                         </div>
        				</div>
+       				
+       				<div class="d-flex justify-content-center mt-4">
+       					<button class="btn btn-outline-info m-2" type="button" id="cancelBtn">취소</button>
+  						<button class="btn btn-outline-info m-2" type="button" id="filterApplyBtn">적용하기</button>
+       				</div>
 				</div>
+				
 				<!-- 메믈 리스트 -->
 				<div class="home-wrap">
                     <div class="home-list">
@@ -211,51 +223,12 @@
 	        </li>      
 	    </ul>	 -->
 	
-	<script>
-	$(document).ready(function () {
-		$("#homeTypeBtn").click(function() {
-			if($(".homeType-content").css("display") == "none")	{
-				$(".homeType-content").css("display", "inline-block");
-			}else {
-				$(".homeType-content").css("display", "none");
-			}
-		});
-		
-		
-		$("#tradingBtn").click(function() {
-			if($(".trading-content").css("display") == "none")	{
-				$(".trading-content").css("display", "inline-block");
-			}else {
-				$(".trading-content").css("display", "none");
-			}
-		});
-		
-		
-		$("#optionBtn").click(function() {
-			if($(".option-content").css("display") == "none")	{
-				$(".option-content").css("display", "inline-block");
-			}else {
-				$(".option-content").css("display", "none");
-			}
-		});
-		
-		$("#addInfoBtn").click(function() {
-			if($(".addInfo-content").css("display") == "none")	{
-				$(".addInfo-content").css("display", "inline-block");
-			}else {
-				$(".addInfo-content").css("display", "none");
-			}
-		});
-		
-	});	
-		
-	</script>
-	
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
+	<script src="/js/searchFilter.js" ></script>
 	<script src="/js/searchHome.js" ></script>
-
+	
 </script>
 </body>
 </html>

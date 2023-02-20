@@ -44,6 +44,6 @@ public class HomeImgMapperTest {
 	@Test
 	public void homePreview() throws Exception {
 		int homeNum = 2;
-		System.out.println(homeMapper.selectHomeImgDetail(homeNum));
+		System.out.println(homeMapper.selectHomeImgList(homeNum));
 	}
 }

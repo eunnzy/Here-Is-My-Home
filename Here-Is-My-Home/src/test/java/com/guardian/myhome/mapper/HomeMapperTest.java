@@ -60,37 +60,9 @@ public class HomeMapperTest {
 
 	
 	
-	public void previewHome() throws Exception {
-		List<HomePreviewVO> homeList = homeMapper.previewList();		
-		System.out.println("전: " + homeList + "\n");
-		
-		
-		for(int i=0; i<homeList.size(); i++)
-		{
-			int homeNum = homeList.get(i).getHomeNum();
-			homeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
-		}
-		
-		System.out.println(homeList);
-		System.out.println();
-	}
-	
-	
-	public void previewHomeBounds() throws Exception {
-		Map<String, Object> mapBounds = new HashMap<>();
-		mapBounds.put("swLng", 127.06148367243757);
-		mapBounds.put("neLng", 127.0736617874016);
-		mapBounds.put("swLat", 37.592605575396554);
-		mapBounds.put("neLat", 37.59862623535382);
-		
-		List<HomePreviewVO> homeList = homeMapper.selectHomeInBoundsList(mapBounds);
-		System.out.println(homeList);
-		
-	}
-	
 	@Test
 	public void detailHome() throws Exception {
-		HomeDetailVO homeDetailVO = homeMapper.selectHomeDetail(2);
+		HomeDetailVO homeDetailVO = homeMapper.selectHomeDetail(7);
 		System.out.println(homeDetailVO);
 	}
 	

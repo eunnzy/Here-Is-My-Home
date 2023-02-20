@@ -98,7 +98,6 @@
 					return false;
 				}
 				
-				
 				if ($('.password2').val() != $('.password').val()) {
 					$('.pass2div').html("입력하신 비밀번호가 일치하지 않습니다.");
 					$('.pass2div').focus();
