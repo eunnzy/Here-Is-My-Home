@@ -6,26 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Community List</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/board_listBT.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	var imchaId = '<c:out value="${member.imchaId}" />';
-	
-	if(imchaId == null || imchaId == '') {
-		$("#regBT").hide();
-		$("#myboardBT").hide();
-	} else {
-		$("#regBT").show();
-		$("#myboardBT").show();
-	}
-	
-	$("#myboardBT").on("click", function(e) {
-		self.location = "/community/mylist?imchaid=<c:out value='${member.imchaId}' />";
-	});
-});
-</script>
+<title>Community List</title>
 </head>
 <body>
 	<header>
@@ -148,5 +131,24 @@ $(document).ready(function() {
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>
     </footer>
+    
+    <!-- 자바스크립트 -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var imchaId = '<c:out value="${member.imchaId}" />';
+		
+		if(imchaId == null || imchaId == '') {
+			$("#regBT").hide();
+			$("#myboardBT").hide();
+		} else {
+			$("#regBT").show();
+			$("#myboardBT").show();
+		}
+		
+		$("#myboardBT").on("click", function(e) {
+			self.location = "/community/mylist?imchaid=<c:out value='${member.imchaId}' />";
+		});
+	});
+	</script>
 </body>
 </html>

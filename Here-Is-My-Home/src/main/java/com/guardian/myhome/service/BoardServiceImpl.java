@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.guardian.myhome.mapper.BoardAttachMapper;
 import com.guardian.myhome.mapper.BoardMapper;
+import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -65,16 +66,32 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 수정
+	@Transactional
 	@Override
 	public boolean modify(BoardVO board) {
-		log.info("remove........" + board);
-		return mapper.update(board) == 1;
+		log.info("modify........" + board);
+		attachMapper.deleteAll(board.getBno());
+		boolean modifyResult = mapper.update(board) == 1;
+		
+		if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
+			board.getAttachList().forEach(attach -> {
+				attach.setBno(board.getBno());
+				attachMapper.insert(attach);
+			});
+		}
+		
+		return modifyResult;
 	}
 	
+	
+	
+	
 	// 삭제 
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		log.info("remove........" + bno);
+		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 
@@ -102,4 +119,10 @@ public class BoardServiceImpl implements BoardService {
 //		return mapper.getMyboardCount(imchaid);
 //	}
 	
+	// 파일 업로드 조회
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		log.info("get Attach list by bno" + bno);
+		return attachMapper.findByBno(bno);
+	}
 }

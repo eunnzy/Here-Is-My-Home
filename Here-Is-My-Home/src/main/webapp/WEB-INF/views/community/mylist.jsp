@@ -6,30 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MyBoard List</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/board_listBT.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#listBT").on("click", function() {
-		self.location = "/community/list";
-	});
-	
-	var myBoardForm = $("#myBoardForm");
-	$(".page-item a").on("click", function(e) {
-		e.preventDefault();
-		myBoardForm.find("input[name='mypageMaker']").val($(this).attr("href"));
-		myBoardForm.submit();
-	});
-	
-	$(".move").on("click", function(e) {
-		e.preventDefault();
-		myBoardForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
-		myBoardForm.attr("action", "/community/get");
-		myBoardForm.submit();
-	});
-});
-</script>
+<title>MyBoard List</title>
 </head>
 <body>
 	<header>
@@ -110,5 +89,28 @@ $(document).ready(function() {
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>
     </footer>
+    
+    <!-- 자바스크립트 -->
+    <script type="text/javascript">
+	$(document).ready(function() {
+		$("#listBT").on("click", function() {
+			self.location = "/community/list";
+		});
+		
+		var myBoardForm = $("#myBoardForm");
+		$(".page-item a").on("click", function(e) {
+			e.preventDefault();
+			myBoardForm.find("input[name='mypageMaker']").val($(this).attr("href"));
+			myBoardForm.submit();
+		});
+		
+		$(".move").on("click", function(e) {
+			e.preventDefault();
+			myBoardForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+			myBoardForm.attr("action", "/community/get");
+			myBoardForm.submit();
+		});
+	});
+	</script>
 </body>
 </html>
