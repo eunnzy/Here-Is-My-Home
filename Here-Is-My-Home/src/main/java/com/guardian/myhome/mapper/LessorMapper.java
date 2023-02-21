@@ -19,4 +19,12 @@ public interface LessorMapper {
 	public LessorVO getLessor(LessorVO lessor);
 
 	public void updateLessor(LessorVO lessor);
+	
+	// 회원가입 승인
+	public int successId(String lessorId);
+	
+	// 거절
+	public int failed(String lessorId);
+	
+
 }

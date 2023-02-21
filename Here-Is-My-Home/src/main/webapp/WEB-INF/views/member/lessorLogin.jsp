@@ -43,7 +43,7 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h1 style="text-align:center;"  class="mb-3">중개인 로그인</h1>
-        <form class="validation-form" novalidate>
+        
         
           <!-- <fieldset class="form-group">
             <div class="form-check">
@@ -81,7 +81,7 @@
         </div>
       <div class="mb-4"></div>
       <div class="col-md-6 mb-3"  >    </div>  
-      <button class="btn btn-primary btn btn-block" type="submit">로그인</button> &nbsp;
+      <button class="btn btn-primary btn btn-block" id="lessorLoginBtn" type="submit">로그인</button> &nbsp;
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-primary">회원가입</button>
         <div class="btn-group" role="group">
@@ -123,7 +123,32 @@
               }, false);
             </script> -->
 
-
+<script type="text/javascript">
+$(function(){
+	$('#lessorLoginBtn').click(function(e){
+		e.preventDefault();
+		
+		var lessorId = $('#lessorId').val();
+		var lessorPw = $('#lessorPw').val();
+		console.log(lessorId);
+		$.ajax({
+			
+			url : "/member/lessorLoginCheck?id="+lessorId+"&pw="+lessorPw,
+			
+			success : function(result) {
+				
+				if(result == 0) {
+					console.log(result);
+					alert("회원가입이 현재 승인 대기 중 입니다.");
+				} else if(result == 1) {
+					console.log(result);
+					document.getElementById('login_form').submit();
+				}
+			}
+		});
+	});
+});
+</script>
 
   <!-- footer -->
   <div style="background-color: #dbe2f0; text-align: center;">

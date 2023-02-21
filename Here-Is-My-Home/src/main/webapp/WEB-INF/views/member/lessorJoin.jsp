@@ -44,7 +44,7 @@
         <h1 style="text-align:center;"  class="mb-3">   </h1>
 
   <form id="join_form" method="post">
-  <h1 style="text-align:center;"  class="mb-3">중개인 회원가입</h4>
+  <h1 style="text-align:center;"  class="mb-3">중개인 회원가입</h1>
         <form class="validation-form" novalidate>
           <div class="row">
             <div class="mb-3">
@@ -190,18 +190,9 @@
 
 
 
-  <!-- footer -->
-  <div style="background-color: #dbe2f0; text-align: center;">
-    <br><br>
-    <dib>
-        <a href="#">이용약관</a>   
-        <a href="#">개인정보처리방침</a>
-        <a href="#">프로젝트소개</a><hr>
-        <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
-    </div>
-    
-    <br><br><br><br>
-  </div>
+      <footer>
+       <jsp:include page="../footer.jsp"></jsp:include>
+    </footer>
  
 
  <script src="/js/lessorJoin.js" ></script>

@@ -1,11 +1,15 @@
 package com.guardian.myhome.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,16 +97,24 @@ public class LessorController {
 		
 		HttpSession session = request.getSession();
 		LessorVO lvo = lessorservice.lessorLogin(lessor);
-		
-		if(lvo == null) {
-			int result = 0;
-			rttr.addFlashAttribute("result", result);
-			return "redirect:/member/lessorLogin";
-		} else {
+		System.out.println(lvo.getStatus());
+		if(lvo.getStatus() == 0 || lvo == null){
 			
+			 return "redirect:/member/lessorLogin";
+		} else {
 			session.setAttribute("lessor", lvo);
 			return "redirect:/index";
 		}
+		
+////		if(lvo == null) {
+////			int result = 0;
+////			rttr.addFlashAttribute("result", result);
+////			return "redirect:/member/lessorLogin";
+////		} else {
+////			
+////			session.setAttribute("lessor", lvo);
+//			return "redirect:/index";
+////		}
 
 	}
 	
@@ -116,7 +128,20 @@ public class LessorController {
 //		
 //		return "redirect:/index";
 //	}
-	
+	@RequestMapping(value = "lessorLoginCheck")
+	@ResponseBody
+	public int lessorLoginCheck(String id, String pw) throws Exception {
+		LessorVO Lvo = new LessorVO();
+		Lvo.setLessorId(id);
+		Lvo.setLessorPw(pw);
+		LessorVO newVo = lessorservice.lessorLogin(Lvo);
+		System.out.println(newVo.getStatus());
+		if(newVo.getStatus() == 1) {
+			return 1;
+		}else {
+		return 0;
+		}
+	}
 	// 아이디 찾기
 		@RequestMapping(value="/findLessorId", method=RequestMethod.GET)
 		public String findLessorIdGET() throws Exception {
@@ -188,4 +213,23 @@ public class LessorController {
 			
 			return "redirect:/member/lessorLogin";
 		}
+		
+		// 중개인 리스트
+		@GetMapping("/lessorList")
+		public String lessorList(Model model) {
+			System.out.println("/lessorList 요청");
+			List<LessorVO> list = lessorservice.lessorList();
+			model.addAttribute("list", list);
+			return "member/lessorList";
+		}
+
+		
+//    @ResponseBody
+//	@PostMapping("/lessorId")
+//	public void successId(String lessorId,LessorVO lessor) throws Exception {
+//		System.out.println(lessorId);
+//		System.out.println("open! user sign success Id ajax!");
+//		lessorservice.lessorId(lessor);
+//		
+//	}
 }
