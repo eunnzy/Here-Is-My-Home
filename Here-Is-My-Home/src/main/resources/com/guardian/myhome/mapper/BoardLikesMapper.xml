@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guardian.myhome.mapper.BoardLikesMapper">
 
-	<select id="likeCheck" resultType="int">
+	<select id="likeCheck" parameterType="map"  resultType="int">
 		SELECT COUNT(*) FROM Board_likes where bno = #{bno} and user_id = #{userid}
 	</select>
 	
-	<insert id="likesOn">
+	<insert id="likesOn" parameterType="map">
 		INSERT INTO Board_likes (likeno, bno, user_id, like_check) 
 		VALUES (SEQ_LIKENO.NEXTVAL, #{bno}, #{userid}, 1)
 	</insert>
 	
-	<delete id="likesOff">
+	<delete id="likesOff" parameterType="map">
 		DELETE FROM Board_likes WHERE bno = #{bno} AND user_id = #{userid}
 	</delete>
+	
 </mapper>

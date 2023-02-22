@@ -54,7 +54,7 @@
 	</insert>
 	
 	<!-- 조회 -->
-	<select id="read" resultType="com.guardian.myhome.vo.BoardVO">
+	<select id="read" parameterType="map" resultType="com.guardian.myhome.vo.BoardVO">
 		SELECT B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID AND bno = #{bno}
 	</select>
 	

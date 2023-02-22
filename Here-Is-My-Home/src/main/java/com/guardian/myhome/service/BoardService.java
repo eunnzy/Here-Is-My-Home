@@ -3,6 +3,7 @@ package com.guardian.myhome.service;
 import java.util.List;
 
 import com.guardian.myhome.vo.BoardAttachVO;
+import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -39,13 +40,24 @@ public interface BoardService {
 	// 파일 업로드 조회 
 	public List<BoardAttachVO> getAttachList(Long bno);
 	
-	// 좋아요 ON -> UP
+	
+	
+	
+	
+	
+	// 좋아요 UP
+	public boolean likesUp(Long bno);
+		
+	// 좋아요 DOWN
+	public boolean likesDown(Long bno);
+	
+	// 좋아요 ON 
 	public void likesOn(Long bno, String userid);
 	
-	// 좋아요 OFF -> DOWN
+	// 좋아요 OFF 
 	public void likesOff(Long bno, String userid);
 	
 	// 좋아요 체크 여부 
-	public boolean likeCheck(Long bno, String userid);
-
+	public int likeCheck(Long bno, String userid);
+	
 }

@@ -2,6 +2,8 @@ package com.guardian.myhome.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -16,7 +18,7 @@ public interface BoardMapper {
 	public void insertSelectKey(BoardVO board);
 			
 	// 조회
-	public BoardVO read(Long bno);
+	public BoardVO read(@Param("bno") Long bno);
 			
 	// 삭제
 	public int delete(Long bno);

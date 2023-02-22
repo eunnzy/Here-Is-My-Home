@@ -24,4 +24,5 @@ public class BoardVO {
 	private String gugun1;		// 주소2 
 	
 	private List<BoardAttachVO> attachList;	// 파일업로드 
+	
 }

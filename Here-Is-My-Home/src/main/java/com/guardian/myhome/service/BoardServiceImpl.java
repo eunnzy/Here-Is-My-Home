@@ -1,5 +1,6 @@
 package com.guardian.myhome.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.guardian.myhome.mapper.BoardAttachMapper;
 import com.guardian.myhome.mapper.BoardLikesMapper;
 import com.guardian.myhome.mapper.BoardMapper;
 import com.guardian.myhome.vo.BoardAttachVO;
+import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -122,29 +124,39 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	// 좋아요 On -> Up
+	// 좋아요 On
 	@Override
 	public void likesOn(Long bno, String userid) {
-		log.info("likesOn........" + bno);
 		likesMapper.likesOn(bno, userid);
-		mapper.likesUp(bno);
 	}
 	
-	// 좋아요 Off -> Down
+	// 좋아요 Off
 	@Override
 	public void likesOff(Long bno, String userid) {
-		log.info("likesOff........" + bno);
 		likesMapper.likesOff(bno, userid);
-		mapper.likesDown(bno);
 	}
 	
-	// 좋아요 체크 여부
+	// 좋아요 Up
 	@Override
-	public boolean likeCheck(Long bno, String userid) {
-		if(likesMapper.likeCheck(bno, userid) == 0) {
-			return false;			// 좋아요 off = false
-		} else {
-			return true;			// 좋아요 on = true 
-		}
+	public boolean likesUp(Long bno) {
+		return mapper.likesUp(bno) == 1;
 	}
+	
+	// 좋아요 Down
+	@Override
+	public boolean likesDown(Long bno) {
+		return mapper.likesDown(bno) == 1;
+	}
+	
+	// 좋아요 체크 
+	@Override
+	public int likeCheck(Long bno, String userid) {
+		log.info("likeCheck........" + bno);
+		return likesMapper.likeCheck(bno, userid);
+	}
+	
+	
+
+	
+	
 }
