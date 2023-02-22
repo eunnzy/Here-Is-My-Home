@@ -19,4 +19,8 @@
 		DELETE Board_attach WHERE bno = #{bno}
 	</delete>
 	
+	<select id="getOldFiles" resultType="com.guardian.myhome.vo.BoardAttachVO">
+		SELECT * FROM Board_attach WHERE uploadpath = to_char(SYSDATE -1, 'yyyy/mm/dd')
+	</select>
+	
 </mapper>

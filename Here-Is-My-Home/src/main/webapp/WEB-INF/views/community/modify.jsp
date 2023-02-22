@@ -7,6 +7,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style type="text/css">
+.uploadResult ul {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadResult ul li {
+    list-style: none;
+    padding: 10px;
+    align-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.uploadResult ul li img {
+    width: 100px;
+}
+</style>
 <title>Modify</title>
 </head>
 <body>
@@ -48,26 +68,25 @@
           <th scope="col" class="col col-lg-1">첨부파일</th>
           <td><input class="form-control" type="file" name="uploadFile" id="file"></td>
          </tr>
-        </table>
-        
-        <!-- 첨부파일 섬네일 -->
-        <table class="table table-hover">
+         <!-- 첨부파일 섬네일 -->
          <tr>
-          <th scope="col" class="col col-lg-1"></th>
-          <div class="uploadResult">
-          	<!-- <td><div><img><button></button><br></div></td> -->
-          </div>
-         </tr>
-        </table>
-        
-        <!-- 내용 -->
-        <table class="table table-hover">
+           <th scope="col" class="col col-lg-1"></th>
+            <td class="uploadResult">
+             <ul>
+             	<!-- <li><div>
+             		<img src='/community/display?fileName=" + fileCallPath + "'>";
+					<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
+				</div></li> -->
+             </ul>
+            </td> 
+          </tr>
+         <!-- 내용 -->
          <tr>
           <th scope="col" class="col col-lg-1">내용</th>
           <td><textarea class="form-control" id="content" rows="10" name="content" required><c:out value="${board.content}" /></textarea></td>
          </tr>
         </table>
-       </div>
+        </div>
         
 	     <!-- 하단 버튼 -->
 	     <button type="submit" class="btn btn-info" id="listBT">취소하고 목록으로</button>
@@ -108,20 +127,20 @@
 				$(arr).each(function(i, attach){
 					if(attach.fileType){
 						var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
-						str+= "<td class='uploadfile' data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileName + "'><div>";
+						str+= "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'><div>";
 						str+= "<img src='/community/display?fileName=" + fileCallPath + "'>";
 						str+= "<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
 						str+= "</div>";
-						str+ "</td>";
+						str+ "</li>";
 					} else {
-						str+= "<td class='uploadfile' data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileName + "'><div>";
+						str+= "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "'><div>";
 						str+= "<img src='/img/attach.png'>";
 						str+= "<button type='button' data-file=/'"+fileCallPath +"/' data-type='file' class='btn btn-primary btn-sm'>x</button><br>";
 						str+= "</div>";
-						str+ "</td>";
+						str+ "</li>";
 					}
 				});
-				$(".uploadResult").html(str);
+				$(".uploadResult ul").html(str);
 			});
 			})();
 	});

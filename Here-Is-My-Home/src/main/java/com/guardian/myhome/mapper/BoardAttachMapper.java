@@ -16,4 +16,7 @@ public interface BoardAttachMapper {
 	
 	// 게시물 자체를 삭제 
 	public void deleteAll(Long bno);
+	
+	// 잘못된 업로드 파일 삭제 
+	public List<BoardAttachVO> getOldFiles();
 }

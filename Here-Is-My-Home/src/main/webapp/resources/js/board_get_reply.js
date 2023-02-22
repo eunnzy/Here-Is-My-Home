@@ -72,6 +72,33 @@ var replyService = (function() {
 			return [yy, '/', (mm>9 ? '': '0') + mm, '/', (dd>9? '':'0') + dd].join('');
 		}
 	};
+		
+	// 좋아요 
+	function likeUp(mylike, callback, error) {
+		console.log(mylike.bno + "번 게시물 좋아요 ");
+		$.ajax ({
+			type : 'post', 
+			url : '/replies/likeUp',  
+			data : JSON.stringify(mylike),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) { if(callback) { callback(result); }},
+			error : function(xhr, status, er) { if(error) { error(er); }}
+		});
+	}
 	
-	return { add:add, getList:getList, remove:remove, update:update, get:get, displayTime:displayTime };
+	// 좋아요 취소 
+	function likeDown(mylike, callback, error) {
+		console.log(mylike.bno + "번 게시물 좋아요 취소 ");
+		$.ajax ({
+			type : 'post', 
+			url : '/replies/likeDown',  
+			data : JSON.stringify(mylike),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) { if(callback) { callback(result); }},
+			error : function(xhr, status, er) { if(error) { error(er); }}
+		});
+	}
+	
+	return { add:add, getList:getList, remove:remove, update:update, get:get, displayTime:displayTime, likeDown:likeDown, likeUp:likeUp };
 })();
+

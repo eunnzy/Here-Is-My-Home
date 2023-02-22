@@ -2,6 +2,8 @@ package com.guardian.myhome.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
 
@@ -16,7 +18,7 @@ public interface BoardMapper {
 	public void insertSelectKey(BoardVO board);
 			
 	// 조회
-	public BoardVO read(Long bno);
+	public BoardVO read(@Param("bno") Long bno);
 			
 	// 삭제
 	public int delete(Long bno);
@@ -26,6 +28,12 @@ public interface BoardMapper {
 		
 	// 조회수 증가
 	public int viewsUp(Long bno);
+	
+	// 좋아요 증가
+	public int likesUp(Long bno);
+		
+	// 좋아요 감소
+	public int likesDown(Long bno);
 		
 	// 내가 쓴 글 목록 리스트 
 	public List<BoardVO> getMyboard(String imchaid);

@@ -148,6 +148,15 @@
 		$("#myboardBT").on("click", function(e) {
 			self.location = "/community/mylist?imchaid=<c:out value='${member.imchaId}' />";
 		});
+		
+		var actionForm = $("#actionForm");
+		$(".move").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+ 			actionForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
+			actionForm.attr("action", "/community/get");
+			actionForm.submit();
+		});
 	});
 	</script>
 </body>
