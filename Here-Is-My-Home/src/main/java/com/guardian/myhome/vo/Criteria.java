@@ -3,8 +3,14 @@ package com.guardian.myhome.vo;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Data
+@Getter
+@Setter
+@ToString
 public class Criteria {
 	private int pageNum;
 	private int amount;

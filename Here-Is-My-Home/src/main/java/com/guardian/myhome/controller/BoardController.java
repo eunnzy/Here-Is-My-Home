@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.FileSystemResource;
@@ -65,14 +66,45 @@ public class BoardController {
 	private BoardService service;
 	
 	// 목록 리스트 (전국)
+//	@GetMapping("/list")
+//	public String list(Model model, Criteria cri) {
+//		log.info("list: " + cri);
+//		model.addAttribute("list", service.getList(cri));
+//		
+//		int total = service.getTotal(cri);
+//		log.info("total : " + total);
+//		model.addAttribute("pageMaker", new PageDTO(cri, total));
+//		return "/community/list";
+//	}
+	
 	@GetMapping("/list")
-	public String list(Model model, Criteria cri) {
-		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
+	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
-		int total = service.getTotal(cri);
-		log.info("total : " + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		
+		if(member == null) {
+			log.info("before Board" + cri);
+			model.addAttribute("list", service.beforeBoard(cri));
+			
+			int total = service.beforeBoardCount(cri);
+			log.info("before total : " + total);
+			model.addAttribute("pageMaker", new PageDTO(cri, total));
+		} else {
+			model.addAttribute("list", service.getList(cri));
+			int total = service.getTotal(cri);
+			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			
+//			String sido1 = member.getSido1();
+//			String gugun1 = member.getGugun1();
+//			
+//			log.info("after Board");
+//			model.addAttribute("list", service.afterBoard(cri, sido1, gugun1));
+//			
+//			int total = service.afterBoardCount(cri, sido1, gugun1);
+//			log.info("after total : ");
+//			model.addAttribute("pageMaker", new PageDTO(cri, total));
+		}
 		return "/community/list";
 	}
 	

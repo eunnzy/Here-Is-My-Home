@@ -24,13 +24,13 @@
             <span class="float-end">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
             	<div class="dropdown-menu">
-                 <a class="dropdown-item" href="#">동네소식</a>
-                 <a class="dropdown-item" href="#">동네질문</a>
-                 <a class="dropdown-item" href="#">동네맛집</a>
-                 <a class="dropdown-item" href="#">도와줘요</a>
-                 <a class="dropdown-item" href="#">분실/실종센터</a>
-                 <a class="dropdown-item" href="#">전국취미생활</a>
-                 <a class="dropdown-item" href="#">전국자취꿀팁</a>
+                 <a class="dropdown-item cate" href="동네소식">동네소식</a>
+                 <a class="dropdown-item cate" href="동네질문">동네질문</a>
+                 <a class="dropdown-item cate" href="동네맛집">동네맛집</a>
+                 <a class="dropdown-item cate" href="도와줘요">도와줘요</a>
+                 <a class="dropdown-item cate" href="분실실종">전국분실실종</a>
+                 <a class="dropdown-item cate" href="취미생활">전국취미생활</a>
+                 <a class="dropdown-item cate" href="자취꿀팁">전국자취꿀팁</a>
                 </div>
             </span><br><br>
             
@@ -155,6 +155,16 @@
 			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
  			actionForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
 			actionForm.attr("action", "/community/get");
+			actionForm.submit();
+		});
+		
+		var cateForm = $("#cateForm");
+		$(".cate").on("click", function(e) {
+			e.preventDefault();
+			var key = $(this).attr("href");
+			actionForm.find("input[name='pageNum']").val(1);
+			actionForm.find("input[name='type']").val('G');
+			actionForm.find("input[name='keyword']").val(key);
 			actionForm.submit();
 		});
 	});

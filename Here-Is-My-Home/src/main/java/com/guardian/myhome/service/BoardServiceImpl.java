@@ -45,6 +45,41 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getTotalCount(cri);
 	}
 
+	// 로그인 전 
+	@Override
+	public List<BoardVO> beforeBoard(Criteria cri) {
+		log.info("before Board" + cri);
+		return mapper.beforeBoard(cri);
+	}
+				
+	// 로그인 후 
+	@Override
+	public List<BoardVO> afterBoard(Criteria cri, String sido1, String gugun1) {
+		log.info("after Board" + cri);
+		return mapper.afterBoard(cri, sido1, gugun1);
+	}
+	
+	// 로그인 전 갯수
+	@Override
+	public int beforeBoardCount(Criteria cri) {
+		log.info("before Board Count");
+		return mapper.beforeBoardCount(cri);
+	}	
+				
+	// 로그인 후 갯수
+	@Override
+	public int afterBoardCount(Criteria cri, String sido1, String gugun1) {
+		log.info("after Board Count");
+		return mapper.afterBoardCount(cri, sido1, gugun1);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	// 등록 
 	@Transactional
 	@Override
@@ -92,6 +127,15 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno) == 1;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 조회수 
 	@Override
 	public boolean viewsUp(Long bno) {
@@ -113,16 +157,23 @@ public class BoardServiceImpl implements BoardService {
 //		return mapper.getMyboardCount(imchaid);
 //	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 파일 업로드 조회
 	@Override
 	public List<BoardAttachVO> getAttachList(Long bno) {
 		log.info("get Attach list by bno" + bno);
 		return attachMapper.findByBno(bno);
 	}
-	
-	
-	
-	
 	
 	// 좋아요 On
 	@Override

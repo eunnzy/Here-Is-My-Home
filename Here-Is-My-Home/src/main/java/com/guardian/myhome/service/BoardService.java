@@ -15,6 +15,18 @@ public interface BoardService {
 		
 	// 게시물 전체 갯수
 	public int getTotal(Criteria cri);
+	
+	// 로그인 전 
+	public List<BoardVO> beforeBoard(Criteria cri);
+			
+	// 로그인 후 
+	public List<BoardVO> afterBoard(Criteria cri, String sido1, String gugun1);
+			
+	// 로그인 전 갯수
+	public int beforeBoardCount(Criteria cri);
+			
+	// 로그인 후 갯수
+	public int afterBoardCount(Criteria cri, String sido1, String gugun1);
 		
 	// 등록 
 	public void register(BoardVO board);
