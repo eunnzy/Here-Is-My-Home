@@ -14,7 +14,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
+      <a class="navbar-brand" href="/index"><img src="/img/logo.png" ></a>
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav me-auto" >
           <li class="nav-item">
@@ -31,10 +31,9 @@
          </ul>
        	<c:if test = "${member == null }">
          <!-- <div><a class="btn btn-secondary my-2 my-sm-0" href="/member/login">Login</a></div> -->
-         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-         <button type="button" class="btn btn-primary">Login</button>
+
         <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="/member/login">일반회원 로그인</a>
             <a class="dropdown-item" href="/member/lessorLogin">중개인 로그인</a>

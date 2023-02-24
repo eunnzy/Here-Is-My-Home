@@ -13,17 +13,8 @@
  	 </header>
 	
 	<div style="background-color: white;">
-	  <div>
-	    <img src="img/b.png" >
-	    <img src="img/c.png" >
-	    <img src="img/d.png" >
-	  </div>
-  
-	<div style="text-align: center;">
-    	<br>
-    	<a href="로그인.html"><button type="button" class="btn btn-primary" style="display: inline-block; width: 150px;">시작하기</button></a>
-    	<br><br><br>
-  	</div>
+	<jsp:include page="container.jsp"></jsp:include>
+
 	</div>
 
     <footer>
