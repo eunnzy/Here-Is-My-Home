@@ -1,19 +1,44 @@
 package com.guardian.myhome.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.lessorImgVO;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 
 @Controller
@@ -93,16 +118,24 @@ public class LessorController {
 		
 		HttpSession session = request.getSession();
 		LessorVO lvo = lessorservice.lessorLogin(lessor);
-		
-		if(lvo == null) {
-			int result = 0;
-			rttr.addFlashAttribute("result", result);
-			return "redirect:/member/lessorLogin";
-		} else {
+		System.out.println(lvo.getStatus());
+		if(lvo.getStatus() == 0 || lvo == null){
 			
+			 return "redirect:/member/lessorLogin";
+		} else {
 			session.setAttribute("lessor", lvo);
 			return "redirect:/index";
 		}
+		
+////		if(lvo == null) {
+////			int result = 0;
+////			rttr.addFlashAttribute("result", result);
+////			return "redirect:/member/lessorLogin";
+////		} else {
+////			
+////			session.setAttribute("lessor", lvo);
+//			return "redirect:/index";
+////		}
 
 	}
 	
@@ -116,7 +149,20 @@ public class LessorController {
 //		
 //		return "redirect:/index";
 //	}
-	
+	@RequestMapping(value = "lessorLoginCheck")
+	@ResponseBody
+	public int lessorLoginCheck(String id, String pw) throws Exception {
+		LessorVO Lvo = new LessorVO();
+		Lvo.setLessorId(id);
+		Lvo.setLessorPw(pw);
+		LessorVO newVo = lessorservice.lessorLogin(Lvo);
+		System.out.println(newVo.getStatus());
+		if(newVo.getStatus() == 1) {
+			return 1;
+		}else {
+		return 0;
+		}
+	}
 	// 아이디 찾기
 		@RequestMapping(value="/findLessorId", method=RequestMethod.GET)
 		public String findLessorIdGET() throws Exception {
@@ -188,4 +234,178 @@ public class LessorController {
 			
 			return "redirect:/member/lessorLogin";
 		}
+		
+		// 중개인 리스트
+		@GetMapping("/lessorList")
+		public String lessorList(Model model) {
+			System.out.println("/lessorList 요청");
+			List<LessorVO> list = lessorservice.lessorList();
+			model.addAttribute("list", list);
+			return "member/lessorList";
+		}
+
+		// 이미지파일 업로드
+		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<List<lessorImgVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
+			
+			String uploadFolder = "C:\\lessorUpload";
+			
+			// 날짜 폴더 경로
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			String str  = sdf.format(date);
+			String datePath = str.replace("-", File.separator);
+			
+			// 폴더 생성
+			File uploadPath = new File(uploadFolder, datePath);
+			
+			for (MultipartFile multipartFile : uploadFile) {
+				
+				File checkfile = new File(multipartFile.getOriginalFilename());
+				String type = null;
+				
+				try {
+					type = Files.probeContentType(checkfile.toPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				if(!type.startsWith("image")) {
+					List<lessorImgVO> list = null;
+					return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+				}
+			}
+			if(uploadPath.exists() == false) {
+				uploadPath.mkdirs();
+			}
+			
+			List<lessorImgVO> list = new ArrayList();
+			
+			for(MultipartFile multipartFile : uploadFile) {
+				
+				// 이미지 정보
+				lessorImgVO imgvo = new lessorImgVO();
+				
+				// 파일 이름
+				String uploadFileName = multipartFile.getOriginalFilename();
+				imgvo.setFileName(uploadFileName);
+				imgvo.setUploadPath(datePath);
+				
+				// uuid 적용 파일 이름
+				String uuid = UUID.randomUUID().toString();
+				imgvo.setUuid(uuid);
+				
+				uploadFileName = uuid + "_" + uploadFileName;
+				
+				// 파일 위치, 파일 이름을 합친 File 객체
+				File saveFile = new File(uploadPath, uploadFileName);
+				
+				try {
+					multipartFile.transferTo(saveFile);
+					
+					// 썸네일 생성
+					File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+					
+					BufferedImage bo_image = ImageIO.read(saveFile);
+					
+					// 비율
+					double ratio = 3;
+					// 넓이 높이
+					int width = (int) (bo_image.getWidth() / ratio);
+					int height = (int) (bo_image.getHeight() / ratio);
+					
+					BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+					
+					Graphics2D graphic = bt_image.createGraphics();
+					
+					graphic.drawImage(bo_image, 0, 0, width, height, null);
+					
+					ImageIO.write(bt_image, "jpg", thumbnailFile);
+					
+					// 방법 2
+//					File thumbnamilFile = new File(uploadPath, "s_" + uploadFileName);
+//					
+//					BufferedImage bo_image = ImageIO.read(saveFile);
+//					
+//					// 비율
+//					double ratio = 3;
+//					// 넓이 높이
+//					int width = (int) (bo_image.getWidth() / ratio);
+//					int height = (int) (bo_image.getHeight() / ratio);
+//					
+//					Thumbnails.of(saveFile)
+//					.size(width, height);
+//					.toFile(thumbnailFile);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				list.add(imgvo);
+			}
+			
+			ResponseEntity<List<lessorImgVO>> result = new ResponseEntity<List<lessorImgVO>>(list, HttpStatus.OK);
+			
+			return result;
+		}
+		
+		// 이미지 미리보기
+		@GetMapping("/display")
+		public ResponseEntity<byte[]> getImage(String fileName) {
+			System.out.println("bg2.jpg");
+			File file = new File("C:\\lessorUpload\\" + fileName);
+			
+			ResponseEntity<byte[]> result = null;
+			
+			try {
+				
+				HttpHeaders header = new HttpHeaders();
+				
+				header.add("Content-type", Files.probeContentType(file.toPath()));
+				
+				result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
+		// 이미지 삭제
+		@PostMapping("/deleteFile")
+		public ResponseEntity<String> deleteFile(String fileName) {
+			
+			File file = null;
+			
+			try {
+				
+				// 썸네일 파일 삭제
+				file = new File("C:\\lessorUpload\\" + URLDecoder.decode(fileName, "UTF-8"));
+				
+				file.delete();
+				
+				// 원본 파일 삭제
+				String originFileName = file.getAbsolutePath().replace("s_", "");
+				
+				file = new File(originFileName);
+				
+				file.delete();
+				
+			} catch(Exception e) {
+				
+				e.printStackTrace();
+				
+				return new ResponseEntity<String>("file", HttpStatus.NOT_IMPLEMENTED);
+			}
+			
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+//    @ResponseBody
+//	@PostMapping("/lessorId")
+//	public void successId(String lessorId,LessorVO lessor) throws Exception {
+//		System.out.println(lessorId);
+//		System.out.println("open! user sign success Id ajax!");
+//		lessorservice.lessorId(lessor);
+//		
+//	}
 }

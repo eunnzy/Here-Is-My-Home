@@ -166,26 +166,6 @@ $(document).ready(function(){
 //	 
 //	}
 	// 주소
-
-	function addressKindChange(e) {
-	    var seoul = ["강남", "홍대", "영등포", "여의도"];
-	    var gyeonggi = ["수원", "평택", "용인"];
-	    var chungcheongnam = ["천안", "세종", "논산"];
-	    var target = document.getElementById("addressKindD");
-
-	    if(e.value == "a") var d = seoul;
-	    else if(e.value == "b") var d = gyeonggi;
-	    else if(e.value == "c") var d = chungcheongnam;
-
-	    target.options.length = 0;
-
-	    for (x in d) {
-	        var opt = document.createElement("option");
-	        opt.value = d[x];
-	        opt.innerHTML = d[x];
-	        target.appendChild(opt);
-	    }   
-	}
 	
 	$('document').ready(function() {
 		 var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];

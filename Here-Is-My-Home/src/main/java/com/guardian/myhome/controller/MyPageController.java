@@ -34,9 +34,9 @@ public class MyPageController {
 		System.out.println(vo.getImchaId());
 		member.setImchaId(vo.getImchaId());
 		memberservice.getMember(member);
-		System.out.println("닉네임" + member.getNickname());
+		System.out.println("닉네임" + vo.getNickname());
 		System.out.println(member.getImchaId());
-		session.setAttribute("member", memberservice.getMember(vo));
+		session.setAttribute("member", vo);
 		
 		return "mypage/getMember";
 	}
@@ -56,7 +56,7 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		memberservice.updateMember(member);
 		session.setAttribute("member", memberservice.getMember(member));
-	    return "mypage/getMember";
+	    return "/mypage/getMember";
 			
 	}
 	

@@ -40,7 +40,7 @@ public class LessorMapperTest {
 		lessormapper.lessorJoin(lessor);
 	}
 	
-	@Test
+	//@Test
 	public void lessorLogin() throws Exception{
 		
 		LessorVO lessor = new LessorVO();
@@ -50,6 +50,13 @@ public class LessorMapperTest {
 		
 		lessormapper.lessorLogin(lessor);
 		System.out.println("결과 값 : " + lessormapper.lessorLogin(lessor));
+	}
+	
+	@Test
+	public void successId() throws Exception{
+		
+		lessormapper.successId("lee");
+
 	}
 	
 }

@@ -12,7 +12,7 @@ import com.guardian.myhome.vo.MemberVO;
 @Repository
 public class MemberDAOImpl implements MemberDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(LessorDAOImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
 	
 	private static final String NAMESPACE = "com.guardian.myhome.mapper.MemberMapper";
 	
