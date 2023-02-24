@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,9 +55,9 @@ public class BoardServiceImpl implements BoardService {
 				
 	// 로그인 후 
 	@Override
-	public List<BoardVO> afterBoard(Criteria cri, String sido1, String gugun1) {
-		log.info("after Board" + cri);
-		return mapper.afterBoard(cri, sido1, gugun1);
+	public List<BoardVO> afterBoard(Criteria cri) {
+		log.info("after Board");
+		return mapper.afterBoard(cri);
 	}
 	
 	// 로그인 전 갯수
@@ -68,9 +69,9 @@ public class BoardServiceImpl implements BoardService {
 				
 	// 로그인 후 갯수
 	@Override
-	public int afterBoardCount(Criteria cri, String sido1, String gugun1) {
+	public int afterBoardCount(Criteria cri) {
 		log.info("after Board Count");
-		return mapper.afterBoardCount(cri, sido1, gugun1);
+		return mapper.afterBoardCount(cri);
 	}
 	
 	
@@ -145,17 +146,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 내가 쓴 글 목록 리스트 
 	@Override
-	public List<BoardVO> getMyboard(String imchaid) {
-		log.info("get getMyboard......" + imchaid);
-		return mapper.getMyboard(imchaid);
+	public List<BoardVO> getMyboard(Criteria cri) {
+		log.info("get getMyboard......");
+		return mapper.getMyboard(cri);
 	}
 	
 	// 내가 쓴 글 갯수
-//	@Override
-//	public int getMyboardCount(String imchaid) {
-//		log.info("getMyboardCount");
-//		return mapper.getMyboardCount(imchaid);
-//	}
+	@Override
+	public int getMyboardCount(Criteria cri) {
+		log.info("getMyboardCount");
+		return mapper.getMyboardCount(cri);
+	}
 	
 	
 	

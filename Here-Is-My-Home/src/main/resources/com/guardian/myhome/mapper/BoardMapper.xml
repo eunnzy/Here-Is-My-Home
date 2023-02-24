@@ -75,6 +75,13 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	
+	
 
 	<!-- 전체 갯수 -->
  	<select id="getTotalCount" resultType="int">
@@ -164,22 +171,15 @@
 
 
 
-
-	<!-- SELECT A.* 
-		FROM (SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
-		WHERE rownum <= #{mypageNum} * #{myamount} AND B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid} ) A 
-		WHERE rn > (#{mypageNum} -1) * #{myamount}  -->
-	
-	<!-- SELECT A.* FROM 
-		(SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
-		WHERE B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid}) A -->
 	
 	
 	<!-- 내가쓴글 -->
-	<select id="getMyboard" resultType="com.guardian.myhome.vo.BoardVO" parameterType="String">
+	<select id="getMyboard" resultType="com.guardian.myhome.vo.BoardVO">
 		<![CDATA[
-		SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
-		WHERE B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid} 
+		SELECT A.* 
+		FROM (SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE 
+		rownum <= #{pageNum} * #{amount} AND B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid}
+		) A WHERE rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>
 	

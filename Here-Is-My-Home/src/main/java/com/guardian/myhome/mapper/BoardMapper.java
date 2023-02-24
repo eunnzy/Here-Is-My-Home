@@ -1,6 +1,7 @@
 package com.guardian.myhome.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -18,14 +19,16 @@ public interface BoardMapper {
 	public List<BoardVO> beforeBoard(Criteria cri);
 		
 	// 로그인 후 
-	public List<BoardVO> afterBoard(Criteria cri, String sido1, String gugun1);
+	// Criteria cri, String sido1, String gugun1
+	public List<BoardVO> afterBoard(Criteria cri);
 		
 	// 로그인 전 갯수
 	public int beforeBoardCount(Criteria cri);
 		
 	// 로그인 후 갯수
-	public int afterBoardCount(Criteria cri, String sido1, String gugun1);
-			
+	// Criteria cri, String sido1, String gugun1
+	public int afterBoardCount(Criteria cri);
+		
 	// 등록 
 	public void insertSelectKey(BoardVO board);
 			
@@ -50,9 +53,10 @@ public interface BoardMapper {
 	public int viewsUp(Long bno);
 		
 	// 내가 쓴 글 목록 리스트 
-	public List<BoardVO> getMyboard(String imchaid);
-		
+	// Criteria cri, String imchaid
+	public List<BoardVO> getMyboard(Criteria cri);
+	
 	// 내가 쓴 글 갯수 
-//	public int getMyboardCount(String imchaid);
+	public int getMyboardCount(Criteria cri);
 
 }

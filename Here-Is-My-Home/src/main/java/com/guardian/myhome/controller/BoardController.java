@@ -65,23 +65,17 @@ public class BoardController {
 
 	private BoardService service;
 	
-	// 목록 리스트 (전국)
-//	@GetMapping("/list")
-//	public String list(Model model, Criteria cri) {
-//		log.info("list: " + cri);
-//		model.addAttribute("list", service.getList(cri));
-//		
-//		int total = service.getTotal(cri);
-//		log.info("total : " + total);
-//		model.addAttribute("pageMaker", new PageDTO(cri, total));
-//		return "/community/list";
-//	}
-	
 	@GetMapping("/list")
 	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		if(cri.getTypeArr() == null) {
+			cri.setType("");
+		}
+		if(cri.getKeyword() == null) {
+			cri.setKeyword("");
+		}
 		
 		if(member == null) {
 			log.info("before Board" + cri);
@@ -89,21 +83,23 @@ public class BoardController {
 			
 			int total = service.beforeBoardCount(cri);
 			log.info("before total : " + total);
-			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			PageDTO dto = new PageDTO(cri, total);
+			model.addAttribute("pageMaker", dto);
+			log.info("total : " + dto);
 		} else {
-			model.addAttribute("list", service.getList(cri));
-			int total = service.getTotal(cri);
-			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			String sido1 = member.getSido1();
+			String gugun1 = member.getGugun1();
+			cri.setSido1(sido1);
+			cri.setGugun1(gugun1);
+			log.info("after Board cri : " + cri);
 			
-//			String sido1 = member.getSido1();
-//			String gugun1 = member.getGugun1();
-//			
-//			log.info("after Board");
-//			model.addAttribute("list", service.afterBoard(cri, sido1, gugun1));
-//			
-//			int total = service.afterBoardCount(cri, sido1, gugun1);
-//			log.info("after total : ");
-//			model.addAttribute("pageMaker", new PageDTO(cri, total));
+			model.addAttribute("list", service.afterBoard(cri));
+			int total = service.afterBoardCount(cri);
+			log.info("after Board total:" + total);
+			
+			PageDTO dto = new PageDTO(cri, total);
+			model.addAttribute("pageMaker", dto);
+			log.info("total : " + dto);
 		}
 		return "/community/list";
 	}
@@ -123,12 +119,12 @@ public class BoardController {
 		BoardLikesVO likevo = new BoardLikesVO();
 		likevo.setBno(bno);
 		likevo.setUserid(userid);
+		log.info(likevo);
 		
 		model.addAttribute("like", service.likeCheck(bno, userid));
 		
 		return "/community/get";
 	}
-	
 	
 	// 수정테이블 불러오기
 	@GetMapping("/modify")
@@ -179,12 +175,20 @@ public class BoardController {
 	
 	// 내가 쓴 글 
 	@GetMapping("/mylist")
-	public String mylist(Model model, String imchaid) {
-		log.info("mylist: ");
-		model.addAttribute("mylist", service.getMyboard(imchaid));
+	public String mylist(Model model, HttpServletRequest request, Criteria cri) {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		cri.setImchaid(member.getImchaId());
+		log.info("mylist: " + cri);
+		model.addAttribute("mylist", service.getMyboard(cri));
+		
+		int total = service.getMyboardCount(cri);
+		log.info("total : " + total);
+		PageDTO dto = new PageDTO(cri, total);
+		model.addAttribute("mypageMaker", dto);
+		log.info("total : " + dto);
 		return "/community/mylist";
 	}
-	
 	
 	
 	

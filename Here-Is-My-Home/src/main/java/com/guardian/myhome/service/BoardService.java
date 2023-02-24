@@ -1,6 +1,7 @@
 package com.guardian.myhome.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardLikesVO;
@@ -16,17 +17,22 @@ public interface BoardService {
 	// 게시물 전체 갯수
 	public int getTotal(Criteria cri);
 	
+	
+	
+	
+	
+	
 	// 로그인 전 
 	public List<BoardVO> beforeBoard(Criteria cri);
 			
 	// 로그인 후 
-	public List<BoardVO> afterBoard(Criteria cri, String sido1, String gugun1);
+	public List<BoardVO> afterBoard(Criteria cri);
 			
 	// 로그인 전 갯수
 	public int beforeBoardCount(Criteria cri);
 			
 	// 로그인 후 갯수
-	public int afterBoardCount(Criteria cri, String sido1, String gugun1);
+	public int afterBoardCount(Criteria cri);
 		
 	// 등록 
 	public void register(BoardVO board);
@@ -44,10 +50,10 @@ public interface BoardService {
 	public boolean viewsUp(Long bno);
 		
 	// 내가 쓴 글 목록 리스트 
-	public List<BoardVO> getMyboard(String imchaid);
+	public List<BoardVO> getMyboard(Criteria cri);
 			
 	// 내가 쓴 글 갯수 
-//	public int getMyboardCount(String imchaid);
+	public int getMyboardCount(Criteria cri);
 	
 	// 파일 업로드 조회 
 	public List<BoardAttachVO> getAttachList(Long bno);
