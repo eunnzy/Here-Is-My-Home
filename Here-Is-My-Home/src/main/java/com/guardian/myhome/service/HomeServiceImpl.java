@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.guardian.myhome.dao.HomeDAO;
-import com.guardian.myhome.mapper.HomeImgMapper;
-import com.guardian.myhome.mapper.HomeMapper;
-import com.guardian.myhome.mapper.HomeOptionMapper;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -24,13 +21,7 @@ public class HomeServiceImpl implements HomeService{
 	
 	@Autowired
 	HomeDAO homeDAO;
-//	@Autowired
-//	HomeMapper homeMapper;
-//	@Autowired
-//	HomeOptionMapper homeOptionMapper;
-//	@Autowired 
-//	HomeImgMapper homeImgMapper;
-	
+
 	@Override
 	public int insertHome(Map<String, Object> insertMap) {
 		System.out.println("\n============ HomeService insertHome 실행 =============\n");
@@ -70,6 +61,19 @@ public class HomeServiceImpl implements HomeService{
 	}
 	
 	// 현재 위치를 기준으로 지도 경계에 존재하는 매물 리스트 반환하기 
+//	@Override 
+//	public List<HomePreviewVO> homeInBoundsList(Map<String, Object> mapBounds) {
+//		List<HomePreviewVO> homeInBoundsList = null;
+//		homeInBoundsList = homeDAO.selectHomeInBoundsList(mapBounds);
+//		
+//		for(int i=0; i<homeInBoundsList.size(); i++) {
+//			int homeNum = homeInBoundsList.get(i).getHomeNum();
+//			homeInBoundsList.get(i).setHomeImgVO(homeDAO.selectPreviewHomeImg(homeNum));
+//		}
+//		
+//		return homeInBoundsList;
+//	}
+	
 	@Override 
 	public List<HomePreviewVO> homeInBoundsList(Map<String, Object> mapBounds) {
 		List<HomePreviewVO> homeInBoundsList = null;
@@ -77,18 +81,20 @@ public class HomeServiceImpl implements HomeService{
 		
 		for(int i=0; i<homeInBoundsList.size(); i++) {
 			int homeNum = homeInBoundsList.get(i).getHomeNum();
-			homeInBoundsList.get(i).setHomeImgVO(homeDAO.selectPreviewHomeImg(homeNum));
+			homeInBoundsList.get(i).setHomeImg(homeDAO.selectPreviewHomeImg(homeNum));
+			homeInBoundsList.get(i).setOptionList(homeDAO.selectHomeOptionList(homeNum));
 		}
 		
 		return homeInBoundsList;
 	}
-
+	
+	
 
 	@Override
 	public Map<String, Object> selectHomeDetail(int homeNum) {
 		HomeDetailVO homeDetailVO = homeDAO.selectHomeDetail(homeNum);
-		homeDetailVO.setOptionList(homeDAO.selectHomeOptionDetail(homeNum));
-		homeDetailVO.setHomeImgList(homeDAO.selectHomeImgDetail(homeNum));
+		homeDetailVO.setOptionList(homeDAO.selectHomeOptionList(homeNum));
+		homeDetailVO.setHomeImgList(homeDAO.selectHomeImgList(homeNum));
 		
 		Map<String, Object> home = new HashMap<>();
 		home.put("homeNum", homeDetailVO.getHomeNum());
@@ -112,17 +118,22 @@ public class HomeServiceImpl implements HomeService{
 		home.put("homeDetail", homeDetailVO.getHomeDetail());
 		home.put("optionList", homeDetailVO.getOptionList());
 		home.put("homeImgList", homeDetailVO.getHomeImgList());
-		
-		
-		home.put("deposit", convertMoneyUnit(homeDetailVO.getDeposit()));
-		home.put("monthly", convertMoneyUnit(homeDetailVO.getMonthly()));
-		home.put("adminCost", convertMoneyUnit(homeDetailVO.getAdminCost()));
+		home.put("jgsName", homeDetailVO.getJgsName());
+		home.put("jgsNum", homeDetailVO.getJgsNum());
+		home.put("phone", homeDetailVO.getPhone());
+		home.put("lessorName", homeDetailVO.getName());
+		home.put("lessorAddr", homeDetailVO.getLessorAddr1() + " " 
+				+ homeDetailVO.getLessorAddr2() + " " + homeDetailVO.getLessorAddr3());
+		home.put("deposit", homeDetailVO.getDeposit());
+		home.put("monthly",	homeDetailVO.getMonthly());
+		home.put("adminCost", homeDetailVO.getAdminCost());
 		
 		return home;
 	}
 	
+	// 매물 상세 보기시 화면 단에서 가격 정보 단위 표시
 	@Override
-	public String convertMoneyUnit(int money) {
+	public String convertMoneyUnit(long money) {
 		money = money / 10000;
 		String convert = "";
 		if(money == 0) {
@@ -140,30 +151,7 @@ public class HomeServiceImpl implements HomeService{
 		
 		return convert;
 	}
-//	public List<HomePreviewVO> previewHomeList() {
-//		List<HomePreviewVO> previewHomeList = null;
-//		
-//		previewHomeList = homeMapper.previewList();
-//		
-//		if(previewHomeList != null) {
-//			for(int i=0; i<previewHomeList.size(); i++) {
-//				int homeNum = previewHomeList.get(i).getHomeNum();
-//				previewHomeList.get(i).setHomeImgVO(homeImgMapper.previewHomeImg(homeNum));
-//			}
-//			
-//			return previewHomeList;
-//		}
-//		
-//		return previewHomeList;
-//	}
-
 	
-	@Override
-	public void deleteHomeImg(int homeNum) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public HomeImgVO previewHomeImg(int homeNum) {
 		// TODO Auto-generated method stub
@@ -175,6 +163,51 @@ public class HomeServiceImpl implements HomeService{
 	public List<HomeVO> selectAllHomeList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int modifyHomeInfo(Map<String, Object> modifyHome) {	// 매물 정보 수정.
+		System.out.println("\n============ HomeService modifyHomeInfo()실행 =============\n");
+		if(modifyHome == null)
+			 return 0;
+		
+		// home_tb(매물 기본 테이블 정보) 수정
+		System.out.println(modifyHome);
+		HomeVO homeVO = (HomeVO)modifyHome.get("homeVO");
+		homeDAO.updateHome(homeVO);
+		
+		// 매물 사진 수정
+		System.out.println((List<HomeImgVO>)modifyHome.get("homeImgList"));
+		List<HomeImgVO> homeImgList = (List<HomeImgVO>)modifyHome.get("homeImgList");
+		if(homeImgList != null) {
+			homeDAO.deleteHomeImg(homeVO.getHomeNum());
+			for(int i=0; i<homeImgList.size(); i++) 
+				homeImgList.get(i).setHomeNum(homeVO.getHomeNum());
+			System.out.println(homeImgList);
+		}
+		
+		homeDAO.insertHomeImgList(homeImgList);
+		
+		// 매물 옵션 수정
+		List<HomeOptionVO> homeOptionList = new ArrayList<>();
+		if(homeOptionList != null) {
+			homeDAO.deleteHomeOption(homeVO.getHomeNum());
+			for(String op: (List<String>)modifyHome.get("homeOptionList")) {
+				HomeOptionVO homeOptionVO = new HomeOptionVO();
+				homeOptionVO.setHomeNum(homeVO.getHomeNum());
+				homeOptionVO.setOptionName(op);
+				homeOptionList.add(homeOptionVO);
+			}
+		}
+		System.out.println(homeOptionList);
+		homeDAO.insertHomeOptionList(homeOptionList);
+		
+		// 매물 가격 정보 수정
+		HomePriceVO homePriceVO = (HomePriceVO)modifyHome.get("homePriceVO");
+		homePriceVO.setHomeNum(homeVO.getHomeNum());
+		homeDAO.updateHomePrice(homePriceVO);
+		
+		return 1;
 	}
 
 

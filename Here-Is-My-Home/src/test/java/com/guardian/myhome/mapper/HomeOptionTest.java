@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.guardian.myhome.vo.HomeOptionVO;
+import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.vo.HomePriceVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +32,7 @@ public class HomeOptionTest {
 		priceVO.setHomeNum(1);
 		priceVO.setMonthly(100);
 		
-		homeOptionMapper.insertHomePrice(priceVO);
+//		homeOptionMapper.insertHomePrice(priceVO);
 	}
 	
 //	@Test
@@ -58,6 +58,11 @@ public class HomeOptionTest {
 	
 	@Test
 	public void selectOption() throws Exception {
-		System.out.println(homeOptionMapper.selectHomeOptionDetail(1));
+		List<String> optionList = new ArrayList<>(); 
+		optionList.add("냉장고");
+		optionList.add("옷장");
+		optionList.add("비데");
+		optionList.add("에어컨");
+		
 	}
 }

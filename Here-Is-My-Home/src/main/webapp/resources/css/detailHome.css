@@ -1,0 +1,63 @@
+body {
+	background-color: white;
+}
+.homeImg-div > .carousel-item > img{
+	border: 1px solid gray;
+	width: 100%;
+	min-width: 100%;
+    		min-height: 500px;
+}
+#reportBtn, #likeBtn, #qnaBtn {
+	cursor: pointer;
+}
+.side-content {
+	position: sticky;
+	top: 5px;
+}
+.reserv-modal {
+	position: fixed;
+	width:100%;
+	height:100%;
+	background-color: rgba(255, 255, 255, 0.7);
+	align-items: center;
+	justify-content:center;
+	top: 0;
+	left:0;
+	display: none;
+	z-index:100;
+}
+.reserv-wrap {
+	background-color: rgba( 69, 139, 197, 0.75);
+	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+	border-radius: 10px;
+	backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    padding: 10px;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+    height: 500px;
+}
+.reserv-close {
+	display: inline;
+	float: right;
+	font-size: 22px;
+	font-weight: 600;
+	color: white;
+	cursor: pointer;
+}
+.reserv-title {
+	display: inline;
+	float: left;
+	color: white;
+	font-size: 25px;
+	font-weight: 700;
+	margin-left: 5px;
+}
+.reserv-content {
+	color: white;
+	margin-top: 40px;
+}
+.reserv-content > td {
+	color: white;
+}

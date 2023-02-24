@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Community List</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/board_listBT.js"></script>
+<title>Community List</title>
 </head>
 <body>
 	<header>
@@ -19,7 +19,7 @@
         <div class="bs-docs-section row">
           <div class="col-lg-12"><br><br>
             <h1 id="tables">Community</h1>
-            <p>이매동</p>
+            <p><c:out value="${member.sido1}" /> <c:out value="${member.gugun1}" /></p>
                 
             <span class="float-end">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
@@ -114,9 +114,10 @@
         </div>
 
         <!-- 하단 버튼 -->
-        <span><button type="button" class="btn btn-info">내가 쓴 글</button></span>
+        <div class="loginshow">
+        <span><button type="button" class="btn btn-info" id="myboardBT">내가 쓴 글</button></span>
         <span class="float-end"><button type="button" class="btn btn-info" id="regBT">글쓰기</button></span>
-        <div><br><br></div>
+        <br><br></div>
     </div>
     
     <!-- 페이지이동 Form -->
@@ -130,5 +131,33 @@
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>
     </footer>
+    
+    <!-- 자바스크립트 -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var imchaId = '<c:out value="${member.imchaId}" />';
+		
+		if(imchaId == null || imchaId == '') {
+			$("#regBT").hide();
+			$("#myboardBT").hide();
+		} else {
+			$("#regBT").show();
+			$("#myboardBT").show();
+		}
+		
+		$("#myboardBT").on("click", function(e) {
+			self.location = "/community/mylist?imchaid=<c:out value='${member.imchaId}' />";
+		});
+		
+		var actionForm = $("#actionForm");
+		$(".move").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+ 			actionForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
+			actionForm.attr("action", "/community/get");
+			actionForm.submit();
+		});
+	});
+	</script>
 </body>
 </html>

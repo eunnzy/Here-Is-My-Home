@@ -1,6 +1,7 @@
 package com.guardian.myhome.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,11 +15,14 @@ public class BoardVO {
 	private String content;		//내용
 	private Date regdate;		//등록시간
 	private Date updateDate;	//수정시간
+	
 	private int views;			//조회수
 	private int likes;			//좋아요
 	
 	private String nickname;	// 닉네임
 	private String sido1;		// 주소1
 	private String gugun1;		// 주소2 
+	
+	private List<BoardAttachVO> attachList;	// 파일업로드 
 	
 }

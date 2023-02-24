@@ -54,7 +54,7 @@
 	</insert>
 	
 	<!-- 조회 -->
-	<select id="read" resultType="com.guardian.myhome.vo.BoardVO">
+	<select id="read" parameterType="map" resultType="com.guardian.myhome.vo.BoardVO">
 		SELECT B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID AND bno = #{bno}
 	</select>
 	
@@ -73,9 +73,46 @@
 		UPDATE Board SET views = views+1 WHERE bno = #{bno}
 	</update>
 	
-	<!-- 좋아요 증가 -->
+	<!-- 좋아요 증가  -->
 	<update id="likesUp">
 		UPDATE Board SET likes = likes+1 WHERE bno = #{bno}
 	</update>
+	
+	<!-- 좋아요 감소  -->
+	<update id="likesDown">
+		UPDATE Board SET likes = likes-1 WHERE bno = #{bno}
+	</update>
+	
+	
+
+	<!-- SELECT A.* 
+		FROM (SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
+		WHERE rownum <= #{mypageNum} * #{myamount} AND B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid} ) A 
+		WHERE rn > (#{mypageNum} -1) * #{myamount}  -->
+	
+	<!-- SELECT A.* FROM 
+		(SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
+		WHERE B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid}) A -->
+	
+	
+	<!-- 내가쓴글 -->
+	<select id="getMyboard" resultType="com.guardian.myhome.vo.BoardVO" parameterType="String">
+		<![CDATA[
+		SELECT A.* FROM 
+		(SELECT /*+ INDEX(I Imcha_pk) INDEX_DESC (B pk_board ) */ rownum rn, B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I 
+		WHERE B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid}) A
+		]]>
+	</select>
+	
+	<!-- 내가쓴글 갯수 -->
+ 	<select id="getMyboardCount" resultType="int">
+ 		SELECT COUNT(*) FROM 
+		(SELECT B.*, I.nickname, I.sido1, I.gugun1 FROM Board B, Imcha_tb I WHERE B.IMCHA_ID = I.IMCHA_ID AND I.IMCHA_ID = #{imchaid}) A 
+		WHERE BNO > 0 
+	</select> 
+	
+	
+	
+
 
 </mapper>

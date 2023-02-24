@@ -32,15 +32,26 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
-	@RequestMapping("/detail")
+	// 매물 상세보기
+	@RequestMapping("/detail")	
 	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
+		
+		// view로 반환할 때 보증금, 월세, 관리비는 돈 단위 계산해서
+		home.put("deposit", homeService.convertMoneyUnit((int)home.get("deposit")));
+		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
+		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
 		System.out.println("detailHome: " + home);
+		
 		model.addAttribute("home", home);
+		
+		
 		return "home/detailHome";
 	}
 	
+	
+	// 지도 경계 내의 매물 위치 정보 
 	@RequestMapping(value="/homeInBounds", method = RequestMethod.POST)
 	@ResponseBody
 	public List<HomePreviewVO> homeInBounds(@RequestParam Map<String, Object> mapBounds) {
@@ -50,7 +61,6 @@ public class HomeController {
 		
 		return homeInBoundsList;
 	}
-	
 	
 	@RequestMapping(value="/searchHome" , method = RequestMethod.GET)
 	public String searchHome() {
