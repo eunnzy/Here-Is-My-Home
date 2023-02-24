@@ -4,7 +4,7 @@ let homeImgList = [];
 
 
 let regex = new RegExp("(.*?)\.(jpg|png|gif|jpeg)$");	// 파일 확장자 -> jpg / pn / gif / jpeg만 가능
-let maxSize = 1048576;	
+let maxSize = 10485760;	
 function imgExtentionCheck(fileName, fileSize){	// 파일 확장자 및 크기 체크 
 
 	if(fileSize >= maxSize){

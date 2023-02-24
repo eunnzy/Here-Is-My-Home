@@ -34,6 +34,7 @@ public class HomeController {
 	
 	@RequestMapping("/detail")
 	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
+		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		System.out.println("detailHome: " + home);
 		model.addAttribute("home", home);
