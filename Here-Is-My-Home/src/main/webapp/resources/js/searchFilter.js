@@ -1,13 +1,13 @@
+let homeData;
 let homeTypeCheck = [];
 let rentTypeCheck = [];
 let optionCheck = [];
 let addInfoCheck = [];
 let deposit = 0;
 let monthly = 0;
-let btnFlag = false;
+let filterBtnStatus = false;
 
 $(document).ready(function() {
-	
 	$("#filterBtn").click(function() {
 		if($(".filter-content").css("display") == "none")	{
 			$(".filter-content").css("display", "inline-block");
@@ -16,14 +16,20 @@ $(document).ready(function() {
 		}
 	});
 	
-});
-
-$("#cancelBtn").click(function() {
-
+	$("#cancelBtn").click(function() {
+	
 	});
-
-$("#filterApplyBtn").click(function() {
-
+	
+	$("#filterApplyBtn").click(function() {
+		homeTypeCheck=[];
+		rentTypeCheck=[];
+		optionCheck=[];
+		addInfoCheck=[];
+		
+		filterBtnStatus = true;
+		console.log("filterApplyBtn func()");
+		console.log("filterBtn" + filterBtnStatus);	
+		
 		$("input[name=homeType]:checked").each(function() {
 			if(!homeTypeCheck.includes($(this).val())) 
 				homeTypeCheck.push($(this).val());
@@ -51,7 +57,7 @@ $("#filterApplyBtn").click(function() {
 		}else if(deposit == 2){
 			deposit = 10000;
 		}else {
-			deposit = 999999;
+			deposit = 99999999;
 		}
 		
 		monthly = $("#monthly").val();
@@ -60,36 +66,38 @@ $("#filterApplyBtn").click(function() {
 		}else if(monthly == 2){
 			monthly = 100;
 		}else {
-			monthly = 999999;
+			monthly = 99999999;
 		}
 		
-		console.log(homeTypeCheck);
+/*		console.log(homeTypeCheck);
 		console.log(rentTypeCheck);
 		console.log(optionCheck);
 		console.log(addInfoCheck);
+*/		
+
+		/*let homeList = $(".home-card");  
+		homeList.remove();	// 기존의 리스트 목록 삭제
+	    removeMarker();	// 기존의 마커 제거
+		*/
+		getHomeInBounds();	
 		
-		btnFlag=true;
-		console.log(homeData);
-		
-		
-			
 		for(let i=0; i<homeData.length; i++) {
 			console.log(homeData[i]);
 			let check = checkFilter(homeData[i]);
-			console.log(check);
+			console.log("check: " + check);
 			if(check === false) {
-				let homeList = $(".home-list");  
-			    homeList.children().remove();	// 기존의 리스트 목록 삭제
-			    removeMarker();	// 기존의 마커 제거
-			    alert("해당 카테고리에 해당하는 매물이 없습니다.");
 			    continue;
 			}
-			else 
+			else {
 				displayHomeList(homeData[i], i);
+		   }
 		}
 		
 		$(".filter-content").css("display", "none");
+	});
+	
 });
+
 
 
 

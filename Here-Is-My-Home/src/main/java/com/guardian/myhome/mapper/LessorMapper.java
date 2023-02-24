@@ -19,4 +19,5 @@ public interface LessorMapper {
 	public LessorVO getLessor(LessorVO lessor);
 
 	public void updateLessor(LessorVO lessor);
+	void successId(String id);
 }

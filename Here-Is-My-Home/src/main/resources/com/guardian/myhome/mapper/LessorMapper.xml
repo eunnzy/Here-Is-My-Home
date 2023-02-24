@@ -44,5 +44,10 @@
  		where lessor_id=#{lessorId}
  	</update>
  	
+ 	<update id="successId">
+ 		UPDATE lessor_tb
+	      SET <![CDATA[ status = 1 ]]>
+	      WHERE lessor_id = #{lessorId}
+ 	</update>
  	
  </mapper>

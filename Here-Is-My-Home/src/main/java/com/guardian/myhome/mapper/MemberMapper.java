@@ -23,7 +23,6 @@ public interface MemberMapper {
 	
 	
 	
-	
 	// 정보 수정
 	public void updateMember(MemberVO member);
 	

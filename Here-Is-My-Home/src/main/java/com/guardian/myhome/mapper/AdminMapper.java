@@ -18,4 +18,5 @@ public interface AdminMapper {
 	public AdminVO adminLogin(AdminVO admin);
 	
 	public List<MemberVO> getList();
+
 }

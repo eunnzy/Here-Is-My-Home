@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>매물 검색</title>
-	<link href="/css/searchHome.css"  type="text/css" rel="stylesheet" >
+	<link href="/css/searchHome.css?v2"  type="text/css" rel="stylesheet" >
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="fa-solid fa-magnifying-glas" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -68,11 +68,11 @@
        				</div>
      				<div class="rent-Type mb-4">
      					<div class="form-check form-check-inline">
-                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="rentType" value="원룸">
+                           	<input type="checkbox" class="form-check-input" autocomplete="off" name="rentType" value="월세">
 							<label class="form-check-label">월세</label>
 						</div>
                         <div class="form-check form-check-inline">
-                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="rentType" value="투룸">
+                        	<input type="checkbox" class="form-check-input"  autocomplete="off" name="rentType" value="전세">
  							<label class="form-check-label">전세</label>
                         </div>
        				</div>
@@ -226,8 +226,8 @@
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
-	<script src="/js/searchFilter.js" ></script>
 	<script src="/js/searchHome.js" ></script>
+	<script src="/js/searchFilter.js" ></script>
 	
 </script>
 </body>

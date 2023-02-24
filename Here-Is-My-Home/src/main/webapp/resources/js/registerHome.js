@@ -111,13 +111,9 @@ $(".resultImg").on("click", ".imgDelete", function(e){
 	
 });
 	
-function overlay() {
-	
-}	
-	
 	
 // 등록하기 버튼 클릭시 submit() 전송	
-$("#updateBtn").on("click",function(e){	
+$("#addBtn").on("click",function(e){	
 	e.preventDefault();
 	
 	let optionList = [];	// 옵션 체크 한 것 배열로 넘기기.

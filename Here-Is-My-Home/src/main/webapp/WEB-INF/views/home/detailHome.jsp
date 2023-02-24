@@ -90,13 +90,12 @@
 							</div>
 							
 							<div class="d-grid gap-2 mx-auto mt-3">
-								<button type="button" class="btn btn-md btn-success" id="reservBtn"> 예약하기 </button>
+								<button type="button" class="btn btn-md btn-success" id="modalBtn"> 예약하기 </button>
 							</div>
 							
 						</div>
 					</div>
 				</div>
-				
 				<div class="col-sm-8 mt-4">
 					<div class="basic-info">
 						<table class="table">
@@ -108,16 +107,14 @@
 							<tbody>
 								<tr>
 									<td width="30%"> ${home.rentType} </td>
-									<td> 
-										<c:choose>
-											<c:when test="${home.rentType == '월세'}">
-												${home.deposit} / ${home.monthly}		
-											</c:when>	 
-											<c:otherwise>
-												${home.deposit}원
-											</c:otherwise> 
-										</c:choose>
-									</td>
+									<c:choose>
+										<c:when test="${home.rentType == '월세'}">
+											<td> ${home.deposit} / ${home.monthly} </td>
+										</c:when>	 
+										<c:otherwise>
+											<td> ${home.deposit}원 </td>
+										</c:otherwise> 
+									</c:choose>
 								</tr>
 								<tr>
 									<td> 관리비 </td>
@@ -125,9 +122,14 @@
 								</tr>
 								<tr>
 									<td> 주차 </td>
-									<c:if test="${home.parking > 0 }">
-										<td> ${home.parking}대 가능 </td>
-									</c:if>
+									<c:choose>
+										<c:when test="${home.parking > 0 }">
+											<td> ${home.parking}대 가능 </td>	
+										</c:when>	 
+										<c:otherwise>
+											<td> 이용 불가 </td>
+										</c:otherwise> 
+									</c:choose>
 								</tr>
 								<tr>
 									<td> 입주 가능일 </td>
@@ -136,7 +138,7 @@
 							</tbody>
 						</table>
 					</div>
-				
+					
 					<!-- 상세 정보  -->
 					<div class="detail-info mt-3">
 						<table class="table">
@@ -196,22 +198,25 @@
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
 				<div class="reserv-close"><i class='bi bi-x-lg'></i></div>
-			<div class="reserv-content">
-				<table class="table">
-					<tr>
-						<td style="color: white;"> 이름 </td>
-						<td> <input type="text" class="form-control" name="reservName"></td>
-					</tr>
-					<tr>
-						<td style="color: white;"> 방문 날짜 </td>
-						<td> <input type="date" class="form-control" name="reservName"></td>
-					</tr>
-					<tr>
-						<td style="color: white;"> 방문 시간 </td>
-						<td> <input type="text" class="form-control" name="reservName"></td>
-					</tr>
-				</table>
-			</div>
+				<div class="reserv-content">
+					<table class="table">
+						<tr>
+							<td style="color: white;"> 이름 </td>
+							<td> <input type="text" class="form-control" name="reservName"></td>
+						</tr>
+						<tr>
+							<td style="color: white;"> 방문 날짜 </td>
+							<td> <input type="date" class="form-control" name="reservName"></td>
+						</tr>
+						<tr>
+							<td style="color: white;"> 방문 시간 </td>
+							<td> <input type="text" class="form-control" name="reservName"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="d-grid gap-3 mx-auto">
+					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
+				</div>
 			</div>
 		</div>
 	</div>

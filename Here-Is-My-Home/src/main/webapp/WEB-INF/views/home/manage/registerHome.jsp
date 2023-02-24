@@ -440,7 +440,7 @@
     	</form>	
 	</div>
 
-	<script src="/js/modifyHome.js" ></script>
+	<script src="/js/registerHome.js" ></script>
 	
 	<!-- 우편 번호 검색 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

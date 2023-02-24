@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 
 
-$("#reservBtn").click(function() {
+$("#modalBtn").click(function() {
 	$(".reserv-modal").css("display", "flex");
 })
 
