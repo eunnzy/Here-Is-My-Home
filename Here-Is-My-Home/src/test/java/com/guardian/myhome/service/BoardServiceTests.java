@@ -78,11 +78,5 @@ public class BoardServiceTests {
 	public void testViewsUp() {
 		log.info("ViewsUP RESULR : " + service.viewsUp(1L));
 	}
-	
-	// 좋아요 
-	// @Test
-	public void testLikesUp() {
-		log.info("LikesUP RESULR : " + service.likesUp(1L));
-	}
 
 }

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Write</title>
 </head>
 <body>
@@ -18,9 +19,8 @@
      <div class="col-lg-12"><br><br>
        <h1 id="tables">글쓰기</h1>
        
-     <form action="insertBoard.do" method="post" enctype="multipart/form-data">
-  	   <!-- '${board.imchaid}' 컨트롤러에서 조정 후 회원 아이디 입력하기 -->
-       <input type='hidden' name='imchaid' value='songs'>
+     <form action="insertBoard.do" method="post" enctype="multipart/form-data" id="regForm">
+       <input type='hidden' name='imchaid' value='<c:out value="${member.imchaId}" />'>
        	
 	   <div class="bs-component">
         <table class="table table-hover">
@@ -44,19 +44,35 @@
           </tr>
           <tr>
            <th scope="col" class="col col-lg-1">첨부파일</th>
-           <td><input class="form-control" type="file" id="file"></td>
+           <td><input class="form-control" type="file" id="file" name="uploadFile" multiple></td>
           </tr>
+        </table>
+        <table class="table table-hover">
+          <tr>
+           <th scope="col" class="col col-lg-1"></th>
+            <td class="uploadResult">
+             <ul>
+             	<!-- <li><div>
+             		<span>obj.fileName</span>
+					<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
+					<img src='/community/display?fileName=" + fileCallPath + "'>";
+				</div></li> -->
+             </ul>
+            </td> 
+          </tr>
+        </table>
+        <table class="table table-hover">
           <tr>
            <th scope="col" class="col col-lg-1">내용</th>
            <td><textarea class="form-control" id="content" rows="10" name="content" required></textarea></td>
           </tr>
-         </table>
+        </table>
         </div>
         
 	     <!-- 하단 버튼 -->
 	     <a href="/community/list"><button type="button" class="btn btn-info">취소</button></a>
 	     <span class="float-end">
-	     	<button type="submit" class="btn btn-info">등록</button>
+	     	<button type="submit" class="btn btn-info" id="regBT">등록</button>
 	     </span>
      </form>
       </div>
@@ -67,5 +83,8 @@
 	<footer>
     	<jsp:include page="../footer.jsp"></jsp:include>
     </footer>
+    
+    <!-- 자바스크립트 -->
+    <script type="text/javascript" src="/js/board_reg_Attach.js"></script>
 </body>
 </html>

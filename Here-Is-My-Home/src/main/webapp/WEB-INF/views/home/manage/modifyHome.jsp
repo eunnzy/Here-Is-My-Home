@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<title>매물 등록</title>
+	<title>매물 수정</title>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -15,54 +17,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link href="/css/registerHome.css"  type="text/css" rel="stylesheet" >
 	<style>
-		.home-container {
-			margin-top: 30px;
-			padding: 30px;
-			height:auto;
-			border-radius: 10px;
-			background-color: white;
-		}
-		.addBtn{
-			margin: auto;
-			display: block;
-			padding: 15px 40px;
-			font-size: 20px;
-			border: none;
-			cursor:pointer;
-			background-color: #BEE9FB;
-		}
-		table {
-			border: 1px solid #8c8c8c;
-		}
-		thead {
-			border-bottom: 1px solid #8c8c8c;
-		}
-		.img-div img{
-			width:100%;
-		    height: auto;
-		    display: flex;
-		    margin-top: 15px;
-		}
-		.img-div {
-			display:flex;
-			margin-top: 25px;
-			position: relative;
-		}
-		.imgDelete{
-		    position: absolute;
-		    top: 10px;
-		    padding:3px;
-		    right: 0px;
-		    background-color: #7E7E7E;
-		    color: white;
-		    font-weight: 900;
-		    width: 30px;
-		    height: 30px;
-		    line-height: 26px;
-		    text-align: center;
-		    display: inline-block;
-		    cursor: pointer;	
-		}
 	/*  
 		photo 이미지 출처 : 
 		https://www.flaticon.com/free-icon/picture_2659360?term=photo&page=1&position=8&origin=tag&related_id=2659360 
@@ -75,7 +29,7 @@
 	</header>
 	
 	<div class="home-container col-md-9 mx-auto">
-		<h1 class="mt-3 mb-3"> 방 올리기 </h1>
+		<h1 class="mt-3 mb-3"> 방 정보 수정 </h1>
 		<div class="add-notice p-3 mx-auto mb-5" >
         	<ul>
         		<li>전/월세 매물만 등록할 수 있습니다.</li>
@@ -93,7 +47,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="width: 15%;"> 방 종류  </td>
+                            <td> 방 종류  </td>
                             <td class="radio-btn"> 
                             	<div class="form-check form-check-inline">
                                 	<input type="radio" class="form-check-input" name="homeType" value="원룸"> <label> 원룸 </label> 
@@ -126,12 +80,12 @@
                    	</thead>
                    	<tbody>
                         <tr>
-                            <td style="width: 15%;"> 주소  </td>
+                            <td> 주소  </td>
                             <td> 
                             	 <div class="row mb-3">
 								    <label for="addr1" class="col-sm-2">우편번호</label>
 								    <div class="col-sm-5">
-								   		<input type="text" class="form-control" name="addr1" id="addr1">
+								   		<input type="text" class="form-control" name="addr1" id="addr1" value="${home.addr1 }">
 							    	</div>
 							    	<div class="col-sm-4">
 							    		<button type="button" class="btn btn-primary" id="searchPost"> 주소 검색</button> 
@@ -140,17 +94,17 @@
 							    <div class="row mb-3">
 								    <label for="addr2" class="col-sm-2">주소</label>
 								    <div class="col-sm-10">
-								   		<input type="text" class="form-control" name="addr2" id="addr2" >
+								   		<input type="text" class="form-control" name="addr2" id="addr2" value="${home.addr2 }">
 							    	</div>
 							    </div>
 							     <div class="row mb-3">
 								    <label for="addr3" class="col-sm-2">상세정보</label>
 								    <div class="col-sm-10">
-								   		<input type="text" class="form-control" name="addr3" id="addr3">  
+								   		<input type="text" class="form-control" name="addr3" id="addr3" value="${home.addr3 }">  
 							    	</div>
 							    </div>
-							    <input type="hidden" name="latitude" id="latitude">
-							    <input type="hidden" name="longitude" id="longitude">
+							    <input type="hidden" name="latitude" id="latitude" value="${home.latitude }">
+							    <input type="hidden" name="longitude" id="longitude" value="${home.longitude }">
                             </td>
                         </tr>
                   		</tbody>
@@ -164,20 +118,20 @@
                    </thead>
                    <tbody>
                        <tr>
-                           <td style="width: 15%;"> 크기  </td>
+                           <td> 크기  </td>
                            <td> 
                            	<div class="row">
 								<div class="col-sm-auto">
 									<label for="homeArea">전용 면적:</label>
 								</div>                            	
 							    <div class="col-sm-auto">
-							   		<input class="form-control" type="text" id="area">
+							   		<input class="form-control" type="text" id="area" >
 						    	</div>
 						    	<div class="col-sm-auto">
 							   		<label>m<sup>2</sup></label>
 						    	</div>
 						    	<div class="col-sm-auto">
-							   		<input class="form-control" type="text" name="homeArea" id="homeArea" readonly>
+							   		<input class="form-control" type="text" name="homeArea" id="homeArea" value="${home.homeArea }" readonly>
 						    	</div>
 						    	<div class="col-sm-auto">
 							   		<label>평</label>
@@ -197,7 +151,7 @@
                            <td>
                            	<div class="row mb-3">
 							    <div class="col-auto">
-							   		 <input class="form-control" type="text" name="deposit">
+							   		 <input class="form-control" type="text" name="deposit" value="${home.deposit }">
 						    	</div>
 						    	<div class="col-auto">
 							   		<label>만원</label>
@@ -210,7 +164,7 @@
                            <td>
 	                           	<div class="row mb-3">
 								    <div class="col-auto">
-								   		<input class="form-control" type="text" name="monthly">
+								   		<input class="form-control" type="text" name="monthly" value="${home.monthly }">
 							    	</div>
 						    		<div class="col-auto">
 							   			<label>만원</label>
@@ -227,7 +181,7 @@
                            <td>    
                            		<div class="row mb-3">
 								    <div class="col-auto">
-								   		<input class="form-control" type="text" name="rentPeriods">
+								   		<input class="form-control" type="text" name="rentPeriods" value="${home.rentPeriods }">
 							    	</div>
 						    		<div class="col-auto">
 							   			<label>년</label>
@@ -240,7 +194,7 @@
                            <td>    
                         		<div class="row mb-3">
 								    <div class="col-auto">
-								   		<input class="form-control" type="text" name="roomCount">
+								   		<input class="form-control" type="text" name="roomCount" value="${home.roomCount }">
 							    	</div>
 						    		<div class="col-auto">
 							   			<label>개</label>
@@ -259,11 +213,11 @@
                    </thead>
                    <tbody>
                        <tr>
-                           <td style="width: 15%;"> 관리비  </td>
+                           <td> 관리비  </td>
                            <td> 
                            		<div class="row mb-3">
 								    <div class="col-auto">
-								   		<input class="form-control" type="text" name="adminCost">
+								   		<input class="form-control" type="text" name="adminCost" value="${home.adminCost }">
 							    	</div>
 						    		<div class="col-auto">
 							   			<label>만원</label>  
@@ -276,7 +230,7 @@
                            <td>
                            		<div class="row mb-3">
 								    <div class="col-auto">
-								   		<input class="form-control" type="text" name="parking">
+								   		<input class="form-control" type="text" name="parking" value="${home.parking }">
 							    	</div>
 						    		<div class="col-auto">
 							   			<label>대</label> 
@@ -285,14 +239,14 @@
                            </td>
                        </tr>
                        <tr>
-                           <td> 반려동물  </td>
+                           <td> 반려동물 </td>
                            <td class="radio-btn">
                                <input class="form-check-input" type="radio" name="pet" value="가능"> <label> 가능 </label> 
                                <input class="form-check-input" type="radio" name="pet" value="불가능"> <label> 불가능 </label> 
                            </td>
                        </tr>
                        <tr>
-                           <td> 엘리베이터  </td>
+                           <td> 엘리베이터 </td>
                            <td class="radio-btn">
                                <input class="form-check-input" type="radio" name="elevator" value="가능"> <label> 가능 </label> 
                                <input class="form-check-input" type="radio" name="elevator" value="불가능"> <label> 불가능 </label> 
@@ -309,7 +263,7 @@
                            <td> 입주 가능 일  </td>
                            <td>    
                            		<div class="col-3">
-                               		<input class="form-control" type="date" name="moveDate"> 
+                               		<input class="form-control" type="date" name="moveDate" value="<fmt:formatDate  value="${home.moveDate}" pattern="yyyy-MM-dd" />"> 
                                </div>
                            </td>
                        </tr>
@@ -321,7 +275,7 @@
 										<label> 해당 층: </label> 
 									</div>                            	
 							    <div class="col-auto">
-							   		 <input class="form-control" type="text" name="floor">
+							   		 <input class="form-control" type="text" name="floor" value="${home.floor }">
 						    	</div>
 						    	<div class="col-auto">
 							   		<label> * 지하인 경우 ex) -1 </label>
@@ -394,14 +348,14 @@
                    </thead>
                    <tbody >
                        <tr>
-                           <td style="width: 15%;"> 제목  </td>
+                           <td> 제목  </td>
                            <td> 
-                               <input class="form-control" type="text" name="homeTitle" >           
+                               <input class="form-control" type="text" name="homeTitle" value="${home.homeTitle }">           
                            </td>
                        </tr>
                        <tr>
                            <td> 상세 설명  </td>
-                           <td><textarea class="form-control"  name="homeDetail" style="height: 300px"></textarea>
+                           <td><textarea class="form-control"  name="homeDetail" rows="10">${home.homeDetail }</textarea>
                            </td>
                        </tr>
                    </tbody>
@@ -423,10 +377,13 @@
 					       	</div>
 				       		<input type="file" class="form-control" name="homeImg" id="homeImg" multiple="multiple">
 					       	<div class="row resultImg">
-						       	 <!-- <div class="img-div">
-						       		<div class="imgDelete">X</div>
-						       		<img src="/home/showHomeImg?homeImgName=homeImg/oneroom.jpg">
-						       	</div> -->
+					       		<%-- <c:forEach items="${home.homeImgList}" var="imgFile" >
+					       			<div class="img-div col-sm-3" data-path="${imgFile.homeImgPath}" data-imgname="${imgFile.homeImgName}">
+					       				<div class="imgDelete" data-file="${imgFile.homeImgPath}">
+					       				<i class="bi bi-x-lg"></i></div>
+					       				<img src="/home/manage/showHomeImg?homeImgName=/${imgFile.homeImgPath}/${imgFile.homeImgName}">
+					       			</div>
+					       		</c:forEach> --%>
 					       	</div>
 		                </td>
              		</tr>
@@ -434,76 +391,73 @@
 				</table>
        		</div>
        		<div class="text-center mx-auto">
-        		<button type="reset" class="btn btn-md mr-2">취소</button>
- 				<button type="submit" id="addBtn" class="btn btn-md" >등록</button>
+        		<button type="reset" class="btn btn-large mr-2">취소</button>
+ 				<button type="submit" id="updateBtn" class="btn btn-large" >수정</button>
 			</div>
     	</form>	
 	</div>
 
-	<script src="/js/modifyHome.js" ></script>
-	
-	<!-- 우편 번호 검색 -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
+	<script src="/js/modifyHome.js" ></script>
 	<script>
-	var geocoder = new kakao.maps.services.Geocoder();
+	// 수정 페이지 시작 -> 기존에 사용자가 첨부한 사진 파일 목록 추가, 선택된 옵션 값들 불러오기.
+	let homeNum = ${home.homeNum};
 	
-	$("#searchPost").click(function() {
-		new daum.Postcode({
-		    oncomplete: function(data) {
-   			// 위치 검색 api
-            	 var addr = '';
-	                var extraAddr = ''; 
-	 
-	                if (data.userSelectedType === 'R') { 
-	                    addr = data.roadAddress;
-	                } else { 
-	                    addr = data.jibunAddress;
-	                }
-	 
-	                if(data.userSelectedType === 'R'){
-	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                        extraAddr += data.bname;
-	                    }
-	                    if(data.buildingName !== '' && data.apartment === 'Y'){
-	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                    }
-	                    if(extraAddr !== ''){
-	                        extraAddr = ' (' + extraAddr + ')';
-	                    }
-	                	addr += extraAddr;
-	                } else {
-	                	addr += ' ';
-	                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                $("#addr1").val(data.zonecode);
-                $("#addr2").val(addr);
-                $("#addr3").focus();
-                
-                
-                geocoder.addressSearch(addr, changeToLoc);
-                
-            }
-        }).open();	 
+	
+	$(document).ready(function() {	
+		$("input:radio[name=homeType]").each(function () {
+			if(this.value ==  "${home.homeType}")
+				this.checked = true;
+		});		
+		
+		$("input:radio[name=rentType]").each(function () {
+			if(this.value ==  "${home.rentType}")
+				this.checked = true;
+		});	
+		
+		$("input:radio[name=balcony]").each(function () {
+			if(this.value == "${home.balcony}")
+				this.checked = true;
+		});		
+		
+		$("input:radio[name=elevator]").each(function () {
+			if(this.value ==  "${home.elevator}")
+				this.checked = true;
+		});		
+		
+		$("input:radio[name=pet]").each(function () {
+			if(this.value ==  "${home.pet}")
+				this.checked = true;
+		});	
+		
+		// 정규식을 이용해 받아온 옵션값 [] 제거 후 배열로 변경
+		let optionList = "${home.optionList}".replace(/[[\]]/g, "").split(", ");	
+		console.log(optionList);
+		
+		for(let i=0; i<optionList.length; i++) {
+			$("input:checkbox[name=optionList]").each(function(index) {
+				console.log(optionList[i]);
+				if(this.value == optionList[i])
+					this.checked = true; 
+			});
+		
+		}
+		
+		let homeImgDiv = $( ".resultImg");
+		let imgStr = "";
+		
+		imgStr += "<c:forEach items='${home.homeImgList}' var='imgFile'>"
+		imgStr += "<div class='img-div col-sm-3' data-path='${imgFile.homeImgPath}' data-imgname='${imgFile.homeImgName}'>";
+		imgStr  += "<div class='imgDelete' data-file='${imgFile.homeImgPath}'><i class='bi bi-x-lg'></i></div>";
+		imgStr  += "<img src='/home/manage/showHomeImg?homeImgName=${imgFile.homeImgPath}/t_${imgFile.homeImgName}'>";
+		imgStr  += "</div></c:forEach>";
+		
+		homeImgDiv.append(imgStr);
+		
 	});
-	
-	var changeToLoc = function(data, status) {
-		if(status  === kakao.maps.services.Status.OK) {
-			$("#latitude").val(data[0].y);
-			$("#longitude").val(data[0].x);
-			console.log($("#latitude").val());
-			console.log($("#longitude").val());
-		}	
-	};
-	
-	$("#area").on("propertychange keyup paste input", function() { 
-		let area = $(this).val();
-		let homeArea = $("#homeArea").val( Math.floor(area / 3.3) );
-	});
-	
-	
 	
    </script>
+   
 </body>
 </html>
