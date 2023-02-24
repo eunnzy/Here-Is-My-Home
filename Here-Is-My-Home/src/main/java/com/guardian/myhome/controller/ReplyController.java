@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guardian.myhome.service.BoardService;
 import com.guardian.myhome.service.ReplyService;
+import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.Criteria;
 import com.guardian.myhome.vo.ReplyVO;
 
@@ -28,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 public class ReplyController {
 	
 	private ReplyService service;
+	private BoardService boardservice;
 	
 	// 등록 
 	@PostMapping(value = "/new", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
@@ -71,24 +74,20 @@ public class ReplyController {
 		return service.modify(vo) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	// 좋아요
+	@PostMapping(value = "/likeUp", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> likeUp(@RequestBody BoardLikesVO likevo) {
+		log.info("좋아요");
+		boardservice.likesOn(likevo.getBno(), likevo.getUserid());
+		return boardservice.likesUp(likevo.getBno()) ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//좋아요 취소 
+	@PostMapping(value = "/likeDown", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> likeDown(@RequestBody BoardLikesVO likevo) {
+		log.info("좋아요 취소");
+		boardservice.likesOff(likevo.getBno(), likevo.getUserid());
+		return boardservice.likesDown(likevo.getBno()) ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 }

@@ -7,6 +7,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style type="text/css">
+.uploadResult ul {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadResult ul li {
+    list-style: none;
+    padding: 10px;
+    align-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.uploadResult ul li img {
+    width: 100px;
+}
+</style>
 <title>Write</title>
 </head>
 <body>
@@ -46,8 +66,6 @@
            <th scope="col" class="col col-lg-1">첨부파일</th>
            <td><input class="form-control" type="file" id="file" name="uploadFile" multiple></td>
           </tr>
-        </table>
-        <table class="table table-hover">
           <tr>
            <th scope="col" class="col col-lg-1"></th>
             <td class="uploadResult">
@@ -60,8 +78,6 @@
              </ul>
             </td> 
           </tr>
-        </table>
-        <table class="table table-hover">
           <tr>
            <th scope="col" class="col col-lg-1">내용</th>
            <td><textarea class="form-control" id="content" rows="10" name="content" required></textarea></td>

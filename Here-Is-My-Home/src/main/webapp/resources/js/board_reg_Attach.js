@@ -72,18 +72,16 @@ $(document).ready(function(e) {
 				if(obj.image) {
 					var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
 					str+= "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>";
-					str+= "<span> " + obj.fileName + "</span>";
-					str+= "<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
 					str+= "<img src='/community/display?fileName=" + fileCallPath + "'>";
+					str+= "<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
 					str+= "</div>";
 					str+ "</li>";
 				} else {
 					var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
 	                var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
 					str+= "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>";
-					str+= "<span> " + obj.fileName + "</span>";
-					str+= "<button type='button' data-file=/'"+fileCallPath +"/' data-type='file' class='btn btn-primary btn-sm'>x</button><br>";
 					str+= "<img src='/img/attach.png'>";
+					str+= "<button type='button' data-file=/'"+fileCallPath +"/' data-type='file' class='btn btn-primary btn-sm'>x</button><br>";
 					str+= "</div>";
 					str+ "</li>";
 				}

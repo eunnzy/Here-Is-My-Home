@@ -12,8 +12,12 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -24,9 +28,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,9 +45,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.guardian.myhome.service.BoardService;
 import com.guardian.myhome.vo.BoardAttachFileDTO;
 import com.guardian.myhome.vo.BoardAttachVO;
+import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
+import com.guardian.myhome.vo.MemberVO;
 import com.guardian.myhome.vo.PageDTO;
+import com.guardian.myhome.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -74,11 +84,19 @@ public class BoardController {
 	
 	// 조회 불러오기 
 	@GetMapping("/get")
-	public String get(@RequestParam("bno") Long bno, Model model, @ModelAttribute("cri") Criteria cri) {
+	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid) {
 		log.info("/get");
 		model.addAttribute("board", service.get(bno));
+		
+		BoardLikesVO likevo = new BoardLikesVO();
+		likevo.setBno(bno);
+		likevo.setUserid(userid);
+		
+		model.addAttribute("like", service.likeCheck(bno, userid));
+		
 		return "/community/get";
 	}
+	
 	
 	// 수정테이블 불러오기
 	@GetMapping("/modify")
@@ -127,7 +145,7 @@ public class BoardController {
 		return "redirect: /community/list" + cri.getListLink();
 	}
 	
-	// 목록 리스트 (전국)
+	// 내가 쓴 글 
 	@GetMapping("/mylist")
 	public String mylist(Model model, String imchaid) {
 		log.info("mylist: ");
@@ -287,18 +305,6 @@ public class BoardController {
 		log.info("getAttachList" + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// 컨트롤러 내에서 사용하는 메소드 
 	// 파일 업로드 폴더 만들기 
@@ -342,8 +348,5 @@ public class BoardController {
 			}
 		});
 	}
-		
-		
-
 }
 

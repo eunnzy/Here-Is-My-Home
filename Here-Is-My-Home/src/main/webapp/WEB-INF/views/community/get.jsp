@@ -43,11 +43,11 @@
 	      <div id="uploadimg"></div>
 	        <!-- hidden -->
 	      	<input type="hidden" name="bno" value="<c:out value="${board.bno}" />" >
-	      	<input type="hidden" name="likec" value="<c:out value="${board.likec}" />" >
+	      	
 	      <!-- 조회수, 좋아요 -->
 	      <div class="card-body"> 	
 	      <span><c:out value="${board.views}" /> 조회</span>
-	      <span class="float-end"><span class="like"><c:out value="${board.likes}" /></span> 좋아요</span>
+	      <form><span class="float-end" id="like"></span></form>
 	      </div>
 	    </div>
 	    
@@ -116,12 +116,46 @@
     });
     </script>
     <script type="text/javascript">
+    // 좋아요 체크 
+    $(document).ready(function() {
+    	var likeval = ${like};
+    	var bnoValue = '<c:out value="${board.bno}" />';
+    	var member = '<c:out value="${member.imchaId}" />';
+		var str = "";
+		
+		if(member == '' || member == null) {
+			str += "<c:out value='${board.likes}' /> 좋아요";
+			$("#like").html(str); 
+		} else {
+			if (likeval > 0) {
+				str = "<img src='/icon/like.png' class='likeBT'>";
+				$("#like").html(str); 
+				$(".likeBT").on("click", function(e) {
+					replyService.likeDown({bno:bnoValue, userid:member}, function(data) { 
+						alert("좋아요 취소");
+						location.reload();
+				});
+				});
+			} else {
+				str = "<img src='/icon/nonlike.png' class='likeBT'>";
+				$("#like").html(str); 
+				$(".likeBT").on("click", function(e) {
+					replyService.likeUp({bno:bnoValue, userid:member}, function(result) {
+						alert("좋아요");
+						location.reload();
+					});
+				});
+			}
+		}
+    });
+    </script>
+    <script type="text/javascript">
     $(document).ready(function() {
 		var bnoValue = '<c:out value="${board.bno}" />';
 		var replyUL = $(".chat");
 		var member = '<c:out value="${member.nickname}" />';
 		
-			// 댓글 목록 불러오기 
+			// 댓글 목록 보여주기  
 			showList(1);
 			function showList(page) { 
 				replyService.getList({ bno:bnoValue, page: page||1 }, 
