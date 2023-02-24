@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guardian.myhome.mapper.LessorMapper;
 import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.service.MemberService;
 import com.guardian.myhome.vo.AdminVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 import com.guardian.myhome.vo.MemberVO;
 
 /*
@@ -38,7 +42,7 @@ public class AdminController {
 	private AdminService adminservice;
 	
 	@Autowired
-	private MemberService memberservice;
+	private LessorService lessorservice;
 	
 	
 	// 유저회원가입
@@ -118,6 +122,28 @@ public class AdminController {
 	}
 	
 
+	
+	@ResponseBody
+	@RequestMapping(value="/successId")
+	public int successId(@RequestParam(value ="lessorId") String lessorId) throws Exception {
+		System.out.println(lessorId);
+		lessorservice.successId(lessorId);
+		
+		int result = lessorservice.successId(lessorId);
+		
+		if (result != 0) {
+			return result;
+		}
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/failId")
+	public void failId(String lessorId) throws Exception {
+		System.out.println(lessorId);
+		lessorservice.failed(lessorId);
+	}
 	
 }
 

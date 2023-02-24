@@ -33,24 +33,8 @@
   <!-- 네브바 -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="Main.html"><img src="/img/house.png"></a>
+      <a class="navbar-brand" href="/admin/adminLogin"><img src="/img/house.png"></a>
       <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav me-auto" >
-          <li class="nav-item">
-              <a class="nav-link active" href="/admin/adminLogin">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">MyPage</a>
-            </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Community</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="FreeBoard.jsp">Free</a>
-              <a class="dropdown-item" href="MeetingBoard.jsp">Meeting</a>
-              <a class="dropdown-item" href="LostBoard.jsp">Lost</a>
-            </div>
-          </li>
-        </ul>
        <!--  <a href="login4.jsp"><button class="btn btn-secondary my-2 my-sm-0">Login</button></a> -->
       </div>
     </div>
@@ -143,18 +127,9 @@
 
 
 
-  <!-- footer -->
-  <div style="background-color: #dbe2f0; text-align: center;">
-    <br><br>
-    <dib>
-        <a href="#">이용약관</a>   
-        <a href="#">개인정보처리방침</a>
-        <a href="#">프로젝트소개</a><hr>
-        <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
-    </div>
-    
-    <br><br><br><br>
-  </div>
+     <footer>
+    	<jsp:include page="footer.jsp"></jsp:include>
+    </footer>
  
 
 <script src="/js/adminJoin.js" ></script>

@@ -1,5 +1,7 @@
 package com.guardian.myhome.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,25 +46,25 @@ public class LessorServiceImpl implements LessorService {
 	}
 	
 	// 아이디찾기
-		@Override
-		public LessorVO findLessorId(LessorVO lessor) throws Exception {
+	@Override
+	public LessorVO findLessorId(LessorVO lessor) throws Exception {
 			
-			return dao.findLessorId(lessor);
-		}
+		return dao.findLessorId(lessor);
+	}
 		
-		// 비밀번호 찾기
-		@Override
-		public LessorVO findLessorPw(LessorVO lessor) throws Exception {
+	// 비밀번호 찾기
+	@Override
+	public LessorVO findLessorPw(LessorVO lessor) throws Exception {
 			
-			return dao.findLessorPw(lessor);
-		}
+		return dao.findLessorPw(lessor);
+	}
 		
-		// 비밀번호 변경
-		@Override
-		public LessorVO updateLessorPw(LessorVO lessor) throws Exception {
+	// 비밀번호 변경
+	@Override
+	public LessorVO updateLessorPw(LessorVO lessor) throws Exception {
 			
-			return dao.updateLessorPw(lessor);
-		}
+		return dao.updateLessorPw(lessor);
+	}
 	
 	@Override
 	public LessorVO getLessor(LessorVO lessor) throws Exception {
@@ -73,5 +75,24 @@ public class LessorServiceImpl implements LessorService {
 	public void updateLessor(LessorVO lessor) throws Exception {
 		lessormapper.updateLessor(lessor);
 	}
+	
+	// 중개인 목록
+	@Override
+	public List<LessorVO> lessorList() {
+		return dao.lessorList();
+	}
 
+	@Override
+	public int successId(String lessorId) throws Exception {
+		return lessormapper.successId(lessorId);
+		
+	}
+
+	@Override
+	public int failed(String lessorId) throws Exception {
+		return lessormapper.failed(lessorId);
+		
+	}
+	
+	
 }
