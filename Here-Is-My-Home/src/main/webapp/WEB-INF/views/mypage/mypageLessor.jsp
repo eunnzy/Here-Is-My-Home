@@ -27,7 +27,7 @@
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/mypage/getLessor'">회원 정보 수정</button>
         </td>
         <td>
-          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = 'HomeManagement.html'">매물 관리</button>
+          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = '/home/manage/list'">매물 관리</button>
         </td>
         <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'reservation_LESSOR.html'">예약 확인</button>

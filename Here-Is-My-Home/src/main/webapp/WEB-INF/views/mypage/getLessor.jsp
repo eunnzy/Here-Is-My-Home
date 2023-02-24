@@ -45,14 +45,20 @@
             <div class="mb-3">
               <label for="id_name">아이디</label>
               <div class="id_input_box">
-			      <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${lessor.lessorId}" required>
+			      <input type="text" class="form-id" name="lessorId" id="lessorId"  value="${lessor.lessorId}" required>
+			      <div class="invalid-feedback">아이디를 입력해주세요.
+               		<span class="final_id_ck">아이디를 입력해주세요.</span>
+              	  </div>
               </div>
             </div>
+            <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+			<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+          </div>
             
 
             <div class="mb-3">
               <label for="password">비밀번호</label>
-              <input type="password" class="form-password" name="lessorPw" id="lessorPw" placeholder="****" required>
+              <input type="password" class="form-password" name="lessorPw" id="lessorPw" value="${lessor.lessorPw}" required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
@@ -69,14 +75,15 @@
                 <span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
                </div>
                
-            <div class=" mb-3">
-              <label for="nickname">닉네임</label>
-              <div class="nickname_input_box">
+            <div class="mb-3">
+              <label for="lessor_nickname">닉네임</label>
+              <div class="id_input_box">
               <input type="text" class="form-nickname" name="lessorNickName" id="lessorNickName" placeholder="" value="${lessor.lessorNickName}" required>
-              <div class="invalid-feedback">
-                닉네임을 입력해주세요.
+              <div class="invalid-feedback">닉네임을 입력해주세요.
+              	 <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
               </div>
-              <span class="final_nickname_ck">닉네임을 입력해주세요.</span>
+              <span class="nickname_input_re_1">사용 가능한 닉네임입니다.</span>
+			  <span class="nickname_input_re_2">닉네임이 이미 존재합니다.</span>
               </div>
            <!--    <span class="id_input_re_1">사용 닉네임입니다.</span>
 			  <span class="id_input_re_2">닉네임이 이미 존재합니다.</span> -->
@@ -92,7 +99,7 @@
             <span class="final_phone_ck">휴대폰 번호를 입력해주세요.</span>
           </div>
 
-		<div class=" mb-3">
+			<div class="mb-3">
               <label for="name">이름</label>
               <input type="text" class="form-control" name="name" id="name" placeholder="" value="${lessor.name}" required>
               <div class="invalid-feedback">
@@ -102,15 +109,15 @@
             </div>
             
             <div class="mb-3">
-            <label for="">생년월일</label>
-            <input type="text" class="form-control" name="birthDate" id="birthDate" placeholder="1900-01-01" value="${lessor.birthDate}" required>
-            <div class="invalid-feedback">
-              생년월일을 입력해주세요.
-            </div>
-            <span class="final_phone_ck">생년월일을 입력해주세요.</span>
-          </div>
+	            <label for="">생년월일</label>
+	            <input type="text" class="form-control" name="birthDate" id="birthDate" placeholder="1900-01-01" value="${lessor.birthDate}" required>
+	            <div class="invalid-feedback">
+	              생년월일을 입력해주세요.
+	            </div>
+	            <span class="final_phone_ck">생년월일을 입력해주세요.</span>
+          	</div>
           
-          <div class=" mb-3">
+          	<div class=" mb-3">
               <label for="jgsname">공인중개소이름</label>
               <input type="text" class="form-control" name="jgsName" id="jgsName" placeholder="" value="${lessor.jgsName}" required>
               <div class="invalid-feedback">
@@ -171,11 +178,10 @@
 
           <div class="col-md-6 mb-4"></div>
           <button class="btn btn-primary btn btn-block" type="submit">수정 완료</button> &nbsp;
-          </div>
 	</form>
       </div>
     </div>
-  </div>  
+    </div>
   
     <footer class="my-3 text-center text-small">
       <p>  &nbsp; </p>

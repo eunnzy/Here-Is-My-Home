@@ -84,7 +84,9 @@
 							   	<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
 						    	<img src="/icon/heart.png" name="likeBtn" id="likeBtn" onclick="homeLike()"> <label for="likeBtn">찜하기</label> 
 						    </div>
-							<div class="col mb-3">
+							    <input type="hidden" name="homeNum" id="homeNum" value="${home.homeNum}">
+							    <input type="hidden" name="imchaId" id="imchaId" value="${member.imchaId}">
+								<div class="col mb-3">
 							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>  -->
 						    	<img src="/icon/question.png" name="qnaBtn" id="qnaBtn" onclick="qna()"> <label for="qnaBtn">문의 남기기</label> 
 							</div>
@@ -92,7 +94,8 @@
 							<div class="d-grid gap-2 mx-auto mt-3">
 								<button type="button" class="btn btn-md btn-success" id="reservBtn"> 예약하기 </button>
 							</div>
-							
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -215,8 +218,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
 	<script>
 		let latitude = ${home.latitude};
@@ -224,5 +225,26 @@
 	// 위치 정보 표시
 	</script>
 	<script src="/js/detailHome.js" ></script>
+	<script>
+		$(document).ready(function() {
+			$("#likeBtn").on("click", function(e){
+				const $imchaId = $('#imchaId').val();
+				const $homeNum = $('#homeNum').val();
+				
+				$.ajax({
+					type : 'get',
+					url : 'like/insetLike?imchaId='+ $imchaId + '&homeNum=' + $homeNum,
+					success : function (data) {
+						if (data===1) {
+							alert('찜 목록에 등록되었습니다.');
+						} else {
+							alert('오류가 발생하였습니다.');
+						}
+							
+						}
+				});
+			});
+		});
+	</script>
 </body>
 </html>

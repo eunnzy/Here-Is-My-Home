@@ -50,7 +50,7 @@
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/mypage/getMember'">회원정보수정</button>
         </td>
         <td>
-          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = 'LikeList.html'">찜 목록</button>
+          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = '/like/likeList?imchaId=${member.imchaId}'">찜 목록</button>
         </td>
         <!-- <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'MyHome.html'">내 집</button>

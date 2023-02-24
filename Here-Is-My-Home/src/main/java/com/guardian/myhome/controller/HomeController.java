@@ -35,6 +35,7 @@ public class HomeController {
 	// 매물 상세보기
 	@RequestMapping("/detail")	
 	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
+		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
 		// view로 반환할 때 보증금, 월세, 관리비는 돈 단위 계산해서
