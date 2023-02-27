@@ -46,8 +46,14 @@ public class LessorServiceImpl implements LessorService {
 	}
 	
 	// 아이디찾기
+//	@Override
+//	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+//			
+//		return dao.findLessorId(lessor);
+//	}
+	
 	@Override
-	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+	public String findLessorId(LessorVO lessor) throws Exception {
 			
 		return dao.findLessorId(lessor);
 	}

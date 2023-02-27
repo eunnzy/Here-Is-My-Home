@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.LessorImgVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -52,11 +53,24 @@ public class LessorMapperTest {
 		System.out.println("결과 값 : " + lessormapper.lessorLogin(lessor));
 	}
 	
-	@Test
+	//@Test
 	public void successId() throws Exception{
 		
 		lessormapper.successId("lee");
 
+	}
+	
+	@Test
+	public void imageEnrollTest() {
+		
+		LessorImgVO vo = new LessorImgVO();
+		
+		vo.setLessorId("test");
+		vo.setFileName("test");
+		vo.setUploadPath("test");
+		vo.setUuid("test2");
+		
+		lessormapper.imgEnroll(vo);
 	}
 	
 }

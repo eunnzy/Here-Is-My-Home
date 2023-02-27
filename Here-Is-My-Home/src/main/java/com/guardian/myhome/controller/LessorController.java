@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,24 +26,26 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.lessorImgVO;
-
-import net.coobird.thumbnailator.Thumbnails;
+import com.guardian.myhome.vo.LessorImgVO;
 
 
 @Controller
+@SessionAttributes("lessorId")
 @RequestMapping(value = "/member")
 public class LessorController {
-
+	
+	
 	@Autowired
 	private LessorService lessorservice;
 	
@@ -170,30 +171,36 @@ public class LessorController {
 		}
 		
 		@RequestMapping(value="/findLessorId", method=RequestMethod.POST)
-		public String findLessorIdPOST(LessorVO lessor, Model model) throws Exception {
+		@ResponseBody
+		public int findLessorIdPOST(LessorVO lessor, Model model) throws Exception {
+			System.out.println(lessor);
+			String findLessorIdVo = lessorservice.findLessorId(lessor);
 			
-			LessorVO findLessorIdVo = lessorservice.findLessorId(lessor);
+			System.out.println(findLessorIdVo);
 			
 			if (findLessorIdVo == null) {
-				
-				model.addAttribute("check",1);
-				return "/member/msg";
+				return 0;
+//				model.addAttribute("check",1);
+//				return "/member/msg";
 			}else {
-				model.addAttribute("check",0);
-				model.addAttribute("lessorId", findLessorIdVo.getLessorId());
-				return "/member/resultLessorId";
+//				model.addAttribute("check",0);
+//				model.addAttribute("lessorId", findLessorIdVo.getLessorId());
+				model.addAttribute("lessorId", findLessorIdVo);
+				return 1;
+//				return "/member/resultLessorId";
 			}
 		}
+		
 		
 		// 아이디 결과
 		@RequestMapping(value="/resultLessorId", method=RequestMethod.GET)
 		public String resultLessorIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="lessornickName")String phone,String lessorNickName,LessorVO searchVO) throws Exception{
 			
-			searchVO.setLessorNickName(lessorNickName);
-			searchVO.setPhone(phone);
-			LessorVO findLessorId = lessorservice.findLessorId(searchVO);
+//			searchVO.setLessorNickName(lessorNickName);
+//			searchVO.setPhone(phone);
+//			LessorVO findLessorId = lessorservice.findLessorId(searchVO);
 			
-			model.addAttribute("searchVO", findLessorId);
+//			model.addAttribute("searchVO", findLessorId);
 			
 			return "/member/resultLessorId";
 		}
@@ -246,7 +253,7 @@ public class LessorController {
 
 		// 이미지파일 업로드
 		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		public ResponseEntity<List<lessorImgVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
+		public ResponseEntity<List<LessorImgVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
 			
 			String uploadFolder = "C:\\lessorUpload";
 			
@@ -271,7 +278,7 @@ public class LessorController {
 				}
 				
 				if(!type.startsWith("image")) {
-					List<lessorImgVO> list = null;
+					List<LessorImgVO> list = null;
 					return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
 				}
 			}
@@ -279,12 +286,12 @@ public class LessorController {
 				uploadPath.mkdirs();
 			}
 			
-			List<lessorImgVO> list = new ArrayList();
+			List<LessorImgVO> list = new ArrayList();
 			
 			for(MultipartFile multipartFile : uploadFile) {
 				
 				// 이미지 정보
-				lessorImgVO imgvo = new lessorImgVO();
+				LessorImgVO imgvo = new LessorImgVO();
 				
 				// 파일 이름
 				String uploadFileName = multipartFile.getOriginalFilename();
@@ -322,20 +329,6 @@ public class LessorController {
 					
 					ImageIO.write(bt_image, "jpg", thumbnailFile);
 					
-					// 방법 2
-//					File thumbnamilFile = new File(uploadPath, "s_" + uploadFileName);
-//					
-//					BufferedImage bo_image = ImageIO.read(saveFile);
-//					
-//					// 비율
-//					double ratio = 3;
-//					// 넓이 높이
-//					int width = (int) (bo_image.getWidth() / ratio);
-//					int height = (int) (bo_image.getHeight() / ratio);
-//					
-//					Thumbnails.of(saveFile)
-//					.size(width, height);
-//					.toFile(thumbnailFile);
 					
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -344,7 +337,7 @@ public class LessorController {
 				list.add(imgvo);
 			}
 			
-			ResponseEntity<List<lessorImgVO>> result = new ResponseEntity<List<lessorImgVO>>(list, HttpStatus.OK);
+			ResponseEntity<List<LessorImgVO>> result = new ResponseEntity<List<LessorImgVO>>(list, HttpStatus.OK);
 			
 			return result;
 		}

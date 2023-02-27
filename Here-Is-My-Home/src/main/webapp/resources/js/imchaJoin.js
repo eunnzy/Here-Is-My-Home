@@ -81,7 +81,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : "post",
-			url : "/member/memberIdChk",
+			url : "/member/imchaIdChk",
 			data : data,
 			success : function(result) {
 				if(result != 'fail') {

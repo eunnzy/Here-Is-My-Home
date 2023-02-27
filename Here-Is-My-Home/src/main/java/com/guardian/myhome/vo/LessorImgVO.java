@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class lessorImgVO {
+public class LessorImgVO {
 
 	
 	private String uploadPath;
