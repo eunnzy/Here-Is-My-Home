@@ -178,7 +178,7 @@
        				</div>
        				
        				<div class="d-flex justify-content-center mt-4">
-       					<button class="btn btn-outline-info m-2" type="button" id="cancelBtn">취소</button>
+       					<button class="btn btn-outline-info m-2" type="button" id="cancelBtn">초기화</button>
   						<button class="btn btn-outline-info m-2" type="button" id="filterApplyBtn">적용하기</button>
        				</div>
 				</div>

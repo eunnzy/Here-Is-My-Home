@@ -145,7 +145,7 @@ $("#addBtn").on("click",function(e){
 		alert("사진은 최소 2장 첨부해야 합니다.");
 		return false;
 	}
-		
+	
 	let homeData= {
 	    		"homeType" : $("input[name=homeType]").val(),
 	    		"addr1" : $("input[name=addr1]").val(),

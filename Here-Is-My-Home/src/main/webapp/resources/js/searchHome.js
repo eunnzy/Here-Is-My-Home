@@ -23,22 +23,25 @@ $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위�
 			var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 			         // 인포윈도우에 표시될 내용입니다
 			map.setCenter(locPosition);	    
-			getHomeInBounds();
+			kakao.maps.event.addListener(map, 'idle', getHomeInBounds);
+			// getHomeInBounds();
 		});
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
 	}
 	
-	kakao.maps.event.addListener(map, 'idle', getHomeInBounds);
+	
+		
 	
 });
 
 // 지도 경계에서의 매물 정보 가져오기
 function getHomeInBounds() {
-	console.log("getHomeInBounds()");
 	let homeList = $(".home-card");  
-	homeList.remove();	// 기존의 리스트 목록 삭제
-    removeMarker();	// 기존의 마커 제거
+		homeList.remove();	// 기존의 리스트 목록 삭제
+	    removeMarker();	// 기존의 마커 제거
+	console.log("getHomeInBounds()");
+	
 	
 	let bounds = map.getBounds();	// 지도 범위 가져오기
 	
@@ -68,7 +71,6 @@ function getHomeInBounds() {
     	data : mapBounds,
     	type : 'Post',
     	dataType : 'json',
-		async : false,		// 동기식으로 처리 -> 지도 범위 내에 있는 매물 정보를 가져오기 위해서
     	success: function(data) {	
     		if(data != null) {
     			map.setCenter(mapCenter);	// 주어진 영역이 화면 안에 전부 나타날 수 있도록 지도의 중심 좌표와 확대 수준을 설정
@@ -88,6 +90,7 @@ function getHomeInBounds() {
 	    	}
 	});
 }
+
 
 // 필터 검색
 function checkFilter(data) {

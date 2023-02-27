@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -87,4 +89,10 @@ public class HomeController {
 		return result;
 	}
 	
+	@RequestMapping(value="/report", method=RequestMethod.POST) 
+	@ResponseBody
+	public int reportHome(HttpServletRequest request) {
+			
+		return 0;
+	}
 }

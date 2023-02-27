@@ -11,13 +11,15 @@ $(document).ready(function() {
 	$("#filterBtn").click(function() {
 		if($(".filter-content").css("display") == "none")	{
 			$(".filter-content").css("display", "inline-block");
+			$(".filter-content").scrollTop(0);
 		}else {
 			$(".filter-content").css("display", "none");
 		}
 	});
 	
 	$("#cancelBtn").click(function() {
-	
+		if($("input[type=checkbox]:checked")) 
+		$("input[type=checkbox]").prop("checked", false);
 	});
 	
 	$("#filterApplyBtn").click(function() {
@@ -69,16 +71,6 @@ $(document).ready(function() {
 			monthly = 99999999;
 		}
 		
-/*		console.log(homeTypeCheck);
-		console.log(rentTypeCheck);
-		console.log(optionCheck);
-		console.log(addInfoCheck);
-*/		
-
-		/*let homeList = $(".home-card");  
-		homeList.remove();	// 기존의 리스트 목록 삭제
-	    removeMarker();	// 기존의 마커 제거
-		*/
 		getHomeInBounds();	
 		
 		for(let i=0; i<homeData.length; i++) {

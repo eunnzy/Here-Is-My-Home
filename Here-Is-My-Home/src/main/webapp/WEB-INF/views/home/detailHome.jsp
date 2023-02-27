@@ -78,7 +78,7 @@
 				    		<hr>
 						   	<div class="col mb-3">
 							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
-						    	<img src="/icon/siren.png" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" name="reportBtn" id="reportBtn" onclick="report()"> <label for="sirenBtn">허위 매물 신고</label> 
+						    	<img src="/icon/siren.png" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" name="sirenBtn" id="sirenBtn"> <label for="sirenBtn">신고하기</label> 
 						   	</div>
 						    <div class="col mb-3">
 							   	<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
@@ -92,13 +92,11 @@
 							</div>
 							
 							<div class="d-grid gap-2 mx-auto mt-3">
-								<button type="button" class="btn btn-md btn-success" id="modalBtn"> 예약하기 </button>
+								<button type="button" class="btn btn-md btn-success" id="reservModalBtn"> 예약하기 </button>
 							</div>
 							</div>
-						</div>
 						</div>
 					</div>
-				</div>
 				<div class="col-sm-8 mt-4">
 					<div class="basic-info">
 						<table class="table">
@@ -197,6 +195,75 @@
 			</div>
 		</div>
 		
+		<div class="report-modal">
+			<div class="report-wrap">
+				<div class="report-title">집 방문 예약</div>
+				<div class="report-close"><i class='bi bi-x-lg'></i></div>
+				<div class="report-content">
+					<table class="table">
+						<tr>
+							<td style="color: white;"> 이름 </td>
+							<td> <input type="text" class="form-control" name="reservName"></td>
+						</tr>
+						<tr>
+							<td style="color: white;"> 방문 날짜 </td>
+							<td> <input type="date" class="form-control" name="reservName"></td>
+						</tr>
+						<tr>
+							<td style="color: white;"> 방문 시간 </td>
+							<td> <input type="text" class="form-control" name="reservName"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="d-grid gap-3 mx-auto">
+					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		
+		<div class="report-modal">
+			<div class="report-wrap">
+				<div class="report-title">매물 신고 하기</div>
+				<div class="report-close"><i class='bi bi-x-lg'></i></div>
+				<div class="report-content">
+					<table class="table">
+						<!-- <tr>
+							<td style="color: white;"> 신고 제목 </td>
+							<td> <input type="text" class="form-control" name="reportTitle"></td>
+						</tr> -->
+						<tr>
+							<td style="color: white;">신고 유형</td>
+							<td style="color: white;">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="reportType" value="1">
+									<label class="form-check-label" >등록된 정보가 일치하지 않음</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="reportType" value="2">
+									<label class="form-check-label" >이미 계약이 완료된 매물임</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio"name="reportType" value="3">
+									<label class="form-check-label" >기타</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="color: white;"> 신고 내용 </td>
+							<td> <textarea class="form-control"  name="reportContent" style="height: 250px" placeholder="신고 유형이 기타인 경우 신고 이유를 작성해주세요"></textarea>
+						</tr>
+					</table>
+				</div>
+				<div class="d-grid gap-3 mx-auto">
+					<button type="button" class="btn btn-md btn-success" id="reportBtn">신고하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		
 		<div class="reserv-modal">
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
@@ -223,6 +290,10 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
 	<script>
 		let latitude = ${home.latitude};

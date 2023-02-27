@@ -39,9 +39,15 @@ $(document).ready(function() {
 
 });
 
+$("#sirenBtn").click(function(){
+	$(".report-modal").css("display", "flex");
+});
 
+$(".report-close").click(function() {
+	$(".report-modal").css("display", "none");
+})
 
-$("#modalBtn").click(function() {
+$("#reservModalBtn").click(function() {
 	$(".reserv-modal").css("display", "flex");
 })
 
