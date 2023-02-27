@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.FileSystemResource;
@@ -48,7 +49,7 @@ import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 import com.guardian.myhome.vo.PageDTO;
 import com.guardian.myhome.vo.ReplyVO;
 
@@ -64,15 +65,42 @@ public class BoardController {
 
 	private BoardService service;
 	
-	// 목록 리스트 (전국)
 	@GetMapping("/list")
-	public String list(Model model, Criteria cri) {
-		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
+	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
-		int total = service.getTotal(cri);
-		log.info("total : " + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		HttpSession session = request.getSession();
+		ImchaVO imcha = (ImchaVO) session.getAttribute("imcha");
+		if(cri.getTypeArr() == null) {
+			cri.setType("");
+		}
+		if(cri.getKeyword() == null) {
+			cri.setKeyword("");
+		}
+		
+		if(imcha == null) {
+			log.info("before Board" + cri);
+			model.addAttribute("list", service.beforeBoard(cri));
+			
+			int total = service.beforeBoardCount(cri);
+			log.info("before total : " + total);
+			PageDTO dto = new PageDTO(cri, total);
+			model.addAttribute("pageMaker", dto);
+			log.info("total : " + dto);
+		} else {
+			String sido1 = imcha.getSido1();
+			String gugun1 = imcha.getGugun1();
+			cri.setSido1(sido1);
+			cri.setGugun1(gugun1);
+			log.info("after Board cri : " + cri);
+			
+			model.addAttribute("list", service.afterBoard(cri));
+			int total = service.afterBoardCount(cri);
+			log.info("after Board total:" + total);
+			
+			PageDTO dto = new PageDTO(cri, total);
+			model.addAttribute("pageMaker", dto);
+			log.info("total : " + dto);
+		}
 		return "/community/list";
 	}
 	
@@ -91,12 +119,12 @@ public class BoardController {
 		BoardLikesVO likevo = new BoardLikesVO();
 		likevo.setBno(bno);
 		likevo.setUserid(userid);
+		log.info(likevo);
 		
 		model.addAttribute("like", service.likeCheck(bno, userid));
 		
 		return "/community/get";
 	}
-	
 	
 	// 수정테이블 불러오기
 	@GetMapping("/modify")
@@ -147,12 +175,20 @@ public class BoardController {
 	
 	// 내가 쓴 글 
 	@GetMapping("/mylist")
-	public String mylist(Model model, String imchaid) {
-		log.info("mylist: ");
-		model.addAttribute("mylist", service.getMyboard(imchaid));
+	public String mylist(Model model, HttpServletRequest request, Criteria cri) {
+		HttpSession session = request.getSession();
+		ImchaVO imcha = (ImchaVO) session.getAttribute("imcha");
+		cri.setImchaid(imcha.getImchaId());
+		log.info("mylist: " + cri);
+		model.addAttribute("mylist", service.getMyboard(cri));
+		
+		int total = service.getMyboardCount(cri);
+		log.info("total : " + total);
+		PageDTO dto = new PageDTO(cri, total);
+		model.addAttribute("mypageMaker", dto);
+		log.info("total : " + dto);
 		return "/community/mylist";
 	}
-	
 	
 	
 	

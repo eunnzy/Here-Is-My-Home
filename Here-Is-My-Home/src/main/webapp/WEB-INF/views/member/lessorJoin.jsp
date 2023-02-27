@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
     <style>
       .input-form {
@@ -22,6 +23,37 @@
         -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
         -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+      }
+      #result_card img {
+      	max-width : 100%;
+      	height : auto;
+      	display: block;
+      	padding: 5px;
+      	margin-top: 10px;
+      	margin: auto;
+      }
+      #result_card {
+      	position: relative;
+      }
+      .imgDeleteBtn{
+      	position: absolute;
+      	top: 0;
+      	right: 5%;
+      	background-color: #ef7d7d;
+      	color: wheat;
+      	font-weight: 900;
+      	width: 30px;
+      	height: 30px;
+      	border-radius: 50%;
+      	line-height: 26px;
+      	text-align: center;
+      	border: none;
+      	display: block;
+      	cursor: pointer;
+      }
+      .address_button {
+      color : blue;
+      cursor: pointer;
       }
     </style>
     <title>Document</title>
@@ -44,7 +76,7 @@
         <h1 style="text-align:center;"  class="mb-3">   </h1>
 
   <form id="join_form" method="post">
-  <h1 style="text-align:center;"  class="mb-3">중개인 회원가입</h4>
+  <h1 style="text-align:center;"  class="mb-3">중개인 회원가입</h1>
         <form class="validation-form" novalidate>
           <div class="row">
             <div class="mb-3">
@@ -134,6 +166,19 @@
               </div>
               <span class="final_nickname_ck">공인중개사 등록번호를 입력해주세요.</span>
             </div>
+            <div class=" mb-3">
+            	<div class="form_section_title">
+            	<label for="jgsImg">공인중개사 인증서 등록</label>
+            	</div>
+            	<div class="form_section_content">
+            		<input type="file" id="jgsImg" name='uploadFile' style="height: 30px;">
+            		<div id="uploadResult">
+        			<!--  <div id="result_card">
+            				 <div class="imgDeleteBtn">x</div>
+            				<img src="/member/display?fileName=house.png">
+            			</div>  -->
+            	</div>
+            </div>
           <div class=" mb-3">
               <label for="user_roll">회원종류</label>
               <input type="text" class="form-control" name="userRoll" id="userRoll" placeholder="" value="중개인" readonly />
@@ -181,27 +226,10 @@
       </div>
     </div>
   </div>  
-  
-    <footer class="my-3 text-center text-small">
-      <p>  &nbsp; </p>
+
+      <footer>
+       <jsp:include page="../footer.jsp"></jsp:include>
     </footer>
-        </div>
-
-
-
-
-  <!-- footer -->
-  <div style="background-color: #dbe2f0; text-align: center;">
-    <br><br>
-    <dib>
-        <a href="#">이용약관</a>   
-        <a href="#">개인정보처리방침</a>
-        <a href="#">프로젝트소개</a><hr>
-        <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
-    </div>
-    
-    <br><br><br><br>
-  </div>
  
 
  <script src="/js/lessorJoin.js" ></script>

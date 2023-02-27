@@ -22,9 +22,8 @@
        select admin_id AS adminId, admin_pw AS adminPw, admin_name As adminName, admin_tel AS adminTel
        from Admin_tb where admin_Id = #{adminId} and admin_pw = #{adminPw}
     </select>
-    
-    <select id="getList" resultType="com.guardian.myhome.vo.MemberVO">
-    	select * from imcha_tb
-    </select>
+
  	
+ 
  </mapper>
+

@@ -18,13 +18,13 @@
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav me-auto" >
           <li class="nav-item">
-             <a class="nav-link" href="/admin/list">회원 목록</a>
+             <a class="nav-link" href="/member/list">신고목록</a>
           </li>
           <li class="nav-item">
-             <a class="nav-link" href="#">MyPage</a>
+             <a class="nav-link" href="/member/lessorList">중개인 가입 목록</a>
           </li>
           <li class="nav-item">
-             <a class="nav-link" href="/community/list">Community</a>
+             <a class="nav-link" href="/community/list">공지게시판</a>
           </li>
 
          

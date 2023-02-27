@@ -1,5 +1,7 @@
 package com.guardian.myhome.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,8 +27,14 @@ public class LessorDAOImpl implements LessorDAO {
 	}
 	
 	// 아이디 찾기
+//	@Override
+//	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+//		
+//		return sqlSession.selectOne(NAMESPACE+".findLessorId", lessor);
+//	}
+	
 	@Override
-	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+	public String findLessorId(LessorVO lessor) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+".findLessorId", lessor);
 	}
@@ -45,5 +53,16 @@ public class LessorDAOImpl implements LessorDAO {
 		return sqlSession.selectOne(NAMESPACE+".updateLessorPw", lessor);
 	}
 	
-
+	// 중개인 목록
+	@Override
+	public List<LessorVO> lessorList() {
+		return sqlSession.selectList(NAMESPACE+".lessorList");
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public LessorVO successId(LessorVO lessor) throws Exception {
+			
+		return sqlSession.selectOne(NAMESPACE+".successId", lessor);
+	}
 }

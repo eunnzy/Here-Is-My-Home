@@ -53,10 +53,10 @@
             <option value="동네소식">동네소식</option>
             <option value="동네질문">동네질문</option>
             <option value="동네맛집">동네맛집</option>
-            <option value="취미생활">취미생활</option>
-            <option value="자취꿀팁">자취꿀팁</option>
             <option value="도와줘요">도와줘요</option>
-            <option value="분실실종">분실실종</option>
+            <option value="취미생활">전국취미생활</option>
+            <option value="자취꿀팁">전국자취꿀팁</option>
+            <option value="분실실종">전국분실실종</option>
            </select>
           </td>
          </tr>

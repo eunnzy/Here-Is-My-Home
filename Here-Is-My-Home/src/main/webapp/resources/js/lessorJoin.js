@@ -185,6 +185,127 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 이미지 업로드
+	$("input[type='file']").on("change", function(e){
+		//alert("동작");
+		
+		// 이미 존재할시 삭제
+		if($(".imgDeleteBtn").length > 0) {
+			deleteFile();
+		}
+		let formData = new FormData();
+		let fileInput = $('input[name="uploadFile"]');
+		let fileList = fileInput[0].files;
+		let fileObj = fileList[0];
+		
+		if(!fileCheck(fileObj.name, fileObj.size)){
+			return false;
+		}
+		
+		alert("파일을 첨부하였습니다.");
+		
+		console.log("fileList :" + fileList);
+		console.log("fileObj :" + fileObj);
+		console.log("fileName :" + fileObj.name);
+		console.log("fileSize :" + fileObj.size);
+		console.log("fileType(MimeType) :" + fileObj.type);
+		
+		formData.append("uploadFile",fileObj);
+		
+		$.ajax({
+			url : '/member/uploadAjaxAction',
+			processData : false,
+			contentType : false,
+			data : formData,
+			type : 'POST',
+			dataType : 'json',
+			success : function(result) {
+				console.log(result);
+				showUploadImage(result);
+			},
+			error : function(result){
+				alert("이미지 파일이 아닙니다.");
+			}
+		});
+	});
+	
+	// 파일 체크
+	let regex = new RegExp("(.*?)\.(jpg|png)$");
+	let maxSize = 1048576; // 1MB
+	
+	function fileCheck(fileName, fileSize) {
+		
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		if(!regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	// 이미지 출력
+	function showUploadImage(uploadResultArr) {
+		
+		// 전달받은 데이터 검증
+		if(!uploadResultArr || uploadResultArr.length == 0) {
+			return
+		}
+		let uploadResult = $("#uploadResult");
+		
+		let obj = uploadResultArr[0];
+		
+		let str = "";
+		
+		let fileCallPath = obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName;
+		
+		str += "<div id='result_card'>";
+		str += "<img src='/member/display?fileName=" + fileCallPath +"'>";
+		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+		str += "<input type='hidden' name='imgeList[0].filename' value='" + obj.fileName + "'>";
+		str += "<input type='hidden' name='imgeList[0].uuid' value='" + obj.uuid + "'>";
+		str += "<input type='hidden' name='imgeList[0].uploadPath' value='" + obj.uploadPath + "'>";
+		str += "</div>";
+		
+		uploadResult.append(str);
+		
+	}
+	
+	// 파일 삭제
+	function deleteFile() {
+		
+		let targetFile = $(".imgDeleteBtn").data("file");
+		
+		let targetDiv = $("#result_card");
+		
+		$.ajax ({
+			
+			url : "/member/deleteFile",
+			data : {fileName : targetFile},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result) {
+				console.log(result);
+				
+				targetDiv.remove();
+				$("input[type='file']").val("");
+			},
+			error : function(result) {
+				console.log(result);
+				
+				alert("파일을 삭제하지 못했습니다.")
+			}
+		});
+	}
+	
+	// 이미지 삭제 버튼 작동
+	$("#uploadResult").on("click", ".imgDeleteBtn", function(e) {
+		
+		deleteFile();
+	});
 //	$(".btn btn-primary btn btn-block").click(function() {
 //		
 //		alert("로그인 버튼 작동");

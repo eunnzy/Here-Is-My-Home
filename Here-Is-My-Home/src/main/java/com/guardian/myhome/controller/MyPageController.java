@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.guardian.myhome.service.LessorService;
-import com.guardian.myhome.service.MemberService;
+import com.guardian.myhome.service.ImchaService;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
 	
 	@Autowired
-	private MemberService  memberservice;
+	private ImchaService  memberservice;
 	
 	@RequestMapping(value="/mypageImcha", method = RequestMethod.GET)
 	public String mypageImcha() {
@@ -28,15 +28,15 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/getMember")
-	public String getMember(MemberVO member, HttpServletRequest request) throws Exception {
+	public String getMember(ImchaVO member, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		MemberVO vo = (MemberVO) session.getAttribute("member");
+		ImchaVO vo = (ImchaVO) session.getAttribute("member");
 		System.out.println(vo.getImchaId());
 		member.setImchaId(vo.getImchaId());
 		memberservice.getMember(member);
-		System.out.println("닉네임" + member.getNickname());
+		System.out.println("닉네임" + vo.getNickname());
 		System.out.println(member.getImchaId());
-		session.setAttribute("member", memberservice.getMember(vo));
+		session.setAttribute("member", vo);
 		
 		return "mypage/getMember";
 	}
@@ -44,7 +44,7 @@ public class MyPageController {
 	
 	// 회원 정보 수정 페이지
 	@RequestMapping(value="/updateMember")
-	public String updateMember(MemberVO member, HttpServletRequest request) throws Exception {
+	public String updateMember(ImchaVO member, HttpServletRequest request) throws Exception {
 		
 //		 //1.session이 있고 + 2.session정보가 있으면 
 //	      if(session != null && session.getAttribute("member") != null) { 
@@ -56,7 +56,7 @@ public class MyPageController {
 		HttpSession session = request.getSession();
 		memberservice.updateMember(member);
 		session.setAttribute("member", memberservice.getMember(member));
-	    return "mypage/getMember";
+	    return "/mypage/getMember";
 			
 	}
 	
