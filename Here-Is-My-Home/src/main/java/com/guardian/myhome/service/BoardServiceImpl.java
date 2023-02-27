@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,41 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getTotalCount(cri);
 	}
 
+	// 로그인 전 
+	@Override
+	public List<BoardVO> beforeBoard(Criteria cri) {
+		log.info("before Board" + cri);
+		return mapper.beforeBoard(cri);
+	}
+				
+	// 로그인 후 
+	@Override
+	public List<BoardVO> afterBoard(Criteria cri) {
+		log.info("after Board");
+		return mapper.afterBoard(cri);
+	}
+	
+	// 로그인 전 갯수
+	@Override
+	public int beforeBoardCount(Criteria cri) {
+		log.info("before Board Count");
+		return mapper.beforeBoardCount(cri);
+	}	
+				
+	// 로그인 후 갯수
+	@Override
+	public int afterBoardCount(Criteria cri) {
+		log.info("after Board Count");
+		return mapper.afterBoardCount(cri);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	// 등록 
 	@Transactional
 	@Override
@@ -92,6 +128,15 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno) == 1;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 조회수 
 	@Override
 	public boolean viewsUp(Long bno) {
@@ -101,17 +146,28 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 내가 쓴 글 목록 리스트 
 	@Override
-	public List<BoardVO> getMyboard(String imchaid) {
-		log.info("get getMyboard......" + imchaid);
-		return mapper.getMyboard(imchaid);
+	public List<BoardVO> getMyboard(Criteria cri) {
+		log.info("get getMyboard......");
+		return mapper.getMyboard(cri);
 	}
 	
 	// 내가 쓴 글 갯수
-//	@Override
-//	public int getMyboardCount(String imchaid) {
-//		log.info("getMyboardCount");
-//		return mapper.getMyboardCount(imchaid);
-//	}
+	@Override
+	public int getMyboardCount(Criteria cri) {
+		log.info("getMyboardCount");
+		return mapper.getMyboardCount(cri);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 파일 업로드 조회
 	@Override
@@ -119,10 +175,6 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get Attach list by bno" + bno);
 		return attachMapper.findByBno(bno);
 	}
-	
-	
-	
-	
 	
 	// 좋아요 On
 	@Override

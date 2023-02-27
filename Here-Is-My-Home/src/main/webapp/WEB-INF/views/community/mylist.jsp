@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="/js/board_listBT.js"></script>
 <title>MyBoard List</title>
 </head>
 <body>
@@ -80,7 +79,7 @@
     	</div>
     	
     	<!-- 페이지이동 Form -->
-   		<form id = "myBoardForm" action="/community/list" method="get" >
+   		<form id = "myBoardForm" action="/community/mylist" method="get" >
     	<input type="hidden" name="pageNum" value="${mypageMaker.cri.pageNum }" >
     	<input type="hidden" name="amount" value="${mypageMaker.cri.amount }" >
     	</form>
@@ -92,22 +91,30 @@
     <!-- 자바스크립트 -->
     <script type="text/javascript">
 	$(document).ready(function() {
+		var imchaId = '<c:out value="${member.imchaId}" />';
+		var myBoardForm = $("#myBoardForm");
 		$("#listBT").on("click", function() {
 			self.location = "/community/list";
 		});
 		
-		var myBoardForm = $("#myBoardForm");
 		$(".page-item a").on("click", function(e) {
 			e.preventDefault();
-			myBoardForm.find("input[name='mypageMaker']").val($(this).attr("href"));
+			myBoardForm.find("input[name='pageNum']").val($(this).attr("href"));
 			myBoardForm.submit();
 		});
 		
 		$(".move").on("click", function(e) {
 			e.preventDefault();
 			myBoardForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+			myBoardForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
 			myBoardForm.attr("action", "/community/get");
 			myBoardForm.submit();
+		});
+		
+		history.replaceState({},null,null);
+		
+		$("#regBT").on("click", function() {
+			self.location = "/community/register";
 		});
 	});
 	</script>
