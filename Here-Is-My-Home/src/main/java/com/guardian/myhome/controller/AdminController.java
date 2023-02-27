@@ -23,11 +23,11 @@ import com.guardian.myhome.mapper.LessorMapper;
 import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.service.LessorService;
-import com.guardian.myhome.service.MemberService;
+import com.guardian.myhome.service.ImchaService;
 import com.guardian.myhome.vo.AdminVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 
 /*
 	회원 관련 기능

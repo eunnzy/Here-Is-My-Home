@@ -31,7 +31,7 @@
     
     
     <!-- 아이디 찾기  -->
-    <select id="findLessorId" resultType="com.guardian.myhome.vo.LessorVO">
+    <select id="findLessorId" resultType="java.lang.String">
     	select lessor_id AS lessorId from lessor_tb where lessor_nickname=#{lessorNickName} and phone = #{phone}
     </select>
  	 
@@ -69,5 +69,12 @@
       SET status = 1
       WHERE lessor_id = #{lessorId}
    </update>
+   
+   <!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+	
+		insert into lessorImg_tb(lessorId, fileName, uploadPath, uuid) values (#{lessorId}, #{fileName}, #{uploadPath}, #{uuid})
+	
+	</insert>
  	
  </mapper>

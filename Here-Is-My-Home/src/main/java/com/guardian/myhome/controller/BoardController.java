@@ -49,7 +49,7 @@ import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardLikesVO;
 import com.guardian.myhome.vo.BoardVO;
 import com.guardian.myhome.vo.Criteria;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 import com.guardian.myhome.vo.PageDTO;
 import com.guardian.myhome.vo.ReplyVO;
 

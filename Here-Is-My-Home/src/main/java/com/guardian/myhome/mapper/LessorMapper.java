@@ -1,6 +1,7 @@
 package com.guardian.myhome.mapper;
 
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.LessorImgVO;
 
 public interface LessorMapper {
 
@@ -15,7 +16,7 @@ public interface LessorMapper {
 	
 	// 로그인 
 	public LessorVO lessorLogin(LessorVO lessor);
-
+	
 	public LessorVO getLessor(LessorVO lessor);
 
 	public void updateLessor(LessorVO lessor);
@@ -25,6 +26,9 @@ public interface LessorMapper {
 	
 	// 거절
 	public int failed(String lessorId);
+	
+	// 이미지 등록
+	public void imgEnroll(LessorImgVO lessorImg);
 	
 
 }

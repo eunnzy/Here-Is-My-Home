@@ -90,7 +90,7 @@
 								<div class="btn-group" role="group"> 
 									<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-										<a class="dropdown-item" href="/member/userJoin">일반회원가입</a> 
+										<a class="dropdown-item" href="/member/imchaJoin">일반회원가입</a> 
 										<a class="dropdown-item" href="/member/lessorJoin">중개인회원가입</a>
 									</div>
 								</div>
