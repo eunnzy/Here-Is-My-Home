@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/imchaLogin.css" rel="stylesheet"></link>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -138,19 +139,12 @@
 
 
 
-  <!-- footer -->
-  <div style="background-color: #dbe2f0; text-align: center;">
-    <br><br>
-    <dib>
-        <a href="#">이용약관</a>   
-        <a href="#">개인정보처리방침</a>
-        <a href="#">프로젝트소개</a><hr>
-        <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
-    </div>
+      <footer>
+       <jsp:include page="../footer.jsp"></jsp:include>
+    </footer>
     
     <br><br><br><br>
   </div>
-
   <script type="text/javascript"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>

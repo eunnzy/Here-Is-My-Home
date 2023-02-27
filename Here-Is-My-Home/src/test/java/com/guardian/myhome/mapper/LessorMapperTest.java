@@ -65,7 +65,7 @@ public class LessorMapperTest {
 		
 		LessorImgVO vo = new LessorImgVO();
 		
-		vo.setLessorId("test");
+		vo.setLessorId("lee");
 		vo.setFileName("test");
 		vo.setUploadPath("test");
 		vo.setUuid("test2");

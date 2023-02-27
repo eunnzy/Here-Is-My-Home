@@ -71,10 +71,8 @@
    </update>
    
    <!-- 이미지 등록 -->
-	<insert id="imageEnroll">
-	
-		insert into lessorImg_tb(lessorId, fileName, uploadPath, uuid) values (#{lessorId}, #{fileName}, #{uploadPath}, #{uuid})
-	
+	<insert id="imgEnroll">
+		insert into lessorImg_tb(lessor_Id, fileName, uploadPath, uuid) values (#{lessorId}, #{fileName}, #{uploadPath}, #{uuid})
 	</insert>
  	
  </mapper>

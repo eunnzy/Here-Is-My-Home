@@ -59,6 +59,7 @@ public class LessorController {
 	@RequestMapping(value = "/lessorJoin", method = RequestMethod.POST)
 	public String joinPOST(LessorVO lessor) throws Exception{
 		
+		System.out.println(lessor);
 		lessorservice.lessorJoin(lessor);
 		
 		return "redirect:/member/lessorLogin";
@@ -251,6 +252,7 @@ public class LessorController {
 			return "member/lessorList";
 		}
 
+		
 		// 이미지파일 업로드
 		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		public ResponseEntity<List<LessorImgVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
@@ -259,6 +261,7 @@ public class LessorController {
 			
 			// 날짜 폴더 경로
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
 			Date date = new Date();
 			String str  = sdf.format(date);
 			String datePath = str.replace("-", File.separator);
