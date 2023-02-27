@@ -69,7 +69,7 @@ public class BoardController {
 	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
 		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		ImchaVO imcha = (ImchaVO) session.getAttribute("imcha");
 		if(cri.getTypeArr() == null) {
 			cri.setType("");
 		}
@@ -77,7 +77,7 @@ public class BoardController {
 			cri.setKeyword("");
 		}
 		
-		if(member == null) {
+		if(imcha == null) {
 			log.info("before Board" + cri);
 			model.addAttribute("list", service.beforeBoard(cri));
 			
@@ -87,8 +87,8 @@ public class BoardController {
 			model.addAttribute("pageMaker", dto);
 			log.info("total : " + dto);
 		} else {
-			String sido1 = member.getSido1();
-			String gugun1 = member.getGugun1();
+			String sido1 = imcha.getSido1();
+			String gugun1 = imcha.getGugun1();
 			cri.setSido1(sido1);
 			cri.setGugun1(gugun1);
 			log.info("after Board cri : " + cri);
@@ -177,8 +177,8 @@ public class BoardController {
 	@GetMapping("/mylist")
 	public String mylist(Model model, HttpServletRequest request, Criteria cri) {
 		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		cri.setImchaid(member.getImchaId());
+		ImchaVO imcha = (ImchaVO) session.getAttribute("imcha");
+		cri.setImchaid(imcha.getImchaId());
 		log.info("mylist: " + cri);
 		model.addAttribute("mylist", service.getMyboard(cri));
 		

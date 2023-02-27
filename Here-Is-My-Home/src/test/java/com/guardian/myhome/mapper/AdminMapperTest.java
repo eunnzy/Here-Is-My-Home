@@ -38,7 +38,7 @@ public class AdminMapperTest {
 		adminmapper.adminJoin(admin);
 	}
 	
-	//@Test
+	//@Testz
 	public void adminLogin() throws Exception {
 		AdminVO admin = new AdminVO();
 		

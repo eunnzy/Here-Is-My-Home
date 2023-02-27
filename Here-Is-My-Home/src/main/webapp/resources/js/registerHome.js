@@ -111,13 +111,9 @@ $(".resultImg").on("click", ".imgDelete", function(e){
 	
 });
 	
-function overlay() {
-	
-}	
-	
 	
 // 등록하기 버튼 클릭시 submit() 전송	
-$("#updateBtn").on("click",function(e){	
+$("#addBtn").on("click",function(e){	
 	e.preventDefault();
 	
 	let optionList = [];	// 옵션 체크 한 것 배열로 넘기기.
@@ -149,7 +145,7 @@ $("#updateBtn").on("click",function(e){
 		alert("사진은 최소 2장 첨부해야 합니다.");
 		return false;
 	}
-		
+	
 	let homeData= {
 	    		"homeType" : $("input[name=homeType]").val(),
 	    		"addr1" : $("input[name=addr1]").val(),
