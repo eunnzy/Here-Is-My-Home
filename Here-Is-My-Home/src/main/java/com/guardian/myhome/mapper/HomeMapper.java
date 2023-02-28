@@ -31,4 +31,6 @@ public interface HomeMapper {
 	int deleteHomeOption(int homeNum);	// 매물 옵션 삭제
 	int deleteHomeImg(int homeNum);	// 매물 사진 정보 삭제
 	
+	public List<HomePreviewVO> getListByLessorId(String lessorId);
+	
 } 

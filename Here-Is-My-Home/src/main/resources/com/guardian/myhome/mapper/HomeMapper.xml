@@ -151,5 +151,15 @@
  		update Home_Price_tb set deposit = #{deposit}, monthly = #{monthly}, admin_cost = #{adminCost} where home_num = #{homeNum}
  	</update>
  	
+ 	<select id="selectListByLessorId" resultType="com.guardian.myhome.vo.HomePreviewVO">
+ 		select  home_num AS homeNum, home_type AS homeType, addr1, addr2, addr3, latitude, longitude,
+					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
+					home_title AS homeTitle, home_valid AS homeValid, lessor_id AS lessorId
+		from Home_tb
+			join Home_Price_tb using(home_num)
+		where lessor_id=#{lessorId}
+ 	</select>
+ 	
+ 	
  </mapper>
  

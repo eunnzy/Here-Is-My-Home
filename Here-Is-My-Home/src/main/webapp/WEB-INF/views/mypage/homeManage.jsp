@@ -22,13 +22,15 @@
 
   <div class="container">
     <div class="row ">
-    <c:forEach items="${homeManagement}" var="management">
+    <c:forEach items="${manageList}" var="manageList">
       <div class="col-4">
         <div class="card bg-light mb-3">
-          <h3 class="card-header">Card header</h3>
+          <h3 class="card-header">${manageList.homeTitle}</h3>
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+            <h5 class="card-title">${manageList.homeType }</h5>
+            <h6 class="card-subtitle text-muted">${manageList.rentType }</h6>
+            <p></p>
+            <h6 class="card-subtitle text-muted">보증금 : ${manageList.deposit }, 월세 : ${manageList.monthly}</h6>
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
             <rect width="100%" height="100%" fill="#868e96"></rect>
@@ -36,12 +38,10 @@
           </svg>
           
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">${manageList.addr2} ${manageList.addr3}</li>
           </ul>
           <div class="card-body">
-            <a href="#" class="card-link">수정</a>
+            <a href="/home/manage/modify?homeNum=${manageList.homeNum}" class="card-link">수정</a>
             <a href="#" class="card-link">삭제</a>
           </div>
          <!--  <div class="card-footer text-muted">

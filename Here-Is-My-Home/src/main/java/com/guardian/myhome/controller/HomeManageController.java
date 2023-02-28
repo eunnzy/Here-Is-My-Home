@@ -25,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,11 +32,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.guardian.myhome.mapper.HomeMapper;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
+import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.LessorVO;
+import com.guardian.myhome.vo.LikeVO;
 
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -52,10 +55,21 @@ public class HomeManageController {
 	@Autowired
 	HomeService homeService;
 	
+	@Autowired
+	HomeMapper homeMapper;
+	
 	@RequestMapping("/list")
-	public String manageList() {
+	public String getHomeList(Model model,  HttpServletRequest request) {
+		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	// 글 등록 아이디
+		List<HomePreviewVO> manageList = null;
+		manageList = homeService.getListByLessorId(lessorVO.getLessorId());
+		System.out.println(manageList);
+		
+		model.addAttribute("manageList", manageList);
 		return "mypage/homeManage";
 	}
+	
+	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerForm() {

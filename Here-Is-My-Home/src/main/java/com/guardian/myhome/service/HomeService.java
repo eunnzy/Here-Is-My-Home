@@ -18,5 +18,7 @@ public interface HomeService {
 	String convertMoneyUnit(long money); 
 	HomeImgVO previewHomeImg(int homeNum);	// 매물 미리보기시 나올 사진
 	int modifyHomeInfo(Map<String, Object> modifyHome);	// 매물 정보 수정
+	public List<HomePreviewVO>  getListByLessorId(String lessorId); // 매물 리스트
+	public void deleteManageList(String lessorId);		// 매물 삭제
 	
 }
