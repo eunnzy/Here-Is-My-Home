@@ -84,13 +84,13 @@ public class HomeDAOImpl implements HomeDAO{
 	public int deleteHomeOption(int homeNum) {
 		return sqlSession.delete(HOMEMAPPER + "deleteHomeOption", homeNum);
 	}
-
-	@Override
-	public List<HomePreviewVO> selectListByLessorId(String lessorId) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(HOMEMAPPER + "selectListByLessorId", lessorId);
-		
-	}
+//
+//	@Override
+//	public List<HomePreviewVO> selectListByLessorId(String lessorId) {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectList(HOMEMAPPER + "selectListByLessorId", lessorId);
+//		
+//	}
 
 
 	

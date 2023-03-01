@@ -211,23 +211,29 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	
-	@Override
-	public List<HomePreviewVO> getListByLessorId(String lessorId) {
-		List<HomePreviewVO> manageList = null;
-		manageList = homeDAO.selectListByLessorId(lessorId);
-		
-		for(int i=0; i<manageList.size(); i++) {
-			int homeNum = manageList.get(i).getHomeNum();
-			manageList.get(i).setHomeImg(homeDAO.selectPreviewHomeImg(homeNum));
-			manageList.get(i).setOptionList(homeDAO.selectHomeOptionList(homeNum));
-		}
-		return manageList;
-	}
+//	@Override
+//	public List<HomePreviewVO> getListByLessorId(String lessorId) {
+//		List<HomePreviewVO> manageList = null;
+//		manageList = homeDAO.selectListByLessorId(lessorId);
+//		
+//		for(int i=0; i<manageList.size(); i++) {
+//			int homeNum = manageList.get(i).getHomeNum();
+//			manageList.get(i).setHomeImg(homeDAO.selectPreviewHomeImg(homeNum));
+//			manageList.get(i).setOptionList(homeDAO.selectHomeOptionList(homeNum));
+//		}
+//		return manageList;
+//	}
 
 	@Override
 	public void deleteManageList(String lessorId) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<HomePreviewVO> getListByLessorId(String lessorId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
