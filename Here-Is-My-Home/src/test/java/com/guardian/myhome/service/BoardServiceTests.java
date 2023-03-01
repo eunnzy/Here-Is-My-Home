@@ -68,10 +68,10 @@ public class BoardServiceTests {
 	
 	// 전국 목록 
 	// @Test
-	public void testGetAllList() {
-		Criteria cri = new Criteria();
-		service.getList(cri).forEach(board -> log.info(board));
-	}
+//	public void testGetAllList() {
+//		Criteria cri = new Criteria();
+//		service.getList(cri).forEach(board -> log.info(board));
+//	}
 	
 	// 조회수 
 	// @Test

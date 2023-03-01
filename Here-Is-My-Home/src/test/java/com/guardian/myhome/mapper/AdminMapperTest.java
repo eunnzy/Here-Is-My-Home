@@ -12,7 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.vo.AdminVO;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -38,7 +38,7 @@ public class AdminMapperTest {
 		adminmapper.adminJoin(admin);
 	}
 	
-	//@Test
+	//@Testz
 	public void adminLogin() throws Exception {
 		AdminVO admin = new AdminVO();
 		

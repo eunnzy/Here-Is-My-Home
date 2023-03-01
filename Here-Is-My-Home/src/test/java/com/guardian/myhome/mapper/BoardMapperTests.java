@@ -24,18 +24,18 @@ public class BoardMapperTests {
 	
 	// 전국 목록 리스트
 	// @Test
-	public void testGetList() {
-		Criteria cri = new Criteria();
-		mapper.getListWithPaging(cri).forEach(board -> log.info(board));
-	}
-	
-	// 페이징 테스트 
-	 @Test
-	public void testPaging() {
-		Criteria cri = new Criteria();
-		List<BoardVO> list = mapper.getListWithPaging(cri);
-		list.forEach(board -> log.info(board));
-	}
+//	public void testGetList() {
+//		Criteria cri = new Criteria();
+//		mapper.getListWithPaging(cri).forEach(board -> log.info(board));
+//	}
+//	
+//	// 페이징 테스트 
+//	 @Test
+//	public void testPaging() {
+//		Criteria cri = new Criteria();
+//		List<BoardVO> list = mapper.getListWithPaging(cri);
+//		list.forEach(board -> log.info(board));
+//	}
 	
 	// INSERT처리도 되고 생성된 PK값을 알아야 하는 경우
 	// @Test

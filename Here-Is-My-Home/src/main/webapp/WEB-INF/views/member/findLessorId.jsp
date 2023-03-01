@@ -52,7 +52,7 @@
         <h1 style="text-align:center;"  class="mb-3">Find My Account</h1>
           <div class="row">
             <div class="mb-3">   
-            <form action="${pageContext.request.contextPath }/member/findLessorId" id="findLessorId" method="post" name="findLessorId">
+            <form  method="post" name="findLessorId">
                <div class="row">
                   <div class="col-12 mb-4">
                      <label for="lessor_name">닉네임 </label> 
@@ -64,7 +64,7 @@
                   <br>
                </div>
                         
-            <button class="btn btn-primary btn btn-block" style="width:360pt;height:40pt;margin:auto;" type="submit" value="check">아이디 찾기</button>
+            <button class="btn btn-primary btn btn-block" id="findId" style="width:360pt;height:40pt;margin:auto;" type="button" value="check">아이디 찾기</button>
                <br><br>
             </div>
             <br>
@@ -80,7 +80,9 @@
 
 <script type="text/javascript">
    $(document).ready(function(){
-      $('#findLessorId').submit(function(){
+	   
+	   let formData = $("#findLessorId");
+      $('#findId').click(function(){
          // alert("성공!");
          if($('#lessorNickName').val() == ''){
             alert("닉네임을 입력하세요.");
@@ -92,27 +94,51 @@
             return false;
          }
          
+         let lessor = {
+        		 "lessorNickName" : $('#lessorNickName').val(),  "phone" : $('#phone').val()
+        	}
+         
+         $.ajax({
+        	data: lessor,
+         	url: "/member/findLessorId",
+         	type : 'POST',
+			success : function(result) {
+				if(result == 1) {
+					const url = "/member/resultLessorId"
+					window.open(url,"아이디찾기",'width=500px, height=700px, scrolbars=yes, resizeable=no');
+				}
+				else {
+					alert("입력하신 정보가 올바르지 않습니다.");
+				}
+			},
+         	error : function(result) {
+				console.log(result);
+				
+				alert("전송 실패");
+			}
+         })
+         
+         
+         formData.submit();
+         
+       
       });
+      
       
       
    });
    
+  /*  $("#findId").on("click", function(e) {
+	   const url = "/member/resultLessorId"
+   	   window.open(url,"아이디찾기",'width=500px, height=700px, scrolbars=yes, resizeable=no');
+   }) */
 
 </script>
 
 
-<!-- footer -->   
-<div style="background-color: #dbe2f0; text-align: center;">
-    <br><br>
-    <dib>
-        <a href="#">이용약관</a>   
-        <a href="#">개인정보처리방침</a>
-        <a href="#">프로젝트소개</a><hr>
-        <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
-    </div>
-    
-    <br><br><br><br>
-  </div>
+    <footer>
+       <jsp:include page="../footer.jsp"></jsp:include>
+    </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
