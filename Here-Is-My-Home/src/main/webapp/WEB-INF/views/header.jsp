@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm navbar-primary bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
       <div class="collapse navbar-collapse" id="navbarColor03">

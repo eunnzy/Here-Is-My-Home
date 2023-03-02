@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guardian.myhome.service.HomeService;
-import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomePreviewVO;
+import com.guardian.myhome.vo.HomeReportVO;
+import com.guardian.myhome.vo.ImchaVO;
 
 /*
 	매물 관련 - 상세보기, 검색 등.
@@ -91,8 +92,22 @@ public class HomeController {
 	
 	@RequestMapping(value="/report", method=RequestMethod.POST) 
 	@ResponseBody
-	public int reportHome(HttpServletRequest request) {
-			
-		return 0;
+	public int reportHome(@RequestParam int homeNum, @RequestParam int reportType, @RequestParam String reportContent, HttpServletRequest request) {
+		ImchaVO imcha = (ImchaVO) request.getSession().getAttribute("imcha");
+		
+		System.out.println(imcha);
+		
+		if(imcha == null) {
+			return 0;
+		}
+		
+		HomeReportVO homeReportVO = new HomeReportVO();
+		
+		homeReportVO.setHomeNum(homeNum);
+		homeReportVO.setImchaId(imcha.getImchaId());
+		homeReportVO.setReportType(reportType);
+		homeReportVO.setReportContent(reportContent);
+		
+		return homeService.reportHome(homeReportVO);
 	}
 }

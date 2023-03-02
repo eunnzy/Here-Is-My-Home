@@ -1,7 +1,6 @@
 var map;
 let homeMarker = [];	// 매물 표시할 마커를 담을 배열
-let content = [];
-
+let categoryStatus=false;
 
 $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위치 내 매물 리스트 보여주기 위해*/
 	let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -12,7 +11,7 @@ $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위�
 	
 	map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	let zoomControl = new kakao.maps.ZoomControl(); // 지도 줌 컨트롤러
-	map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
 	
 	/*------------ searchHome 페이지 들어갈 때 사용자의 현재 위치 받아와서 그 위치에 있는 매물 리스트 보여줌 -------------*/
@@ -22,26 +21,27 @@ $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위�
 			        lon = position.coords.longitude; // 경도
 			var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 			         // 인포윈도우에 표시될 내용입니다
-			map.setCenter(locPosition);	    
+			map.setCenter(locPosition);	 
+			getHomeInBounds();
+			
+			
 			kakao.maps.event.addListener(map, 'idle', getHomeInBounds);
-			// getHomeInBounds();
+			
 		});
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
 	}
 	
 	
-		
-	
 });
+
+var ps = new kakao.maps.services.Places(); 	// 장소 검색 객체 
 
 // 지도 경계에서의 매물 정보 가져오기
 function getHomeInBounds() {
 	let homeList = $(".home-card");  
 		homeList.remove();	// 기존의 리스트 목록 삭제
 	    removeMarker();	// 기존의 마커 제거
-	console.log("getHomeInBounds()");
-	
 	
 	let bounds = map.getBounds();	// 지도 범위 가져오기
 	
@@ -77,7 +77,11 @@ function getHomeInBounds() {
 				console.log(data.length);
 				homeData = JSON.parse(JSON.stringify(data));	// 필터 검색을 위한 객체 저장
 				console.log("data 값 : " + homeData);
-				if(filterBtnStatus !== true) {
+				if(filterBtnStatus != true) {
+					let homeList = $(".home-card");  
+						homeList.remove();	// 기존의 리스트 목록 삭제
+					    removeMarker();	// 기존의 마커 제거
+								
 					for(let i=0; i<data.length; i++) {
 						displayHomeList(data[i], i);	// 매물 정보 리스트 출력
 					}
@@ -116,8 +120,8 @@ function checkFilter(data) {
 		if(data.rentType == rentTypeCheck[i])
 			rentStatus = true;
 	}
-	if(rentStatus == false) return rentStatus;
 	
+	if(rentStatus == false) return rentStatus;
 	
 	// 돈 범위 체크
 	if((data.deposit/10000) > deposit)
@@ -171,7 +175,6 @@ function checkFilter(data) {
 	return true;
 }
 
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 매물 리스트 출력하기
 function displayHomeList(data, i) {
@@ -186,7 +189,7 @@ function displayHomeList(data, i) {
 }
 
 
-
+// 매물 정보 추가 
 function getHomeItem(data) {
 	homeImgFile = data.homeImg.homeImgPath + "/" + data.homeImg.homeImgName;	// 사진경로
 	
@@ -254,18 +257,22 @@ $("#searchBtn").click(function() {
 		alert("검색어를 입력해주세요!");
 		return false;
 	}
+	
 	ps.keywordSearch(searchInput, placesSearchCB);
 });
 
 
-var ps = new kakao.maps.services.Places(); 
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-		
-       	displayPlaces(data);	// 검색한 장소 찾기
-		
+		console.log(categoryStatus);	
+		if(categoryStatus == true) {
+			categoryDisplay(data);
+		}else {
+	       	displayPlaces(data);	// 검색한 장소 찾기
+		}
+			
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
         return;
@@ -277,23 +284,20 @@ function placesSearchCB(data, status, pagination) {
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-    let homeList = $(".home-list");  
-    
-    homeList.children().remove();	// 기존의 리스트 목록 삭제
-    removeMarker();	// 기존의 마커 제거
- 
+	console.log("displayPlace : " + places);		
+	
  	var bounds = new kakao.maps.LatLngBounds(); 	// 지도 범위 재 설정
     var placePosition = new kakao.maps.LatLng(places[0].y, places[0].x);
     bounds.extend(placePosition);
  	
-     //
-    // 검색된 장소 위치를 기준으로 지도 범위를 재설정
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정 & 매물 정보가져오기.
   	map.setBounds(bounds);
   	map.setLevel(3);
-  	getHomeInBounds();
+  	getHomeInBounds();	
 }
 
-// 인포 윈도우 생성
+
+// 마커 오버레이 생성
 function getOverlay(data) {
 	let homeImg =  data.homeImg.homeImgPath + "/t_" + data.homeImg.homeImgName;	// 사진경로
 	console.log(homeImg);
@@ -319,7 +323,7 @@ function getOverlay(data) {
 }
 
 
-// 마커 삭제
+// 매물 마커 삭제
 function removeMarker() {
     for (var i = 0; i < homeMarker.length; i++ ) {
         homeMarker[i].setMap(null);
@@ -327,8 +331,7 @@ function removeMarker() {
     homeMarker = [];
 }
 
-
-// 돈 format
+// 돈(관리비, 월세, 보증금 등) 단위 변환
 function convertMoney(money) {	
 	let convert = ""; 
 	money = money / 10000;
@@ -346,7 +349,6 @@ function convertMoney(money) {
 	
 	return convert;
 }
-
 
 // 상세보기 페이지 이동
 function detailHome(homeNum) {
