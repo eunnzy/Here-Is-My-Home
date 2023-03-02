@@ -24,7 +24,7 @@
  	
  	<!-- 로그인 -->
  	<select id="lessorLogin" resultType="com.guardian.myhome.vo.LessorVO">
-       select lessor_id AS lessorId, lessor_pw AS lessorPw, lessor_nickname AS lessorNickName, phone, user_roll AS userRoll,status,
+       select lessor_id AS lessorId, lessor_pw AS lessorPw, lessor_nickname AS lessorNickName, name, phone, user_roll AS userRoll,status,
              lessor_addr1 AS lessorAddr1, lessor_addr2 AS lessorAddr2, lessor_addr3 AS lessorAddr3
        from lessor_tb where lessor_Id = #{lessorId} and lessor_pw = #{lessorPw}
     </select>

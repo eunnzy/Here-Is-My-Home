@@ -22,7 +22,8 @@ $("#sirenBtn").click(function(){
 			return;
 		}
 		
-		if($("#agreeCheck").is("checked") == false) {
+		
+		if($("#agreeCheck").is(":checked") == false) {
 			alert("약관에 동의해주세요.");
 			return;
 		}
