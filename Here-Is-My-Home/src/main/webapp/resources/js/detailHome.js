@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 		let basicInfo = $(".basic-info")
 		function convertMoney(money) {	
@@ -23,7 +24,7 @@ $(document).ready(function() {
 		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
 		    center: new kakao.maps.LatLng(latitude, logitude), // 지도의 중심좌표
-		    level: 3 // 지도의 확대 레벨 
+		    level: 4 // 지도의 확대 레벨 
 		};
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
@@ -39,19 +40,4 @@ $(document).ready(function() {
 
 });
 
-$("#sirenBtn").click(function(){
-	$(".report-modal").css("display", "flex");
-});
 
-$(".report-close").click(function() {
-	$(".report-modal").css("display", "none");
-})
-
-$("#reservModalBtn").click(function() {
-	$(".reserv-modal").css("display", "flex");
-})
-
-$(".reserv-close").click(function() {
-	$(".reserv-modal").css("display", "none");
-})
-	

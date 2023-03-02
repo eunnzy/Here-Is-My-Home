@@ -15,56 +15,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link href="/css/registerHome.css"  type="text/css" rel="stylesheet" >
 	<style>
-		.home-container {
-			margin-top: 30px;
-			padding: 30px;
-			height:auto;
-			border-radius: 10px;
-			background-color: white;
-		}
-		.addBtn{
-			margin: auto;
-			display: block;
-			padding: 15px 40px;
-			font-size: 20px;
-			border: none;
-			cursor:pointer;
-			background-color: #BEE9FB;
-		}
-		table {
-			border: 1px solid #8c8c8c;
-		}
-		thead {
-			border-bottom: 1px solid #8c8c8c;
-		}
-		.img-div img{
-			width:100%;
-		    height: auto;
-		    display: flex;
-		    margin-top: 15px;
-		}
-		.img-div {
-			display:flex;
-			margin-top: 25px;
-			position: relative;
-		}
-		.imgDelete{
-		    position: absolute;
-		    top: 10px;
-		    padding:3px;
-		    right: 0px;
-		    background-color: #7E7E7E;
-		    color: white;
-		    font-weight: 900;
-		    width: 30px;
-		    height: 30px;
-		    line-height: 26px;
-		    text-align: center;
-		    display: inline-block;
-		    cursor: pointer;	
-		}
-	/*  
-		photo 이미지 출처 : 
+	/*		photo 이미지 출처 : 
 		https://www.flaticon.com/free-icon/picture_2659360?term=photo&page=1&position=8&origin=tag&related_id=2659360 
 	*/		
     </style>
@@ -75,7 +26,7 @@
 	</header>
 	
 	<div class="home-container col-md-9 mx-auto">
-		<h1 class="mt-3 mb-3"> 방 올리기 </h1>
+		<h1 class="mt-3 mb-3"> 매물 올리기 </h1>
 		<div class="add-notice p-3 mx-auto mb-5" >
         	<ul>
         		<li>전/월세 매물만 등록할 수 있습니다.</li>
