@@ -35,9 +35,10 @@ textarea {
 
 .home-container {
 	margin-top: 30px;
+	margin-bottom: 10px;
 	padding: 30px;
 	height:auto;
-	border-radius: 10px;
+	border: 1px solid  #ddd;
 	background-color: white;
 }
 .addBtn{

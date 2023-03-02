@@ -14,6 +14,7 @@ import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 
 @Service
@@ -208,6 +209,11 @@ public class HomeServiceImpl implements HomeService{
 		homeDAO.updateHomePrice(homePriceVO);
 		
 		return 1;
+	}
+
+	@Override
+	public int reportHome(HomeReportVO homeReportVO) {
+		return homeDAO.insertHomeReport(homeReportVO);
 	}
 
 

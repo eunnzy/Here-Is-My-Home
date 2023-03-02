@@ -61,3 +61,7 @@ body {
 .reserv-content > td {
 	color: white;
 }
+.option-list {
+	width: 32px;
+	height:32px;
+}
