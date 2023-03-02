@@ -110,11 +110,11 @@ public class LessorServiceImpl implements LessorService {
 		
 	}
 
-	@Override
-	public int failed(String lessorId) throws Exception {
-		return lessormapper.failed(lessorId);
-		
-	}
+//	@Override
+//	public int failed(String lessorId) throws Exception {
+//		return lessormapper.failed(lessorId);
+//		
+//	}
 	
 	@Override
 	public int imgEnroll(LessorImgVO lessorImg) throws Exception {

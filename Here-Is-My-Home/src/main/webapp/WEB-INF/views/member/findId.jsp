@@ -31,7 +31,7 @@
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
       }
     </style>
-<title>아이디 찾기</title>   
+<title>아이디 찾기</title>     
 </head>
 <body>
 <!-- 네브바 -->
@@ -52,7 +52,7 @@
         <h1 style="text-align:center;"  class="mb-3">Find My Account</h1>
           <div class="row">
             <div class="mb-3">   
-            <form  method="post" name="findImchaId">
+            <form  method="post" name="findId">
                <div class="row">
                   <div class="col-12 mb-4">
                      <label for="imcha_name">닉네임 </label> 
@@ -81,7 +81,7 @@
 <script type="text/javascript">
    $(document).ready(function(){
 	   
-	   let formDate = $('findImchaId');
+	   let formData = $("#findId");
 	   $('#findId').click(function(){
          // alert("성공!");
          if($('#nickname').val() == ''){

@@ -15,11 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
@@ -34,6 +36,9 @@ import com.guardian.myhome.vo.ImchaVO;
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	private HomeDAO homedao;
 	
 	// 매물 상세보기
 	@RequestMapping("/detail")	
@@ -109,5 +114,14 @@ public class HomeController {
 		homeReportVO.setReportContent(reportContent);
 		
 		return homeService.reportHome(homeReportVO);
+	}
+	
+	// 허위 매물 목록 리스트
+	@GetMapping("/reportHome")
+	public String HomeReport(Model model) {
+		System.out.println("/HomeList 요청");
+		List<HomeReportVO> list = homedao.selectReportHomeList();
+		model.addAttribute("list", list);
+		return "home/reportHome";
 	}
 }

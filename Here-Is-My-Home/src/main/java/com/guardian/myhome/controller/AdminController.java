@@ -19,20 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.mapper.LessorMapper;
 import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.service.ImchaService;
 import com.guardian.myhome.vo.AdminVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.LessorVO;
 import com.guardian.myhome.vo.ImchaVO;
 
-/*
-	회원 관련 기능
-	
- */
 
 @Controller
 @RequestMapping("/admin")
@@ -44,6 +42,7 @@ public class AdminController {
 	@Autowired
 	private LessorService lessorservice;
 	
+
 	
 	// 관리자 회원가입
 	@RequestMapping(value = "/adminJoin", method = RequestMethod.GET)
@@ -138,12 +137,20 @@ public class AdminController {
 		
 	}
 	
-	@ResponseBody
-	@PostMapping("/failId")
-	public void failId(String lessorId) throws Exception {
-		System.out.println(lessorId);
-		lessorservice.failed(lessorId);
-	}
+//	@ResponseBody
+//	@PostMapping("/failId")
+//	public void failId(String lessorId) throws Exception {
+//		System.out.println(lessorId);
+//		lessorservice.failed(lessorId);
+//	}
 	
+//	// 허위 매물 목록 리스트
+//	@GetMapping("/reportHome")
+//	public String HomeReport(Model model) {
+//		System.out.println("/HomeList 요청");
+//		List<HomeReportVO> list = homedao.selectReportHomeList();
+//		model.addAttribute("list", list);
+//		return "admin/reportHome";
+//	}
 }
 

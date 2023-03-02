@@ -22,10 +22,10 @@ $("#sirenBtn").click(function(){
 			return;
 		}
 		
-		if($("#agreeCheck").is("checked") == false) {
-			alert("약관에 동의해주세요.");
-			return;
-		}
+		if($("#agreeCheck").is(":checked") == false) {
+	         alert("약관에 동의해주세요.");
+	         return;
+	      }
 		
 		$.ajax({
 			data: { "homeNum": homeNum, "reportType": reportType, "reportContent": reportContent},

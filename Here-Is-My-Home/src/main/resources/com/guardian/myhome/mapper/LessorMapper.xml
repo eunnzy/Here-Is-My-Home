@@ -59,6 +59,7 @@
  		where lessor_id=#{lessorId}
  	</update>
  	
+ 	<!-- 중개인 목록 -->
  	<select id="lessorList" resultType="com.guardian.myhome.vo.LessorVO">
  		select lessor_id AS lessorId, name, lessor_nickname AS lessorNickName, jgs_name AS jgsName, jgs_num AS jgsNum,enroll_Date AS enrollDate,status from lessor_tb 
  	</select>

@@ -91,4 +91,9 @@ public class HomeDAOImpl implements HomeDAO{
 		return sqlSession.delete(HOMEMAPPER + "deleteHomeOption", homeNum);
 	}
 
+	@Override
+	public List<HomeReportVO> selectReportHomeList() {
+
+		return sqlSession.selectList(HOMEMAPPER + "selectReprotHomeList");
+	}
 }

@@ -44,7 +44,7 @@ public interface LessorService {
 	public int successId(String lessorId) throws Exception;
 	
 	// 회원가입 거절
-	public int failed(String lessorId) throws Exception;
+//	public int failed(String lessorId) throws Exception;
 	
 	// 이미지 업로드
 	public int imgEnroll(LessorImgVO lessorImg) throws Exception;

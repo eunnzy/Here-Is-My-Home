@@ -1,39 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="report-modal">
-	<div class="report-wrap">
-		<div class="report-title">매물 신고 하기</div>
-		<div class="report-close"><i class='bi bi-x-lg'></i></div>
-		<div class="report-content">
-			<table class="table">
-				<tr>
-					<td style="color: white;">신고 유형</td>
-					<td style="color: white;">
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reportType" value="1">
-							<label class="form-check-label" >등록된 정보가 일치하지 않음</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reportType" value="2">
-							<label class="form-check-label" >이미 계약이 완료된 매물임</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio"name="reportType" value="3">
-							<label class="form-check-label" >기타</label>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="color: white;"> 신고 내용 </td>
-					<td> <textarea class="form-control"  name="reportContent" id="reportContent" style="height: 200px" placeholder="신고 유형이 기타인 경우 신고 이유를 작성해주세요"></textarea>
-				</tr>
-			</table>
-		</div>
-		<div class="mb-3">
-			<input class="form-check-input" type="checkbox" id="agreeCheck"> 
-			<label class="form-check-lable" style="color: white">위 내용에 동의 합니다</label>
-		</div>
-		<div class="d-grid gap-3 mx-auto">
-			<button type="button" class="btn btn-md btn-success" id="reportBtn">신고하기</button>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<div class="bs-docs-section row">
+			<div class="col-lg-12">
+				<br><br>
+				<h1 id="tables" style="text-align: center;">신고매물 목록</h1>
+				<br><br>
+				
+				<div class="bs-component">
+					<table class="table table-hover" style="text-align: center">
+					<tr>
+						<th scope="col" style="width: 15%;">신고 번호</th> 
+						<th scope="col" style="width: 15%;">매물 번호</th> 
+						<th scope="col" style="width: 15%;">신고자</th>
+						<th scope="col" style="width: 15%;">신고 유형</th> 
+						<th scope="col" style="width: 30%;">신고 내용</th> 
+						<th scope="col" style="width: 15%;">신고 날짜</th>
+						</tr>
+						<c:forEach var="Home" items="${list }">
+						<tr>
+					 		<td>${home.reportNum }</td>
+							<td>${home.homeNum }</td>
+							<td>${imcha.imchaId }</td>
+							<td>${home.reportType }</td>
+							<td>${home.reportContent }</td>
+							<td><fmt:formatDate  value="${home.reportRegDate }" pattern="yyyy-MM-dd" /></td> 
+						</c:forEach>
+				</table>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+</body>
+</html>
