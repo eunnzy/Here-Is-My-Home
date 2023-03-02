@@ -45,7 +45,7 @@ public class AdminController {
 	private LessorService lessorservice;
 	
 	
-	// 유저회원가입
+	// 관리자 회원가입
 	@RequestMapping(value = "/adminJoin", method = RequestMethod.GET)
 	public void joinGET() {
 		

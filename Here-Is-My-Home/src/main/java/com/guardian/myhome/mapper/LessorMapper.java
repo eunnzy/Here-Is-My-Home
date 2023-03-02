@@ -28,7 +28,10 @@ public interface LessorMapper {
 	public int failed(String lessorId);
 	
 	// 이미지 등록
-	public void imgEnroll(LessorImgVO lessorImg);
+	public int imgEnroll(LessorImgVO lessorImg);
+	
+	// 
+	public LessorImgVO selectImg(String lessorId);
 	
 
 }

@@ -43,8 +43,14 @@ public class ImchaServiceImpl implements ImchaService {
 	}
 	
 	// 아이디찾기
+//	@Override
+//	public ImchaVO findId(ImchaVO imcha) throws Exception {
+//		
+//		return dao.findId(imcha);
+//	}
+	
 	@Override
-	public ImchaVO findId(ImchaVO imcha) throws Exception {
+	public String findId(ImchaVO imcha) throws Exception {
 		
 		return dao.findId(imcha);
 	}

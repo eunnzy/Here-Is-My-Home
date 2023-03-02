@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.List;
 
+import com.guardian.myhome.vo.LessorImgVO;
 import com.guardian.myhome.vo.LessorVO;
 
 public interface LessorService {
@@ -44,6 +45,12 @@ public interface LessorService {
 	
 	// 회원가입 거절
 	public int failed(String lessorId) throws Exception;
+	
+	// 이미지 업로드
+	public int imgEnroll(LessorImgVO lessorImg) throws Exception;
+
+	//
+	public LessorImgVO selectImg(String lessorId) throws Exception;
 	
 
 }

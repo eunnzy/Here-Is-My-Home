@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class LessorImgVO {
 	
-	private String fileName;
-	
 	private String lessorId;
+	
+	private String fileName;
 	
 	private String uploadPath;
 	

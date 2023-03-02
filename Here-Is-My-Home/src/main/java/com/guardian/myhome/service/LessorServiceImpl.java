@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.guardian.myhome.dao.LessorDAO;
 import com.guardian.myhome.mapper.LessorMapper;
+import com.guardian.myhome.vo.LessorImgVO;
 import com.guardian.myhome.vo.LessorVO;
 
 
@@ -21,8 +22,23 @@ public class LessorServiceImpl implements LessorService {
 	
 	@Override
 	public void lessorJoin(LessorVO lessor) throws Exception {
-
+		System.out.println("lessorJoin service 실행");
+		System.out.println(lessor);
 		lessormapper.lessorJoin(lessor);
+		
+		// 이미지가 존재하지 않을 때
+		if(lessor.getLessorImg() == null) {
+			return;
+		}
+		
+		lessor.getLessorImg().setLessorId(lessor.getLessorId());
+		System.out.println(lessor.getLessorImg());
+		lessormapper.imgEnroll(lessor.getLessorImg());
+		
+//		lessor.getImageList().forEach(attach -> {
+//			attach.setLessorId(lessor.getLessorId());
+//			lessormapper.imgEnroll(attach);
+//		});
 
 	}
 	
@@ -98,6 +114,17 @@ public class LessorServiceImpl implements LessorService {
 	public int failed(String lessorId) throws Exception {
 		return lessormapper.failed(lessorId);
 		
+	}
+	
+	@Override
+	public int imgEnroll(LessorImgVO lessorImg) throws Exception {
+		return lessormapper.imgEnroll(lessorImg);
+	}
+
+	@Override
+	public LessorImgVO selectImg(String lessorId) throws Exception {
+	
+		return lessormapper.selectImg(lessorId);
 	}
 	
 	

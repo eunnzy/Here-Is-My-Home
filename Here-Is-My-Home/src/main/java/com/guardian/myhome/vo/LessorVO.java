@@ -36,9 +36,8 @@ public class LessorVO {
 	private int valid;
 	
 	// 이미지 정보
-	private List<LessorImgVO> imageList;
+	private LessorImgVO lessorImg;
 	
-	private LessorImgVO lessorimg;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enrollDate;
@@ -165,22 +164,12 @@ public class LessorVO {
 		this.enrollDate = enrollDate;
 	}
 
-	public List<LessorImgVO> getImageList() {
-		return imageList;
+	public LessorImgVO getLessorImg() {
+		return lessorImg;
 	}
 
-	public void setImageList(List<LessorImgVO> imageList) {
-		this.imageList = imageList;
-	}
-	
-	
-
-	public LessorImgVO getLessorimg() {
-		return lessorimg;
-	}
-
-	public void setLessorimg(LessorImgVO lessorimg) {
-		this.lessorimg = lessorimg;
+	public void setLessorImg(LessorImgVO lessorImg) {
+		this.lessorImg = lessorImg;
 	}
 
 	@Override
@@ -189,7 +178,11 @@ public class LessorVO {
 				+ ", phone=" + phone + ", name=" + name + ", birthDate=" + birthDate + ", jgsName=" + jgsName
 				+ ", jgsNum=" + jgsNum + ", status=" + status + ", userRoll=" + userRoll + ", lessorAddr1="
 				+ lessorAddr1 + ", lessorAddr2=" + lessorAddr2 + ", lessorAddr3=" + lessorAddr3 + ", valid=" + valid
-				+ ", imageList=" + imageList + ", lessorimg=" + lessorimg + ", enrollDate=" + enrollDate + "]";
+				+ ", lessorImg=" + lessorImg + ", enrollDate=" + enrollDate + "]";
 	}
+
+
+
+
 	
 }
