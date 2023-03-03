@@ -18,4 +18,6 @@ public interface HomeService {
 	HomeImgVO previewHomeImg(int homeNum);	// 매물 미리보기시 나올 사진
 	int modifyHomeInfo(Map<String, Object> modifyHome);	// 매물 정보 수정
 	int reportHome(HomeReportVO homeReportVO);	// 매물 신고
+	
+	List<HomeReportVO> selectReportHomeList();
 }

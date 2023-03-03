@@ -28,6 +28,8 @@ public interface HomeMapper {
 	List<HomeImgVO> selectHomeImgList(int homeNum); // 해당 매물 사진들 반환
 	List<String> selectHomeOptionList(int homeNum); // 해당 매물 옵션 목록 반환
 	
+	//List<HomeReportVO> selectReportHomeList();	// 매물 신고리스트 조회
+	
 	int updateHome(HomeVO homeVO);	// 매물 테이블 수정
 	int updateHomePrice(HomePriceVO HomePriceVO);	// 매물 가격 테이블 수정
 	int deleteHomeOption(int homeNum);	// 매물 옵션 삭제

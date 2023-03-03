@@ -17,7 +17,9 @@ public interface ImchaService {
 	public ImchaVO imchaLogin(ImchaVO imcha) throws Exception;
 	
 	// 아이디 찾기
-	public ImchaVO findId(ImchaVO imcha) throws Exception;
+//	public ImchaVO findId(ImchaVO imcha) throws Exception;
+	
+	public String findId(ImchaVO imcha) throws Exception;
 	
 	// 비밀번호 찾기
 	public ImchaVO findPw(ImchaVO imcha) throws Exception;
