@@ -33,6 +33,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminmapper.adminLogin(admin);
 	}
 	
+	// 신고목록
 	@Override
 	public int successNum(int homeNum) throws Exception {
 		return adminmapper.successNum(homeNum);
