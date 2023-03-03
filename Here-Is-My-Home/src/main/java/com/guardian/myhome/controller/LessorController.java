@@ -26,7 +26,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.service.LessorService;
-import com.guardian.myhome.vo.LessorVO;
 import com.guardian.myhome.vo.LessorImgVO;
+import com.guardian.myhome.vo.LessorVO;
 
 
 @Controller
@@ -59,6 +58,9 @@ public class LessorController {
 	@RequestMapping(value = "/lessorJoin", method = RequestMethod.POST)
 	public String joinPOST(LessorVO lessor) throws Exception{
 		
+		System.out.print("joinPost method 실행 : ");
+		
+		System.out.println(lessor);
 		lessorservice.lessorJoin(lessor);
 		
 		return "redirect:/member/lessorLogin";
@@ -119,11 +121,13 @@ public class LessorController {
 		
 		HttpSession session = request.getSession();
 		LessorVO lvo = lessorservice.lessorLogin(lessor);
-		System.out.println(lvo.getStatus());
-		if(lvo.getStatus() == 0 || lvo == null){
-			
+		System.out.println(lvo);
+//		System.out.println(lvo.getStatus());
+		if(lvo == null){
 			 return "redirect:/member/lessorLogin";
-		} else {
+		}else if( lvo.getStatus() == 0) {
+			 return "redirect:/member/lessorLogin";
+		}else {
 			session.setAttribute("lessor", lvo);
 			return "redirect:/index";
 		}
@@ -251,6 +255,7 @@ public class LessorController {
 			return "member/lessorList";
 		}
 
+		
 		// 이미지파일 업로드
 		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		public ResponseEntity<List<LessorImgVO>> uploadAjaxActionPOST(MultipartFile[] uploadFile) {
@@ -259,6 +264,7 @@ public class LessorController {
 			
 			// 날짜 폴더 경로
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
 			Date date = new Date();
 			String str  = sdf.format(date);
 			String datePath = str.replace("-", File.separator);
@@ -342,10 +348,10 @@ public class LessorController {
 			return result;
 		}
 		
-		// 이미지 미리보기
+		// 이미지 출력
 		@GetMapping("/display")
 		public ResponseEntity<byte[]> getImage(String fileName) {
-			System.out.println("bg2.jpg");
+			// System.out.println("bg2.jpg");
 			File file = new File("C:\\lessorUpload\\" + fileName);
 			
 			ResponseEntity<byte[]> result = null;
@@ -392,6 +398,30 @@ public class LessorController {
 			}
 			
 			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		
+		@PostMapping("/goodsEnroll")
+		public String goodsEnrollPOST(LessorImgVO lessorImg, RedirectAttributes rttr) throws Exception {
+			lessorservice.imgEnroll(lessorImg);
+			
+			rttr.addFlashAttribute("enroll_esult", lessorImg.getLessorId());
+			
+			return "redirect:/lessor/lessorLogin";
+		}
+		
+		
+		// 뷰 봔환
+		@RequestMapping(value="/lessorImg", method=RequestMethod.GET)
+		public String lessorImgGET(@RequestParam String lessorId, Model model) throws Exception{
+			System.out.println("lessorImg controller ");
+			System.out.println(lessorId);
+			LessorImgVO lessorImgVO = lessorservice.selectImg(lessorId);
+			
+			System.out.println(lessorImgVO);
+			
+			model.addAttribute("lessorImg", lessorImgVO);
+			
+			return "/member/lessorImg";
 		}
 //    @ResponseBody
 //	@PostMapping("/lessorId")

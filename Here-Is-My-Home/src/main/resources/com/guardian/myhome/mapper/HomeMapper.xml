@@ -39,6 +39,12 @@
  		values (#{homeNum}, #{deposit}, #{monthly}, #{adminCost})
  	</insert>
  	
+ 	<!-- 매물 신고 삽입 -->
+	<insert id="insertHomeReport" parameterType="com.guardian.myhome.vo.HomeReportVO">
+		insert into Home_Report_tb(report_num, home_num, imcha_id, report_type, report_content) 
+		values ((select nvl(max(report_num), 0) + 1 from Home_Report_tb), #{homeNum}, #{imchaId}, #{reportType}, #{reportContent} )
+	</insert>
+ 	
  	<!-- <insert id="insertHome"  parameterType="com.guardian.myhome.vo.HomeVO">
  		insert into Home_tb(home_num, home_type, addr1, addr2, addr3, latitude, longitude, home_area, rent_type, deposit, monthly, rent_periods,
  						room_count, admin_cost, parking, pet, elevator, balcony, moveDate, floor, home_title, home_detail) 
@@ -56,6 +62,7 @@
 					rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, admin_cost AS adminCost, 
 					home_title AS homeTitle, home_valid AS homeValid, lessor_id AS lessorId
 			from Home_tb
+			where <![CDATA[home_valid=1]]>
 	</select>
 	
 	
@@ -82,11 +89,12 @@
 			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
 			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail, 
 			   lessor_id AS lessorId, jgs_name AS jgsName, jgs_num AS jgsNum, phone, name, lessor_addr1 as lessorAddr1, 
-               lessor_addr2 as lessorAddr2, lessor_addr3 as lessorAddr3
+               lessor_addr2 as lessorAddr2, lessor_addr3 as lessorAddr3 
 		from Home_tb 
 			join Home_Price_tb using(home_num) 
 			join lessor_tb using (lessor_id)
 		where home_num = #{homeNum}
+		
 	</select>
 	
 	 <select id="selectHomeOptionList" resultType="java.lang.String">
@@ -129,6 +137,8 @@
 	</select>
 	
 
+
+
  	<delete id="deleteHomeImg">
 		delete from Home_Img_tb where home_num = #{homeNum}
 	</delete>
@@ -158,6 +168,13 @@
 		from Home_tb
 			join Home_Price_tb using(home_num)
 		where lessor_id=#{lessorId}
+ 	</select>
+ 	
+ 	
+  	<select id="selectReportHomeList" resultType="com.guardian.myhome.vo.HomeReportVO">
+ 		select report_num AS reportNum, home_num AS homeNum, imcha_id AS imchaId, report_type AS reportType, report_content AS reportContent, report_regdate AS reportRegDate, home_valid AS homeValid 
+ 		from Home_Report_tb 
+ 			join Home_tb using(home_num) 
  	</select>
  	
  	

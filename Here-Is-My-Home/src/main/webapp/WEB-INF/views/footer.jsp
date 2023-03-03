@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="background-color: #dbe2f0; text-align: center;">
+	<div style="background-color: white; text-align: center;">
         <br><br>
         <dib>
             <a href="#">이용약관</a>   

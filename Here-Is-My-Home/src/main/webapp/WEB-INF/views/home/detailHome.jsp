@@ -250,9 +250,14 @@
 		</div> -->
 	</div>
 		
+<<<<<<< HEAD
 		<%-- <jsp:include page="reportHome.jsp"></jsp:include> --%>	<!-- 신고하기 모달 -->
 		
 		<form action="reservation/enroll" method="POST">
+=======
+		<jsp:include page="reportHome.jsp"></jsp:include>	<!-- 신고하기 모달 -->
+		
+>>>>>>> branch 'main' of https://github.com/eunnzy/Here-Is-My-Home.git
 		<div class="reserv-modal">
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
@@ -306,9 +311,12 @@
 		let logitude = ${home.longitude};
 		let homeNum = ${home.homeNum};
 		let imchaId = $('#imchaId').val();
+<<<<<<< HEAD
 		let lessorId = "${home.jgsName}";
 		let enrollName = $('#enrollName').val();
 		let enrollDate = $('#enrollDate').val();
+=======
+>>>>>>> branch 'main' of https://github.com/eunnzy/Here-Is-My-Home.git
 //		let homeNum = $('#homeNum').val();
 	// 위치 정보 표시
 		let revTime = $("input[name='revTime']:checked").val();

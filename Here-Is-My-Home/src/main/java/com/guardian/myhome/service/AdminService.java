@@ -14,4 +14,6 @@ public interface AdminService {
 	// 로그인
 	public AdminVO adminLogin(AdminVO admin) throws Exception;
 	
+	public int successNum(int homeNum) throws Exception;
+	
 }

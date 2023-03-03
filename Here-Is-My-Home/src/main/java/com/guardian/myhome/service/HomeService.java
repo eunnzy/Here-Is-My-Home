@@ -7,6 +7,7 @@ import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 
 
@@ -20,5 +21,7 @@ public interface HomeService {
 	int modifyHomeInfo(Map<String, Object> modifyHome);	// 매물 정보 수정
 	public List<HomePreviewVO>  getListByLessorId(String lessorId); // 매물 리스트
 	public void deleteManageList(String lessorId);		// 매물 삭제
+	int reportHome(HomeReportVO homeReportVO);	// 매물 신고
 	
+	List<HomeReportVO> selectReportHomeList();
 }

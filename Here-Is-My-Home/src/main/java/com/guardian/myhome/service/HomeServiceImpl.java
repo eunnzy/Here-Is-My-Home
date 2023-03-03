@@ -13,6 +13,7 @@ import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 
 @Service
@@ -229,11 +230,20 @@ public class HomeServiceImpl implements HomeService{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int reportHome(HomeReportVO homeReportVO) {
+		return homeDAO.insertHomeReport(homeReportVO);
+	}
 
 	@Override
 	public List<HomePreviewVO> getListByLessorId(String lessorId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public List<HomeReportVO> selectReportHomeList() {
+		
+		return homeDAO.selectReportHomeList();
 	}
 
 }

@@ -2,34 +2,44 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+      <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 </head>
 <body>
-<h2>중개인 목록</h2>
-<table border="1" width="700px">
+	<div class="container">
+        <div class="bs-docs-section row">
+          <div class="col-lg-12">
+            <br><br>
+              <h1 id="tables" style="text-align: center;">중개인 목록</h1>
+              <br><br>
+              
+              <div class="bs-component">
+<table class="table table-hover" style="text-align: center;">
 <tr>
-	<th>아이디</th>
-	<th>이름</th>
-	<th>닉네임</th>
-	<th>중개소이름</th>
-	<th>중개소 등록번호</th>
-	<th>회원가입일자</th>
-	<th>현재상태</th>
+	<th scope="col" style="width: 15%;">아이디</th>
+	<th scope="col" style="width: 15%;">이름</th>
+	<th scope="col" style="width: 15%;">닉네임</th>
+	<th scope="col" style="width: 15%;">중개소이름</th>
+	<th scope="col" style="width: 15%;">중개소 등록번호</th>
+	<th scope="col" style="width: 15%;">회원가입일자</th>
+	<th scope="col" style="width: 10%;">현재상태</th>
 	</tr>
 	<c:forEach var="lessor" items="${list }" >
 	<tr>
 		<td>${lessor.lessorId }</td>
 		<td>${lessor.name }</td>
 		<td>${lessor.lessorNickName }</td>
-		<td>${lessor.jgsName }</td>
+		<td><a href="#" onclick="displayImg('${lessor.lessorId}')">${lessor.jgsName }</a></td>
 		<td>${lessor.jgsNum }</td>
 		<td><fmt:formatDate  value="${lessor.enrollDate }" pattern="yyyy-MM-dd" /></td>
 	 	 <c:choose>
@@ -37,7 +47,7 @@
 			  	<td class="admin_list">
 	                <button id ="${lessor.lessorId}" type="button" value="승인" class="success">승인 </button>
                 </td>
-			  	</c:when>
+			  	</c:when> 
 			  	<c:when test="${lessor.status == 1}">
 			  	<td class="admin_list">
 	                <p data-user-id ="${lessor.lessorId}" type="text" value="승인완료" class="">승인완료</p>
@@ -78,6 +88,14 @@
 </script> -->
 
 <script>
+
+function displayImg(lessorId) {
+	console.log(lessorId);
+	const url = "/member/lessorImg?lessorId="+lessorId;
+	window.open(url,"아이디찾기",'width=500px, height=700px, scrolbars=yes, resizeable=no');
+
+}
+
 $(function(){
 $('.success').on('click', function() { 
 	  
