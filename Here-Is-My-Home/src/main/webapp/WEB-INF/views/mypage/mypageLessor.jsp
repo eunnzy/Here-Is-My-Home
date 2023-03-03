@@ -30,7 +30,7 @@
           <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = '/home/manage/list'">매물 관리</button>
         </td>
         <td>
-          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'reservation_LESSOR.html'">예약 확인</button>
+          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/home/reservation/lessorList?lessorId=${lessor.lessorId}'">예약 확인</button>
         </td>
         <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'Answer_Borad.html'">1대1 문의</button>

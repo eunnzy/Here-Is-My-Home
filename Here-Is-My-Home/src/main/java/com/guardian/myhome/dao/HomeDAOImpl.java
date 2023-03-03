@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.guardian.myhome.service.HomeDAO;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;

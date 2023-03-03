@@ -27,7 +27,7 @@
   <div class="container">
     <div class="row">
     	<c:forEach items = "${likeList }" var="list">
-	        <div class="col-3 ">
+	        <div class="col-12 ">
 	          <div class="card list-group bg-light mt-5 mb-3 mx-3" style="max-width: 20rem;">
 	          <a href="/home/detail?homeNum=${list.homeNum}" class="list-group-item list-group-item-action flex-column align-items-start active">
 	            <div class="card-header">매물번호 : ${list.homeNum }</div>

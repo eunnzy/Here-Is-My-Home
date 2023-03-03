@@ -82,7 +82,7 @@
 			   rent_type AS rentType, deposit, monthly, rent_periods AS rentPeriods, room_count AS roomCount, admin_cost AS adminCost, 
 			   parking, pet, elevator, balcony, moveDate, floor, home_title AS homeTitle, home_detail AS homeDetail, 
 			   lessor_id AS lessorId, jgs_name AS jgsName, jgs_num AS jgsNum, phone, name, lessor_addr1 as lessorAddr1, 
-               lessor_addr2 as lessorAddr2, lessor_addr3 as lessorAddr3 
+               lessor_addr2 as lessorAddr2, lessor_addr3 as lessorAddr3
 		from Home_tb 
 			join Home_Price_tb using(home_num) 
 			join lessor_tb using (lessor_id)

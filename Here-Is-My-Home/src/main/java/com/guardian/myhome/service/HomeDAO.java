@@ -1,4 +1,4 @@
-package com.guardian.myhome.dao;
+package com.guardian.myhome.service;
 
 import java.util.List;
 import java.util.Map;

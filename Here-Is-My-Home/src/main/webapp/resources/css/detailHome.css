@@ -61,3 +61,31 @@ body {
 .reserv-content > td {
 	color: white;
 }
+
+.timeSelect {
+    padding: 15px 10px;
+}
+.timeSelect input[type=radio]{
+    display: none;
+    width:66px;
+    height:41px;
+}
+.timeSelect input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 50px;
+    /* border: 1px solid #BEE9FB; */
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+.timeSelect input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+.timeSelect input[type=radio]:checked+label{
+    background-color: #BEE9FB;
+    color: #000;
+}

@@ -45,7 +45,6 @@ public class HomeController {
 		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
 		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
 		System.out.println("detailHome: " + home);
-		
 		model.addAttribute("home", home);
 		
 		

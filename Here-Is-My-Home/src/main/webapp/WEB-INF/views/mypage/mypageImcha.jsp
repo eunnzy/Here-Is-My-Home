@@ -56,7 +56,7 @@
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'MyHome.html'">내 집</button>
         </td> -->
         <td>
-          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'reservation_IMCHA.html'">예약 확인</button>
+          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/home/reservation/list?imchaId=${member.imchaId}'">예약 확인</button>
         </td>
         <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'QNA_IMCHA.html'">문의 하기</button>

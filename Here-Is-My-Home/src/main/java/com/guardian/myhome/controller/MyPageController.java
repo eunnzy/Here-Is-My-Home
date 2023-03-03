@@ -91,6 +91,7 @@ public class MyPageController {
 		System.out.println(vo.getLessorId());
 		lessorservice.updateLessor(lessor);
 		session.setAttribute("lessor", lessorservice.getLessor(lessor));
+		
 	    return "mypage/getLessor";
 			
 	}

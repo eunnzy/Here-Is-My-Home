@@ -23,7 +23,7 @@
   <div class="container">
     <div class="row ">
     <c:forEach items="${manageList}" var="manageList">
-      <div class="col-4">
+      <div class="col-12">
         <div class="card bg-light mb-3">
           <h3 class="card-header">${manageList.homeTitle}</h3>
           <div class="card-body">

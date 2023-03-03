@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -127,6 +126,7 @@ public class HomeServiceImpl implements HomeService{
 		home.put("deposit", homeDetailVO.getDeposit());
 		home.put("monthly",	homeDetailVO.getMonthly());
 		home.put("adminCost", homeDetailVO.getAdminCost());
+		home.put("lessorId", homeDetailVO.getLessorId());
 		
 		return home;
 	}

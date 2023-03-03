@@ -10,13 +10,16 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 	<link href="/css/detailHome.css" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<style>
+	</style>
 </head>
-<body style="background-color:white;">
+<body>
 	<header>
 		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
@@ -169,17 +172,27 @@
 									<td> 반려 동물 </td>
 									<td> ${home.pet } </td>
 								</tr>
+								<tr>
+									<td> 층 </td>
+									<td> 
+									<c:choose>
+										<c:when test="${home.floor > 0 }">
+											 ${home.floor}층
+										</c:when>	 
+										<c:otherwise>
+											 지하 
+										</c:otherwise> 
+									</c:choose></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
-				
 					<div class="detail">
 						<table class="table" >
 							<tr>
 								<td style="width: 30%;">제목</td>
 								<td colspan="2">${home.homeTitle} </td>
 							</tr>
-					
 							<tr>
 								<td>내용</td>
 								<td colspan="2"> ${home.homeDetail} </td>
@@ -187,7 +200,22 @@
 						</table>
 					</div>
 					
-				<div class="location mt-3 mb-2">
+					<div class="option ms-2 mt-3 mb-3">
+						<h3> <b>기본 옵션</b> </h3>
+						<div class="option-list">
+							<c:forEach items="${home.optionList}" var="option">
+								<div class="option-icon-wrapper">
+								<div class="option-icon">
+									<img src="/icon/home/${option}.png">
+								</div>
+								<label> ${option} </label>
+							</div>
+							</c:forEach>
+						</div>
+					</div>
+					
+					
+				<div class="location ms-2 mt-5 mb-2">
 					 <h3> <b>위치 정보</b> </h3>
 					<div id="map" style="width:100%; height: 350px"></div>
 				</div>
@@ -195,9 +223,9 @@
 			</div>
 		</div>
 		
-		<div class="report-modal">
+		<!-- <div class="report-modal">
 			<div class="report-wrap">
-				<div class="report-title">집 방문 예약</div>
+				<div class="report-title">방문 예약</div>
 				<div class="report-close"><i class='bi bi-x-lg'></i></div>
 				<div class="report-content">
 					<table class="table">
@@ -219,77 +247,55 @@
 					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 		
+		<%-- <jsp:include page="reportHome.jsp"></jsp:include> --%>	<!-- 신고하기 모달 -->
 		
-		<div class="report-modal">
-			<div class="report-wrap">
-				<div class="report-title">매물 신고 하기</div>
-				<div class="report-close"><i class='bi bi-x-lg'></i></div>
-				<div class="report-content">
-					<table class="table">
-						<!-- <tr>
-							<td style="color: white;"> 신고 제목 </td>
-							<td> <input type="text" class="form-control" name="reportTitle"></td>
-						</tr> -->
-						<tr>
-							<td style="color: white;">신고 유형</td>
-							<td style="color: white;">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="reportType" value="1">
-									<label class="form-check-label" >등록된 정보가 일치하지 않음</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="reportType" value="2">
-									<label class="form-check-label" >이미 계약이 완료된 매물임</label>
-								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="radio"name="reportType" value="3">
-									<label class="form-check-label" >기타</label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="color: white;"> 신고 내용 </td>
-							<td> <textarea class="form-control"  name="reportContent" style="height: 250px" placeholder="신고 유형이 기타인 경우 신고 이유를 작성해주세요"></textarea>
-						</tr>
-					</table>
-				</div>
-				<div class="d-grid gap-3 mx-auto">
-					<button type="button" class="btn btn-md btn-success" id="reportBtn">신고하기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-		
-		
+		<form action="reservation/enroll" method="POST">
 		<div class="reserv-modal">
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
 				<div class="reserv-close"><i class='bi bi-x-lg'></i></div>
 				<div class="reserv-content">
+				
 					<table class="table">
 						<tr>
 							<td style="color: white;"> 이름 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+							<td> <input type="text" class="form-control" id="imchaId" name="imchaId"></td>
 						</tr>
 						<tr>
 							<td style="color: white;"> 방문 날짜 </td>
-							<td> <input type="date" class="form-control" name="reservName"></td>
+							<td> <input type="date" class="form-control" id="revDate" name="revDate"></td>
 						</tr>
-						<tr>
+						<tr class="timeSelect">
 							<td style="color: white;"> 방문 시간 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+							<td><input type="radio" id="revTime" name="revTime" value="10:00"><label for="revTime">10:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="11:00"><label for="revTime">11:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="12:00"><label for="revTime">12:00</label></td>
 						</tr>
+						<tr class="timeSelect">
+							<td style="color: white;"></td>
+							<td><input type="radio" id="revTime" name="revTime" value="13:00"><label for="revTime">13:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="14:00"><label for="revTime">14:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="15:00"><label for="revTime">15:00</label></td>
+						</tr>
+						<tr class="timeSelect">
+							<td style="color: white;"></td>
+							<td><input type="radio" id="revTime" name="revTime" value="16:00"><label for="revTime">16:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="17:00"><label for="revTime">17:00</label></td>
+							<td><input type="radio" id="revTime" name="revTime" value="18:00"><label for="revTime">18:00</label></td>
 					</table>
 				</div>
 				<div class="d-grid gap-3 mx-auto">
-					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
+					<input type="hidden" id="lessorId" name="lessorId" value="${home.lessorId}">
+					<input type="hidden" id="homeNum" name="homeNum" value="${home.homeNum}">
+					<button type="submit" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
 				</div>
+				
 			</div>
 		</div>
-	</div>
+		</form>
 	
 	
 	
@@ -298,18 +304,31 @@
 	<script>
 		let latitude = ${home.latitude};
 		let logitude = ${home.longitude};
+		let homeNum = ${home.homeNum};
+		let imchaId = $('#imchaId').val();
+		let lessorId = "${home.jgsName}";
+		let enrollName = $('#enrollName').val();
+		let enrollDate = $('#enrollDate').val();
+//		let homeNum = $('#homeNum').val();
 	// 위치 정보 표시
+		let revTime = $("input[name='revTime']:checked").val();
 	</script>
+	<script src="/js/reportHome.js" ></script>
 	<script src="/js/detailHome.js" ></script>
 	<script>
 		$(document).ready(function() {
+			let latitude = ${home.latitude};
+			let logitude = ${home.longitude};
+			let homeNum = ${home.homeNum};
+			let imchaId = $('#imchaId').val();
+			let lessorId = "${home.jgsName}";
+			let enrollName = $('#enrollName').val();
+			let enrollDate = $('#enrollDate').val();
+			let revTime = $("input[name='revTime']:checked").val();
 			$("#likeBtn").on("click", function(e){
-				const $imchaId = $('#imchaId').val();
-				const $homeNum = $('#homeNum').val();
-				
 				$.ajax({
 					type : 'get',
-					url : 'like/insetLike?imchaId='+ $imchaId + '&homeNum=' + $homeNum,
+					url : 'like/insetLike?imchaId='+ imchaId + '&homeNum=' + homeNum,
 					success : function (data) {
 						if (data===1) {
 							alert('찜 목록에 등록되었습니다.');
@@ -317,9 +336,28 @@
 							alert('오류가 발생하였습니다.');
 						}
 							
-						}
+					}
 				});
 			});
+			 /* $("#reservBtn").on("click", function(e){
+				console.log($('#enrollDate').val());
+				$.ajax({
+				                    url: 'reservation/enroll', 
+				                    data: { 
+				                    	lessorId: lessorId,
+				                    	imchaId : $('#enrollName').val()
+				                    	homeNum : homeNum,
+				                    	revDate : enrollDate + ' ' + revTime
+				                        }, 
+				                    type: 'POST',
+				                    success: function (param) { 
+				                       alert('예약이 완료되었습니다.');
+				                    },
+				                    error: function () {
+				                        alert('네트워크 오류 발생');
+				                    }
+				                });  //end of ajax 
+			});  */
 		});
 	</script>
 </body>
