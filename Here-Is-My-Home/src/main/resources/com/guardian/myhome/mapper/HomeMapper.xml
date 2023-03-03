@@ -161,9 +161,11 @@
  		update Home_Price_tb set deposit = #{deposit}, monthly = #{monthly}, admin_cost = #{adminCost} where home_num = #{homeNum}
  	</update>
  	
-<!--  	<select id="reportHome" resultType="com.guardian.myhome.vo.HomereportVO">
- 		select report_num AS reportNum, home_num AS homeNum, imcha_id AS imchaId, report_type AS reportType, report_content AS reportContent, report_regdate AS reportRegdate from Home_Report_tb; 
- 	</select> -->
+  	<select id="selectReportHomeList" resultType="com.guardian.myhome.vo.HomeReportVO"> <!--  오타있잖아 뒤질래? 팬다. HomereportVO가 아니라 HomeReportVO 인데요; -->
+ 		select report_num AS reportNum, home_num AS homeNum, imcha_id AS imchaId, report_type AS reportType, report_content AS reportContent, report_regdate AS reportRegDate, home_valid AS homeValid 
+ 		from Home_Report_tb 
+ 			join Home_tb using(home_num) 
+ 	</select>
  	
  	
  </mapper>

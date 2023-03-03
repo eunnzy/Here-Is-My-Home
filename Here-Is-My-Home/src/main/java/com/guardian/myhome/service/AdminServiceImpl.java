@@ -33,4 +33,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminmapper.adminLogin(admin);
 	}
 	
+	@Override
+	public int successNum(int homeNum) throws Exception {
+		return adminmapper.successNum(homeNum);
+		
+	}
+	
 }

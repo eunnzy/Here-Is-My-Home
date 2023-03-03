@@ -42,6 +42,9 @@ public class AdminController {
 	@Autowired
 	private LessorService lessorservice;
 	
+	
+	@Autowired
+	private HomeDAO homedao;
 
 	
 	// 관리자 회원가입
@@ -121,7 +124,7 @@ public class AdminController {
 	}
 	
 
-	
+	// 회원가입 승인여부
 	@ResponseBody
 	@RequestMapping(value="/successId")
 	public int successId(@RequestParam(value ="lessorId") String lessorId) throws Exception {
@@ -144,13 +147,30 @@ public class AdminController {
 //		lessorservice.failed(lessorId);
 //	}
 	
-//	// 허위 매물 목록 리스트
-//	@GetMapping("/reportHome")
-//	public String HomeReport(Model model) {
-//		System.out.println("/HomeList 요청");
-//		List<HomeReportVO> list = homedao.selectReportHomeList();
-//		model.addAttribute("list", list);
-//		return "admin/reportHome";
-//	}
+	// 허위 매물 목록 리스트
+	@GetMapping("/reportList")
+	public String HomeReport(Model model) {
+		System.out.println("/HomeList 요청");
+		List<HomeReportVO> list = homedao.selectReportHomeList();
+		System.out.println(list);
+		model.addAttribute("list", list);
+		return "admin/reportList";
+	}
+	
+	// 차단여부
+	@ResponseBody
+	@RequestMapping(value="/successNum")
+	public int successNum(@RequestParam(value ="homeNum") int homeNum) throws Exception {
+		System.out.println(homeNum);
+		adminservice.successNum(homeNum);
+		
+		int result = adminservice.successNum(homeNum);
+		
+		if (result != 1) {
+			return result;
+		}
+		return result;
+		
+	}
 }
 

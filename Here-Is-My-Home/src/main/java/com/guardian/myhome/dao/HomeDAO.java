@@ -26,5 +26,6 @@ public interface HomeDAO {
 	int updateHomePrice(HomePriceVO HomePriceVO);	// 매물 가격 테이블 수정
 	int deleteHomeOption(int homeNum);	// 매물 옵션 삭제
 	int deleteHomeImg(int homeNum);	// 매물 사진 정보 삭제
+	
 	List<HomeReportVO> selectReportHomeList();
 }

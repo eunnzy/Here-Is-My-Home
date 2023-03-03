@@ -16,7 +16,6 @@
 	<link href="/css/detailHome.css" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="fa-duotone fa-refrigerator" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<style>
 	</style>
 </head>
@@ -188,16 +187,6 @@
 							</tbody>
 						</table>
 					</div>
-					
-					
-					<div class="location ms-2 mt-3 mb-2">
-						<h3> <b>옵션 목록</b> </h3>
-						<div class="option-icon">
-							<i class="fa-duotone fa-refrigerator"></i></label>
-
-						</div>
-					</div>
-				
 					<div class="detail">
 						<table class="table" >
 							<tr>
@@ -211,7 +200,22 @@
 						</table>
 					</div>
 					
-				<div class="location ms-2 mt-3 mb-2">
+					<div class="option ms-2 mt-3 mb-3">
+						<h3> <b>기본 옵션</b> </h3>
+						<div class="option-list">
+							<c:forEach items="${home.optionList}" var="option">
+								<div class="option-icon-wrapper">
+								<div class="option-icon">
+									<img src="/icon/home/${option}.png">
+								</div>
+								<label> ${option} </label>
+							</div>
+							</c:forEach>
+						</div>
+					</div>
+					
+					
+				<div class="location ms-2 mt-5 mb-2">
 					 <h3> <b>위치 정보</b> </h3>
 					<div id="map" style="width:100%; height: 350px"></div>
 				</div>

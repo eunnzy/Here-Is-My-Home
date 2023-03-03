@@ -98,8 +98,6 @@ public class LessorVO {
 		this.jgsName = jgsName;
 	}
 
-	
-
 	public String getJgsNum() {
 		return jgsNum;
 	}

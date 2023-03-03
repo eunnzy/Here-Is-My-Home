@@ -94,6 +94,6 @@ public class HomeDAOImpl implements HomeDAO{
 	@Override
 	public List<HomeReportVO> selectReportHomeList() {
 
-		return sqlSession.selectList(HOMEMAPPER + "selectReprotHomeList");
+		return sqlSession.selectList(HOMEMAPPER + "selectReportHomeList");
 	}
 }

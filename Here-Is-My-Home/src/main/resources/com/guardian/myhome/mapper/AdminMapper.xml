@@ -28,5 +28,11 @@
  		select report_num AS reportNum, home_num AS homeNum, imcha_id AS imchaId, report_type AS reportType, report_content AS reportContent, report_regdate AS reportregdate from Home_Report_tb; 
  	</select> -->
  
+  	<!-- 가입 승인 -->
+   <update id="successNum"> 
+      UPDATE Home_tb
+      SET <![CDATA[ home_valid = 0 ]]>
+      WHERE home_num = #{homeNum}
+   </update>
  </mapper>
 

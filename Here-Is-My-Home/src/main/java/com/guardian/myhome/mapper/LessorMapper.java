@@ -34,4 +34,5 @@ public interface LessorMapper {
 	public LessorImgVO selectImg(String lessorId);
 	
 
+
 }

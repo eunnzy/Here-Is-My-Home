@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexController {
 	
-	@RequestMapping("index")
+	@RequestMapping("index")	// 메인 페이지
 	public String home() {
-		
 		return "index";
+	}
+	
+	@RequestMapping("member/selectMemberType")	// 회원 유형 선택
+	public String memberJoin() {
+		
+		return "/member/selectMemberType";
 	}
 	
 }

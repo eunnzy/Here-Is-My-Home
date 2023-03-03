@@ -307,6 +307,8 @@
 		
 		deleteFile();
 	});
+	
+	
 //	$(".btn btn-primary btn btn-block").click(function() {
 //		
 //		alert("로그인 버튼 작동");

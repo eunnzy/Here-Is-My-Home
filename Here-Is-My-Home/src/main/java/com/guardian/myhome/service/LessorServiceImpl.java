@@ -127,5 +127,6 @@ public class LessorServiceImpl implements LessorService {
 		return lessormapper.selectImg(lessorId);
 	}
 	
+
 	
 }

@@ -116,12 +116,12 @@ public class HomeController {
 		return homeService.reportHome(homeReportVO);
 	}
 	
-	// 허위 매물 목록 리스트
-	@GetMapping("/reportHome")
-	public String HomeReport(Model model) {
-		System.out.println("/HomeList 요청");
-		List<HomeReportVO> list = homedao.selectReportHomeList();
-		model.addAttribute("list", list);
-		return "home/reportHome";
-	}
+//	// 허위 매물 목록 리스트
+//	@GetMapping("/reportHome")
+//	public String HomeReport(Model model) {
+//		System.out.println("/HomeList 요청");
+//		List<HomeReportVO> list = homedao.selectReportHomeList();
+//		model.addAttribute("list", list);
+//		return "admin/reportHome";
+//	}
 }
