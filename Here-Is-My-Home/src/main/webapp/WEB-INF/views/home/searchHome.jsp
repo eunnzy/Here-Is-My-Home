@@ -110,7 +110,7 @@
        				</div>
        				<div class="range-div mt-3 mb-4">
 				        <label for="customRange1" class="form-label d-grid">보증금</label>
-				        <input type="range" id="deposit" min="0" max="3">
+				        <input type="range" id="deposit" min="0" max="3" value="3">
 				        <ul class="deposit-range-ul">
 				        	<li> 0 </li>
 				        	<li> 5000만</li>
@@ -118,7 +118,7 @@
 				        	<li> 최대 </li>
 				        </ul>
 				        <label for="customRange3" class="form-label d-grid">월세</label>
-				        <input type="range"id="monthly" min="0" max="3">
+				        <input type="range"id="monthly" min="0" max="3" value="3"> 
 				        <ul class="monthly-range-ul">
 				        	<li> 0 </li>
 				        	<li> 50만</li>

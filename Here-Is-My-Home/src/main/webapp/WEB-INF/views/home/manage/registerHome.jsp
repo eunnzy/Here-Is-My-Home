@@ -7,7 +7,6 @@
 	<title>매물 등록</title>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +25,7 @@
 	</header>
 	
 	<div class="home-container col-md-9 mx-auto">
-		<h1 class="mt-3 mb-3"> 매물 올리기 </h1>
+		<h1 class="mt-3 mb-3"> 매물 등록 </h1>
 		<div class="add-notice p-3 mx-auto mb-5" >
         	<ul>
         		<li>전/월세 매물만 등록할 수 있습니다.</li>
@@ -385,7 +384,7 @@
 				</table>
        		</div>
        		<div class="text-center mx-auto">
-        		<button type="reset" class="btn btn-md mr-2">취소</button>
+        		<button type="reset" class="btn btn-md mr-2" onclick="location.href='/home/manage/list'">취소</button>
  				<button type="submit" id="addBtn" class="btn btn-md" >등록</button>
 			</div>
     	</form>	
