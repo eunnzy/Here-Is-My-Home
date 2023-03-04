@@ -92,3 +92,13 @@ body {
 	border: 1px solid gray;
 	border-radius: 3px;
 }
+.home-detail{
+	background-color: rgba(199, 199, 199, 0.3);
+	border-radius: 7px;
+	padding: 10px;
+	height: auto;
+}
+.home-title {
+	font-size: 18px;
+	font-weight: 700;
+}

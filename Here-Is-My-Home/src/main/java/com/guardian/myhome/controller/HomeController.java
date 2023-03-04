@@ -41,12 +41,7 @@ public class HomeController {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
-		// view로 반환할 때 보증금, 월세, 관리비는 돈 단위 계산해서
-		home.put("deposit", homeService.convertMoneyUnit((int)home.get("deposit")));
-		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
-		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
 		System.out.println("detailHome: " + home);
-		
 		model.addAttribute("home", home);
 		
 		

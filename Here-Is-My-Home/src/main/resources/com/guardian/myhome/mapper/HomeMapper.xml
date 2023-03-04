@@ -161,6 +161,5 @@
  		update Home_Price_tb set deposit = #{deposit}, monthly = #{monthly}, admin_cost = #{adminCost} where home_num = #{homeNum}
  	</update>
  	
- 	
  </mapper>
  
