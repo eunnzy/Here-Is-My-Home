@@ -19,20 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.mapper.LessorMapper;
 import com.guardian.myhome.service.AdminService;
 import com.guardian.myhome.service.HomeService;
 import com.guardian.myhome.service.LessorService;
 import com.guardian.myhome.service.ImchaService;
 import com.guardian.myhome.vo.AdminVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.LessorVO;
 import com.guardian.myhome.vo.ImchaVO;
 
-/*
-	회원 관련 기능
-	
- */
 
 @Controller
 @RequestMapping("/admin")
@@ -45,7 +43,11 @@ public class AdminController {
 	private LessorService lessorservice;
 	
 	
-	// 유저회원가입
+	@Autowired
+	private HomeDAO homedao;
+
+	
+	// 관리자 회원가입
 	@RequestMapping(value = "/adminJoin", method = RequestMethod.GET)
 	public void joinGET() {
 		
@@ -122,7 +124,7 @@ public class AdminController {
 	}
 	
 
-	
+	// 회원가입 승인여부
 	@ResponseBody
 	@RequestMapping(value="/successId")
 	public int successId(@RequestParam(value ="lessorId") String lessorId) throws Exception {
@@ -138,12 +140,39 @@ public class AdminController {
 		
 	}
 	
-	@ResponseBody
-	@PostMapping("/failId")
-	public void failId(String lessorId) throws Exception {
-		System.out.println(lessorId);
-		lessorservice.failed(lessorId);
+//	@ResponseBody
+//	@PostMapping("/failId")
+//	public void failId(String lessorId) throws Exception {
+//		System.out.println(lessorId);
+//		lessorservice.failed(lessorId);
+//	}
+	
+	// 허위 매물 목록 리스트
+	@GetMapping("/reportList")
+	public String HomeReport(Model model) {
+		System.out.println("/HomeList 요청");
+		List<HomeReportVO> list = homedao.selectReportHomeList();
+		System.out.println(list);
+		model.addAttribute("list", list);
+		return "admin/reportList";
 	}
+	
+	// 차단여부
+	@ResponseBody
+	@RequestMapping(value="/successNum")
+	public int successNum(@RequestParam(value ="homeNum") int homeNum) throws Exception {
+		System.out.println(homeNum);
+		adminservice.successNum(homeNum);
+		
+		int result = adminservice.successNum(homeNum);
+		
+		if (result != 1) {
+			return result;
+		}
+		return result;
+		
+	}
+	
 	
 }
 

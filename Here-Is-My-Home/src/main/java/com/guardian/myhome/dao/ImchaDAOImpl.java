@@ -24,8 +24,14 @@ public class ImchaDAOImpl implements ImchaDAO {
 	}
 	
 	// 아이디 찾기
+//	@Override
+//	public ImchaVO findId(ImchaVO imcha) throws Exception {
+//		
+//		return sqlSession.selectOne(NAMESPACE+".findId", imcha);
+//	}
+	
 	@Override
-	public ImchaVO findId(ImchaVO imcha) throws Exception {
+	public String findId(ImchaVO imcha) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+".findId", imcha);
 	}

@@ -128,18 +128,22 @@ public class ImchaController {
 	}
 	
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
-	public String findIdPOST(ImchaVO imcha, Model model) throws Exception {
+	@ResponseBody
+	public int findIdPOST(ImchaVO imcha, Model model) throws Exception {
+		System.out.println(imcha);
+		String findIdVo = imchaservice.findId(imcha);
 		
-		ImchaVO findIdVo = imchaservice.findId(imcha);
+		System.out.println(findIdVo);
 		
 		if (findIdVo == null) {
-			
-			model.addAttribute("check",1);
-			return "/member/msg";
+			return 0;
+//			model.addAttribute("check",1);
+//			return "/member/msg";
 		}else {
-			model.addAttribute("check",0);
-			model.addAttribute("imchaId", findIdVo.getImchaId());
-			return "/member/resultId";
+//			model.addAttribute("check",0);
+//			model.addAttribute("imchaId", findIdVo.getImchaId());
+			model.addAttribute("imchaId", findIdVo);
+			return 1;
 		}
 	}
 	
@@ -147,11 +151,11 @@ public class ImchaController {
 	@RequestMapping(value="/resultId", method=RequestMethod.GET)
 	public String resultIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="nickname")String phone,String nickname,ImchaVO searchVO) throws Exception{
 		
-		searchVO.setNickname(nickname);
-		searchVO.setPhone(phone);
-		ImchaVO findId = imchaservice.findId(searchVO);
-		
-		model.addAttribute("searchVO", findId);
+//		searchVO.setNickname(nickname);
+//		searchVO.setPhone(phone);
+//		ImchaVO findId = imchaservice.findId(searchVO);
+//		
+//		model.addAttribute("searchVO", findId);
 		
 		return "/member/resultId";
 	}

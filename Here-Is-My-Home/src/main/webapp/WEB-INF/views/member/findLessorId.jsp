@@ -60,7 +60,7 @@
                   </div>
                <div class="col-12 mb-4">
                      <label for="lessor_phone">전화번호 </label> 
-                     <input type="text" name="phone" class="form-control" id="phone" value="" placeholder=" 010-0000-0000"><br>
+                     <input type="text" name="phone" class="form-control" id="phone" value="" placeholder="010-0000-0000"><br>
                   <br>
                </div>
                         
@@ -97,7 +97,6 @@
          let lessor = {
         		 "lessorNickName" : $('#lessorNickName').val(),  "phone" : $('#phone').val()
         	}
-         
          $.ajax({
         	data: lessor,
          	url: "/member/findLessorId",

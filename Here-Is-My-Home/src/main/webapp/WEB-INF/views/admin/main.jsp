@@ -13,11 +13,11 @@
  	 </header>
 	
 	<div style="background-color: white;">
-	  <!-- <div>
+	   <div>
 	    <img src="img/b.png" >
 	    <img src="img/c.png" >
 	    <img src="img/d.png" >
-	  </div>  -->
+	  </div> 
   
 	<div style="text-align: center;">
     	<br>

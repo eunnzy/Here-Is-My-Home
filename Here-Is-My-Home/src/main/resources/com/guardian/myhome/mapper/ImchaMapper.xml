@@ -30,7 +30,7 @@
     </select>
     
    <!-- 아이디 찾기  -->
-    <select id="findId" resultType="com.guardian.myhome.vo.ImchaVO">
+    <select id="findId" resultType="java.lang.String">
     	select imcha_id AS imchaId from imcha_tb where nickname=#{nickname} and phone = #{phone}
     </select>
  	 

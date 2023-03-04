@@ -31,7 +31,7 @@
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
       }
     </style>
-<title>아이디 찾기</title>   
+<title>아이디 찾기</title>     
 </head>
 <body>
 <!-- 네브바 -->
@@ -52,19 +52,19 @@
         <h1 style="text-align:center;"  class="mb-3">Find My Account</h1>
           <div class="row">
             <div class="mb-3">   
-            <form action="${pageContext.request.contextPath }/member/findId" id="findId" method="post" name="findId">
+            <form  method="post" name="findId">
                <div class="row">
                   <div class="col-12 mb-4">
-                     <label for="user_name">닉네임 </label> 
+                     <label for="imcha_name">닉네임 </label> 
                      <input type="text" name="nickname" class="form-control" id="nickname" value="" placeholder="닉네임을 입력하세요.">
                   </div>
                <div class="col-12 mb-4">
                      <label for="user_phone">전화번호 </label> 
-                     <input type="text" name="phone" class="form-control" id="phone" value="" placeholder=" 010-0000-0000"><br>
+                     <input type="text" name="phone" class="form-control" id="phone" value="" placeholder="010-0000-0000"><br>
                   <br>
                </div>
                         
-            <button class="btn btn-primary btn btn-block" style="width:360pt;height:40pt;margin:auto;" type="submit" value="check">아이디 찾기</button>
+            <button class="btn btn-primary btn btn-block" id="findId" style="width:360pt;height:40pt;margin:auto;" type="button" value="check">아이디 찾기</button>
                <br><br>
             </div>
             <br>
@@ -73,16 +73,16 @@
       </form>
    </div>
 </div>
-</form>
 </div>
 </div>
-</form>
    </div><br><br><br>
    
 
 <script type="text/javascript">
    $(document).ready(function(){
-      $('#findId').submit(function(){
+	   
+	   let formData = $("#findId");
+	   $('#findId').click(function(){
          // alert("성공!");
          if($('#nickname').val() == ''){
             alert("닉네임을 입력하세요.");
@@ -94,12 +94,38 @@
             return false;
          }
          
+         let imcha = {
+        		 "nickname" : $('#nickname').val(),  "phone" : $('#phone').val()
+        	}
+         $.ajax({
+        	data: imcha,
+         	url: "/member/findId",
+         	type : 'POST',
+			success : function(result) {
+				if(result == 1) {
+					const url = "/member/resultId"
+					window.open(url,"아이디찾기",'width=500px, height=700px, scrolbars=yes, resizeable=no');
+				}
+				else {
+					alert("입력하신 정보가 올바르지 않습니다.");
+				}
+			},
+         	error : function(result) {
+				console.log(result);
+				
+				alert("전송 실패");
+			}
+         })
+         
+         
+         formData.submit();
+         
+       
       });
       
       
+      
    });
-   
-
 </script>
 
 

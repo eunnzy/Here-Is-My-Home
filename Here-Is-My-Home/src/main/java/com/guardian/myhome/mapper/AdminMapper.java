@@ -18,4 +18,6 @@ public interface AdminMapper {
 	public AdminVO adminLogin(AdminVO admin);
 	
 	public List<ImchaVO> getList();
+	
+	public int successNum(int homeNum);
 }

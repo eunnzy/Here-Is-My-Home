@@ -216,6 +216,10 @@ public class HomeServiceImpl implements HomeService{
 		return homeDAO.insertHomeReport(homeReportVO);
 	}
 
-
+	@Override
+	public List<HomeReportVO> selectReportHomeList() {
+		
+		return homeDAO.selectReportHomeList();
+	}
 
 }
