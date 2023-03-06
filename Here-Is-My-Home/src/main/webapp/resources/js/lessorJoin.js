@@ -1,78 +1,79 @@
-//	$(document).ready(function(){
-//		$(".join_button").click(function(){
-//			$("#join_form").attr("action", "/member/imchaJoin");
-//			$("#join_form").submit();
-//		});
+////	$(document).ready(function(){
+////		$(".join_button").click(function(){
+////			$("#join_form").attr("action", "/member/imchaJoin");
+////			$("#join_form").submit();
+////		});
+////	});
+////	
+// var code = "";
+// 
+// var idCheck = false;
+// var idckCheck = false;
+// var pwCheck = false;
+// var pwckCheck = false;
+// var nicknameCheck = false;
+// var phoneCheck = false;
+// var addressCheck = false;
+// 
+//$(document).ready(function(){
+//	$("btn btn-primary btn btn-block").click(function(){
+//		
+//		var lessorId = $('.form-id').val();
+//		var lessorPw = $('.form-password').val();
+//		var pwck    = $('.form-passwordCheck').val();
+//		var lessorNickName = $('.form-control').val();
+//		var phone   = $('.form-control').val();
+//		var imchaAddr3 = $('.form-control_3').val();
 //	});
 //	
- var code = "";
- 
- var idCheck = false;
- var idckCheck = false;
- var pwCheck = false;
- var pwckCheck = false;
- var nicknameCheck = false;
- var phoneCheck = false;
- var addressCheck = false;
- 
-$(document).ready(function(){
-	$("btn btn-primary btn btn-block").click(function(){
-		
-		var lessorId = $('.form-id').val();
-		var lessorPw = $('.form-password').val();
-		var pwck    = $('.form-passwordCheck').val();
-		var lessorNickName = $('.form-control').val();
-		var phone   = $('.form-control').val();
-		var imchaAddr3 = $('.form-control_3').val();
-	});
-	
-	if(lessorId == "") {
-		$('.final_id_ck').css('display', 'block');
-		idCheck = false;
-	} else {
-		$('.final_id_ck').css('display', 'none');
-		idCheck = true;
-	}
-	
-	if(pwck == "") {
-		$('.final_pwck_ck').css('display', 'block');
-		pwckCheck = false;
-	} else {
-		$('.final_pwck_ck').css('display', 'none');
-		pwckCheck = true;
-	}
-	
-	if(lessorNickName == "") {
-		$('.final_name_ck').css('display','block');
-		nicknameCheck = false;
-	} else {
-		$('.final_name_ck').css('display','none');
-		nicknameCheck = true;
-	}
-	
-	if(phone == "") {
-		$('.final_phone_ck').css('display','block');
-		phoneCheck = false;
-	} else {
-		$('.final_phone_ck').css('display','none');
-		phoncheck = true;
-	}
-	
-	if(lessorAddr3 = "") {
-		$('.final_imchaAddr3_ck').css('display','block');
-		addressCheck = false; 
-	} else {
-		$('.final_imchaAddr3_ck').css('display','none');
-		addressCheck = true;
-	}
-	
-	if(idCheck&idckCheck&pwCheck&pwckCheck&nicknameCheck&phoneCheck&addressCheck){
-		$("#validation-form").attr("action", "/member/lessorJoin");
-		$("#validation-form").submit();
-	}
-	
-	
-});
+//	if(lessorId == "") {
+//		$('.final_id_ck').css('display', 'block');
+//		idCheck = false;
+//	} else {
+//		$('.final_id_ck').css('display', 'none');
+//		idCheck = true;
+//	}
+//	
+//	if(pwck == "") {
+//		$('.final_pwck_ck').css('display', 'block');
+//		pwckCheck = false;
+//	} else {
+//		$('.final_pwck_ck').css('display', 'none');
+//		pwckCheck = true;
+//	}
+//	
+//	if(lessorNickName == "") {
+//		$('.final_name_ck').css('display','block');
+//		nicknameCheck = false;
+//	} else {
+//		$('.final_name_ck').css('display','none');
+//		nicknameCheck = true;
+//	}
+//	
+//	if(phone == "") {
+//		$('.final_phone_ck').css('display','block');
+//		phoneCheck = false;
+//	} else {
+//		$('.final_phone_ck').css('display','none');
+//		phoncheck = true;
+//	}
+//	
+//	if(lessorAddr3 = "") {
+//		$('.final_imchaAddr3_ck').css('display','block');
+//		addressCheck = false; 
+//	} else {
+//		$('.final_imchaAddr3_ck').css('display','none');
+//		addressCheck = true;
+//	}
+//	
+//	if(idCheck&idckCheck&pwCheck&pwckCheck&nicknameCheck&phoneCheck&addressCheck){
+//		$("#validation-form").attr("action", "/member/lessorJoin");
+//		$("#validation-form").submit();
+//	}
+//	
+//	
+//	
+//});
 	// 아이디 중복검사
 	$('.form-id').on("propertychange change keyup paste input", function(){
 		
@@ -265,6 +266,9 @@ $(document).ready(function(){
 		str += "<div id='result_card'>";
 		str += "<img src='/member/display?fileName=" + fileCallPath +"'>";
 		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+		str += "<input type='hidden' name='lessorImg.fileName' value='" + obj.fileName + "'>";
+		str += "<input type='hidden' name='lessorImg.uuid' value='" + obj.uuid + "'>";
+		str += "<input type='hidden' name='lessorImg.uploadPath' value='" + obj.uploadPath + "'>";
 		str += "</div>";
 		
 		uploadResult.append(str);
@@ -303,6 +307,8 @@ $(document).ready(function(){
 		
 		deleteFile();
 	});
+	
+	
 //	$(".btn btn-primary btn btn-block").click(function() {
 //		
 //		alert("로그인 버튼 작동");

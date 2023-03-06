@@ -27,8 +27,14 @@ public class LessorDAOImpl implements LessorDAO {
 	}
 	
 	// 아이디 찾기
+//	@Override
+//	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+//		
+//		return sqlSession.selectOne(NAMESPACE+".findLessorId", lessor);
+//	}
+	
 	@Override
-	public LessorVO findLessorId(LessorVO lessor) throws Exception {
+	public String findLessorId(LessorVO lessor) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+".findLessorId", lessor);
 	}

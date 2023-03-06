@@ -14,6 +14,7 @@ import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 
 @Service
@@ -88,8 +89,7 @@ public class HomeServiceImpl implements HomeService{
 		return homeInBoundsList;
 	}
 	
-	
-
+	// 메믈 상세 정보
 	@Override
 	public Map<String, Object> selectHomeDetail(int homeNum) {
 		HomeDetailVO homeDetailVO = homeDAO.selectHomeDetail(homeNum);
@@ -122,11 +122,11 @@ public class HomeServiceImpl implements HomeService{
 		home.put("jgsNum", homeDetailVO.getJgsNum());
 		home.put("phone", homeDetailVO.getPhone());
 		home.put("lessorName", homeDetailVO.getName());
-		home.put("lessorAddr", homeDetailVO.getLessorAddr1() + " " 
-				+ homeDetailVO.getLessorAddr2() + " " + homeDetailVO.getLessorAddr3());
-		home.put("deposit", homeDetailVO.getDeposit());
-		home.put("monthly",	homeDetailVO.getMonthly());
-		home.put("adminCost", homeDetailVO.getAdminCost());
+		home.put("lessorAddr", homeDetailVO.getLessorAddr2() + " " + homeDetailVO.getLessorAddr3());
+		// view로 반환할 때 보증금, 월세, 관리비는 돈 단위 계산해서
+		home.put("deposit", convertMoneyUnit(homeDetailVO.getDeposit()));
+		home.put("monthly", convertMoneyUnit(homeDetailVO.getMonthly()));
+		home.put("adminCost",convertMoneyUnit(homeDetailVO.getAdminCost()));
 		
 		return home;
 	}
@@ -210,6 +210,16 @@ public class HomeServiceImpl implements HomeService{
 		return 1;
 	}
 
+	// 매물 신고
+	@Override
+	public int reportHome(HomeReportVO homeReportVO) {
+		return homeDAO.insertHomeReport(homeReportVO);
+	}
 
+	@Override
+	public List<HomeReportVO> selectReportHomeList() {
+		
+		return homeDAO.selectReportHomeList();
+	}
 
 }

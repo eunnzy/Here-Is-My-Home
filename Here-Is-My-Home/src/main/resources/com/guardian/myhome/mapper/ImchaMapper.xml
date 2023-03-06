@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  
- <mapper namespace="com.guardian.myhome.mapper.MemberMapper">
+ <mapper namespace="com.guardian.myhome.mapper.ImchaMapper">
  
  	<!-- 회원가입 -->
- 	<insert id="memberJoin" parameterType="com.guardian.myhome.vo.MemberVO">
+ 	<insert id="imchaJoin" parameterType="com.guardian.myhome.vo.ImchaVO">
 	insert into Imcha_tb (imcha_id, imcha_pw, nickname, phone, user_roll, sido1, gugun1)          
 	values(#{imchaId}, #{imchaPw}, #{nickname}, #{phone}, #{userRoll}, #{sido1}, #{gugun1})
  	</insert> 
@@ -23,19 +23,19 @@
  	</select>
  	
  	<!-- 로그인 -->
- 	<select id="memberLogin" resultType="com.guardian.myhome.vo.MemberVO">
+ 	<select id="imchaLogin" resultType="com.guardian.myhome.vo.ImchaVO">
        select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
              sido1, gugun1
        from Imcha_tb where imcha_Id = #{imchaId} and imcha_pw = #{imchaPw}
     </select>
     
    <!-- 아이디 찾기  -->
-    <select id="findId" resultType="com.guardian.myhome.vo.MemberVO">
+    <select id="findId" resultType="java.lang.String">
     	select imcha_id AS imchaId from imcha_tb where nickname=#{nickname} and phone = #{phone}
     </select>
  	 
  	 <!-- 비밀번호 찾기 -->
- 	 <select id="findPw" resultType="com.guardian.myhome.vo.MemberVO">
+ 	 <select id="findPw" resultType="com.guardian.myhome.vo.ImchaVO">
  	 	select imcha_pw As imchaPw from imcha_tb where imcha_id = #{imchaId} and phone = #{phone}
  	 </select>
  	 
@@ -51,7 +51,7 @@
  		where imcha_Id=#{imchaId}
  	</update>
  	
- 	<select id="getMember" resultType="com.guardian.myhome.vo.MemberVO">
+ 	<select id="getImcha" resultType="com.guardian.myhome.vo.ImchaVO">
  		select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
              sido1, gugun1
        from Imcha_tb where imcha_Id=#{imchaId}

@@ -7,7 +7,6 @@
 	<title>매물 등록</title>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,56 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	<link href="/css/registerHome.css"  type="text/css" rel="stylesheet" >
 	<style>
-		.home-container {
-			margin-top: 30px;
-			padding: 30px;
-			height:auto;
-			border-radius: 10px;
-			background-color: white;
-		}
-		.addBtn{
-			margin: auto;
-			display: block;
-			padding: 15px 40px;
-			font-size: 20px;
-			border: none;
-			cursor:pointer;
-			background-color: #BEE9FB;
-		}
-		table {
-			border: 1px solid #8c8c8c;
-		}
-		thead {
-			border-bottom: 1px solid #8c8c8c;
-		}
-		.img-div img{
-			width:100%;
-		    height: auto;
-		    display: flex;
-		    margin-top: 15px;
-		}
-		.img-div {
-			display:flex;
-			margin-top: 25px;
-			position: relative;
-		}
-		.imgDelete{
-		    position: absolute;
-		    top: 10px;
-		    padding:3px;
-		    right: 0px;
-		    background-color: #7E7E7E;
-		    color: white;
-		    font-weight: 900;
-		    width: 30px;
-		    height: 30px;
-		    line-height: 26px;
-		    text-align: center;
-		    display: inline-block;
-		    cursor: pointer;	
-		}
-	/*  
-		photo 이미지 출처 : 
+	/*		photo 이미지 출처 : 
 		https://www.flaticon.com/free-icon/picture_2659360?term=photo&page=1&position=8&origin=tag&related_id=2659360 
 	*/		
     </style>
@@ -75,7 +25,7 @@
 	</header>
 	
 	<div class="home-container col-md-9 mx-auto">
-		<h1 class="mt-3 mb-3"> 방 올리기 </h1>
+		<h1 class="mt-3 mb-3"> 매물 등록 </h1>
 		<div class="add-notice p-3 mx-auto mb-5" >
         	<ul>
         		<li>전/월세 매물만 등록할 수 있습니다.</li>
@@ -434,13 +384,13 @@
 				</table>
        		</div>
        		<div class="text-center mx-auto">
-        		<button type="reset" class="btn btn-md mr-2">취소</button>
+        		<button type="reset" class="btn btn-md mr-2" onclick="location.href='/home/manage/list'">취소</button>
  				<button type="submit" id="addBtn" class="btn btn-md" >등록</button>
 			</div>
     	</form>	
 	</div>
 
-	<script src="/js/modifyHome.js" ></script>
+	<script src="/js/registerHome.js" ></script>
 	
 	<!-- 우편 번호 검색 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

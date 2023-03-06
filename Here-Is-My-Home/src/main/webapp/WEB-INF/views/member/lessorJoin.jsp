@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
     <style>
       .input-form {
@@ -225,14 +226,6 @@
       </div>
     </div>
   </div>  
-  
-    <footer class="my-3 text-center text-small">
-      <p>  &nbsp; </p>
-    </footer>
-        </div>
-
-
-
 
       <footer>
        <jsp:include page="../footer.jsp"></jsp:include>

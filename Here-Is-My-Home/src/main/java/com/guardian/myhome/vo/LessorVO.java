@@ -1,6 +1,7 @@
 package com.guardian.myhome.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,6 +34,10 @@ public class LessorVO {
 	private String lessorAddr3;
 	
 	private int valid;
+	
+	// 이미지 정보
+	private LessorImgVO lessorImg;
+	
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enrollDate;
@@ -92,8 +97,6 @@ public class LessorVO {
 	public void setJgsName(String jgsName) {
 		this.jgsName = jgsName;
 	}
-
-	
 
 	public String getJgsNum() {
 		return jgsNum;
@@ -159,19 +162,25 @@ public class LessorVO {
 		this.enrollDate = enrollDate;
 	}
 
+	public LessorImgVO getLessorImg() {
+		return lessorImg;
+	}
+
+	public void setLessorImg(LessorImgVO lessorImg) {
+		this.lessorImg = lessorImg;
+	}
+
 	@Override
 	public String toString() {
 		return "LessorVO [lessorId=" + lessorId + ", lessorPw=" + lessorPw + ", lessorNickName=" + lessorNickName
 				+ ", phone=" + phone + ", name=" + name + ", birthDate=" + birthDate + ", jgsName=" + jgsName
 				+ ", jgsNum=" + jgsNum + ", status=" + status + ", userRoll=" + userRoll + ", lessorAddr1="
 				+ lessorAddr1 + ", lessorAddr2=" + lessorAddr2 + ", lessorAddr3=" + lessorAddr3 + ", valid=" + valid
-				+ ", enrollDate=" + enrollDate + "]";
+				+ ", lessorImg=" + lessorImg + ", enrollDate=" + enrollDate + "]";
 	}
 
-	
-	
 
-	
-	
+
+
 	
 }

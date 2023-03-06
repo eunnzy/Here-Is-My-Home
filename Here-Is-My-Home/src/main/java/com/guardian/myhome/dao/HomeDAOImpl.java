@@ -12,6 +12,7 @@ import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
+import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
 
 @Repository
@@ -41,6 +42,11 @@ public class HomeDAOImpl implements HomeDAO{
 		return sqlSession.insert(HOMEMAPPER + "insertHomeOptionList", homeOptionList);
 	}
 
+	@Override
+	public int insertHomeReport(HomeReportVO homeReportVO) {
+		return sqlSession.insert(HOMEMAPPER + "insertHomeReport", homeReportVO);
+	}
+	
 	
 	@Override
 	public List<HomePreviewVO> selectHomeInBoundsList(Map<String, Object> mapBounds) {
@@ -85,13 +91,9 @@ public class HomeDAOImpl implements HomeDAO{
 		return sqlSession.delete(HOMEMAPPER + "deleteHomeOption", homeNum);
 	}
 
+	@Override
+	public List<HomeReportVO> selectReportHomeList() {
 
-	
-//	@Override
-//	public List<Integer> selectHomeNumByOptionCheck(List<String> homeOptionList) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	
-
+		return sqlSession.selectList(HOMEMAPPER + "selectReportHomeList");
+	}
 }

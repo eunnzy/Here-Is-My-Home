@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.guardian.myhome.mapper.MemberMapper;
-import com.guardian.myhome.service.MemberService;
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.mapper.ImchaMapper;
+import com.guardian.myhome.service.ImchaService;
+import com.guardian.myhome.vo.ImchaVO;
 
 /*
 	회원 관련 기능
@@ -31,33 +31,33 @@ import com.guardian.myhome.vo.MemberVO;
 
 @Controller
 @RequestMapping("/member")
-public class MemberController {
+public class ImchaController {
 	
 	@Autowired
-	private MemberService memberservice;
+	private ImchaService imchaservice;
 	
 	
 	// 유저회원가입
-	@RequestMapping(value = "/userJoin", method = RequestMethod.GET)
+	@RequestMapping(value = "/imchaJoin", method = RequestMethod.GET)
 	public void joinGET() {
 		
 	}
 	
 	
-	@RequestMapping(value = "/userJoin", method = RequestMethod.POST)
-	public String joinPOST(MemberVO member) throws Exception{
+	@RequestMapping(value = "/imchaJoin", method = RequestMethod.POST)
+	public String joinPOST(ImchaVO imcha) throws Exception{
 		
-		memberservice.memberJoin(member);
+		imchaservice.imchaJoin(imcha);
 		
 		return "redirect:/index";
 	}
 	
 	// 아이디 중복체크
-	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+	@RequestMapping(value = "/imchaIdChk", method = RequestMethod.POST)
 	@ResponseBody
-	public String memberIdChkPOST(String imchaId) throws Exception {
+	public String imchaIdChkPOST(String imchaId) throws Exception {
 		
-		int result = memberservice.idCheck(imchaId);
+		int result = imchaservice.idCheck(imchaId);
 		
 		if (result != 0) {
 			return "fail";
@@ -71,7 +71,7 @@ public class MemberController {
 		@ResponseBody
 		public String nicknameChkPOST(String nickname) throws Exception {
 			
-			int result = memberservice.nicknameCheck(nickname);
+			int result = imchaservice.nicknameCheck(nickname);
 			
 			if (result != 0) {
 				return "fail";
@@ -87,7 +87,7 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping(value = "/imchaLogin", method = RequestMethod.POST)
-	public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
+	public String loginPOST(HttpServletRequest request, ImchaVO imcha, RedirectAttributes rttr) throws Exception {
 		
 //		System.out.println("login 메서드 진입");
 //		System.out.println("전달된 데이터 :" + member);
@@ -95,14 +95,14 @@ public class MemberController {
 //		return null;
 		
 		HttpSession session = request.getSession();
-		MemberVO vo = memberservice.memberLogin(member);
+		ImchaVO vo = imchaservice.imchaLogin(imcha);
 		
 		if(vo == null) {
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/member/imchaLogin";
 		} else {
-			session.setAttribute("member", vo);
+			session.setAttribute("imcha", vo);
 			System.out.println(vo.getImchaId());
 			return "redirect:/index";
 		}
@@ -128,30 +128,34 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
-	public String findIdPOST(MemberVO member, Model model) throws Exception {
+	@ResponseBody
+	public int findIdPOST(ImchaVO imcha, Model model) throws Exception {
+		System.out.println(imcha);
+		String findIdVo = imchaservice.findId(imcha);
 		
-		MemberVO findIdVo = memberservice.findId(member);
+		System.out.println(findIdVo);
 		
 		if (findIdVo == null) {
-			
-			model.addAttribute("check",1);
-			return "/member/msg";
+			return 0;
+//			model.addAttribute("check",1);
+//			return "/member/msg";
 		}else {
-			model.addAttribute("check",0);
-			model.addAttribute("imchaId", findIdVo.getImchaId());
-			return "/member/resultId";
+//			model.addAttribute("check",0);
+//			model.addAttribute("imchaId", findIdVo.getImchaId());
+			model.addAttribute("imchaId", findIdVo);
+			return 1;
 		}
 	}
 	
 	// 아이디 결과
 	@RequestMapping(value="/resultId", method=RequestMethod.GET)
-	public String resultIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="nickname")String phone,String nickname,MemberVO searchVO) throws Exception{
+	public String resultIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="nickname")String phone,String nickname,ImchaVO searchVO) throws Exception{
 		
-		searchVO.setNickname(nickname);
-		searchVO.setPhone(phone);
-		MemberVO findId = memberservice.findId(searchVO);
-		
-		model.addAttribute("searchVO", findId);
+//		searchVO.setNickname(nickname);
+//		searchVO.setPhone(phone);
+//		ImchaVO findId = imchaservice.findId(searchVO);
+//		
+//		model.addAttribute("searchVO", findId);
 		
 		return "/member/resultId";
 	}
@@ -164,15 +168,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/findPw", method=RequestMethod.POST)
-	public String findPwPOST(MemberVO member, HttpSession session, RedirectAttributes rttr) throws Exception{
+	public String findPwPOST(ImchaVO imcha, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
-		MemberVO findPwVo = memberservice.findPw(member);
+		ImchaVO findPwVo = imchaservice.findPw(imcha);
 		
 		if(findPwVo == null) {
 			rttr.addFlashAttribute("check", 1);
 			return "/member/msg";
 		}else {
-			findPwVo.setImchaId(member.getImchaId());
+			findPwVo.setImchaId(imcha.getImchaId());
 			rttr.addFlashAttribute("check",0);
 			rttr.addFlashAttribute("findPwVo", findPwVo);
 			return "redirect:/member/updatePw";
@@ -181,14 +185,14 @@ public class MemberController {
 	
 	// 비밀번호 변경
 	@RequestMapping(value="/updatePw", method=RequestMethod.GET)
-	public void updatePwGET(@RequestParam(value="updatePw", defaultValue="", required=false) String imchaId, MemberVO member) throws Exception{
+	public void updatePwGET(@RequestParam(value="updatePw", defaultValue="", required=false) String imchaId, ImchaVO imcha) throws Exception{
 		
 	}
 	
 	@RequestMapping(value="/updatePw", method=RequestMethod.POST)
-	public String updatePwPOST(@RequestParam(value="updatePw", defaultValue="", required=false) String imchaId, MemberVO member) throws Exception{
+	public String updatePwPOST(@RequestParam(value="updatePw", defaultValue="", required=false) String imchaId, ImchaVO imcha) throws Exception{
 		
-		memberservice.updatePw(member);
+		imchaservice.updatePw(imcha);
 		
 		return "redirect:/member/imchaLogin";
 	}

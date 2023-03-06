@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.List;
 
+import com.guardian.myhome.vo.LessorImgVO;
 import com.guardian.myhome.vo.LessorVO;
 
 public interface LessorService {
@@ -18,8 +19,11 @@ public interface LessorService {
 	// 로그인
 	public LessorVO lessorLogin(LessorVO lessor) throws Exception;
 		
-	// 아이디 찾기
-	public LessorVO findLessorId(LessorVO lessor) throws Exception;
+//	// 아이디 찾기
+//	public LessorVO findLessorId(LessorVO lessor) throws Exception;
+	
+	
+	public String findLessorId(LessorVO lessor) throws Exception;
 		
 	// 비밀번호 찾기
 	public LessorVO findLessorPw(LessorVO lessor) throws Exception;
@@ -40,7 +44,13 @@ public interface LessorService {
 	public int successId(String lessorId) throws Exception;
 	
 	// 회원가입 거절
-	public int failed(String lessorId) throws Exception;
+//	public int failed(String lessorId) throws Exception;
+	
+	// 이미지 업로드
+	public int imgEnroll(LessorImgVO lessorImg) throws Exception;
+
+	//
+	public LessorImgVO selectImg(String lessorId) throws Exception;
 	
 
 }

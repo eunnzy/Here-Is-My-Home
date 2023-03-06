@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.guardian.myhome.vo.MemberVO;
+import com.guardian.myhome.vo.ImchaVO;
 
-public interface MemberMapper {
+public interface ImchaMapper {
 
 	// 회원가입
-	public void memberJoin(MemberVO member);
+	public void imchaJoin(ImchaVO imcha);
 	
 	// 아이디 중복 검사
 	public int idCheck(String imchaId);
@@ -19,16 +19,14 @@ public interface MemberMapper {
 	public int nicknameCheck(String nickname);
 	
 	// 로그인
-	public MemberVO memberLogin(MemberVO member);
-	
-	
+	public ImchaVO imchaLogin(ImchaVO imcha);
 	
 	
 	// 정보 수정
-	public void updateMember(MemberVO member);
+	public void updateMember(ImchaVO imcha);
 	
 	// 정보 저장
-	public MemberVO getMember(MemberVO memeber);
+	public ImchaVO getImcha(ImchaVO imcha);
 	
 	
 }
