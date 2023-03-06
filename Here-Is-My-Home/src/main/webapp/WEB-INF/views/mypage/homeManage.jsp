@@ -62,6 +62,10 @@
     </div>
   </div>
 
+
+  <div style="bottom: 30px; width: 78rem; margin-left: auto; margin-right: auto;">
+    <button type="button" class="btn btn-secondary mr-2 my-2" style="float: right;" onclick = "location.href = '/home/manage/register' ">매물 등록</button>
+  </div>
   
   
 </body>

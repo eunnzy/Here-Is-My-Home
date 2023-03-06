@@ -377,8 +377,8 @@ public class HomeManageController {
 
 		}
 		
-//		String uploadPath = "C:\\homeUpload";	// 파일 저장 경로
-		String uploadPath = "/Users/sihyun/homeUpload";	// 파일 저장 경로
+		String uploadPath = "C:\\homeUpload";	// 파일 저장 경로
+//		String uploadPath = "/Users/sihyun/homeUpload";	// 파일 저장 경로
 		String homeImgPath = "homeImg";
 		File uploadFolder = new File(uploadPath, homeImgPath);
 		
@@ -428,8 +428,8 @@ public class HomeManageController {
 	@RequestMapping(value = "/showHomeImg", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getHomeImg(String homeImgName) {
 		System.out.println(homeImgName);
-//		File imgFile = new File("C:\\homeUpload", homeImgName);
-		File imgFile = new File("/Users/sihyun/homeUpload", homeImgName);
+		File imgFile = new File("C:\\homeUpload", homeImgName);
+//		File imgFile = new File("/Users/sihyun/homeUpload", homeImgName);
 		
 		ResponseEntity<byte[]> result = null;
 		

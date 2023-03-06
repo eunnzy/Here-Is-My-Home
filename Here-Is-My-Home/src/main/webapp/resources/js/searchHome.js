@@ -261,6 +261,12 @@ $("#searchBtn").click(function() {
 	ps.keywordSearch(searchInput, placesSearchCB);
 });
 
+// 검색 이벤트
+$("#searchInput").on("keyup",function(key){
+    if(key.keyCode==13) {
+		ps.keywordSearch($("#searchInput").val(), placesSearchCB);
+	}
+});
 
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수
