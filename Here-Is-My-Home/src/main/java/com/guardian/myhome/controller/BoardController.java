@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.FileSystemResource;
@@ -65,6 +67,7 @@ public class BoardController {
 
 	private BoardService service;
 	
+	// 로그인 여부에 따른 목록 리스트 
 	@GetMapping("/list")
 	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
@@ -112,17 +115,51 @@ public class BoardController {
 	
 	// 조회 불러오기 
 	@GetMapping("/get")
-	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid) {
+	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid, HttpServletRequest request, HttpServletResponse response) {
+		// 조회 게시물 정보 넘기기 
 		log.info("/get");
 		model.addAttribute("board", service.get(bno));
 		
+		// 좋아요 처리 
 		BoardLikesVO likevo = new BoardLikesVO();
 		likevo.setBno(bno);
 		likevo.setUserid(userid);
 		log.info(likevo);
-		
 		model.addAttribute("like", service.likeCheck(bno, userid));
 		
+		// 조회수 처리 
+		Cookie[] cookies = request.getCookies();
+		Cookie viewCookie = null;
+		
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("cookie" + bno + userid)) {
+					viewCookie = cookies[i];
+				}
+			}
+		}
+		
+		if (viewCookie != null) {
+	        if (!viewCookie.getValue().contains("[" + bno + userid +"]")) {
+	        	boolean result = service.viewsUp(bno);
+				if(result) {
+					log.info("조회수 증가");
+	            }else {
+	            	log.info("조회수 증가 에러");
+	            }
+				viewCookie.setValue(viewCookie.getValue() + "_[" + bno + userid + "]");
+				viewCookie.setPath("/");
+				viewCookie.setMaxAge(60 * 60 * 24);
+	            response.addCookie(viewCookie);
+	        }
+	    } else {
+	    	service.viewsUp(bno);
+	        Cookie newCookie = new Cookie("cookie" + bno + userid, "[" + bno + userid + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	        log.info("newCookie" + newCookie);
+	    }
 		return "/community/get";
 	}
 	
@@ -189,17 +226,6 @@ public class BoardController {
 		log.info("total : " + dto);
 		return "/community/mylist";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// 파일 업로드 등록
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
