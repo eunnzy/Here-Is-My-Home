@@ -45,7 +45,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guardian.myhome.service.AlarmBoardService;
 import com.guardian.myhome.service.BoardService;
+import com.guardian.myhome.vo.AlarmBoardVO;
 import com.guardian.myhome.vo.BoardAttachFileDTO;
 import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardLikesVO;
@@ -66,6 +68,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class BoardController {
 
 	private BoardService service;
+	private AlarmBoardService abservice;
 	
 	// 로그인 여부에 따른 목록 리스트 
 	@GetMapping("/list")
@@ -104,6 +107,11 @@ public class BoardController {
 			model.addAttribute("pageMaker", dto);
 			log.info("total : " + dto);
 		}
+		
+		// 공지사항 리스트 
+		List<AlarmBoardVO> ablist = abservice.alarmBoard();
+		model.addAttribute("ablist", ablist);
+		
 		return "/community/list";
 	}
 	
@@ -117,7 +125,7 @@ public class BoardController {
 	@GetMapping("/get")
 	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid, HttpServletRequest request, HttpServletResponse response) {
 		// 조회 게시물 정보 넘기기 
-		log.info("/get");
+		log.info("get");
 		model.addAttribute("board", service.get(bno));
 		
 		// 좋아요 처리 
@@ -161,6 +169,15 @@ public class BoardController {
 	        log.info("newCookie" + newCookie);
 	    }
 		return "/community/get";
+	}
+	
+	// 공지사항 조회 불러오기 
+	@GetMapping("/getAlarm")
+	public String getAlarm(Long ano, Model model) {
+		// 조회 게시물 정보 넘기기 
+		log.info("getAlarm");
+		model.addAttribute("Aboard", abservice.abget(ano));		
+		return "/community/getAlarm";
 	}
 	
 	// 수정테이블 불러오기

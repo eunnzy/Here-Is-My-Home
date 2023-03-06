@@ -120,7 +120,7 @@
     $(document).ready(function() {
     	var likeval = ${like};
     	var bnoValue = '<c:out value="${board.bno}" />';
-    	var member = '<c:out value="${member.imchaId}" />';
+    	var member = '<c:out value="${imcha.imchaId}" />';
 		var str = "";
 		
 		if(member == '' || member == null) {
@@ -153,7 +153,7 @@
     $(document).ready(function() {
 		var bnoValue = '<c:out value="${board.bno}" />';
 		var replyUL = $(".chat");
-		var member = '<c:out value="${member.nickname}" />';
+		var member = '<c:out value="${imcha.nickname}" />';
 		
 			// 댓글 목록 보여주기  
 			showList(1);
@@ -197,7 +197,7 @@
 				}
 			});
 		// 로그인 여부에 따른 버튼 
-	 	var imchanick = '<c:out value="${member.nickname}" />';
+	 	var imchanick = '<c:out value="${imcha.nickname}" />';
 	 	var boardnick = '<c:out value="${board.nickname}" />';
 		if(imchanick != boardnick || imchanick == '' || imchanick == null) {
 			$("#modifyBT").hide();

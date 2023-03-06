@@ -122,16 +122,6 @@
 		UPDATE Board SET likes = likes-1 WHERE bno = #{bno}
 	</update>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<!-- 조회수 증가  -->
 	<update id="viewsUp">
 		UPDATE Board SET views = views+1 WHERE bno = #{bno}
