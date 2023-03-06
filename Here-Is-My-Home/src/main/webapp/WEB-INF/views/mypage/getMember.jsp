@@ -83,7 +83,7 @@
             <div class="mb-3" >
               <label for="id_name">아이디</label>
               <div class="id_input_box">
-                 <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${member.imchaId}" required>
+                 <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${imcha.imchaId}" required>
             </div>
 
             <div class="mb-3">
@@ -107,7 +107,7 @@
                
             <div class=" mb-3">
               <label for="nickname">닉네임</label>
-              <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="${member.nickname}" required>
+              <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="${imcha.nickname}" required>
               <div class="invalid-feedback">
                 닉네임을 입력해주세요.
               </div>
@@ -117,7 +117,7 @@
 
           <div class="mb-3">
             <label for="phone">전화번호</label>
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" value="${member.phone}" required>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="010-1234-5678" value="${imcha.phone}" required>
             <div class="invalid-feedback">
               전화번호를 입력해주세요.
             </div>
@@ -162,6 +162,5 @@
     </footer>
   <script src="/js/imchaJoin.js" ></script>
   <script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.guardian.myhome.dao.HomeDAO;
+import com.guardian.myhome.mapper.HomeMapper;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -16,12 +18,16 @@ import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 @Service
 public class HomeServiceImpl implements HomeService{
 	
 	@Autowired
 	HomeDAO homeDAO;
+	
+	@Autowired
+	HomeMapper homeMapper;
 
 	@Override
 	public int insertHome(Map<String, Object> insertMap) {
@@ -89,7 +95,8 @@ public class HomeServiceImpl implements HomeService{
 		return homeInBoundsList;
 	}
 	
-	// 메믈 상세 정보
+	
+
 	@Override
 	public Map<String, Object> selectHomeDetail(int homeNum) {
 		HomeDetailVO homeDetailVO = homeDAO.selectHomeDetail(homeNum);
@@ -127,6 +134,7 @@ public class HomeServiceImpl implements HomeService{
 		home.put("deposit", convertMoneyUnit(homeDetailVO.getDeposit()));
 		home.put("monthly", convertMoneyUnit(homeDetailVO.getMonthly()));
 		home.put("adminCost",convertMoneyUnit(homeDetailVO.getAdminCost()));
+		home.put("lessorId", homeDetailVO.getLessorId());
 		
 		return home;
 	}
@@ -210,7 +218,6 @@ public class HomeServiceImpl implements HomeService{
 		return 1;
 	}
 
-	// 매물 신고
 	@Override
 	public int reportHome(HomeReportVO homeReportVO) {
 		return homeDAO.insertHomeReport(homeReportVO);
@@ -222,4 +229,15 @@ public class HomeServiceImpl implements HomeService{
 		return homeDAO.selectReportHomeList();
 	}
 
+	@Override
+	public List<HomePreviewVO> getListByLessorId(LessorVO vo) {
+		System.out.println(vo);
+	
+		return homeDAO.getListByLessorId(vo);
+	}
+
+	@Override
+	public void deleteHome(@Param("homeNum")int homeNum, @Param("lessorId")String lessorId) {
+		homeMapper.deleteHome(homeNum, lessorId);
+	}
 }

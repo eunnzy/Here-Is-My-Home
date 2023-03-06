@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.mapper.ImchaMapper;
@@ -30,6 +31,7 @@ import com.guardian.myhome.vo.ImchaVO;
  */
 
 @Controller
+@SessionAttributes("imcha")
 @RequestMapping("/member")
 public class ImchaController {
 	

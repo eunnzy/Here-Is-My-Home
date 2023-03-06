@@ -3,6 +3,8 @@ package com.guardian.myhome.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -34,5 +36,8 @@ public interface HomeMapper {
 	int updateHomePrice(HomePriceVO HomePriceVO);	// 매물 가격 테이블 수정
 	int deleteHomeOption(int homeNum);	// 매물 옵션 삭제
 	int deleteHomeImg(int homeNum);	// 매물 사진 정보 삭제
+	
+	public List<HomePreviewVO> getListByLessorId(String lessorId);
+	public void deleteHome(@Param("homeNum")int homeNum, @Param("lessorId")String lessorId);
 	
 } 
