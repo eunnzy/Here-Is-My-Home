@@ -28,15 +28,15 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="/getMember")
-	public String getMember(ImchaVO member, HttpServletRequest request) throws Exception {
+	public String getMember(ImchaVO imcha, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
-		ImchaVO vo = (ImchaVO) session.getAttribute("member");
+		ImchaVO vo = (ImchaVO) session.getAttribute("imcha");
 		System.out.println(vo.getImchaId());
-		member.setImchaId(vo.getImchaId());
-		memberservice.getMember(member);
+		imcha.setImchaId(vo.getImchaId());
+		memberservice.getMember(imcha);
 		System.out.println("닉네임" + vo.getNickname());
-		System.out.println(member.getImchaId());
-		session.setAttribute("member", vo);
+		System.out.println(imcha.getImchaId());
+		session.setAttribute("imcha", vo);
 		
 		return "mypage/getMember";
 	}
@@ -44,7 +44,7 @@ public class MyPageController {
 	
 	// 회원 정보 수정 페이지
 	@RequestMapping(value="/updateMember")
-	public String updateMember(ImchaVO member, HttpServletRequest request) throws Exception {
+	public String updateMember(ImchaVO imcha, HttpServletRequest request) throws Exception {
 		
 //		 //1.session이 있고 + 2.session정보가 있으면 
 //	      if(session != null && session.getAttribute("member") != null) { 
@@ -54,8 +54,8 @@ public class MyPageController {
 //	         return "redirect:/mypage/getMember";
 //	      }
 		HttpSession session = request.getSession();
-		memberservice.updateMember(member);
-		session.setAttribute("member", memberservice.getMember(member));
+		memberservice.updateMember(imcha);
+		session.setAttribute("imcha", memberservice.getMember(imcha));
 	    return "/mypage/getMember";
 			
 	}

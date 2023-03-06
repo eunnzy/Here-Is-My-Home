@@ -250,14 +250,11 @@
 		</div> -->
 	</div>
 		
-<<<<<<< HEAD
 		<%-- <jsp:include page="reportHome.jsp"></jsp:include> --%>	<!-- 신고하기 모달 -->
 		
 		<form action="reservation/enroll" method="POST">
-=======
 		<jsp:include page="reportHome.jsp"></jsp:include>	<!-- 신고하기 모달 -->
 		
->>>>>>> branch 'main' of https://github.com/eunnzy/Here-Is-My-Home.git
 		<div class="reserv-modal">
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
@@ -267,29 +264,33 @@
 					<table class="table">
 						<tr>
 							<td style="color: white;"> 이름 </td>
-							<td> <input type="text" class="form-control" id="imchaId" name="imchaId"></td>
+							<td> <input type="text" class="form-control" id="imchaId" name="imchaId" value="${imcha.imchaId }" readonly></td>
 						</tr>
 						<tr>
 							<td style="color: white;"> 방문 날짜 </td>
 							<td> <input type="date" class="form-control" id="revDate" name="revDate"></td>
 						</tr>
+						
+					</table>
+					<table class="timeTable">
 						<tr class="timeSelect">
-							<td style="color: white;"> 방문 시간 </td>
+							<td style="color: white; padding-right:25px;" > 방문 시간 </td>
 							<td><input type="radio" id="revTime" name="revTime" value="10:00"><label for="revTime">10:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="11:00"><label for="revTime">11:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="12:00"><label for="revTime">12:00</label></td>
+							<td><input type="radio" id="revTime2" name="revTime" value="11:00"><label for="revTime2">11:00</label></td>
+							<td><input type="radio" id="revTime3" name="revTime" value="12:00"><label for="revTime3">12:00</label></td>
 						</tr>
 						<tr class="timeSelect">
 							<td style="color: white;"></td>
-							<td><input type="radio" id="revTime" name="revTime" value="13:00"><label for="revTime">13:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="14:00"><label for="revTime">14:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="15:00"><label for="revTime">15:00</label></td>
+							<td><input type="radio" id="revTime4" name="revTime" value="13:00"><label for="revTime4">13:00</label></td>
+							<td><input type="radio" id="revTime5" name="revTime" value="14:00"><label for="revTime5">14:00</label></td>
+							<td><input type="radio" id="revTime6" name="revTime" value="15:00"><label for="revTime6">15:00</label></td>
 						</tr>
 						<tr class="timeSelect">
 							<td style="color: white;"></td>
-							<td><input type="radio" id="revTime" name="revTime" value="16:00"><label for="revTime">16:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="17:00"><label for="revTime">17:00</label></td>
-							<td><input type="radio" id="revTime" name="revTime" value="18:00"><label for="revTime">18:00</label></td>
+							<td><input type="radio" id="revTime7" name="revTime" value="16:00"><label for="revTime7">16:00</label></td>
+							<td><input type="radio" id="revTime8" name="revTime" value="17:00"><label for="revTime8">17:00</label></td>
+							<td><input type="radio" id="revTime9" name="revTime" value="18:00"><label for="revTime9">18:00</label></td>
+						</tr>
 					</table>
 				</div>
 				<div class="d-grid gap-3 mx-auto">
@@ -311,18 +312,16 @@
 		let logitude = ${home.longitude};
 		let homeNum = ${home.homeNum};
 		let imchaId = $('#imchaId').val();
-<<<<<<< HEAD
 		let lessorId = "${home.jgsName}";
 		let enrollName = $('#enrollName').val();
 		let enrollDate = $('#enrollDate').val();
-=======
->>>>>>> branch 'main' of https://github.com/eunnzy/Here-Is-My-Home.git
-//		let homeNum = $('#homeNum').val();
+		let homeNum = $('#homeNum').val();
 	// 위치 정보 표시
 		let revTime = $("input[name='revTime']:checked").val();
 	</script>
 	<script src="/js/reportHome.js" ></script>
 	<script src="/js/detailHome.js" ></script>
+	<script src="/js/reservHome.js" ></script>
 	<script>
 		$(document).ready(function() {
 			let latitude = ${home.latitude};

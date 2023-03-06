@@ -10,7 +10,8 @@ public interface ReservationService {
 	public List<ReservationVO> getRevByImchaId(String imchaId);
 	public void delete(int revNum, String imchaId);
 	public List<ReservationVO> getRevByLessor(String lessorId);
-	public void reject(int revNum, String imchaId);
-	public void changeRevState(int homeNum, String imchaId);
+	public void reject(int revNum, String imchaId, int homeNum);
+	public void changeRevState(int homeNum, String imchaId, int revNum);
+	public List<ReservationVO> invaildDate(String revDate);
 	
 }

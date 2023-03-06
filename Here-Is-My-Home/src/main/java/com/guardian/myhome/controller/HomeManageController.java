@@ -3,6 +3,7 @@ package com.guardian.myhome.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,15 +34,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.mapper.HomeMapper;
 import com.guardian.myhome.service.HomeService;
-import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeVO;
 import com.guardian.myhome.vo.LessorVO;
-import com.guardian.myhome.vo.LikeVO;
 
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -58,13 +59,20 @@ public class HomeManageController {
 	@Autowired
 	HomeMapper homeMapper;
 	
+	@Autowired
+	HomeDAO homeDAO;
+	
 	@RequestMapping("/list")
 	public String getHomeList(Model model,  HttpServletRequest request) {
-		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	// 글 등록 아이디
-		List<HomePreviewVO> manageList = null;
-		manageList = homeService.getListByLessorId(lessorVO.getLessorId());
+		HttpSession session = request.getSession();
+		LessorVO lessorVO = (LessorVO) session.getAttribute("lessor");	// 글 등록 아이디
+		System.out.println(lessorVO.getLessorId());
+		List<HomePreviewVO> manageList = homeService.getListByLessorId(lessorVO);
 		System.out.println(manageList);
-		
+		for (int i=0; i<manageList.size(); i++) {
+			List<HomeImgVO> img = homeDAO.selectHomeImgList(manageList.get(i).getHomeNum());
+			manageList.get(i).setHomeImg(img.get(0));
+		}
 		model.addAttribute("manageList", manageList);
 		return "mypage/homeManage";
 	}
@@ -462,5 +470,15 @@ public class HomeManageController {
 		}
 		
 		return new ResponseEntity<String>("success", HttpStatus.OK);	// 성공했다고 리턴.
+	}
+	
+	@RequestMapping("/deleteHome")
+	public String deleteHome(int homeNum, String lessorId, HttpServletResponse response) throws IOException {
+		homeMapper.deleteHome(homeNum, lessorId);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('삭제가 완료되었습니다.');location.href='/home/manage/list?lessorId='+lessorId;</script>");
+        out.flush();
+		return "redirect:/home/manage/list?lessorId="+lessorId;
 	}
 }

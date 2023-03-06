@@ -2,11 +2,12 @@ package com.guardian.myhome.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guardian.myhome.mapper.RevMapper;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.service.ReservationService;
+import com.guardian.myhome.vo.LessorVO;
 import com.guardian.myhome.vo.ReservationVO;
 
 @Controller
@@ -26,8 +29,11 @@ public class ReservationController {
 	RevMapper revMapper;
 	
 	@Autowired
-	HomeService homeService;
+	ReservationService reservationService;
 	
+	@Autowired
+	HomeService homeService;
+
 	// 회원방문예약 신청
 	@RequestMapping(value="/enroll")
 	@ResponseBody
@@ -59,9 +65,8 @@ public class ReservationController {
 				revList.get(i).setState("예약 거절되었습니다.");
 			}
 		
-		
 		}
-		System.out.println("error1");
+		System.out.println("listError");
 		
 		model.addAttribute("revList",revList);
 		return "mypage/reservationImcha";
@@ -71,13 +76,27 @@ public class ReservationController {
 	@RequestMapping("/cancel")
 	public String delete(int revNum, String imchaId) {
 		revMapper.delete(revNum, imchaId);
-		return "/home/reservation/list";
+		return "redirect:/home/reservation/list?imchaId="+imchaId;
 	}
 	
 	// 중개인이 보는 예약 목록
 	@RequestMapping("/lessorList")
-	public String getRevByLessor(String lessorId, Model model){
-		List<ReservationVO> lessorList = revMapper.getRevByLessor(lessorId);
+	public String getRevByLessor(Model model, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		LessorVO lessorVO = (LessorVO) session.getAttribute("lessor");	// 글 등록 아이디
+		System.out.println(lessorVO.getLessorId());
+		List<ReservationVO> lessorList = revMapper.getRevByLessor(lessorVO.getLessorId());
+		for(int i=0; i<lessorList.size(); i++) {
+			int tmp = lessorList.get(i).getRevState();
+			if(tmp==0) {
+				lessorList.get(i).setState("확인 중 입니다.");
+			} else if (tmp==1) {
+				lessorList.get(i).setState("예약 확정되었습니다.");
+			} else {
+				lessorList.get(i).setState("예약 거절되었습니다.");
+			}
+		
+		}
 		
 		model.addAttribute("lessorList",lessorList);
 
@@ -86,15 +105,32 @@ public class ReservationController {
 	
 	// 예약 거부
 	@RequestMapping("/reject")
-	public String reject(int revNum, String imchaId) {
-		revMapper.reject(revNum, imchaId);
-		return "/home/reservation/lessorList";
+	public String reject(int revNum, String imchaId, int homeNum, HttpServletResponse response) throws IOException {
+		revMapper.reject(revNum, imchaId, homeNum);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('예약을 거절하였습니다.');history.go(-1);</script>");
+        out.flush();
+		return "redirect:/home/reservation/lessorList";
 	}
 	
 	// 예약 확정
 	@RequestMapping("/allow")
-	public String changeRevState(int homeNum, String imchaId) {
-		revMapper.changeRevState(homeNum, imchaId);
-		return "/home/reservation/lessorList";
+	public String changeRevState(int homeNum, String imchaId, int revNum, HttpServletResponse response) throws IOException {
+		revMapper.changeRevState(homeNum, imchaId, revNum);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+        out.println("<script>alert('예약을 확정하였습니다.');history.go(-1);</script>");
+        out.flush();
+		return "redirect:/home/reservation/lessorList";
+	}
+	
+	@RequestMapping("/invaildDate")
+	@ResponseBody
+	public List<ReservationVO> invaildDate(String revDate){
+		System.out.println(revDate);
+        List<ReservationVO>list = revMapper.invaildDate(revDate);
+        System.out.println(list);
+        return list;
 	}
  }

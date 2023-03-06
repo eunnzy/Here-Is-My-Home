@@ -3,12 +3,11 @@ package com.guardian.myhome.service;
 import java.util.List;
 import java.util.Map;
 
-import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
-import com.guardian.myhome.vo.HomeOptionVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 
 public interface HomeService {
@@ -19,9 +18,9 @@ public interface HomeService {
 	String convertMoneyUnit(long money); 
 	HomeImgVO previewHomeImg(int homeNum);	// 매물 미리보기시 나올 사진
 	int modifyHomeInfo(Map<String, Object> modifyHome);	// 매물 정보 수정
-	public List<HomePreviewVO>  getListByLessorId(String lessorId); // 매물 리스트
-	public void deleteManageList(String lessorId);		// 매물 삭제
 	int reportHome(HomeReportVO homeReportVO);	// 매물 신고
 	
 	List<HomeReportVO> selectReportHomeList();
+	public List<HomePreviewVO> getListByLessorId(LessorVO vo);
+	public void deleteHome(int homeNum, String lessorId);
 }

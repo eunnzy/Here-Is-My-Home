@@ -11,6 +11,7 @@ import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 public interface HomeDAO {
 	int insertHome(HomeVO homeVO);	// 매물 테이블에 삽입
@@ -27,6 +28,6 @@ public interface HomeDAO {
 	int updateHomePrice(HomePriceVO HomePriceVO);	// 매물 가격 테이블 수정
 	int deleteHomeOption(int homeNum);	// 매물 옵션 삭제
 	int deleteHomeImg(int homeNum);	// 매물 사진 정보 삭제
-	
+	List<HomePreviewVO> getListByLessorId(LessorVO vo);
 	List<HomeReportVO> selectReportHomeList();
 }

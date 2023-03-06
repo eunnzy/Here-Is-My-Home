@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.guardian.myhome.service.HomeDAO;
 import com.guardian.myhome.vo.HomeDetailVO;
 import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomeOptionVO;
@@ -15,6 +14,7 @@ import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 @Repository
 public class HomeDAOImpl implements HomeDAO{
@@ -91,17 +91,16 @@ public class HomeDAOImpl implements HomeDAO{
 	public int deleteHomeOption(int homeNum) {
 		return sqlSession.delete(HOMEMAPPER + "deleteHomeOption", homeNum);
 	}
-//
-//	@Override
-//	public List<HomePreviewVO> selectListByLessorId(String lessorId) {
-//		// TODO Auto-generated method stub
-//		return sqlSession.selectList(HOMEMAPPER + "selectListByLessorId", lessorId);
-//		
-//	}
 
 	@Override
 	public List<HomeReportVO> selectReportHomeList() {
 
 		return sqlSession.selectList(HOMEMAPPER + "selectReportHomeList");
+	}
+	
+	@Override
+	public List<HomePreviewVO> getListByLessorId(LessorVO vo) {
+		System.out.println(vo.getLessorId());
+		return sqlSession.selectList(HOMEMAPPER+ "selectListByLessorId", vo);
 	}
 }

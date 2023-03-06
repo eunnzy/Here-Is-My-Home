@@ -2,6 +2,7 @@ package com.guardian.myhome.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void delete(int revNum, String imchaId) {
+	public void delete(@Param("revNum")int revNum, @Param("imchaId")String imchaId) {
 		revMapper.delete(revNum, imchaId);
 	}
 	
@@ -41,14 +42,20 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
-	public void changeRevState(int homeNum, String imchaId) {
-		revMapper.changeRevState(homeNum, imchaId);
+	public void changeRevState(@Param("homeNum")int homeNum, @Param("imchaId")String imchaId, @Param("revNum")int revNum) {
+		revMapper.changeRevState(homeNum, imchaId, revNum);
 	}
 	
 	
 	@Override
-	public void reject(int revNum, String imchaId) {
-		revMapper.reject(revNum, imchaId);
+	public void reject(@Param("revNum")int revNum, @Param("imchaId")String imchaId, @Param("homeNum")int homeNum) {
+		revMapper.reject(revNum, imchaId, homeNum);
+	}
+	
+	@Override
+	public List<ReservationVO> invaildDate(String revDate) {
+		// TODO Auto-generated method stub
+		return revMapper.invaildDate(revDate);
 	}
 	
 }

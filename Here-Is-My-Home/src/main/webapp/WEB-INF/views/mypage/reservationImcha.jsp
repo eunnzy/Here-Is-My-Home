@@ -16,7 +16,7 @@
 	  <div class="container">
 	    <div class="row">
 	    <c:forEach items="${revList}" var="revList">
-	      <div class="col-12">
+	      <div class="col-6" style="text-align:center;">
 	        <div class="card bg-light">
 	          <div class="card-body">
 	            <h4 class="card-title">방문 예약 일자 : ${revList.revDate}</h4>
@@ -28,7 +28,7 @@
 	            onclick = "location.href = '/home/reservation/cancel?revNum=${revList.revNum}&imchaId=${revList.imchaId }'" >신청 취소</button>
 	          </div>
 	        </div>
-	        <p class="mb-2"></p>
+	        <p class="mb-4"></p>
 	      </div>
 	     </c:forEach>
 		</div>
@@ -36,6 +36,5 @@
 
 
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

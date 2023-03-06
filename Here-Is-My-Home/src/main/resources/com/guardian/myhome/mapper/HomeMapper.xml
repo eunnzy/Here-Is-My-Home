@@ -167,7 +167,7 @@
 					home_title AS homeTitle, home_valid AS homeValid, lessor_id AS lessorId
 		from Home_tb
 			join Home_Price_tb using(home_num)
-		where lessor_id=#{lessorId}
+		where lessor_id=#{lessorId, jdbcType=VARCHAR}
  	</select>
  	
  	
@@ -177,6 +177,9 @@
  			join Home_tb using(home_num) 
  	</select>
  	
+ 	<delete id="deleteHome">
+ 		delete from Home_tb where lessor_id = #{lessorId} and home_num = #{homeNum}
+ 	</delete>
  	
  </mapper>
  
