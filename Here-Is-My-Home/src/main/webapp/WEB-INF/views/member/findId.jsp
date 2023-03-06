@@ -31,7 +31,7 @@
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
       }
     </style>
-<title>아이디 찾기</title>     
+<title>아이디 찾기</title>   
 </head>
 <body>
 <!-- 네브바 -->
@@ -59,7 +59,7 @@
                      <input type="text" name="nickname" class="form-control" id="nickname" value="" placeholder="닉네임을 입력하세요.">
                   </div>
                <div class="col-12 mb-4">
-                     <label for="user_phone">전화번호 </label> 
+                     <label for="imcha_phone">전화번호 </label> 
                      <input type="text" name="phone" class="form-control" id="phone" value="" placeholder="010-0000-0000"><br>
                   <br>
                </div>
@@ -78,11 +78,11 @@
    </div><br><br><br>
    
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    $(document).ready(function(){
 	   
 	   let formData = $("#findId");
-	   $('#findId').click(function(){
+      $('#findId').click(function(){
          // alert("성공!");
          if($('#nickname').val() == ''){
             alert("닉네임을 입력하세요.");
@@ -126,14 +126,20 @@
       
       
    });
-</script>
+   
+  /*  $("#findId").on("click", function(e) {
+	   const url = "/member/resultLessorId"
+   	   window.open(url,"아이디찾기",'width=500px, height=700px, scrolbars=yes, resizeable=no');
+   }) */
+
+</script> -->
 
 
     <footer>
        <jsp:include page="../footer.jsp"></jsp:include>
     </footer>
 
+  <script src="/js/findId.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
-

@@ -68,6 +68,7 @@ public class LessorServiceImpl implements LessorService {
 //		return dao.findLessorId(lessor);
 //	}
 	
+	// 아이디 찾기
 	@Override
 	public String findLessorId(LessorVO lessor) throws Exception {
 			

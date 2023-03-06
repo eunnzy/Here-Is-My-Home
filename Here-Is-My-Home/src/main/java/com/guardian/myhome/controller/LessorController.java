@@ -198,7 +198,7 @@ public class LessorController {
 		
 		// 아이디 결과
 		@RequestMapping(value="/resultLessorId", method=RequestMethod.GET)
-		public String resultLessorIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="lessornickName")String phone,String lessorNickName,LessorVO searchVO) throws Exception{
+		public String resultLessorIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="lessorNickName")String phone,String lessorNickName,LessorVO searchVO) throws Exception{
 			
 //			searchVO.setLessorNickName(lessorNickName);
 //			searchVO.setPhone(phone);
