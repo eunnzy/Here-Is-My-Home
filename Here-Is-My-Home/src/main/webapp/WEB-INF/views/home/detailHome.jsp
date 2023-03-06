@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>매물 상세 보기</title>
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
-	<link href="/css/detailHome.css" rel="stylesheet"></link>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<style>
-	</style>
+<meta charset="UTF-8">
+<title>매물 상세 보기</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+<link href="/css/detailHome.css" rel="stylesheet"></link>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+</style>
 </head>
 <body>
 	<header>
@@ -223,7 +227,7 @@
 			</div>
 		</div>
 		
-		<div class="report-modal">
+		<!-- <div class="report-modal">
 			<div class="report-wrap">
 				<div class="report-title">방문 예약</div>
 				<div class="report-close"><i class='bi bi-x-lg'></i></div>
@@ -247,37 +251,61 @@
 					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 		
-		<jsp:include page="reportHome.jsp"></jsp:include>	<!-- 신고하기 모달 -->
+		<jsp:include page="reportHome.jsp"></jsp:include> 	
+		<!-- 신고하기 모달 -->
+		
+		<form action="reservation/enroll" method="POST">
 		
 		<div class="reserv-modal">
 			<div class="reserv-wrap">
 				<div class="reserv-title">집 방문 예약</div>
 				<div class="reserv-close"><i class='bi bi-x-lg'></i></div>
 				<div class="reserv-content">
+				
 					<table class="table">
 						<tr>
 							<td style="color: white;"> 이름 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+							<td> <input type="text" class="form-control" id="imchaId" name="imchaId" value="${imcha.imchaId }" readonly></td>
 						</tr>
 						<tr>
 							<td style="color: white;"> 방문 날짜 </td>
-							<td> <input type="date" class="form-control" name="reservName"></td>
+							<td> <input type="date" class="form-control" id="revDate" name="revDate"></td>
 						</tr>
-						<tr>
-							<td style="color: white;"> 방문 시간 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+						
+					</table>
+					<table class="timeTable">
+						<tr class="timeSelect">
+							<td style="color: white; padding-right:25px;" > 방문 시간 </td>
+							<td><input type="radio" id="revTime" name="revTime" value="10:00"><label for="revTime">10:00</label></td>
+							<td><input type="radio" id="revTime2" name="revTime" value="11:00"><label for="revTime2">11:00</label></td>
+							<td><input type="radio" id="revTime3" name="revTime" value="12:00"><label for="revTime3">12:00</label></td>
+						</tr>
+						<tr class="timeSelect">
+							<td style="color: white;"></td>
+							<td><input type="radio" id="revTime4" name="revTime" value="13:00"><label for="revTime4">13:00</label></td>
+							<td><input type="radio" id="revTime5" name="revTime" value="14:00"><label for="revTime5">14:00</label></td>
+							<td><input type="radio" id="revTime6" name="revTime" value="15:00"><label for="revTime6">15:00</label></td>
+						</tr>
+						<tr class="timeSelect">
+							<td style="color: white;"></td>
+							<td><input type="radio" id="revTime7" name="revTime" value="16:00"><label for="revTime7">16:00</label></td>
+							<td><input type="radio" id="revTime8" name="revTime" value="17:00"><label for="revTime8">17:00</label></td>
+							<td><input type="radio" id="revTime9" name="revTime" value="18:00"><label for="revTime9">18:00</label></td>
 						</tr>
 					</table>
 				</div>
 				<div class="d-grid gap-3 mx-auto">
-					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
+					<input type="hidden" id="lessorId" name="lessorId" value="${home.lessorId}">
+					<input type="hidden" id="homeNum" name="homeNum" value="${home.homeNum}">
+					<button type="submit" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
 				</div>
+				
 			</div>
 		</div>
-	</div>
+		</form>
 	
 	
 	
@@ -288,13 +316,26 @@
 		let logitude = ${home.longitude};
 		let homeNum = ${home.homeNum};
 		let imchaId = $('#imchaId').val();
-//		let homeNum = $('#homeNum').val();
+		let lessorId = "${home.jgsName}";
+		let enrollName = $('#enrollName').val();
+		let enrollDate = $('#enrollDate').val();
+		let homeNum = $('#homeNum').val();
 	// 위치 정보 표시
+		let revTime = $("input[name='revTime']:checked").val();
 	</script>
 	<script src="/js/reportHome.js" ></script>
 	<script src="/js/detailHome.js" ></script>
+	<script src="/js/reservHome.js" ></script>
 	<script>
 		$(document).ready(function() {
+			let latitude = ${home.latitude};
+			let logitude = ${home.longitude};
+			let homeNum = ${home.homeNum};
+			let imchaId = $('#imchaId').val();
+			let lessorId = "${home.jgsName}";
+			let enrollName = $('#enrollName').val();
+			let enrollDate = $('#enrollDate').val();
+			let revTime = $("input[name='revTime']:checked").val();
 			$("#likeBtn").on("click", function(e){
 				$.ajax({
 					type : 'get',
@@ -309,6 +350,25 @@
 					}
 				});
 			});
+			 /* $("#reservBtn").on("click", function(e){
+				console.log($('#enrollDate').val());
+				$.ajax({
+				                    url: 'reservation/enroll', 
+				                    data: { 
+				                    	lessorId: lessorId,
+				                    	imchaId : $('#enrollName').val()
+				                    	homeNum : homeNum,
+				                    	revDate : enrollDate + ' ' + revTime
+				                        }, 
+				                    type: 'POST',
+				                    success: function (param) { 
+				                       alert('예약이 완료되었습니다.');
+				                    },
+				                    error: function () {
+				                        alert('네트워크 오류 발생');
+				                    }
+				                });  //end of ajax 
+			});  */
 		});
 	</script>
 </body>

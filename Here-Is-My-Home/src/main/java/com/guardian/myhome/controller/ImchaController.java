@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.guardian.myhome.mapper.ImchaMapper;
 import com.guardian.myhome.service.ImchaService;
 import com.guardian.myhome.vo.ImchaVO;
-import com.guardian.myhome.vo.LessorVO;
 
 /*
 	회원 관련 기능

@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.guardian.myhome.dao.HomeDAO;
+import com.guardian.myhome.service.HomeDAO;
 import com.guardian.myhome.vo.HomePriceVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)

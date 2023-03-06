@@ -40,7 +40,7 @@ import com.guardian.myhome.vo.LessorVO;
 
 
 @Controller
-@SessionAttributes("lessorId")
+@SessionAttributes({"lessorId", "lessor"})
 @RequestMapping(value = "/member")
 public class LessorController {
 	

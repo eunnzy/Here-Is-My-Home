@@ -137,23 +137,23 @@ $("#addBtn").on("click",function(e){
 	homeForm.append(str);
 	
 	// 유효성 확인.
-	let homeType = $("input[name=homeType]").val();
+	let homeType = $("input[name=homeType]:checked").val();
 	let addr1 =  $("input[name=addr1]").val();
 	let addr2 =  $("input[name=addr2]").val();
 	let addr3 =  $("input[name=addr3]").val();
 	let latitude =  $("input[name=latitude]").val();
 	let longitude = $("input[name=longitude]").val();
 	let homeArea = $("input[name=homeArea]").val();
-	let rentType = $("input[name=rentType]").val();
-	let deposit = $("input[name=deposit]").val() * 10000;
-	let monthly = $("input[name=monthly]").val() * 10000;
+	let rentType = $("input[name=rentType]:checked").val();
+	let deposit = $("input[name=deposit]").val();
+	let monthly = $("input[name=monthly]").val();
 	let rentPeriods =  $("input[name=rentPeriods]").val();
 	let roomCount = $("input[name=roomCount]").val();
-	let adminCost = $("input[name=adminCost]").val()  * 10000;
+	let adminCost = $("input[name=adminCost]").val();
 	let parking = $("input[name=parking]").val();
-	let pet = $("input[name=pet]").val();
-	let elevator = $("input[name=elevator]").val();
-	let balcony = $("input[name=balcony]").val();
+	let pet = $("input[name=pet]:checked").val();
+	let elevator = $("input[name=elevator]:checked").val();
+	let balcony = $("input[name=balcony]:checked").val();
 	let moveDate = $("input[name=moveDate]").val();
 	let floor = $("input[name=floor]").val();
 	let homeTitle = $("input[name=homeTitle]").val();
@@ -187,8 +187,8 @@ $("#addBtn").on("click",function(e){
 		return false;
 	}
 	
-	if(rentType == "월세" && monthly == "") {
-		alert("거래종류가 월세인 경우는 월세 정보를 필수로 입력해야 합니다.");
+	if(monthly == "") {
+		alert("월세를 작성해주세요.");
 		return false;
 	}
 	
@@ -263,11 +263,11 @@ $("#addBtn").on("click",function(e){
 	    		"longitude": longitude,
 	    		"homeArea" : homeArea,
 	    		"rentType" : rentType,
-	    		"deposit" : deposit,
-	    		"monthly" : monthly,
+	    		"deposit" : deposit  * 10000,
+	    		"monthly" : monthly * 10000,
 	    		"rentPeriods" : rentPeriods,
 	    		"roomCount" : roomCount,
-	    		"adminCost" : adminCost,
+	    		"adminCost" : adminCost * 10000,
 	    		"parking" : parking,
 	    		"pet" : pet,
 	    		"elevator" : elevator,
@@ -287,9 +287,9 @@ $("#addBtn").on("click",function(e){
 			data: JSON.stringify(homeData),
             contentType: "application/json",
 			success:function(data, status, xhr){
-				var msg = (data==1) ? "글 등록 성공했습니다." : "실패";
+				var msg = (data==1) ? "글 등록 성공했습니다." : "글 등록 실패하였습니다.";
 				alert(msg);
-				homeForm[0].reset();
+				location.href="/home/manage/list";
 	 		},
 	 		error: function(xhr, status, error){console.log(xhr.status, status)}
 		}); 

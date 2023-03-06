@@ -14,6 +14,7 @@ import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomePriceVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 @Repository
 public class HomeDAOImpl implements HomeDAO{
@@ -95,5 +96,11 @@ public class HomeDAOImpl implements HomeDAO{
 	public List<HomeReportVO> selectReportHomeList() {
 
 		return sqlSession.selectList(HOMEMAPPER + "selectReportHomeList");
+	}
+	
+	@Override
+	public List<HomePreviewVO> getListByLessorId(LessorVO vo) {
+		System.out.println(vo.getLessorId());
+		return sqlSession.selectList(HOMEMAPPER+ "selectListByLessorId", vo);
 	}
 }

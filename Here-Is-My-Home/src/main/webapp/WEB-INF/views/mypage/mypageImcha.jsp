@@ -50,13 +50,13 @@
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/mypage/getMember'">회원정보수정</button>
         </td>
         <td>
-          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = '/like/likeList?imchaId=${member.imchaId}'">찜 목록</button>
+          <button class="btn btn-secondary btn-lg mx-5 my-5" type="button" onclick = "location.href = '/like/likeList?imchaId=${imcha.imchaId}'">찜 목록</button>
         </td>
         <!-- <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'MyHome.html'">내 집</button>
         </td> -->
         <td>
-          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'reservation_IMCHA.html'">예약 확인</button>
+          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/home/reservation/list?imchaId=${imcha.imchaId}'">예약 확인</button>
         </td>
         <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'QNA_IMCHA.html'">문의 하기</button>
@@ -67,6 +67,5 @@
   </div>
   </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
