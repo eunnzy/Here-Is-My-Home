@@ -10,6 +10,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -24,12 +25,12 @@
 				<div class="bs-component">
 					<table class="table table-hover" style="text-align: center">
 					<tr>
-						<th scope="col" style="width: 7%;">신고 번호</th> 
-						<th scope="col" style="width: 7%;">매물 번호</th> 
-						<th scope="col" style="width: 15%;">신고자</th>
+						<th scope="col" style="width: 5%;">신고 번호</th> 
+						<th scope="col" style="width: 5%;">매물 번호</th> 
+						<th scope="col" style="width: 10%;">신고자</th>
 						<th scope="col" style="width: 25%;">신고 유형</th> 
-						<th scope="col" style="width: 25%;">신고 내용</th> 
-						<th scope="col" style="width: 15%;">신고 날짜</th>
+						<th scope="col" style="width: 30%;">신고 내용</th> 
+						<th scope="col" style="width: 10%;">신고 날짜</th>
 						<th scope="col" style="width: 15%;">신고처리</th>
 						</tr>
 						<c:forEach var="list" items="${list }">

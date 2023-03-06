@@ -9,7 +9,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
     <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
-    <style>
+    <!-- <style>
       .input-form {
         max-width: 680px;
   
@@ -55,7 +55,7 @@
       color : blue;
       cursor: pointer;
       }
-    </style>
+    </style> -->
     <title>Document</title>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

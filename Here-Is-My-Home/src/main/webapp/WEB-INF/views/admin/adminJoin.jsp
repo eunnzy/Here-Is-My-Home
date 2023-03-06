@@ -7,27 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
-
-    <style>
-      .input-form {
-        max-width: 680px;
-  
-        margin-top: 80px;
-        padding: 32px;
-  
-        background: #fff;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-      }
-    </style>
-    <title>Document</title>
+    <link href="/css/adminJoin.css" rel="stylesheet"></link>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 		crossorigin="anonymous"></script>
+	<title>Document</title>
 </head>
 <body>
   <!-- 네브바 -->
@@ -111,7 +95,7 @@
 
           <div class="col-md-6 mb-4"></div>
           <button class="btn btn-primary btn btn-block" type="submit">가입 완료</button> &nbsp;
-          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button>
+          <!-- <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button> -->
 </form>
 </h1>
 </form>

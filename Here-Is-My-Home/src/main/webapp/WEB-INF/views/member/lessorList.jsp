@@ -12,7 +12,6 @@
   crossorigin="anonymous"></script>
       <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -45,7 +44,7 @@
 	 	 <c:choose>
 			  	<c:when test="${lessor.status == 0}">
 			  	<td class="admin_list">
-	                <button id ="${lessor.lessorId}" type="button" value="승인" class="success">승인 </button>
+	                <button id ="${lessor.lessorId}" type="button" value="승인" class="success" style="background-color: skyblue;">승인 </button>
                 </td>
 			  	</c:when> 
 			  	<c:when test="${lessor.status == 1}">
@@ -55,8 +54,12 @@
 			  	</c:when>
 			  </c:choose> 
 	</tr>
-	</c:forEach>
+	</c:forEach>	
 </table>
+</div>
+</div>
+</div>
+</div>
 <!--<script type="text/javascript">
 //회원가입 승인
  $(function(){
@@ -87,7 +90,7 @@
 });
 </script> -->
 
-<script>
+<!-- <script>
 
 function displayImg(lessorId) {
 	console.log(lessorId);
@@ -126,7 +129,8 @@ $.ajax({
 });
 });
 });
-</script>
+</script> -->
+<script src="/js/lessorList.js" ></script>
 </body>
 </html>
 
