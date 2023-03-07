@@ -79,9 +79,14 @@
 		
 		$(".abde").on("click", function(e) {
 			e.preventDefault();
-			actionForm.attr("action", "/admin/deleteAlarm.do");
-			actionForm.append("<input type='hidden' name='ano' value='" + $(this).attr("href") + "'>");
-			actionForm.submit();
+			var result = confirm("삭제하시면 홈페이지의 공지사항에서도 삭제됩니다. 삭제하시겠습니까?");
+			if(result){
+				actionForm.attr("action", "/admin/deleteAlarm.do");
+				actionForm.append("<input type='hidden' name='ano' value='" + $(this).attr("href") + "'>");
+				actionForm.submit();
+			}else{
+			    return;
+			}
 		});
 		
 		$(".abmo").on("click", function(e) {
