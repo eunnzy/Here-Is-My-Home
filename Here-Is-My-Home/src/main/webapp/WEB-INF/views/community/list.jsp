@@ -19,7 +19,7 @@
         <div class="bs-docs-section row">
           <div class="col-lg-12"><br><br>
             <h1 id="tables">Community</h1>
-            <p><c:out value="${member.sido1}" /> <c:out value="${member.gugun1}" /></p>
+            <p><c:out value="${imcha.sido1}" /> <c:out value="${imcha.gugun1}" /></p>
                 
             <span class="float-end">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">카테고리</a>
@@ -65,17 +65,20 @@
                     <th scope="col" style="width: 10%;">Likes</th>
                   </tr>
                   <!-- 공지 -->
-                  <tr class="table-warning">
+                  <c:forEach var="list" items="${ablist}">
+                  <tr class="table-primary">
                     <td></td>
-                    <td><a href="/Front/New/View.html" style="text-decoration: none;">공지제목</a></td>
+                    <td><a class="abmove" href="<c:out value="${list.ano}" />" style="text-decoration:none;"><c:out value="${list.title}" /></a></td>
                     <td></td>
-                    <td>작성일</td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.regdate}" /></td>
                     <td></td>
                     <td></td>
                   </tr>
+                  </c:forEach>  
+                  
                   <!-- 목록리스트 -->
                   <c:forEach items="${list}" var="board">
-                  <tr class="table-light">
+                  <tr class="table-secondary">
                     <td><c:out value="${board.category}" /></td>
                     <td><a class="move" href="<c:out value="${board.bno}" />" style="text-decoration:none;"><c:out value="${board.title}" /></a></td>
                     <td><c:out value="${board.nickname}" /></td>
@@ -135,7 +138,7 @@
     <!-- 자바스크립트 -->
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var imchaId = '<c:out value="${member.imchaId}" />';
+		var imchaId = '<c:out value="${imcha.imchaId}" />';
 		
 		if(imchaId == null || imchaId == '') {
 			$("#regBT").hide();
@@ -146,7 +149,7 @@
 		}
 		
 		$("#myboardBT").on("click", function(e) {
-			self.location = "/community/mylist?imchaid=<c:out value='${member.imchaId}' />";
+			self.location = "/community/mylist?imchaid=<c:out value='${imcha.imchaId}' />";
 		});
 		
 		var actionForm = $("#actionForm");
@@ -155,6 +158,13 @@
 			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
  			actionForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
 			actionForm.attr("action", "/community/get");
+			actionForm.submit();
+		});
+		
+		$(".abmove").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='ano' value='" + $(this).attr("href") + "'>");
+			actionForm.attr("action", "/community/getAlarm");
 			actionForm.submit();
 		});
 		
