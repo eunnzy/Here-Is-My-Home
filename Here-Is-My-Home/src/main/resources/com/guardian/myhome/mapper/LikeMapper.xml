@@ -20,8 +20,8 @@
  		select * from Home_Like_tb where IMCHA_ID = #{imchaId}
  	</select>
  	
- 	<select id="checkLike" resultMap="likeMap" > <!--좋아요 눌렀는지 확인 -->
- 		select * from Home_Like_tb where IMCHA_ID = #{imchaId} and home_num = #{homeNum}
+ 	<select id="checkLike" resultType="int"> <!--좋아요 눌렀는지 확인 -->
+ 		select <![CDATA[count(*)]]>  from Home_Like_tb where IMCHA_ID = #{imchaId} and home_num = #{homeNum}
  	</select>
  	
  	

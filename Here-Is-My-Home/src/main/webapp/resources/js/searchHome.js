@@ -2,6 +2,7 @@ var map;
 let homeMarker = [];	// 매물 표시할 마커를 담을 배열
 let categoryStatus=false;
 
+
 $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위치 내 매물 리스트 보여주기 위해*/
 	let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
@@ -22,9 +23,16 @@ $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위�
 			var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 			         // 인포윈도우에 표시될 내용입니다
 			map.setCenter(locPosition);	 
+			
+/*			if(searchKeyword !== "") {
+				console.log("searchKeyword 실행")
+				var ps = new kakao.maps.services.Places(); 	// 장소 검색 객체 
+				ps.keywordSearch(searchKeyword, placesSearchCB);
+				return;
+			}
+		*/
+			
 			getHomeInBounds();
-			
-			
 			kakao.maps.event.addListener(map, 'idle', getHomeInBounds);
 			
 		});
@@ -36,6 +44,7 @@ $(document).ready(function() { 	// 처음 페이지 들어왔을 때 현재 위�
 });
 
 var ps = new kakao.maps.services.Places(); 	// 장소 검색 객체 
+
 
 // 지도 경계에서의 매물 정보 가져오기
 function getHomeInBounds() {

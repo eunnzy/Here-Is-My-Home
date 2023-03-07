@@ -45,9 +45,10 @@ public class LikeController {
 		likeVO.setHomeNum(homeNum);
 		
 		System.out.println(likeVO);
-		LikeVO checkLike = likeService.checkLike(likeVO);
+		int checkLike = likeService.checkLike(likeVO);
 		
-		if(checkLike == null) {	 // 좋아요가 안 되어 있는 경우 
+		
+		if(checkLike == 0) {	 // 좋아요가 안 되어 있는 경우 
 			likeService.insetLike(likeVO);
 			return 1;
 		} else { // 좋아요 되어 있는 경우 삭
