@@ -55,7 +55,7 @@
 				<div class="search-bar-wrap">		
 					<div class="search-bar">
 						<button type="button" class="filterBtn" id="filterBtn"><i class="fa-solid fa-sliders"></i></button>
-						<input type="text" id="searchInput" placeholder="지역, 학교, 지하철역으로 검색"> 
+						<input type="text" id="searchInput" placeholder="지역, 학교, 지하철역으로 검색" > 
 						<button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 	       			</div>
        		   </div> 
@@ -223,10 +223,15 @@
 		</div>
 	</div>
 		
-	
+	<script>
+		var search = encodeURIComponent("${searchKeyword}");
+		/* var searchKeyword = "${searchKeyword}"; */
+		console.log(searchKeyword);
+	</script>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
+	
 	<script src="/js/searchHome.js" ></script>
 	<script src="/js/searchFilter.js" ></script>
 	

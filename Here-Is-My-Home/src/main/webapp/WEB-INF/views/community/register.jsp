@@ -27,7 +27,7 @@
     width: 100px;
 }
 </style>
-<title>Write</title>
+<title>Alarm Write</title>
 </head>
 <body>
 	<header>
@@ -40,7 +40,7 @@
        <h1 id="tables">글쓰기</h1>
        
      <form action="insertBoard.do" method="post" enctype="multipart/form-data" id="regForm">
-       <input type='hidden' name='imchaid' value='<c:out value="${member.imchaId}" />'>
+       <input type='hidden' name='imchaid' value='<c:out value="${imcha.imchaId}" />'>
        	
 	   <div class="bs-component">
         <table class="table table-hover">
@@ -70,11 +70,6 @@
            <th scope="col" class="col col-lg-1"></th>
             <td class="uploadResult">
              <ul>
-             	<!-- <li><div>
-             		<span>obj.fileName</span>
-					<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
-					<img src='/community/display?fileName=" + fileCallPath + "'>";
-				</div></li> -->
              </ul>
             </td> 
           </tr>
@@ -86,7 +81,7 @@
         </div>
         
 	     <!-- 하단 버튼 -->
-	     <a href="/community/list"><button type="button" class="btn btn-info">취소</button></a>
+	     <button type="button" class="btn btn-info" id="backBT">취소</button>
 	     <span class="float-end">
 	     	<button type="submit" class="btn btn-info" id="regBT">등록</button>
 	     </span>

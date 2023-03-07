@@ -15,17 +15,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.service.LikeService;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.ImchaVO;
+import com.guardian.myhome.vo.LikeVO;
 
 /*
 	매물 관련 - 상세보기, 검색 등.
@@ -33,23 +35,50 @@ import com.guardian.myhome.vo.ImchaVO;
 
 @Controller
 @RequestMapping("/home")
+@SessionAttributes("home")
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
 	@Autowired
+	LikeService likeService;
+	
+	@Autowired
 	private HomeDAO homedao;
+	
+	
 	
 	// 매물 상세보기
 	@RequestMapping("/detail")	
-	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
+	public String detailHome(@RequestParam("homeNum") int homeNum, HttpServletRequest request, Model model) {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
+		home.put("deposit", homeService.convertMoneyUnit((int)home.get("deposit")));
+		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
+		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
+		
 		System.out.println("detailHome: " + home);
 		model.addAttribute("home", home);
+	
 		
+		ImchaVO imcha = (ImchaVO) request.getSession().getAttribute("imcha");
+		System.out.println("imcha " + imcha);
 		
+		int homeLike = 0;
+		if(imcha != null) {
+			LikeVO likeVO = new LikeVO();
+			likeVO.setHomeNum(homeNum);
+			likeVO.setImchaId(imcha.getImchaId());
+			
+			homeLike = likeService.checkLike(likeVO);
+			
+			System.out.println("homeLike: " + homeLike);
+			
+		}
+		
+		model.addAttribute("homeLike", homeLike);
+
 		return "home/detailHome";
 	}
 	
@@ -65,10 +94,25 @@ public class HomeController {
 		return homeInBoundsList;
 	}
 	
+	
+	/*
+	 * public String searchKeyword(@RequestParam("searchKeyword") String
+	 * searchKeyword, Model model) { System.out.println("searhKeyword" +
+	 * searchKeyword); model.addAttribute(searchKeyword, "searchKeyword"); return
+	 * "home/searchHome"; }
+	 */
+	
 	@RequestMapping(value="/searchHome" , method = RequestMethod.GET)
 	public String searchHome() {
 		return "home/searchHome";
 	}
+	
+	/*
+	 * @RequestMapping(value="/searchHome" , method = RequestMethod.POST) public
+	 * String searchHomePost(@RequestParam String searchKeyword, Model model) {
+	 * model.addAttribute("searchKeyword", searchKeyword); return "home/searchHome";
+	 * }
+	 */
 	
 	
 	@RequestMapping(value = "/getHomeImg", method = RequestMethod.GET)

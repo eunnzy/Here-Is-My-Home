@@ -68,11 +68,11 @@ public class HomeManageController {
 		LessorVO lessorVO = (LessorVO) session.getAttribute("lessor");	// 글 등록 아이디
 		System.out.println(lessorVO.getLessorId());
 		List<HomePreviewVO> manageList = homeService.getListByLessorId(lessorVO);
-		System.out.println(manageList);
-		for (int i=0; i<manageList.size(); i++) {
-			List<HomeImgVO> img = homeDAO.selectHomeImgList(manageList.get(i).getHomeNum());
-			manageList.get(i).setHomeImg(img.get(0));
-		}
+//		System.out.println(manageList);
+//		for (int i=0; i<manageList.size(); i++) {
+//			List<HomeImgVO> img = homeDAO.selectHomeImgList(manageList.get(i).getHomeNum());
+//			manageList.get(i).setHomeImg(img.get(0));
+//		}
 		model.addAttribute("manageList", manageList);
 		return "mypage/homeManage";
 	}
@@ -215,6 +215,7 @@ public class HomeManageController {
 		LessorVO lessorVO = (LessorVO) request.getSession().getAttribute("lessor");	
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);	// 원래 정보 가져오기
 		System.out.println("detailHome: " + home);
+		
 		home.put("deposit", (int)home.get("deposit")/10000);
 		home.put("monthly", (int)home.get("monthly")/10000);
 		home.put("adminCost", (int)home.get("adminCost")/10000);
@@ -473,12 +474,14 @@ public class HomeManageController {
 	}
 	
 	@RequestMapping("/deleteHome")
-	public String deleteHome(int homeNum, String lessorId, HttpServletResponse response) throws IOException {
-		homeMapper.deleteHome(homeNum, lessorId);
+	public String deleteHome(int homeNum, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session =  request.getSession();
+		LessorVO lessorVO = (LessorVO) session.getAttribute("lessor");
+		homeService.deleteHome(homeNum);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
         out.println("<script>alert('삭제가 완료되었습니다.');location.href='/home/manage/list?lessorId='+lessorId;</script>");
         out.flush();
-		return "redirect:/home/manage/list?lessorId="+lessorId;
+		return "redirect:/home/manage/list?lessorId="+lessorVO.getLessorId();
 	}
 }

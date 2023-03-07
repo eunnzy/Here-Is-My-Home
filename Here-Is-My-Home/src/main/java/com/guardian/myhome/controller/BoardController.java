@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.FileSystemResource;
@@ -43,7 +45,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.guardian.myhome.service.AlarmBoardService;
 import com.guardian.myhome.service.BoardService;
+import com.guardian.myhome.vo.AlarmBoardVO;
 import com.guardian.myhome.vo.BoardAttachFileDTO;
 import com.guardian.myhome.vo.BoardAttachVO;
 import com.guardian.myhome.vo.BoardLikesVO;
@@ -64,7 +68,9 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class BoardController {
 
 	private BoardService service;
+	private AlarmBoardService abservice;
 	
+	// 로그인 여부에 따른 목록 리스트 
 	@GetMapping("/list")
 	public String list(Model model, HttpServletRequest request, Criteria cri) {
 		
@@ -101,6 +107,11 @@ public class BoardController {
 			model.addAttribute("pageMaker", dto);
 			log.info("total : " + dto);
 		}
+		
+		// 공지사항 리스트 
+		List<AlarmBoardVO> ablist = abservice.alarmBoard();
+		model.addAttribute("ablist", ablist);
+		
 		return "/community/list";
 	}
 	
@@ -112,18 +123,61 @@ public class BoardController {
 	
 	// 조회 불러오기 
 	@GetMapping("/get")
-	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid) {
-		log.info("/get");
+	public String get(Long bno, Model model, @ModelAttribute("cri") Criteria cri, String userid, HttpServletRequest request, HttpServletResponse response) {
+		// 조회 게시물 정보 넘기기 
+		log.info("get");
 		model.addAttribute("board", service.get(bno));
 		
+		// 좋아요 처리 
 		BoardLikesVO likevo = new BoardLikesVO();
 		likevo.setBno(bno);
 		likevo.setUserid(userid);
 		log.info(likevo);
-		
 		model.addAttribute("like", service.likeCheck(bno, userid));
 		
+		// 조회수 처리 
+		Cookie[] cookies = request.getCookies();
+		Cookie viewCookie = null;
+		
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("cookie" + bno + userid)) {
+					viewCookie = cookies[i];
+				}
+			}
+		}
+		
+		if (viewCookie != null) {
+	        if (!viewCookie.getValue().contains("[" + bno + userid +"]")) {
+	        	boolean result = service.viewsUp(bno);
+				if(result) {
+					log.info("조회수 증가");
+	            }else {
+	            	log.info("조회수 증가 에러");
+	            }
+				viewCookie.setValue(viewCookie.getValue() + "_[" + bno + userid + "]");
+				viewCookie.setPath("/");
+				viewCookie.setMaxAge(60 * 60 * 24);
+	            response.addCookie(viewCookie);
+	        }
+	    } else {
+	    	service.viewsUp(bno);
+	        Cookie newCookie = new Cookie("cookie" + bno + userid, "[" + bno + userid + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	        log.info("newCookie" + newCookie);
+	    }
 		return "/community/get";
+	}
+	
+	// 공지사항 조회 불러오기 
+	@GetMapping("/getAlarm")
+	public String getAlarm(Long ano, Model model) {
+		// 조회 게시물 정보 넘기기 
+		log.info("getAlarm");
+		model.addAttribute("Aboard", abservice.abget(ano));		
+		return "/community/getAlarm";
 	}
 	
 	// 수정테이블 불러오기
@@ -187,19 +241,10 @@ public class BoardController {
 		PageDTO dto = new PageDTO(cri, total);
 		model.addAttribute("mypageMaker", dto);
 		log.info("total : " + dto);
+		
+		
 		return "/community/mylist";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// 파일 업로드 등록
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

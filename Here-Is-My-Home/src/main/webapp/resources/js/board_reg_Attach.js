@@ -4,7 +4,6 @@ $(document).ready(function(e) {
 		var formObj = $("#regForm");
 	    $("#regBT").on("click", function (e) {
 	        e.preventDefault();
-	        console.log("submit clicked");
 	        var str = "";
 	        $(".uploadResult ul li").each(function (i, obj) {
 	           var jobj = $(obj);
@@ -16,6 +15,15 @@ $(document).ready(function(e) {
 	        });
 	        formObj.append(str).submit();
 	    });
+	    
+	    $("#backBT").click(function() {
+	    	var result = confirm("취소하면 작성 중이던 내용이 등록되지 않습니다. 이동하시겠습니까?");
+			if(result){
+				location.href = "/community/list";
+			}else{
+			    return;
+			}
+		});
 		
 		
 		// 파일 확장자와 크기 사전 처리 

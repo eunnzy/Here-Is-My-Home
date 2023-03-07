@@ -14,7 +14,7 @@ public interface LikeService {
 	
 	public void remove(int homeNum, String imchaId);
 	
-	public LikeVO checkLike(LikeVO vo);
+	public int checkLike(LikeVO vo);
 	
 	public HomeDetailVO getLikeDetail(LikeVO vo);
 	
