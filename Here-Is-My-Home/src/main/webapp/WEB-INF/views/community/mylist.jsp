@@ -36,7 +36,11 @@
                   <c:forEach items="${mylist}" var="board">
                   <tr class="table-light">
                     <td><c:out value="${board.category}" /></td>
-                    <td><a href="/community/get?bno=<c:out value='${board.bno}' />" style="text-decoration:none;"><c:out value="${board.title}" /></a></td>
+                    <td>
+                    	<a href="/community/get?bno=<c:out value='${board.bno}' />&userid=<c:out value="${imcha.imchaId}" />" style="text-decoration:none;">
+                    		<c:out value="${board.title}" />
+                    	</a>
+                    </td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
                     <td><c:out value="${board.views}" /></td>
                     <td><c:out value="${board.likes}" /></td>
@@ -91,27 +95,18 @@
     <!-- 자바스크립트 -->
     <script type="text/javascript">
 	$(document).ready(function() {
-		var imchaId = '<c:out value="${member.imchaId}" />';
-		var myBoardForm = $("#myBoardForm");
+		history.replaceState({},null,null);
+		
 		$("#listBT").on("click", function() {
 			self.location = "/community/list";
 		});
 		
+		var myBoardForm = $("#myBoardForm");
 		$(".page-item a").on("click", function(e) {
 			e.preventDefault();
 			myBoardForm.find("input[name='pageNum']").val($(this).attr("href"));
 			myBoardForm.submit();
 		});
-		
-		$(".move").on("click", function(e) {
-			e.preventDefault();
-			myBoardForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
-			myBoardForm.append("<input type='hidden' name='userid' value='" + imchaId + "'>");  
-			myBoardForm.attr("action", "/community/get");
-			myBoardForm.submit();
-		});
-		
-		history.replaceState({},null,null);
 		
 		$("#regBT").on("click", function() {
 			self.location = "/community/register";

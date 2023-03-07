@@ -16,5 +16,4 @@ public interface BoardLikesMapper {
 	
 	// 좋아요 OFF
 	public void likesOff(@Param("bno") Long bno, @Param("userid") String userid);
-	
 }
