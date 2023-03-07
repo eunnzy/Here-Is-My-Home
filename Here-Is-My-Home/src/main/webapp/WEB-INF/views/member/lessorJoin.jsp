@@ -9,53 +9,6 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
     <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
-    <!-- <style>
-      .input-form {
-        max-width: 680px;
-  
-        margin-top: 80px;
-        padding: 32px;
-  
-        background: #fff;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-      }
-      #result_card img {
-      	max-width : 100%;
-      	height : auto;
-      	display: block;
-      	padding: 5px;
-      	margin-top: 10px;
-      	margin: auto;
-      }
-      #result_card {
-      	position: relative;
-      }
-      .imgDeleteBtn{
-      	position: absolute;
-      	top: 0;
-      	right: 5%;
-      	background-color: #ef7d7d;
-      	color: wheat;
-      	font-weight: 900;
-      	width: 30px;
-      	height: 30px;
-      	border-radius: 50%;
-      	line-height: 26px;
-      	text-align: center;
-      	border: none;
-      	display: block;
-      	cursor: pointer;
-      }
-      .address_button {
-      color : blue;
-      cursor: pointer;
-      }
-    </style> -->
     <title>Document</title>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

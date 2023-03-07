@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
-      <link href="/css/imchaJoin.css" rel="stylesheet"></link>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
     <title>Document</title>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
@@ -16,7 +15,7 @@
 		crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- 네브바 -->
+  <!-- 네브바 -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
@@ -116,15 +115,12 @@
       </div>
     </div>
   </div>  
-  
-    <footer class="my-3 text-center text-small">
-      <p>  &nbsp; </p>
-    </footer>
-        </div>
+
 
   	<footer>
        <jsp:include page="../footer.jsp"></jsp:include>
     </footer>
+    
   <script src="/js/imchaJoin.js" ></script>
   <script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
