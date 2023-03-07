@@ -54,7 +54,7 @@
 							<c:choose>
 								<c:when test="${list.homeValid == 1 }">
 									<td>
-										<button id="${list.homeNum }" type="button" value="신고처리" class="success">신고처리</button>
+										<button id="${list.homeNum }" type="button" value="신고처리" class="success" style="background-color: #ff4500;">신고처리</button>
 									</td>
 								</c:when>
 								<c:when test="${list.homeValid == 0 }">

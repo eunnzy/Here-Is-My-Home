@@ -9,53 +9,6 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"></link>
     <link href="/css/lessorJoin.css" rel="stylesheet"></link>
 
-    <!-- <style>
-      .input-form {
-        max-width: 680px;
-  
-        margin-top: 80px;
-        padding: 32px;
-  
-        background: #fff;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-      }
-      #result_card img {
-      	max-width : 100%;
-      	height : auto;
-      	display: block;
-      	padding: 5px;
-      	margin-top: 10px;
-      	margin: auto;
-      }
-      #result_card {
-      	position: relative;
-      }
-      .imgDeleteBtn{
-      	position: absolute;
-      	top: 0;
-      	right: 5%;
-      	background-color: #ef7d7d;
-      	color: wheat;
-      	font-weight: 900;
-      	width: 30px;
-      	height: 30px;
-      	border-radius: 50%;
-      	line-height: 26px;
-      	text-align: center;
-      	border: none;
-      	display: block;
-      	cursor: pointer;
-      }
-      .address_button {
-      color : blue;
-      cursor: pointer;
-      }
-    </style> -->
     <title>Document</title>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -214,12 +167,13 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+            <br><p>(※중개인의 경우 관리자가 회원가입 승인을 하여야 아이디 이용이 가능합니다.※)</p>
           </div>
 
           <div class="col-md-6 mb-4"></div>
           <button class="btn btn-primary btn btn-block" type="submit">가입 완료</button> &nbsp;
-        <!--   <a href="lessor_join.jsp" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp; -->
-          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button>
+        <!--   <a href="lessor_join.jsp" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp; 
+          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button> -->
 </form>
 </h1>
 </form>
