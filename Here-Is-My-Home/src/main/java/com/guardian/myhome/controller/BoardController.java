@@ -241,6 +241,8 @@ public class BoardController {
 		PageDTO dto = new PageDTO(cri, total);
 		model.addAttribute("mypageMaker", dto);
 		log.info("total : " + dto);
+		
+		
 		return "/community/mylist";
 	}
 	

@@ -10,9 +10,6 @@ public interface AlarmBoardService {
 	// 목록 
 	public List<AlarmBoardVO> alarmBoard();
 		
-	// 갯수
-	public int alarmBoardCount();
-			
 	// 등록 
 	public void abregister(AlarmBoardVO board);
 				

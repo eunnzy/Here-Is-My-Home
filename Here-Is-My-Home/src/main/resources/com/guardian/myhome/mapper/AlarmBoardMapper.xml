@@ -7,11 +7,6 @@
 		SELECT * FROM alarmBoard 
 	</select>
 	
-	<!-- 갯수 -->
-	<select id="alarmBoardCount" resultType="int">
-		SELECT COUNT(*) FROM alarmBoard ORDER BY ano
-	</select>
-	
 	<!-- 등록 -->
 	<insert id="insertalarmBoard">
 		<selectKey keyProperty="ano" order="BEFORE" resultType="long"> SELECT SEQ_ANO.NEXTVAL FROM dual </selectKey>
