@@ -11,8 +11,7 @@ box-shadow:inset 2px 2px 8px rgba(55,94,148,.3),inset -3px -2px 5px
 rgba(255,255,255,.8);
 transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
 
-<!-- -------------------------------------- -->
-
+<!-- ------------------------------------------- -->
 
 
 *{
@@ -26,42 +25,68 @@ body{
     overflow: hidden;
 }
 
-.wave{
+/* .wave{
   position: fixed;
   bottom: 0;
   left: 0;
+  width:100%;
   height: 100%;
   z-index: -1;
-}
+} */
 
 .container{
-    width: 100vw;
+    /* width: 100vw;
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap :7rem;
-    padding: 0 2rem;
+    padding: 0 2rem; */
 }
 
-.img{
+/* .img{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
+} */
 
 .login-content{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
+	margin-top: 30px;
+	position:relative;
+	width:100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center; 
+}
+.login-wrapper {
+	position: relative;
+	display: flex;
+	width:100%;
+	height:100%;
 }
 
-.img img{
+/* .img img{
   width: 500px;
+} */
+.img-wrap {
+	width: 50%;
+}
+.img-div {
+	position: relative;
+	width: 500px;
+	height: auto;
+}
+.img-wrapper{
+	position:absolute;
+	width: 50%;
+}
+.wave {
+	width: 100%;
+	height: 100%;
 }
 
 form{
-  width: 360px;
+  width: 500px;
 }
 
 .login-content img{

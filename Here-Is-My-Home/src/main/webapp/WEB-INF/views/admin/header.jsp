@@ -14,7 +14,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/index"><img src="/img/house.png"></a>
+      <a class="navbar-brand" href="/admin/main"><img src="/img/house.png"></a>
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav me-auto" >
           <li class="nav-item">

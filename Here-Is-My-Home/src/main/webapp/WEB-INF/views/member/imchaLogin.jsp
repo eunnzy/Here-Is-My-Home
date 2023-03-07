@@ -26,48 +26,54 @@
   </nav>
   <!-- 네브바 끝 -->
 
-  <img class="wave" src="/img/adminhome.png">
+  
   <div class="container">
-    <div class="img">
-      <img src="">
-    </div>
-    <div class="login-content">
-  <form id="login_form" method="post">
-        <img src="/img/homes.png">
-        <h2 class="title">Welcome</h2>
-              <div class="input-div one">
-                 <div class="i">
-                    <i class="fas fa-user"></i>
-                 </div>
-                 <div class="div">
-                    <h5>ID</h5>
-                    <label id="id"></label>
-                    <input type="text" class="input" id="imchaId" name="imchaId" required />
-                 </div>
-              </div>
-              <div class="input-div pass">
-                 <div class="i"> 
-                    <i class="fas fa-lock"></i>
-                 </div>
-                 <div class="div">
-                    <h5>Password</h5>
-                    <input type="password" class="input" id="imchaPw" name="imchaPw" required />
-                 </div>
-              </div>
-             <div style="display: inline-block; float:left;">
-             <a href="/member/findId" id="findId">아이디</a></div>
-             <div style="display: inline-block; float:left;">
-             <p>&</p>
-             </div>
-             <div style="display: inline-block; float:left;">
-             <a href="/member/findPw" id="findPw">비밀번호 찾기</a>
-             </div>
-             <div style="float:right;">
-             <a href="/member/imchaJoin">회원가입</a>
-             </div>
-             
-              <button type="submit" class="btn2" value="Login">Login</button>
-            </form> 
+  	<div class="login-wrapper">
+  		<div class="img-wrap">
+	    	<div class="img-div" >
+	      		<img class="wave" src="/img/adminhome.png">
+	    	</div>
+	    </div>
+    	<div class="content-wrap">
+	    	<div class="login-content">
+			  	<form id="login_form" method="post">
+			        <img src="/img/homes.png">
+			        <h2 class="title">Welcome</h2>
+			              <div class="input-div one">
+			                 <div class="i">
+			                    <i class="fas fa-user"></i>
+			                 </div>
+			                 <div class="div">
+			                    <h5>ID</h5>
+			                    <label id="id"></label>
+			                    <input type="text" class="input" id="imchaId" name="imchaId" required />
+			                 </div>
+			              </div>
+			              <div class="input-div pass">
+			                 <div class="i"> 
+			                    <i class="fas fa-lock"></i>
+			                 </div>
+			                 <div class="div">
+			                    <h5>Password</h5>
+			                    <input type="password" class="input" id="imchaPw" name="imchaPw" required />
+			                 </div>
+			              </div>
+			             <div style="display: inline-block; float:left;">
+			             <a href="/member/findId" id="findId">아이디</a></div>
+			             <div style="display: inline-block; float:left;">
+			             <p>&</p>
+			             </div>
+			             <div style="display: inline-block; float:left;">
+			             <a href="/member/findPw" id="findPw">비밀번호 찾기</a>
+			             </div>
+			             <div style="float:right;">
+			             <a href="/member/imchaJoin">회원가입</a>
+			             </div>
+			             
+		              <button type="submit" class="btn2" value="Login">Login</button>
+		       	</form> 
+	        </div>
+	       </div>
         </div>
     </div>
 
@@ -93,10 +99,6 @@
       input.addEventListener("blur", remcl);
     });
     </script> -->
-    
-    <footer>
-       <jsp:include page="../footer.jsp"></jsp:include>
-    </footer>
     
     <script src="/js/imchaLogin.js" ></script>
 </body>
