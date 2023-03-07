@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 		let basicInfo = $(".basic-info")
 		function convertMoney(money) {	
@@ -23,13 +22,13 @@ $(document).ready(function() {
 		
 		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
-		    center: new kakao.maps.LatLng(latitude, logitude), // 지도의 중심좌표
+		    center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
 		    level: 4 // 지도의 확대 레벨 
 		};
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
 		
-		var markerPosition  = new kakao.maps.LatLng(latitude, logitude); 	// 마커 위치
+		var markerPosition  = new kakao.maps.LatLng(latitude, longitude); 	// 마커 위치
 			
 		var marker = new kakao.maps.Marker({
 		    position: markerPosition

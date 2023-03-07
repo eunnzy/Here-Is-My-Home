@@ -22,5 +22,5 @@ public interface HomeService {
 	
 	List<HomeReportVO> selectReportHomeList();
 	public List<HomePreviewVO> getListByLessorId(LessorVO vo);
-	public void deleteHome(int homeNum, String lessorId);
+	public int deleteHome(int homeNum);
 }

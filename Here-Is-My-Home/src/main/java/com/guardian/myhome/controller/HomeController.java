@@ -15,11 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.service.HomeService;
@@ -33,6 +33,7 @@ import com.guardian.myhome.vo.ImchaVO;
 
 @Controller
 @RequestMapping("/home")
+@SessionAttributes("searchKeyword")
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
@@ -46,8 +47,13 @@ public class HomeController {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
+		home.put("deposit", homeService.convertMoneyUnit((int)home.get("deposit")));
+		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
+		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
+		
 		System.out.println("detailHome: " + home);
 		model.addAttribute("home", home);
+		
 		
 		
 		return "home/detailHome";
@@ -65,10 +71,25 @@ public class HomeController {
 		return homeInBoundsList;
 	}
 	
+	
+	/*
+	 * public String searchKeyword(@RequestParam("searchKeyword") String
+	 * searchKeyword, Model model) { System.out.println("searhKeyword" +
+	 * searchKeyword); model.addAttribute(searchKeyword, "searchKeyword"); return
+	 * "home/searchHome"; }
+	 */
+	
 	@RequestMapping(value="/searchHome" , method = RequestMethod.GET)
 	public String searchHome() {
 		return "home/searchHome";
 	}
+	
+	/*
+	 * @RequestMapping(value="/searchHome" , method = RequestMethod.POST) public
+	 * String searchHomePost(@RequestParam String searchKeyword, Model model) {
+	 * model.addAttribute("searchKeyword", searchKeyword); return "home/searchHome";
+	 * }
+	 */
 	
 	
 	@RequestMapping(value = "/getHomeImg", method = RequestMethod.GET)
