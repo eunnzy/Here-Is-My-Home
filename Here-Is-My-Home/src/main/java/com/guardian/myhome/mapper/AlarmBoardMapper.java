@@ -9,9 +9,6 @@ import com.guardian.myhome.vo.AlarmBoardVO;
 public interface AlarmBoardMapper {
 	// 목록 
 	public List<AlarmBoardVO> alarmBoard();
-	
-	// 갯수
-	public int alarmBoardCount();
 		
 	// 등록 
 	public void insertalarmBoard(AlarmBoardVO board);

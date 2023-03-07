@@ -17,6 +17,7 @@ public class BoardVO {
 	private Date updateDate;	//수정시간
 	private int views;			//조회수
 	private int likes;			//좋아요
+	private int replys;			//댓글 
 	
 	private String nickname;	// 닉네임
 	private String sido1;		// 주소1
