@@ -32,32 +32,12 @@ public class BoardServiceImpl implements BoardService {
 	@Setter(onMethod_ = @Autowired)
 	private BoardLikesMapper likesMapper;
 	
-	// 목록 리스트 
-	@Override
-	public List<BoardVO> getList(Criteria cri) {
-		log.info("get List With Paging......" + cri);
-		return mapper.getListWithPaging(cri);
-	}
-	
-	// 게시물 전체 갯수
-	@Override
-	public int getTotal(Criteria cri) {
-		log.info("get total count");
-		return mapper.getTotalCount(cri);
-	}
 
 	// 로그인 전 
 	@Override
 	public List<BoardVO> beforeBoard(Criteria cri) {
 		log.info("before Board" + cri);
 		return mapper.beforeBoard(cri);
-	}
-				
-	// 로그인 후 
-	@Override
-	public List<BoardVO> afterBoard(Criteria cri) {
-		log.info("after Board");
-		return mapper.afterBoard(cri);
 	}
 	
 	// 로그인 전 갯수
@@ -67,6 +47,13 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.beforeBoardCount(cri);
 	}	
 				
+	// 로그인 후 
+	@Override
+	public List<BoardVO> afterBoard(Criteria cri) {
+		log.info("after Board");
+		return mapper.afterBoard(cri);
+	}
+				
 	// 로그인 후 갯수
 	@Override
 	public int afterBoardCount(Criteria cri) {
@@ -74,12 +61,19 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.afterBoardCount(cri);
 	}
 	
-	
-	
-	
-	
-	
-	
+	// 내가 쓴 글 목록 리스트 
+	@Override
+	public List<BoardVO> getMyboard(Criteria cri) {
+		log.info("get getMyboard......");
+		return mapper.getMyboard(cri);
+	}
+		
+	// 내가 쓴 글 갯수
+	@Override
+	public int getMyboardCount(Criteria cri) {
+		log.info("getMyboardCount");
+		return mapper.getMyboardCount(cri);
+	}
 	
 	// 등록 
 	@Transactional
@@ -101,6 +95,13 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO get(Long bno) {
 		log.info("get........" + bno);
 		return mapper.read(bno);
+	}
+	
+	// 파일 업로드 조회
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		log.info("get Attach list by bno" + bno);
+		return attachMapper.findByBno(bno);
 	}
 
 	// 수정
@@ -128,78 +129,30 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno) == 1;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 조회수 
-	@Override
-	public boolean viewsUp(Long bno) {
-		log.info("viewsUp........" + bno);
-		return mapper.viewsUp(bno) == 1;
-	}
-	
-	// 내가 쓴 글 목록 리스트 
-	@Override
-	public List<BoardVO> getMyboard(Criteria cri) {
-		log.info("get getMyboard......");
-		return mapper.getMyboard(cri);
-	}
-	
-	// 내가 쓴 글 갯수
-	@Override
-	public int getMyboardCount(Criteria cri) {
-		log.info("getMyboardCount");
-		return mapper.getMyboardCount(cri);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 파일 업로드 조회
-	@Override
-	public List<BoardAttachVO> getAttachList(Long bno) {
-		log.info("get Attach list by bno" + bno);
-		return attachMapper.findByBno(bno);
-	}
-	
 	// 좋아요 On
 	@Override
 	public void likesOn(Long bno, String userid) {
 		likesMapper.likesOn(bno, userid);
 	}
-	
+		
 	// 좋아요 Off
 	@Override
 	public void likesOff(Long bno, String userid) {
 		likesMapper.likesOff(bno, userid);
 	}
-	
+		
 	// 좋아요 Up
 	@Override
 	public boolean likesUp(Long bno) {
 		return mapper.likesUp(bno) == 1;
 	}
-	
+		
 	// 좋아요 Down
 	@Override
 	public boolean likesDown(Long bno) {
 		return mapper.likesDown(bno) == 1;
 	}
-	
+		
 	// 좋아요 체크 
 	@Override
 	public int likeCheck(Long bno, String userid) {
@@ -207,8 +160,10 @@ public class BoardServiceImpl implements BoardService {
 		return likesMapper.likeCheck(bno, userid);
 	}
 	
-	
-
-	
-	
+	// 조회수 
+	@Override
+	public boolean viewsUp(Long bno) {
+		log.info("viewsUp........" + bno);
+		return mapper.viewsUp(bno) == 1;
+	}
 }

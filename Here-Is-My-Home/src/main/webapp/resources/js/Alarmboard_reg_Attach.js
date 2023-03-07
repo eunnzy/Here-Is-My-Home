@@ -47,7 +47,7 @@ $(document).ready(function(e) {
 			}
 			
 			$.ajax({
-				url: '/community/uploadAjaxAction',
+				url: '/admin/AlarmuploadAjaxAction',
 				processData: false,
 				contentType: false,
 				data: formData, 
@@ -71,7 +71,7 @@ $(document).ready(function(e) {
 				if(obj.image) {
 					var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
 					str+= "<li data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.image + "'><div>";
-					str+= "<img src='/community/display?fileName=" + fileCallPath + "'>";
+					str+= "<img src='/admin/display?fileName=" + fileCallPath + "'>";
 					str+= "<button type='button' data-file=/'"+fileCallPath+"/' data-type='image' class='btn btn-primary btn-sm'>x</button><br>";
 					str+= "</div>";
 					str+ "</li>";
@@ -96,7 +96,7 @@ $(document).ready(function(e) {
 				var targetLi = $(this).closest("li");
 				
 				$.ajax({
-					url: '/community/deleteFile',
+					url: '/admin/deleteFile',
 					data: {fileName: targetFile, type:type},
 					dataType: 'text',
 					type: 'POST',
