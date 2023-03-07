@@ -99,6 +99,11 @@ $(document).ready(function() {
 		var actionForm = $("#actionForm");
 		$("#listBT").on("click", function(e) {
 			e.preventDefault();
-			actionForm.submit();
+			var result = confirm("목록으로 이동하면 수정 중이던 내용이 저장되지 않습니다. 이동하시겠습니까?");
+			if(result){
+				actionForm.submit();
+			}else{
+			    return;
+			}
 		});
 	});

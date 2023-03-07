@@ -32,13 +32,6 @@ public class AlarmBoardServicelmpl implements AlarmBoardService {
 		log.info("alarm Board");
 		return mapper.alarmBoard();
 	}
-
-	// 목록 갯수 
-	@Override
-	public int alarmBoardCount() {
-		log.info("alarm Board Count");
-		return mapper.alarmBoardCount();
-	}
 		
 	// 등록 
 	@Transactional
@@ -56,18 +49,6 @@ public class AlarmBoardServicelmpl implements AlarmBoardService {
 			log.info("Alarm Board Attach insert After");
 		});
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
 
 	// 조회
 	@Override

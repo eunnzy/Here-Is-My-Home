@@ -38,6 +38,8 @@ public class ReplyController {
 		log.info("ReplyVO : " + vo);
 		int insertCount = service.register(vo);
 		log.info("result : " + insertCount);
+		boardservice.replysUp(vo.getBno());
+		log.info("replysUp : " + vo.getBno());
 		
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -62,17 +64,20 @@ public class ReplyController {
 	@DeleteMapping(value="/{rno}", produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
 		log.info("remove : " + rno);
+		ReplyVO vo = service.get(rno);
+		boardservice.replysDown(vo.getBno());
+		log.info("replysDown : " + vo.getBno());
 		return service.remove(rno) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	// 수정
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> modify (@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
-		vo.setRno(rno);
-		log.info("rno : " + rno);
-		log.info("modify : " + vo);
-		return service.modify(vo) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+//	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="/{rno}", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+//	public ResponseEntity<String> modify (@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
+//		vo.setRno(rno);
+//		log.info("rno : " + rno);
+//		log.info("modify : " + vo);
+//		return service.modify(vo) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 	
 	// 좋아요
 	@PostMapping(value = "/likeUp", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
