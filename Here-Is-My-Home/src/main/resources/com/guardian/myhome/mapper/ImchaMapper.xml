@@ -51,7 +51,7 @@
  		where imcha_Id=#{imchaId}
  	</update>
  	
- 	<select id="getImcha" resultType="com.guardian.myhome.vo.ImchaVO">
+ 	<select id="getMember" resultType="com.guardian.myhome.vo.ImchaVO">
  		select imcha_id AS imchaId, imcha_pw AS imchaPw, nickname, phone, user_roll AS userRoll,
              sido1, gugun1
        from Imcha_tb where imcha_Id=#{imchaId}

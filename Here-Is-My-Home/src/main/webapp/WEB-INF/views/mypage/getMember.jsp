@@ -84,7 +84,7 @@
             <div class="mb-3" >
               <label for="id_name">아이디</label>
               <div class="id_input_box">
-                 <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${imcha.imchaId}" required>
+                 <input type="text" class="form-id" name="imchaId" id="imchaId"  value="${imcha.imchaId}" required readonly >
             </div>
 
             <div class="mb-3">
