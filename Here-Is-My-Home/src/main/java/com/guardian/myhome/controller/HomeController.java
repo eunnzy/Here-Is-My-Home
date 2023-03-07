@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.service.LikeService;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.ImchaVO;
+import com.guardian.myhome.vo.LikeVO;
 
 /*
 	매물 관련 - 상세보기, 검색 등.
@@ -33,17 +35,22 @@ import com.guardian.myhome.vo.ImchaVO;
 
 @Controller
 @RequestMapping("/home")
-@SessionAttributes("searchKeyword")
+@SessionAttributes("home")
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
 	@Autowired
+	LikeService likeService;
+	
+	@Autowired
 	private HomeDAO homedao;
+	
+	
 	
 	// 매물 상세보기
 	@RequestMapping("/detail")	
-	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
+	public String detailHome(@RequestParam("homeNum") int homeNum, HttpServletRequest request, Model model) {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
@@ -55,6 +62,28 @@ public class HomeController {
 		model.addAttribute("home", home);
 		
 		
+		ImchaVO imcha = (ImchaVO) request.getSession().getAttribute("imcha");
+		
+		System.out.println("imcha " + imcha);
+		if(imcha != null) {
+			LikeVO likeVO = new LikeVO();
+			likeVO.setHomeNum(homeNum);
+			likeVO.setImchaId(imcha.getImchaId());
+			
+			int homeLike = likeService.checkLike(likeVO);
+			
+			System.out.println("homeLike: " + homeLike);
+			
+			model.addAttribute("homeLike", homeLike);
+			
+//			if(homeLike == null) {	// 좋아요 없을 때 
+//				model.addAttribute(homeLike);
+//			}else {
+//				System.out.println(homeLike);
+//				model.addAttribute("homeLike", 1);
+//			}
+			
+		}
 		
 		return "home/detailHome";
 	}

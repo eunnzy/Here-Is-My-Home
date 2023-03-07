@@ -32,7 +32,7 @@
                   </c:if> <c:if test="${lessor.userRoll == '중개인' }">
                      <a class="nav-link" href="../mypage/mypageLessor">MyPage</a>
                   </c:if></li> --%>
-               <li class="nav-item"><a class="nav-link" href="/community/list">Community</a></li>
+               <li class="nav-item"><a class="nav-link" href="/community/list">커뮤니티</a></li>
             </ul>
 
             

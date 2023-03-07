@@ -71,58 +71,52 @@
 				</div>
 			</div>
 			<div class="col-sm-4 side-content">
-				<div class="card bg-light">
-					<div class="card-body">
-						<h4 class="card-title">
-							<c:choose>
-								<c:when test="${home.rentType == '월세'}">
-									<span class="badge bg-success">${home.rentType}</span>
+					<div class="card bg-light">
+						<div class="card-body">
+					    	<h4 class="card-title">
+					    		<c:choose>
+					    			<c:when test="${home.rentType == '월세'}">
+					    				<span class="badge bg-success">${home.rentType}</span>
 										${home.deposit} / ${home.monthly}		
-									</c:when>
-								<c:otherwise>
-									<span class="badge bg-info">${home.rentType}</span>
+									</c:when>	   
+									<c:otherwise>
+										<span class="badge bg-info">${home.rentType}</span>
 										${home.deposit}
-									</c:otherwise>
-							</c:choose>
-						</h4>
-						<h6 class="card-subtitle mb-2 text-muted">${home.addr2 }
-							${home.addr3 }</h6>
-						<hr>
-						<div class="user-info mt-3">
-							<div class="text-center">
-								${home.jgsName} <br> 중개사 등록번호: ${home.jgsNum} <br> 대표명
-								: ${home.jgsName } <br> 전화번호: ${home.phone } <br> 주소:
-								${home.lessorAddr }
+									</c:otherwise> 
+					    		</c:choose>
+					    	</h4>
+					    	<h6 class="card-subtitle mb-2 text-muted">${home.addr2 } ${home.addr3 } </h6>
+					    	<hr>
+					    	<div class="user-info mt-3">
+				    		<div class="text-center">
+					    		 ${home.jgsName} <br> 
+					    		중개사 등록번호:  ${home.jgsNum} <br>
+						    	 대표명 : ${home.jgsName }  <br>
+						    	전화번호: ${home.phone }  <br>
+						    	주소:  ${home.lessorAddr }</div>
+				    		</div>
+				    		<hr>
+						   	<div class="col mb-3">
+							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
+						    	<img src="/icon/siren.png" data-bs-toggle="modal" data-bs-target="#exampleModalLabel" name="sirenBtn" id="sirenBtn"> <label for="sirenBtn">신고하기</label> 
+						   	</div>
+						    <div class="like-div col mb-3">
+							   	<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
+						    	<img src="/icon/heart.png" name="likeBtn" id="likeBtn"> <label for="likeBtn">찜하기</label>
+						    </div>
+							    <input type="hidden" name="homeNum" id="homeNum" value="${home.homeNum}">
+							    <input type="hidden" name="imchaId" id="imchaId" value="${member.imchaId}">
+								<div class="col mb-3">
+							    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>  -->
+						    	<img src="/icon/question.png" name="qnaBtn" id="qnaBtn"> <label for="qnaBtn">문의 남기기</label> 
+							</div>
+							
+							<div class="d-grid gap-2 mx-auto mt-3">
+								<button type="button" class="btn btn-md btn-success" id="reservModalBtn"> 예약하기 </button>
+							</div>
 							</div>
 						</div>
-						<hr>
-						<div class="col mb-3">
-							<!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a> -->
-							<img src="/icon/siren.png" data-bs-toggle="modal"
-								data-bs-target="#exampleModalLabel" name="sirenBtn"
-								id="sirenBtn"> <label for="sirenBtn">신고하기</label>
-						</div>
-						<div class="col mb-3">
-							<!-- <a href="https://www.flaticon.com/kr/free-icons/" title="심장 아이콘">심장 아이콘  제작자: Freepik - Flaticon</a> -->
-							<img src="/icon/heart.png" name="likeBtn" id="likeBtn"
-								onclick="homeLike()"> <label for="likeBtn">찜하기</label>
-						</div>
-						<input type="hidden" name="homeNum" id="homeNum"
-							value="${home.homeNum}"> <input type="hidden"
-							name="imchaId" id="imchaId" value="${member.imchaId}">
-						<div class="col mb-3">
-							<!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘  제작자: Freepik - Flaticon</a>  -->
-							<img src="/icon/question.png" name="qnaBtn" id="qnaBtn"
-								onclick="qna()"> <label for="qnaBtn">문의 남기기</label>
-						</div>
-
-						<div class="d-grid gap-2 mx-auto mt-3">
-							<button type="button" class="btn btn-md btn-success"
-								id="reservModalBtn">예약하기</button>
-						</div>
 					</div>
-				</div>
-			</div>
 			<div class="col-sm-8 mt-4">
 				<div class="basic-info">
 					<table class="table">
@@ -254,31 +248,36 @@
 			</div>
 		</div>
 
-		<!-- <div class="report-modal">
-			<div class="report-wrap">
-				<div class="report-title">방문 예약</div>
-				<div class="report-close"><i class='bi bi-x-lg'></i></div>
-				<div class="report-content">
+		<!--  문의하기 모달 --> 
+		<div class="qna-modal">
+			<div class="qna-wrap">
+			<form action="/qna/insert" method="post">
+				<div class="qna-title">문의 하기</div>
+				<div class="qna-close"><i class='bi bi-x-lg'></i></div>
+				<div class="qna-content">
 					<table class="table">
 						<tr>
 							<td style="color: white;"> 이름 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+							<td> <input type="text" class="form-control" name="imchaId" id="imchaId" value="${imcha.imchaId }" readonly></td>
 						</tr>
 						<tr>
-							<td style="color: white;"> 방문 날짜 </td>
-							<td> <input type="date" class="form-control" name="reservName"></td>
+							<td style="color: white;"> 문의 제목 </td>
+							<td> <input type="text" class="form-control" name="iqTitle" id="iqTitle"></td>
 						</tr>
 						<tr>
-							<td style="color: white;"> 방문 시간 </td>
-							<td> <input type="text" class="form-control" name="reservName"></td>
+							<td style="color: white;"> 문의 내용</td>
+							<td> <textarea class="form-control" style="min-height:200px; resize: none;" id="iqContent" name="iqContent"></textarea></td>
 						</tr>
 					</table>
 				</div>
 				<div class="d-grid gap-3 mx-auto">
-					<button type="button" class="btn btn-md btn-success" id="reservBtn">예약하기</button>
+					
+					<button type="submit" class="btn btn-md btn-success" id="qnaBtn">문의하기</button>
 				</div>
+			</form>
 			</div>
-		</div> -->
+		</div>
+		
 	</div>
 
 	<jsp:include page="reportHome.jsp"></jsp:include>
@@ -354,15 +353,13 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a94d4863c9f7363e85ad81dac027db86"></script>
 	<script>
 		let latitude = ${home.latitude};
-		console.log(latitude);
 		let longitude = ${home.longitude};
-		console.log(longitude);
-	/* 	let imchaId = $('#imchaId').val();
+		let homeNum = ${home.homeNum};
+		let imchaId = $('#imchaId').val();
 		let lessorId = "${home.jgsName}";
 		let enrollName = $('#enrollName').val();
 		let enrollDate = $('#enrollDate').val();
-		let homeNum = $('#homeNum').val(); */
-	// 위치 정보 표시
+		let homeLike = ${homeLike};
 		let revTime = $("input[name='revTime']:checked").val();
 	</script>
 	<script src="/js/reportHome.js"></script>
@@ -370,23 +367,30 @@
 	<script src="/js/reservHome.js"></script>
 	<script>
 		$(document).ready(function() {
-		/* 	let latitude = ${home.latitude};
-			let longitude = ${home.longitude}; */
-			let homeNum = ${home.homeNum};
+			
+			console.log(homeLike);
+			if(homeLike == 1) {
+				$("#likeBtn").prop("src", "/icon/heart-fill.png");
+			}else{
+				$("#likeBtn").prop("src", "/icon/heart.png");
+				
+			}
+			
 			let imchaId = $('#imchaId').val();
 			let lessorId = "${home.jgsName}";
 			let enrollName = $('#enrollName').val();
 			let enrollDate = $('#enrollDate').val();
 			let revTime = $("input[name='revTime']:checked").val();
-			$("#likeBtn").on("click", function(e){
+			$("#likeBtn").on("click", function(e){ 
 				$.ajax({
 					type : 'get',
-					url : 'like/insetLike?imchaId='+ imchaId + '&homeNum=' + homeNum,
+					url : '/like/clickLike?homeNum=' + homeNum,
 					success : function (data) {
-						if (data===1) {
-							alert('찜 목록에 등록되었습니다.');
+						if (data > 0) {
+							$("#likeBtn").prop("src", "/icon/heart-fill.png");
 						} else {
-							alert('오류가 발생하였습니다.');
+							$("#likeBtn").prop("src", "/icon/heart.png");
+							
 						}
 							
 					}

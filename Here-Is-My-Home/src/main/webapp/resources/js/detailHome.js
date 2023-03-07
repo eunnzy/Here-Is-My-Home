@@ -1,25 +1,4 @@
 $(document).ready(function() {
-		let basicInfo = $(".basic-info")
-		function convertMoney(money) {	
-			let convert = ""; 
-			money = money / 10000;
-			if(money == 0) {
-				convert = "없음";
-			}else if(money >= 10000) {
-				console.log(money); 
-				convert += Math.floor(money/10000) + "억";
-				
-				if(money % 10000 != 0 ) {
-					money = money % 10000;
-					convert +=  money + "만";
-				}
-			}else {
-				convert = money + "만";
-			}
-			
-			return convert;
-		}
-		
 		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
 		    center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
