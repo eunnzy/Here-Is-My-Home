@@ -108,8 +108,8 @@
 
           <div class="col-md-6 mb-4"></div>
           <button class="btn btn-primary btn btn-block" type="submit">가입 완료</button> &nbsp;
-          <a href="/member/lessorJoin" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp;
-          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button>
+          <!-- <a href="/member/lessorJoin" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp;
+          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button> -->
 </form>
 </h1>
 </form>

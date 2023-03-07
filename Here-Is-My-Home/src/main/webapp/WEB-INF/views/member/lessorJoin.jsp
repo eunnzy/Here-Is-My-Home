@@ -214,12 +214,13 @@
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="aggrement" required>
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+            <br><p>(※중개인의 경우 관리자가 회원가입 승인을 하여야 아이디 이용이 가능합니다.※)</p>
           </div>
 
           <div class="col-md-6 mb-4"></div>
           <button class="btn btn-primary btn btn-block" type="submit">가입 완료</button> &nbsp;
-        <!--   <a href="lessor_join.jsp" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp; -->
-          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button>
+        <!--   <a href="lessor_join.jsp" class="btn btn-primary btn btn-block" type="submit">중개인 회원가입</a>&nbsp; 
+          <button style=background-color:#FEE500;   class="btn btn-primary btn btn-block" type="submit" >카카오 회원가입</button> -->
 </form>
 </h1>
 </form>
