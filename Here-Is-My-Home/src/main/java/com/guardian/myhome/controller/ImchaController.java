@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.guardian.myhome.mapper.ImchaMapper;
@@ -30,6 +31,7 @@ import com.guardian.myhome.vo.ImchaVO;
  */
 
 @Controller
+@SessionAttributes("imchaId")
 @RequestMapping("/member")
 public class ImchaController {
 	
@@ -141,21 +143,23 @@ public class ImchaController {
 //			return "/member/msg";
 		}else {
 //			model.addAttribute("check",0);
-//			model.addAttribute("imchaId", findIdVo.getImchaId());
+//			model.addAttribute("lessorId", findLessorIdVo.getLessorId());
 			model.addAttribute("imchaId", findIdVo);
 			return 1;
+//			return "/member/resultLessorId";
 		}
 	}
 	
 	// 아이디 결과
 	@RequestMapping(value="/resultId", method=RequestMethod.GET)
-	public String resultIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="nickname")String phone,String nickname,ImchaVO searchVO) throws Exception{
+	public String resultIdGET(HttpServletRequest request, Model model, @RequestParam(required=false,value="nickname")
+	String phone,String nickname,ImchaVO searchVO) throws Exception{
 		
-//		searchVO.setNickname(nickname);
-//		searchVO.setPhone(phone);
-//		ImchaVO findId = imchaservice.findId(searchVO);
-//		
-//		model.addAttribute("searchVO", findId);
+//				searchVO.setLessorNickName(lessorNickName);
+//				searchVO.setPhone(phone);
+//				LessorVO findLessorId = lessorservice.findLessorId(searchVO);
+		
+//				model.addAttribute("searchVO", findLessorId);
 		
 		return "/member/resultId";
 	}

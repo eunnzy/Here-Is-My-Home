@@ -61,6 +61,55 @@ body {
 .reserv-content > td {
 	color: white;
 }
+
+
+.timeTable{
+	width: 100%;
+	margin-bottom : 30px;
+	
+}
+.timeTable td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-bottom: 5px;	
+	text-align: center;
+}
+
+.timeSelect {
+    padding: 15px 10px;
+    
+}
+.timeSelect input[type=radio]{
+    display: none;
+    width:66px;
+    height:41px;
+    text-align: center;
+    border-radius: 10px;
+}
+.timeSelect input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 25px;
+    width: 75px;
+    /* border: 1px solid #BEE9FB; */
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+    border-radius: 10px;
+}
+.timeSelect input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    text-align: center;
+}
+.timeSelect input[type=radio]:checked+label{
+    background-color: #BEE9FB;
+    color: #000;
+    border-radius: 10px;
+    text-align: center;
+}
 .option-list {
 	display: flex;
 }
@@ -91,6 +140,11 @@ body {
 	padding: 5px;
 	border: 1px solid gray;
 	border-radius: 3px;
+}
+
+.timeSelect input[type=radio]:disabled+label{
+	background-color: #808080;
+    
 }
 .home-detail{
 	background-color: rgba(199, 199, 199, 0.3);

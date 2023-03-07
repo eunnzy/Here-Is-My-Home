@@ -33,6 +33,7 @@ public class LessorDAOImpl implements LessorDAO {
 //		return sqlSession.selectOne(NAMESPACE+".findLessorId", lessor);
 //	}
 	
+	// 아이디 찾기
 	@Override
 	public String findLessorId(LessorVO lessor) throws Exception {
 		
@@ -59,7 +60,7 @@ public class LessorDAOImpl implements LessorDAO {
 		return sqlSession.selectList(NAMESPACE+".lessorList");
 	}
 	
-	// 비밀번호 변경
+	// 회원가입 승인
 	@Override
 	public LessorVO successId(LessorVO lessor) throws Exception {
 			

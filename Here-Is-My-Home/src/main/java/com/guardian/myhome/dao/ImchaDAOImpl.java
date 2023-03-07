@@ -30,6 +30,7 @@ public class ImchaDAOImpl implements ImchaDAO {
 //		return sqlSession.selectOne(NAMESPACE+".findId", imcha);
 //	}
 	
+	// 아이디 찾기
 	@Override
 	public String findId(ImchaVO imcha) throws Exception {
 		

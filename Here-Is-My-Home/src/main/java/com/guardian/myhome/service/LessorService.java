@@ -22,7 +22,7 @@ public interface LessorService {
 //	// 아이디 찾기
 //	public LessorVO findLessorId(LessorVO lessor) throws Exception;
 	
-	
+	// 아이디 찾기
 	public String findLessorId(LessorVO lessor) throws Exception;
 		
 	// 비밀번호 찾기
@@ -49,7 +49,7 @@ public interface LessorService {
 	// 이미지 업로드
 	public int imgEnroll(LessorImgVO lessorImg) throws Exception;
 
-	//
+	// 이미지 보기
 	public LessorImgVO selectImg(String lessorId) throws Exception;
 	
 

@@ -7,6 +7,7 @@ import com.guardian.myhome.vo.HomeImgVO;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.LessorVO;
 
 
 public interface HomeService {
@@ -20,4 +21,6 @@ public interface HomeService {
 	int reportHome(HomeReportVO homeReportVO);	// 매물 신고
 	
 	List<HomeReportVO> selectReportHomeList();
+	public List<HomePreviewVO> getListByLessorId(LessorVO vo);
+	public void deleteHome(int homeNum, String lessorId);
 }
