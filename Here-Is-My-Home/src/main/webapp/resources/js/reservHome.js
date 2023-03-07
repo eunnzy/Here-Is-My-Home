@@ -37,7 +37,7 @@ $("#reservBtn").on("click", function(e){
 				alert('예약이 완료되었습니다.');
 				},
 				error: function () {
-				alert('네트워크 오류 발생');
+//				alert('네트워크 오류 발생');
 				}
 	});  
 });

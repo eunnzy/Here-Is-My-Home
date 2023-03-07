@@ -55,8 +55,9 @@ public class MyPageController {
 //	      }
 		HttpSession session = request.getSession();
 		memberservice.updateMember(imcha);
+		System.out.println(imcha.getImchaId());
 		session.setAttribute("imcha", memberservice.getMember(imcha));
-	    return "/mypage/getMember";
+	    return "redirect:/mypage/getMember";
 			
 	}
 	

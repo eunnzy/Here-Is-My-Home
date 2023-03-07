@@ -72,14 +72,13 @@ public class ImchaServiceImpl implements ImchaService {
 
 	@Override
 	public void updateMember(ImchaVO imcha) throws Exception {
-		// TODO Auto-generated method stub
+		imchamapper.updateMember(imcha);
 		
 	}
 
 	@Override
-	public ImchaVO getMember(ImchaVO member) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ImchaVO getMember(ImchaVO imcha) throws Exception {
+		return imchamapper.getMember(imcha);
 	}
 
 

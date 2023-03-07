@@ -26,7 +26,7 @@ public interface ImchaMapper {
 	public void updateMember(ImchaVO imcha);
 	
 	// 정보 저장
-	public ImchaVO getImcha(ImchaVO imcha);
+	public ImchaVO getMember(ImchaVO imcha);
 	
 	
 }
