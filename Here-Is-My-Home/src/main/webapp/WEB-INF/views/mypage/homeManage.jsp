@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./bootstrap.min.css" rel="stylesheet"></link>
-    <title>Document</title>
+    <title>매물 관리</title>
     <link href="/css/homeManage.css"  type="text/css" rel="stylesheet" >
 </head>
 <body style="height: 100; width: 100;">
@@ -23,7 +23,7 @@
 	    
 	  	
 	  	<h2 style="text-align: center; font-weight: bold; padding-left:85px" class="my-5">매물 관리 
-	  	<button type="button" class="btn btn-secondary mr-2 my-2" style="float: right;" onclick = "location.href = 'home/manage/register' ">매물 등록</button></h2>
+	  	<button type="button" class="btn btn-secondary mr-2 my-2" style="float: right;" onclick = "location.href = '/home/manage/register' ">매물 등록</button></h2>
 	  </div>
 	</div>
 	
@@ -62,10 +62,6 @@
     </div>
   </div>
 
-
-  <div style="bottom: 30px; width: 78rem; margin-left: auto; margin-right: auto;">
-    <button type="button" class="btn btn-secondary mr-2 my-2" style="float: right;" onclick = "location.href = '/home/manage/register' ">매물 등록</button>
-  </div>
   
   
 </body>

@@ -15,17 +15,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.guardian.myhome.dao.HomeDAO;
 import com.guardian.myhome.service.HomeService;
+import com.guardian.myhome.service.LikeService;
 import com.guardian.myhome.vo.HomePreviewVO;
 import com.guardian.myhome.vo.HomeReportVO;
 import com.guardian.myhome.vo.ImchaVO;
+import com.guardian.myhome.vo.LikeVO;
 
 /*
 	매물 관련 - 상세보기, 검색 등.
@@ -33,21 +35,42 @@ import com.guardian.myhome.vo.ImchaVO;
 
 @Controller
 @RequestMapping("/home")
+@SessionAttributes("home")
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
 	@Autowired
+	LikeService likeService;
+	
+	@Autowired
 	private HomeDAO homedao;
+	
+	
 	
 	// 매물 상세보기
 	@RequestMapping("/detail")	
-	public String detailHome(@RequestParam("homeNum") int homeNum, Model model) {
+	public String detailHome(@RequestParam("homeNum") int homeNum, HttpServletRequest request, Model model) {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
 		System.out.println("detailHome: " + home);
 		model.addAttribute("home", home);
+		
+		ImchaVO imcha = (ImchaVO) request.getSession().getAttribute("imcha");
+		LikeVO likeVO = new LikeVO();
+		likeVO.setHomeNum(homeNum);
+		likeVO.setImchaId(imcha.getImchaId());
+		
+		LikeVO homeLike = likeService.checkLike(likeVO);
+		
+		if(homeLike == null) {	// 좋아요 없을 때 
+			model.addAttribute("homeLike", 0);
+		}else {
+			System.out.println(homeLike);
+			model.addAttribute("homeLike", 1);
+		}
+		
 		
 		
 		return "home/detailHome";
