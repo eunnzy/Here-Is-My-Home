@@ -9,6 +9,7 @@
  		<result property="imchaId" column="IMCHA_ID" />
  		<result property="homeNum" column="home_num" />
  		<result property="likeNum" column="like_num" />
+ 		<result property="likeStatus" column="like_status" />
  	</resultMap>
  	
  	<insert id="insertLike" parameterType="com.guardian.myhome.vo.LikeVO">
@@ -19,9 +20,10 @@
  		select * from Home_Like_tb where IMCHA_ID = #{imchaId}
  	</select>
  	
- 	<select id="checkLike">
+ 	<select id="checkLike" resultMap="likeMap" > <!--좋아요 눌렀는지 확인 -->
  		select * from Home_Like_tb where IMCHA_ID = #{imchaId} and home_num = #{homeNum}
  	</select>
+ 	
  	
  	<delete id="delete">
  		delete from Home_Like_tb where IMCHA_ID = #{imchaId} and home_num = #{homeNum}

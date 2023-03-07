@@ -2,20 +2,21 @@ package com.guardian.myhome.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guardian.myhome.mapper.HomeMapper;
 import com.guardian.myhome.mapper.LikeMapper;
 import com.guardian.myhome.service.LikeService;
 import com.guardian.myhome.vo.HomeDetailVO;
-import com.guardian.myhome.vo.HomeVO;
+import com.guardian.myhome.vo.ImchaVO;
 import com.guardian.myhome.vo.LikeVO;
 
 @Controller
@@ -31,17 +32,27 @@ public class LikeController {
 	@Autowired
 	HomeMapper homeMapper;
 	
-	@RequestMapping("/insetLike")
+	@RequestMapping("/clickLike")
 	@ResponseBody
-	public int insetLike(LikeVO vo, String imchaId, int homeNum) {
-		vo.setImchaId(imchaId);
-		vo.setHomeNum(homeNum);
-		if(likeService.checkLike(vo) != null) {
-			likeService.remove(homeNum, imchaId);
+	public int clickLike(@RequestParam("homeNum")int homeNum, HttpServletRequest request) {
+		System.out.println("insertLike controller");
+		ImchaVO imchaVO = (ImchaVO)request.getSession().getAttribute("imcha");
+		String imchaId =  imchaVO.getImchaId();
+		System.out.println(imchaId);
+		
+		LikeVO likeVO = new LikeVO();
+		likeVO.setImchaId(imchaId);
+		likeVO.setHomeNum(homeNum);
+		
+		System.out.println(likeVO);
+		LikeVO checkLike = likeService.checkLike(likeVO);
+		
+		if(checkLike == null) {	 // 좋아요가 안 되어 있는 경우 
+			likeService.insetLike(likeVO);
 			return 1;
-		} else {
-			likeService.insetLike(vo);
-			return 2;
+		} else { // 좋아요 되어 있는 경우 삭
+			likeService.remove(homeNum, imchaId);
+			return 0;
 		}
 		
 	}

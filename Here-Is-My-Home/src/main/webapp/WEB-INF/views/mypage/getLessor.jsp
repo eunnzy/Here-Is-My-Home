@@ -24,7 +24,7 @@
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
       }
     </style>
-    <title>Document</title>
+    <title>회원정보수정</title>
     <script src="http://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 		crossorigin="anonymous"></script>

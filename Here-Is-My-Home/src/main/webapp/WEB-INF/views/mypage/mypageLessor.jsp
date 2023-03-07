@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./bootstrap.min.css" rel="stylesheet"></link>
-    <title>Document</title>
+    <title>마이페이지</title>
 </head>
 <body>
 	<header>
@@ -31,7 +31,7 @@
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/home/reservation/lessorList'">예약 확인</button>
         </td>
         <td>
-          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'Answer_Borad.html'">1대1 문의</button>
+          <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = '/qna/lessorList'">1대1 문의</button>
         </td>
         <td>
           <button class="btn btn-secondary btn-lg mx-5" type="button" onclick = "location.href = 'QNA_LESSOR.html'">관리자 문의</button>

@@ -46,7 +46,7 @@ public class LikeServiceImpl implements LikeService {
 	}
 	
 	@Override
-	public LikeVO checkLike(LikeVO vo) {
+	public LikeVO checkLike(LikeVO vo){
 		return likeMapper.checkLike(vo);
 	}
 
@@ -54,7 +54,7 @@ public class LikeServiceImpl implements LikeService {
 	public HomeDetailVO getLikeDetail(LikeVO vo) {
 		return likeMapper.getLikeDetail(vo);
 	}
-	
+
 //	@Override
 //	public LikeVO getByLikeNumWithImchaId(LikeVO vo) {
 //		return null;

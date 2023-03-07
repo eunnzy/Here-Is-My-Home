@@ -23,6 +23,7 @@ public interface LikeMapper {
 		// 이미 찜한 게시물인지 조회
 //		public LikeVO getByLikeNumWithImchaId(@Param("vo")LikeVO vo);
 		
+		
 		public LikeVO checkLike(LikeVO vo);
 		
 		public HomeDetailVO getLikeDetail(LikeVO vo);
