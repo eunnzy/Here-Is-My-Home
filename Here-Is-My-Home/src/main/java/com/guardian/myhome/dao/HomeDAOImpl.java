@@ -103,4 +103,10 @@ public class HomeDAOImpl implements HomeDAO{
 		System.out.println(vo.getLessorId());
 		return sqlSession.selectList(HOMEMAPPER+ "selectListByLessorId", vo);
 	}
+
+	@Override
+	public int deleteHome(int homeNum) {
+		return  sqlSession.selectOne(HOMEMAPPER+ "deleteHome", homeNum);
+	}
+
 }

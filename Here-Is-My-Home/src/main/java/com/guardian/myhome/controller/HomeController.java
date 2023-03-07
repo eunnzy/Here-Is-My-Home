@@ -54,24 +54,36 @@ public class HomeController {
 		System.out.println(homeNum);
 		Map<String, Object> home = homeService.selectHomeDetail(homeNum);
 		
+		home.put("deposit", homeService.convertMoneyUnit((int)home.get("deposit")));
+		home.put("monthly", homeService.convertMoneyUnit((int)home.get("monthly")));
+		home.put("adminCost", homeService.convertMoneyUnit((int)home.get("adminCost")));
+		
 		System.out.println("detailHome: " + home);
 		model.addAttribute("home", home);
 		
+		
 		ImchaVO imcha = (ImchaVO) request.getSession().getAttribute("imcha");
-		LikeVO likeVO = new LikeVO();
-		likeVO.setHomeNum(homeNum);
-		likeVO.setImchaId(imcha.getImchaId());
 		
-		LikeVO homeLike = likeService.checkLike(likeVO);
-		
-		if(homeLike == null) {	// 좋아요 없을 때 
-			model.addAttribute("homeLike", 0);
-		}else {
-			System.out.println(homeLike);
-			model.addAttribute("homeLike", 1);
+		System.out.println("imcha " + imcha);
+		if(imcha != null) {
+			LikeVO likeVO = new LikeVO();
+			likeVO.setHomeNum(homeNum);
+			likeVO.setImchaId(imcha.getImchaId());
+			
+			int homeLike = likeService.checkLike(likeVO);
+			
+			System.out.println("homeLike: " + homeLike);
+			
+			model.addAttribute("homeLike", homeLike);
+			
+//			if(homeLike == null) {	// 좋아요 없을 때 
+//				model.addAttribute(homeLike);
+//			}else {
+//				System.out.println(homeLike);
+//				model.addAttribute("homeLike", 1);
+//			}
+			
 		}
-		
-		
 		
 		return "home/detailHome";
 	}
@@ -88,10 +100,25 @@ public class HomeController {
 		return homeInBoundsList;
 	}
 	
+	
+	/*
+	 * public String searchKeyword(@RequestParam("searchKeyword") String
+	 * searchKeyword, Model model) { System.out.println("searhKeyword" +
+	 * searchKeyword); model.addAttribute(searchKeyword, "searchKeyword"); return
+	 * "home/searchHome"; }
+	 */
+	
 	@RequestMapping(value="/searchHome" , method = RequestMethod.GET)
 	public String searchHome() {
 		return "home/searchHome";
 	}
+	
+	/*
+	 * @RequestMapping(value="/searchHome" , method = RequestMethod.POST) public
+	 * String searchHomePost(@RequestParam String searchKeyword, Model model) {
+	 * model.addAttribute("searchKeyword", searchKeyword); return "home/searchHome";
+	 * }
+	 */
 	
 	
 	@RequestMapping(value = "/getHomeImg", method = RequestMethod.GET)

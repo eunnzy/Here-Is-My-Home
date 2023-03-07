@@ -65,7 +65,7 @@
         </div>
         
 	     <!-- 하단 버튼 -->
-	     <a href="/admin/ablist"><button type="button" class="btn btn-info">취소</button></a>
+	     <button type="button" class="btn btn-info" id="backBT">취소</button>
 	     <span class="float-end">
 	     	<button type="submit" class="btn btn-info" id="regBT">등록</button>
 	     </span>

@@ -131,17 +131,20 @@
 				str = "<img src='/icon/like.png' class='likeBT'>";
 				$("#like").html(str); 
 				$(".likeBT").on("click", function(e) {
-					replyService.likeDown({bno:bnoValue, userid:member}, function(data) { 
-						alert("좋아요 취소");
-						location.reload();
-				});
+					var result = confirm("좋아요를 취소하시겠습니까?");
+					if(result){
+						replyService.likeDown({bno:bnoValue, userid:member}, function(data) { 
+							location.reload();
+					});
+					}else{
+					    return;
+					}
 				});
 			} else {
 				str = "<img src='/icon/nonlike.png' class='likeBT'>";
 				$("#like").html(str); 
 				$(".likeBT").on("click", function(e) {
 					replyService.likeUp({bno:bnoValue, userid:member}, function(result) {
-						alert("좋아요");
 						location.reload();
 					});
 				});
@@ -175,11 +178,15 @@
 						
 						// 댓글 삭제 
 						$(".delBT").on("click", function(e) {
+							var result = confirm("댓글을 삭제하시겠습니까?");
 							var no = $(this).data("no");
-							replyService.remove(no, function(result) { 
-								alert("댓글이 삭제되었습니다.");
-								showList(1);
-						});
+							if(result){
+								replyService.remove(no, function(result) { 
+									showList(1);
+							});
+							}else{
+							    return;
+							}
 						}); 		
 			});
 			}

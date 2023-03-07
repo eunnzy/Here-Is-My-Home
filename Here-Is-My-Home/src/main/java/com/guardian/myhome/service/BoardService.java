@@ -61,4 +61,9 @@ public interface BoardService {
 	// 조회수 
 	public boolean viewsUp(Long bno);
 	
+	// 댓글수 증가
+	public void replysUp(Long bno);
+					
+	// 댓글수 감소
+	public void replysDown(Long bno);
 }

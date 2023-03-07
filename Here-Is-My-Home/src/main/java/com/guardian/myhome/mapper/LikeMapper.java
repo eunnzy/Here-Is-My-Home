@@ -24,7 +24,7 @@ public interface LikeMapper {
 //		public LikeVO getByLikeNumWithImchaId(@Param("vo")LikeVO vo);
 		
 		
-		public LikeVO checkLike(LikeVO vo);
+		public int checkLike(LikeVO vo);
 		
 		public HomeDetailVO getLikeDetail(LikeVO vo);
 }

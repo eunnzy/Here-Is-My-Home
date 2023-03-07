@@ -50,4 +50,11 @@ public interface BoardMapper {
 		
 	// 조회수 증가
 	public int viewsUp(Long bno);
+	
+	// 댓글수 증가
+	public int replysUp(Long bno);
+				
+	// 댓글수 감소
+	public int replysDown(Long bno);
+	
 }

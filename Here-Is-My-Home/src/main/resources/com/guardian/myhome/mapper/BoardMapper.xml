@@ -127,4 +127,14 @@
 		UPDATE Board SET views = views+1 WHERE bno = #{bno}
 	</update>
 	
+	<!-- 댓글수 증가  -->
+	<update id="replysUp">
+		UPDATE Board SET replys = replys+1 WHERE bno = #{bno}
+	</update>
+	
+	<!-- 댓글수 감소  -->
+	<update id="replysDown">
+		UPDATE Board SET replys = replys-1 WHERE bno = #{bno}
+	</update>
+	
 </mapper>

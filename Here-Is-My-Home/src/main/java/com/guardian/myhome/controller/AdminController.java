@@ -280,24 +280,6 @@ public class AdminController {
 		return "redirect: /admin/ablist";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 파일 업로드 등록
 	@PostMapping(value = "/AlarmuploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody

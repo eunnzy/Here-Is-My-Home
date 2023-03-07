@@ -166,4 +166,16 @@ public class BoardServiceImpl implements BoardService {
 		log.info("viewsUp........" + bno);
 		return mapper.viewsUp(bno) == 1;
 	}
+	
+	// 댓글수 증가
+	@Override
+	public void replysUp(Long bno) {
+		mapper.replysUp(bno);
+	}
+						
+	// 댓글수 감소
+	@Override
+	public void replysDown(Long bno) {
+		mapper.replysDown(bno);
+	}
 }

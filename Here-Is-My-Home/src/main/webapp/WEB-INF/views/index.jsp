@@ -14,9 +14,12 @@
 	
 	<div style="background-color: white;">
 	  <div>
-	    <img src="img/b.png" style="max-width: 100%; height:auto;">
+<!-- 	    <img src="img/b.png" style="max-width: 100%; height:auto;">
 	    <img src="img/c.png" style="max-width: 100%; height:auto;">
-	    <img src="img/d.png" style="max-width: 100%; height:auto;">
+	    <img src="img/d.png" style="max-width: 100%; height:auto;"> -->
+	    <img src="img/b.png">
+	    <img src="img/c.png">
+	    <img src="img/d.png">
 	  </div>
   
 	<div style="text-align: center;">

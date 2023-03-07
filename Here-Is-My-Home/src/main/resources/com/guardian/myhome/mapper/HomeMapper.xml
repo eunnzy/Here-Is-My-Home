@@ -178,7 +178,7 @@
  	</select>
  	
  	<delete id="deleteHome">
- 		delete from Home_tb where lessor_id = #{lessorId} and home_num = #{homeNum}
+ 		delete from Home_tb where home_num = #{homeNum}
  	</delete>
  	
  </mapper>

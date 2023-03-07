@@ -232,12 +232,19 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public List<HomePreviewVO> getListByLessorId(LessorVO vo) {
 		System.out.println(vo);
-	
-		return homeDAO.getListByLessorId(vo);
+		List<HomePreviewVO> manageList = null;
+		manageList = homeDAO.getListByLessorId(vo);
+		
+		for(int i=0; i<manageList.size(); i++) {
+			int homeNum = manageList.get(i).getHomeNum();
+			manageList.get(i).setHomeImg(homeDAO.selectPreviewHomeImg(homeNum));
+		}
+		
+		return manageList;
 	}
 
 	@Override
-	public void deleteHome(@Param("homeNum")int homeNum, @Param("lessorId")String lessorId) {
-		homeMapper.deleteHome(homeNum, lessorId);
+	public int deleteHome(@Param("homeNum")int homeNum) {
+		return homeDAO.deleteHome(homeNum);
 	}
 }

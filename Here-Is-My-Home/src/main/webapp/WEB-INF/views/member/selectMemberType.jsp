@@ -15,7 +15,6 @@
 		cursor: pointer;
 		color: black;
 	}
-	
 </style>
 </head>
 <body>
